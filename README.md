@@ -3,28 +3,26 @@
 ### Front-End
 |이름|역할|이메일|기술
 |----|---|---|---|
-|[홍길동]()|FrontEnd(Android/iOS)|example@gmail.com|React|
-|[김철수]()|FrontEnd(Admin)|example@gmail.com|React|
+|[이지홍](https://github.com/lee-ji-hong)|FrontEnd|zhffktkdlekghksxk@naver.com|React|
+|[곽민우](https://github.com/kmwdevelop)|FrontEnd|g.kmwdev@gmail.com|React|
 
 ## Stack
 
 <div>
     <!-- Frontend Language 추가 -->
-    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
-    <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"/>
-    <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white/">
-    <img src="https://img.shields.io/badge/react-FFCA28?style=for-the-badge&logo=react&logoColor=blue"/>
-    <br>
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" height=35 alt="java logo" />&nbsp;
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" height=35 alt="java logo" />&nbsp;
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" height=35 alt="java logo" />
     <!-- devops 추가 -->
-    <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"/>
+    <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" height=35 />
 </div>
 
- ## 🎯 Commit & PR Convention
+ ## 🎯 Commit Convention
 
 | 커밋 유형 | 설명 |
 | --- | --- |
 | Feat: | 새로운 기능 추가 |
-| Fix: | 버그 및 기능 수정 |
+| Fix: | 버그 수정 |
 | Refactor: | 코드 리팩토링 |
-| Remove: | 파일을 삭제하는 작업만 수행한 경우 |
-| HOTFIX: | 급하게 치명적인 버그를 고쳐야 하는 경우 |
+| Chore: | README, folderstructure, gitignore, Config 등 기타문서 수정 |
+| Design: | Design 변경 |
