@@ -17,6 +17,14 @@
     <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" height=35 />
 </div>
 
+
+## 🍎 Branch 전략
+
+- master
+- dev : 개인 개발 후 rebase merge
+- feature/#이슈번호 : feature 단위는 기능 명세에 나눠져 있는 번호 기준으로 진행
+    - ex) feature/#5
+
  ## 🎯 Commit Convention
 
 | 커밋 유형 | 설명 |
@@ -26,3 +34,4 @@
 | Refactor: | 코드 리팩토링 |
 | Chore: | README, folderstructure, gitignore, Config 등 기타문서 수정 |
 | Design: | Design 변경 |
+
