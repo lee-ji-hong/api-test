@@ -1,0 +1,11 @@
+{
+  "style": "default",
+  "rsc": false,
+  "tsx": true,
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/utils",
+    "lib": "@/lib",
+    "styles": "@/assets/styles"
+  }
+}
