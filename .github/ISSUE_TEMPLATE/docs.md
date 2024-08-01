@@ -1,10 +1,9 @@
 ---
 name: Docs
 about: 문서 작업 (README, pr 템플릿)
-title: ''
+title: ""
 labels: Docs
-assignees: ''
-
+assignees: ""
 ---
 
 # 개요

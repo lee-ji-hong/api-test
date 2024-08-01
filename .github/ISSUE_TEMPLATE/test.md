@@ -1,10 +1,9 @@
 ---
 name: Test
 about: 테스트 코드, 리펙토링 테스트 코드 추가
-title: ''
+title: ""
 labels: Test
-assignees: ''
-
+assignees: ""
 ---
 
 # 개요

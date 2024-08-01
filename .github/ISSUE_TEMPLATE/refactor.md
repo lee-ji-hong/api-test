@@ -1,10 +1,9 @@
 ---
 name: Refactor
 about: 코드 리팩토링
-title: ''
+title: ""
 labels: Refactor
-assignees: ''
-
+assignees: ""
 ---
 
 # 개요

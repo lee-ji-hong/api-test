@@ -1,10 +1,9 @@
 ---
 name: Chore
 about: 기타문서 수정
-title: ''
+title: ""
 labels: Chore
-assignees: ''
-
+assignees: ""
 ---
 
 # 개요

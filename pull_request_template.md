@@ -28,8 +28,7 @@
 
 ### 이슈 번호
 
-> 예시) https://github.com/BankersCalculator/web-front/issues/[이슈번호]
-> https://github.com/BankersCalculator/web-front/issues/
+> 예시) https://github.com/BankersCalculator/web-front/issues/[이슈번호] > https://github.com/BankersCalculator/web-front/issues/
 
 ### To Reviewers
 

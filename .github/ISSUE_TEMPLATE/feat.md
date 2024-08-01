@@ -1,10 +1,9 @@
 ---
 name: Feat
 about: 추가할 기능에 대하여
-title: ''
+title: ""
 labels: Feat
-assignees: ''
-
+assignees: ""
 ---
 
 # 개요

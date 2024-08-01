@@ -1,10 +1,9 @@
 ---
 name: Fix
 about: 해결해야 할 버그에 대하여
-title: ''
+title: ""
 labels: Fix
-assignees: ''
-
+assignees: ""
 ---
 
 # 개요

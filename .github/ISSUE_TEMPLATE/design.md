@@ -1,10 +1,9 @@
 ---
 name: Design
 about: Design 변경
-title: ''
+title: ""
 labels: Design
-assignees: ''
-
+assignees: ""
 ---
 
 # 개요
