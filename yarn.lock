@@ -947,21 +947,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.51.16":
-  version: 5.51.16
-  resolution: "@tanstack/query-core@npm:5.51.16"
-  checksum: 10c0/ed0922dc320cf77e4c34dac80658555617689e3a8761965300c949561426393421c184e4cd2d4b4fedf7aca1c4d82dca8e6e91e7d776347b583f8239d56a14df
+"@tanstack/query-core@npm:5.51.21":
+  version: 5.51.21
+  resolution: "@tanstack/query-core@npm:5.51.21"
+  checksum: 10c0/bb9e03391facd21c431d6571f3e088f47dc996b42a10ef636d3fd4444a483019d0e9bd4eb971d554bb4317ac3ee3ab23d5ce9221345753b792fb6fae030d1ad7
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.37.1":
-  version: 5.51.16
-  resolution: "@tanstack/react-query@npm:5.51.16"
+"@tanstack/react-query@npm:^5.51.23":
+  version: 5.51.23
+  resolution: "@tanstack/react-query@npm:5.51.23"
   dependencies:
-    "@tanstack/query-core": "npm:5.51.16"
+    "@tanstack/query-core": "npm:5.51.21"
   peerDependencies:
     react: ^18.0.0
-  checksum: 10c0/8c702acc110cddd451f00b85d8682915550a4a0cc2a3c4051fc968a3a39f0447a6fc73b6467554017a43800de3d23872630bbb81d258a59a15c976357fe3af59
+  checksum: 10c0/913566a6778197b0b6dd04416e7ccb2fc766b4c0d04b0dc7f0e10f2bb5dee5663688369e363ae129ccbc1844578f57c81ee7599fac7f3b90ab9611bc52a35e69
   languageName: node
   linkType: hard
 
@@ -1570,6 +1570,17 @@ __metadata:
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0"
   checksum: 10c0/d73e2ddf20c4eb9337e1b3df1a0f6159481050a5de457c55b14ea2e5cb6d90bb69e004c9af54737a5ee0917fcf2c9e25de67777bbe58261847846066ba75bc9d
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.7.3":
+  version: 1.7.3
+  resolution: "axios@npm:1.7.3"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/a18cbe559203efa05fb1fec2d1898e23bf6329bd2575784ee32aa11b5bbe1d54b9f472c49a261294125519cf62aa4fe5ef6e647bb7482eafc15bffe15ab314ce
   languageName: node
   linkType: hard
 
@@ -2615,6 +2626,16 @@ __metadata:
   version: 3.3.1
   resolution: "flatted@npm:3.3.1"
   checksum: 10c0/324166b125ee07d4ca9bcf3a5f98d915d5db4f39d711fba640a3178b959919aae1f7cfd8aabcfef5826ed8aa8a2aa14cc85b2d7d18ff638ddf4ae3df39573eaf
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.15.6":
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 10c0/9ff767f0d7be6aa6870c82ac79cf0368cd73e01bbc00e9eb1c2a16fbb198ec105e3c9b6628bb98e9f3ac66fe29a957b9645bcb9a490bb7aa0d35f908b6b85071
   languageName: node
   linkType: hard
 
@@ -4164,6 +4185,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: 10c0/fe7dd8b1bdbbbea18d1459107729c3e4a2243ca870d26d34c2c1bcd3e4425b7bcc5112362df2d93cc7fb9746f6142b5e272fd1cc5c86ddf8580175186f6ad42b
+  languageName: node
+  linkType: hard
+
 "psl@npm:^1.1.33":
   version: 1.9.0
   resolution: "psl@npm:1.9.0"
@@ -5124,7 +5152,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:^19.3.0"
     "@commitlint/config-conventional": "npm:^19.2.2"
-    "@tanstack/react-query": "npm:^5.37.1"
+    "@tanstack/react-query": "npm:^5.51.23"
     "@testing-library/jest-dom": "npm:^6.4.5"
     "@testing-library/react": "npm:^15.0.7"
     "@testing-library/user-event": "npm:^14.5.2"
@@ -5134,6 +5162,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     "@vitejs/plugin-react": "npm:^4.2.1"
+    axios: "npm:^1.7.3"
     classnames: "npm:^2.5.1"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
