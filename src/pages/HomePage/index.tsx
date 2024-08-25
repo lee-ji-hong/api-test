@@ -5,6 +5,10 @@ const HomePage = () => {
   /*************
    * User API
    ************/
+  const g_accessToken =
+    "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1OTk1MTJ9.qDxw4OlMhwSlqWXCwG89wnEyCHgAXqvirzMlRZzprFo";
+  const g_refreshToken =
+    "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6InJwZzMyMkBuYXZlci5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ2NDk5MTJ9.PY84PSpf55iImgISeRSOFsRlt9EFCQefImB9wnIX4G4";
 
   const handleLoginRequest = async () => {
     try {
@@ -30,10 +34,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -48,10 +50,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -65,10 +65,8 @@ const HomePage = () => {
       const response = await axios.post("http://52.78.180.147:8080/api/v1/user/withdraw", {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -88,10 +86,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -106,10 +102,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -143,10 +137,8 @@ const HomePage = () => {
       const response = await axios.post("http://52.78.180.147:8080/api/v1/loanAdvice", data, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
           tempUserId: "",
         },
       });
@@ -165,10 +157,8 @@ const HomePage = () => {
       const response = await axios.post("http://52.78.180.147:8080/api/v1/loanAdvice/specific", data, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
           tempUserId: "",
         },
       });
@@ -189,10 +179,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -208,10 +196,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -227,10 +213,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -403,10 +387,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -422,10 +404,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -447,10 +427,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -466,10 +444,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
@@ -491,10 +467,8 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          AccessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ0OTk0NTZ9.od1LYIgS-RfRzHS2-z9oGK10v3BqTy75VEdkxK2bPwI", // 여기에 실제 액세스 토큰을 입력하세요
-          RefreshToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJFTUFJTCI6ImxnaDk4MDdAbmF0ZS5jb20iLCJBVVRIT1JJVFkiOiJST0xFX1VTRVIiLCJleHAiOjE3MjQ1NDk4NTZ9.skikSFPyiLlkKBWK6m6QyaYFcMKTMahHjQhgL43QNkA", // 여기에 실제 리프레시 토큰을 입력하세요
+          AccessToken: g_accessToken, // 여기에 실제 액세스 토큰을 입력하세요
+          RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
       console.log("응답 데이터:", response.data);
