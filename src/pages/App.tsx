@@ -1,8 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
-import HomePage from "./HomePage";
-import ScssExample from "./scss-example";
+
+const HomePage = lazy(() => import("./HomePage"));
+const ApiPage = lazy(() => import("./ApiPage"));
+const ScssExample = lazy(() => import("./scss-example"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,12 +18,15 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="scss-example" element={<ScssExample />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<AppLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="api" element={<ApiPage />} />
+            <Route path="scss-example" element={<ScssExample />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </QueryClientProvider>
   );
 }
