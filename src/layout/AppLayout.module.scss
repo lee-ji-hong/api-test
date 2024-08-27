@@ -1,0 +1,17 @@
+.main {
+  padding-top: 8rem;
+  position: relative;
+  margin: 0 auto;
+  max-width: 90rem;
+  z-index: 0;
+  background-color: #f2eaff;
+
+  @include responsive("T") {
+    max-width: calc(100% - 16.8rem);
+    padding-bottom: 8rem;
+  }
+  @include responsive("M") {
+    padding-top: 6rem;
+    max-width: calc(100% - 4rem);
+  }
+}
