@@ -1,4 +1,4 @@
-export default function Spacing({ size }: { size: number }) {
+const Spacing = ({ size }: { size: number }) => {
   return (
     <div
       style={{
@@ -7,4 +7,6 @@ export default function Spacing({ size }: { size: number }) {
       }}
     />
   );
-}
+};
+
+export default Spacing;
