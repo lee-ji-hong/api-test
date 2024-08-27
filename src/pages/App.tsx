@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
-            <Route path="api" element={<ApiPage />} />
+            <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
           </Route>
         </Routes>

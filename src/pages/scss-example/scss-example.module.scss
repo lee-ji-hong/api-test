@@ -3,14 +3,6 @@
   - mixin 문법을 가장 상단에 기재하면 가독성을 높일 수 있음
 */
 
-button {
-  background-color: red;
-  border: 1px solid;
-  margin: 10px;
-  font-size: 20px;
-  display: grid;
-}
-
 // global.scss file test
 .global {
   background-color: magenta;
