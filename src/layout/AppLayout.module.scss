@@ -1,5 +1,5 @@
 .main {
-  padding-top: 8rem;
+  // padding-top: 8rem;
   position: relative;
   margin: 0 auto;
   max-width: 90rem;
@@ -11,7 +11,8 @@
     padding-bottom: 8rem;
   }
   @include responsive("M") {
-    padding-top: 6rem;
+    // padding-top: 6rem;
+    margin: 0 24px;
     max-width: calc(100% - 4rem);
   }
 }
