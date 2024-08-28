@@ -2,6 +2,7 @@ import Onboarding_1 from "@/assets/images/onboarding_1.png";
 import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
 import Onboarding_4 from "@/assets/images/onboarding_4.png";
+import Cancel_btn from "@/assets/images/cancel_btn.svg";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -19,5 +20,9 @@ export const IMAGES = {
   Onboarding_4: {
     src: Onboarding_4,
     alt: "말풍선",
+  },
+  Cancel_btn: {
+    src: Cancel_btn,
+    alt: "취소",
   },
 };

@@ -18,6 +18,9 @@ const HomePage = () => {
   return (
     <div>
       <Spacing size={126} />
+      <div onClick={() => navigate("/deposit-entry")}>
+        <Image className={cx("cancel")} imageInfo={IMAGES?.Cancel_btn} />
+      </div>
       <Section01 title="당신을 위한/n최적의 전세 대출을/n찾아드릴게요">
         <Spacing size={18} />
         <Text className={cx("txt-box")} text="최신 정보를 바탕으로/n맞춤형 대출 솔루션을 제공받으세요" />
@@ -50,7 +53,7 @@ const HomePage = () => {
         <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_4} />
       </Box>
       <Spacing size={60} />
-      <Button onClick={() => navigate("/test")} title="전월세 대출 상품 확인하러 가기" />
+      <Button onClick={() => navigate("/deposit-entry")} title="전월세 대출 상품 확인하러 가기" />
       <Spacing size={14} />
     </div>
   );
