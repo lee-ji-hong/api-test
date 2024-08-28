@@ -1,0 +1,4 @@
+.container {
+  @include flexbox();
+  gap: 12px;
+}
