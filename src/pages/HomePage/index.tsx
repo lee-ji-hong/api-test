@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 import Box from "@/components/shared/Box";
+import Button from "@/components/shared/Button";
 
 import { IMAGES } from "@/constants/images";
 import classNames from "classnames/bind";
@@ -11,15 +13,16 @@ import styles from "./HomePage.module.scss";
 const cx = classNames.bind(styles);
 
 const HomePage = () => {
-  console.log(IMAGES.Onboarding_1);
+  const navigate = useNavigate();
+
   return (
     <div>
-      <Spacing size={82} />
+      <Spacing size={126} />
       <Section01 title="당신을 위한/n최적의 전세 대출을/n찾아드릴게요">
         <Spacing size={18} />
         <Text className={cx("txt-box")} text="최신 정보를 바탕으로/n맞춤형 대출 솔루션을 제공받으세요" />
         <Spacing size={52} />
-        <Image imageInfo={IMAGES?.Onboarding_1} />
+        <Image className={cx("top-img")} imageInfo={IMAGES?.Onboarding_1} />
       </Section01>
       <Box>
         <Text
@@ -46,6 +49,9 @@ const HomePage = () => {
         <Text className={cx("txt-sub")} text="궁금한 점,/n다 물어보고 대출을 선택하세요" />
         <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_4} />
       </Box>
+      <Spacing size={60} />
+      <Button onClick={() => navigate("/test")} title="전월세 대출 상품 확인하러 가기" />
+      <Spacing size={14} />
     </div>
   );
 };
