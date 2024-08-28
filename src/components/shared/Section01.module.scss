@@ -2,15 +2,13 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  .txt-title-wrap {
-    @include column-flexbox();
-    span {
+  .text {
+    p {
       color: $grey800;
       font-size: 27px;
       font-weight: 700;
       line-height: 35.1px;
       letter-spacing: -0.8px;
-      text-align: center;
     }
   }
 }

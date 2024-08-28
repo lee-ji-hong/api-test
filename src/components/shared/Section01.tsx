@@ -1,3 +1,5 @@
+import Text from "@/components/shared/Text";
+
 import classNames from "classnames/bind";
 import styles from "./Section01.module.scss";
 
@@ -12,18 +14,9 @@ const Section01 = ({
   className?: string;
   title?: string;
 }) => {
-  const titleParts = title ? title.split("/n") : [];
-
-  console.log(titleParts);
   return (
     <section className={cx(["container", className])}>
-      {title != null ? (
-        <div className={cx("txt-title-wrap")}>
-          {titleParts.map((part, index) => (
-            <span key={index}>{part}</span>
-          ))}
-        </div>
-      ) : null}
+      {title != null ? <Text className={cx("text")} text={title} /> : null}
       {children}
     </section>
   );
