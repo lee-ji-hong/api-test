@@ -3,7 +3,6 @@ import { styled } from "@mui/system";
 
 const DepositInput = styled(TextField)({
   width: "311px",
-  marginBottom: "16px",
   "& .MuiInput-underline:before": {
     border: "none",
   },
@@ -12,7 +11,7 @@ const DepositInput = styled(TextField)({
   },
   "& .MuiInput-input": {
     fontFamily: "Pretendard",
-    height: "46px",
+    height: "52px",
     fontSize: "38px",
     fontWeight: 700,
     lineHeight: "45.35px",

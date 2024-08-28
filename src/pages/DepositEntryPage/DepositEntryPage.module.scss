@@ -7,6 +7,14 @@
     letter-spacing: -1.2px;
     text-align: center;
   }
+
+  .txt-sub {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    color: $grey600;
+  }
   .fixed-button {
     position: fixed;
     bottom: 50px;

@@ -36,6 +36,18 @@ const DepositEntryPage = () => {
     return `${new Intl.NumberFormat().format(number)}만원`;
   };
 
+  const formatNumberWithUnits = (number: number): string => {
+    if (number >= 10000) {
+      const billion = Math.floor(number / 10000); // 억 단위 계산
+      const million = number % 10000; // 만 단위 계산
+      if (million > 0) {
+        return `${billion}억 ${new Intl.NumberFormat().format(million)}만원`;
+      }
+      return `${billion}억`;
+    }
+    return formatNumber(number); // 억 단위 미만
+  };
+
   return (
     <div className={cx("container")}>
       <Spacing size={179} />
@@ -46,10 +58,11 @@ const DepositEntryPage = () => {
         placeholder="0만원"
         onFocus={handleFocus}
         onBlur={handleBlur}
-        value={formatNumber(inputValue)}
+        value={`${formatNumber(inputValue)}`}
         onChange={handleInputChange}
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
       />
+      <Text className={cx("txt-sub")} text={formatNumberWithUnits(inputValue)} />
       <Spacing size={58} />
       <BadgeList list={moneyKeys} onClick={handleChangeValue} />
       <Button
