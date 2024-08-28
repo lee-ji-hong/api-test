@@ -1,5 +1,5 @@
 .container {
-  @include column-flexbox($jc: between);
+  @include column-flexbox($jc: between, $ai: start);
   padding: 30px;
   height: 490px;
   background-color: $grey100;
