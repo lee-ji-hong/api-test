@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
 
 const HomePage = lazy(() => import("./HomePage"));
+const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
 const ScssExample = lazy(() => import("./scss-example"));
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
+            <Route path="deposit-entry" element={<DepositEntryPage />} />
             <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
           </Route>
