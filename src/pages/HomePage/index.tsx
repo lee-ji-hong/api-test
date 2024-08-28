@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
