@@ -58,13 +58,13 @@
   @include column-flexbox(center, end);
   width: 10rem;
   height: 10rem;
-  border: 0.1rem solid $Black;
+  border: 0.1rem solid $black;
 
   p {
     background-color: $red500;
     width: 3rem;
     height: 3rem;
-    border: 0.1rem solid $Black;
+    border: 0.1rem solid $black;
   }
 }
 
@@ -78,13 +78,13 @@
 .position {
   width: 10rem;
   height: 10rem;
-  border: 0.1rem solid $Black;
+  border: 0.1rem solid $black;
   position: relative;
   p {
     background-color: $Primary_Emerald;
     width: 3rem;
     height: 3rem;
-    border: 0.1rem solid $Black;
+    border: 0.1rem solid $black;
     position: relative;
 
     &:nth-child(1) {
@@ -104,7 +104,7 @@
   3. 디스플레이, 테블릿, 모바일 사이즈의 기준을 변경하고 싶을 때는 breakpoint.scss 파일의 변수 값을 조정해 주면 됨
 */
 .responsive {
-  background-color: $Black;
+  background-color: $black;
   width: 3rem;
   height: 3rem;
 
