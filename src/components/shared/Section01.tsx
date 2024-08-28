@@ -1,3 +1,4 @@
+import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
 
 import classNames from "classnames/bind";
@@ -16,6 +17,7 @@ const Section01 = ({
 }) => {
   return (
     <section className={cx(["container", className])}>
+      <Spacing size={126} />
       {title != null ? <Text className={cx("text")} text={title} /> : null}
       {children}
     </section>

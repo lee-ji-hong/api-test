@@ -17,11 +17,10 @@ const HomePage = () => {
 
   return (
     <div>
-      <Spacing size={126} />
-      <div onClick={() => navigate("/deposit-entry")}>
-        <Image className={cx("cancel")} imageInfo={IMAGES?.Cancel_btn} />
-      </div>
-      <Section01 title="당신을 위한/n최적의 전세 대출을/n찾아드릴게요">
+      <Section01 className={cx("section")} title="당신을 위한/n최적의 전세 대출을/n찾아드릴게요">
+        <div onClick={() => navigate("/deposit-entry")}>
+          <Image className={cx("cancel")} imageInfo={IMAGES?.Cancel_btn} />
+        </div>
         <Spacing size={18} />
         <Text className={cx("txt-box")} text="최신 정보를 바탕으로/n맞춤형 대출 솔루션을 제공받으세요" />
         <Spacing size={52} />
