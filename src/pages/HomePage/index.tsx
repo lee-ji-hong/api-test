@@ -15,7 +15,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div data-testid="home-page">
       <Section01 className={cx("section")} title="당신을 위한/n최적의 전세 대출을/n찾아드릴게요">
         <div onClick={() => navigate("/deposit-entry")}>
           <Image className={cx("cancel")} imageInfo={IMAGES?.Cancel_btn} />
