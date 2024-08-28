@@ -3,18 +3,29 @@ import styles from "./Text.module.scss";
 
 const cx = classNames.bind(styles);
 
-interface ImageProps {
+interface TextProps {
   text?: string;
   className?: string;
+  highlight?: string;
 }
 
-const Text = ({ text, className }: ImageProps) => {
+const Text = ({ text, className, highlight }: TextProps) => {
   const titleParts = text ? text.split("/n") : [];
 
   return (
     <div className={cx(["container", className])}>
       {titleParts.map((part, index) => (
-        <span key={index}>{part}</span>
+        <p key={index}>
+          {highlight && part.includes(highlight) ? (
+            <>
+              {part.split(highlight)[0]}
+              <span className={cx("highlight")}>{highlight}</span>
+              {part.split(highlight)[1]}
+            </>
+          ) : (
+            part
+          )}
+        </p>
       ))}
     </div>
   );

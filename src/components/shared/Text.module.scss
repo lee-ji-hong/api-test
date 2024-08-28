@@ -1,3 +1,10 @@
 .container {
-  @include flexbox();
+  // @include column-flexbox();
+
+  p {
+    text-align: center;
+  }
+  .highlight {
+    color: $blue500;
+  }
 }
