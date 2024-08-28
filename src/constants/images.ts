@@ -3,6 +3,9 @@ import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
 import Onboarding_4 from "@/assets/images/onboarding_4.png";
 import Cancel_btn from "@/assets/images/cancel_btn.svg";
+import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
+import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
+import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -24,5 +27,17 @@ export const IMAGES = {
   Cancel_btn: {
     src: Cancel_btn,
     alt: "취소",
+  },
+  TabBarCalculatorIcon: {
+    SVGComponent: TabBarCalculatorIcon,
+    alt: "계산기 아이콘",
+  },
+  TabBarHomeIcon: {
+    SVGComponent: TabBarHomeIcon,
+    alt: "홈 아이콘",
+  },
+  TabBarBoardIcon: {
+    SVGComponent: TabBarBoardIcon,
+    alt: "게시판 아이콘",
   },
 };

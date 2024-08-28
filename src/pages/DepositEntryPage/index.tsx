@@ -17,7 +17,6 @@ const DepositEntryPage = () => {
       <Text className={cx("txt-title")} text="전월세보증금은?" />
       <DepositInput id="standard-basic" variant="standard" placeholder="0만원" />
       <Button onClick={() => navigate("/deposit-entry")} title="전월세 대출 상품 확인하기" />
-      <Spacing size={14} />
     </div>
   );
 };

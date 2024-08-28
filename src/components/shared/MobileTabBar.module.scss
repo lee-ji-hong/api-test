@@ -1,0 +1,26 @@
+.menu {
+  @include flexbox(around, center);
+  width: 100%;
+
+  &-item {
+    color: $grey800;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 13.13px;
+    text-align: center;
+
+    &-active {
+      color: $blue500;
+    }
+  }
+
+  a {
+    @include column-flexbox(center, center);
+    gap: 0.5rem;
+
+    svg {
+      width: 2.4rem;
+    }
+  }
+}

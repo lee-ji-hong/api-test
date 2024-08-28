@@ -17,6 +17,7 @@ const DepositInput = styled(TextField)({
     fontWeight: 700,
     lineHeight: "45.35px",
     textAlign: "center",
+    color: "#4169E1",
     "&::placeholder": {
       color: "#DADAE1",
     },

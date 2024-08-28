@@ -16,3 +16,13 @@
     max-width: calc(100% - 4rem);
   }
 }
+
+.tabBar {
+  @include flexbox();
+  @include pos-center-x(fixed);
+  background-color: $white;
+  width: 100%;
+  bottom: 0;
+  height: 50px;
+  border-top: 0.1rem solid $grey200;
+}
