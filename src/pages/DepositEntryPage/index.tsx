@@ -12,12 +12,18 @@ const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
   const money = ["+10만", "+100만", "+1000만", "+1억"];
 
   // Input 포커스 핸들러
   const handleFocus = () => setIsInputFocused(true);
   const handleBlur = () => setIsInputFocused(false);
+
+  const handleChangeValue = (value: string) => {
+    console.log(value);
+    setInputValue(value);
+  };
 
   return (
     <div className={cx("container")}>
@@ -29,9 +35,11 @@ const DepositEntryPage = () => {
         placeholder="0만원"
         onFocus={handleFocus}
         onBlur={handleBlur}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
       <Spacing size={58} />
-      <BadgeList list={money} />
+      <BadgeList list={money} onClick={handleChangeValue} />
       <Button
         onClick={() => navigate("/deposit-entry")}
         title="전월세 대출 상품 확인하기"

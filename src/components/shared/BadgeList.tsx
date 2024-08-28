@@ -10,12 +10,14 @@ interface BadgeProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const BadgeList = ({ list, className }: BadgeProps) => {
-  // string[]로 수정
+const BadgeList = ({ list, className, onClick }: BadgeProps) => {
+  const handleClick = (value: string) => {
+    onClick(value);
+  };
   return (
     <div className={cx(["container", className])}>
       {list.map((item, index) => (
-        <Badge key={index} title={item} />
+        <Badge key={index} title={item} onClick={() => handleClick(item)} />
       ))}
     </div>
   );
