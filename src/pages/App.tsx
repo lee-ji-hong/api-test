@@ -8,6 +8,7 @@ const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
 const ScssExample = lazy(() => import("./scss-example"));
+const LoginSuccessPage = lazy(() => import("./LoginTest/LoginSuccessPage"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
 
 const queryClient = new QueryClient({
@@ -28,6 +29,7 @@ function App() {
             <Route path="deposit-entry" element={<DepositEntryPage />} />
             <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
+            <Route path="login-success" element={<LoginSuccessPage />} />
             <Route path="community" element={<CommunityPage />} />
           </Route>
         </Routes>
