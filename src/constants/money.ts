@@ -1,6 +1,6 @@
-export const MONEY = {
-  "+10만": 10,
-  "+100만": 100,
-  "+1000만": 1000,
-  "+1억": 10000,
-};
+export const MONEY = [
+  { label: "+10만", value: 10 },
+  { label: "+100만", value: 100 },
+  { label: "+1000만", value: 1000 },
+  { label: "+1억", value: 10000 },
+];

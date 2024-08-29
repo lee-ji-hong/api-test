@@ -13,8 +13,7 @@ import Text from "@/components/shared/Text";
 
 const DepositEntryPage = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const [inputValue, setInputValue] = useState<number>("");
-  const moneyKeys = Object.keys(MONEY);
+  const [inputValue, setInputValue] = useState<number>(0);
   const navigate = useNavigate();
 
   const isInvalidValue = inputValue <= 5 || inputValue > 200000;
@@ -24,9 +23,9 @@ const DepositEntryPage = () => {
   const handleFocus = () => setIsInputFocused(true);
   const handleBlur = () => setIsInputFocused(false);
 
-  const handleChangeValue = (value: string) => {
-    const amount = MONEY[value];
-    setInputValue((prevValue) => Math.min(prevValue + amount, 210000));
+  const handleChangeValue = (label: string) => {
+    const item = MONEY.find((item) => item.label === label)!;
+    setInputValue((prevValue) => Math.min(prevValue + item.value, 210000));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +78,7 @@ const DepositEntryPage = () => {
         text={isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
       />
       <Spacing size={58} />
-      <BadgeList list={moneyKeys} onClick={handleChangeValue} />
+      <BadgeList list={MONEY} onClick={handleChangeValue} />
       <Button
         onClick={() => navigate("/deposit-entry")}
         title="전월세 대출 상품 확인하기"

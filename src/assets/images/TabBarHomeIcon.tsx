@@ -1,5 +1,3 @@
-import { TabBarIconProps } from "@/type/type";
-
 interface TabBarIconProps {
   title?: string;
   color: string;
