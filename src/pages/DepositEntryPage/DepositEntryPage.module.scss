@@ -24,6 +24,10 @@
     transition: bottom 0.3s ease;
   }
 
+  .text-alert {
+    color: $red500;
+  }
+
   .with-input-focus {
     bottom: 260px;
   }

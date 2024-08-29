@@ -9,6 +9,9 @@ const DepositInput = styled(TextField)({
   "& .MuiInput-underline:hover:before": {
     border: "none",
   },
+  "& .Mui-error::after": {
+    borderBottomColor: "#fc4a4a",
+  },
   "& .MuiInput-input": {
     fontFamily: "Pretendard",
     height: "52px",
@@ -16,7 +19,6 @@ const DepositInput = styled(TextField)({
     fontWeight: 700,
     lineHeight: "45.35px",
     textAlign: "center",
-    color: "#4169E1",
     "&::placeholder": {
       color: "#DADAE1",
     },

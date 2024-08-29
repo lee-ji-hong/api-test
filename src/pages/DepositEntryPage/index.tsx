@@ -17,18 +17,22 @@ const DepositEntryPage = () => {
   const moneyKeys = Object.keys(MONEY);
   const navigate = useNavigate();
 
+  const isInvalidValue = inputValue <= 5 || inputValue > 200000;
+  const warningMessage =
+    inputValue <= 5 ? "보증금은 5만원 이상이어야 합니다." : "보증금은 20억원을 초과할 수 없습니다.";
+
   const handleFocus = () => setIsInputFocused(true);
   const handleBlur = () => setIsInputFocused(false);
 
   const handleChangeValue = (value: string) => {
     const amount = MONEY[value];
-    setInputValue((prevValue) => Math.min(prevValue + amount, 200000));
+    setInputValue((prevValue) => Math.min(prevValue + amount, 210000));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value.replace(/,/g, ""), 10);
     if (!isNaN(newValue)) {
-      setInputValue(Math.min(newValue, 200000));
+      setInputValue(Math.min(newValue, 210000));
     }
   };
 
@@ -58,11 +62,20 @@ const DepositEntryPage = () => {
         placeholder="0만원"
         onFocus={handleFocus}
         onBlur={handleBlur}
+        error={isInvalidValue ? true : false}
         value={`${formatNumber(inputValue)}`}
         onChange={handleInputChange}
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+        sx={{
+          "& .MuiInputBase-input": {
+            color: isInvalidValue ? "#fc4a4a" : "#4169e1",
+          },
+        }}
       />
-      <Text className={cx("txt-sub")} text={formatNumberWithUnits(inputValue)} />
+      <Text
+        className={cx("txt-sub", { "text-alert": isInvalidValue })}
+        text={isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
+      />
       <Spacing size={58} />
       <BadgeList list={moneyKeys} onClick={handleChangeValue} />
       <Button
