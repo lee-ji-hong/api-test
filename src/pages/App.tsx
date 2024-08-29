@@ -11,8 +11,8 @@ const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const DepositResultPage = lazy(() => import("./DepositResultPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
 const ScssExample = lazy(() => import("./scss-example"));
-const LoginSuccessPage = lazy(() => import("./LoginPage/LoginResultPage"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
+const LoginSuccessPage = lazy(() => import("./LoginTest/LoginSuccessPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +38,7 @@ function App() {
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/write" element={<CommunityWirtePage />} />
             <Route path="community/detail" element={<CommunityDetail />} />
+            <Route path="login-success" element={<LoginSuccessPage />} />
           </Route>
         </Routes>
       </Suspense>
