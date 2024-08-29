@@ -30,7 +30,9 @@ const DepositEntryPage = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value.replace(/,/g, ""), 10);
+    const { value } = e.target;
+    const rawValue = value.replace(/,/g, "").replace(/만원/g, "");
+    const newValue = parseInt(rawValue, 10);
     if (!isNaN(newValue)) {
       setInputValue(Math.min(newValue, 210000));
     }

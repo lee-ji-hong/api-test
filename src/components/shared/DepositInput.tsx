@@ -9,8 +9,14 @@ const DepositInput = styled(TextField)({
   "& .MuiInput-underline:hover:before": {
     border: "none",
   },
+  "& .Mui-error::before": {
+    borderBottomColor: "#fc4a4a !important",
+  },
   "& .Mui-error::after": {
-    borderBottomColor: "#fc4a4a",
+    borderBottomColor: "#fc4a4a !important",
+  },
+  "& .MuiInput-root::after": {
+    // borderBottom: "2px solid #4169e1 !important",
   },
   "& .MuiInput-input": {
     fontFamily: "Pretendard",
