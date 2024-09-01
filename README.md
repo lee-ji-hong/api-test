@@ -1,4 +1,4 @@
-<div><img src="https://capsule-render.vercel.app/api?type=rounded&height=300&color=gradient&text=BankCalculator&fontAlign=50&fontAlignY=42&section=header&textBg=false&fontColor=000000&fontSize=60&animation=scaleIn&reversal=true"/></div>
+<div><img src="https://capsule-render.vercel.app/api?type=rounded&height=300&color=gradient&text=MyZipPlan&fontAlign=50&fontAlignY=42&section=header&textBg=false&fontColor=000000&fontSize=60&animation=scaleIn&reversal=true"/></div>
 
 ### Front-End
 
