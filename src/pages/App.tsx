@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
+import LoginPage from "./LoginPage";
 import LoginPage from "./LoginTest/loginPage";
 // import CommunityPage from "./CommunityPage";
 
@@ -9,6 +10,7 @@ const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
 const ScssExample = lazy(() => import("./scss-example"));
+const LoginSuccessPage = lazy(() => import("./LoginPage/LoginResultPage"));
 const LoginSuccessPage = lazy(() => import("./LoginTest/LoginSuccessPage"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
 
