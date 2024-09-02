@@ -9,6 +9,15 @@ const LoginSuccessPage = () => {
   );
 };
 
+onload = () => {
+  const objToken = getTokens();
+  console.log("objToken");
+  console.log(objToken);
+  if (objToken.accessToken && objToken.refreshToken) {
+    alert("로그인 성공!");
+  }
+};
+
 const getTokens = () => {
   const queryParams = new URLSearchParams(location.search);
   const accessToken = queryParams.get("accessToken");
