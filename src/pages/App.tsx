@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
+import LoginPage from "./LoginTest/loginPage";
 import LoginPage from "./LoginPage";
 import LoginPage from "./LoginTest/loginPage";
 // import CommunityPage from "./CommunityPage";
@@ -33,8 +34,8 @@ function App() {
             <Route path="deposit-result" element={<DepositResultPage />} />
             <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
-            <Route path="login-page" element={<LoginPage />} />
             <Route path="login-result" element={<LoginSuccessPage />} />
+            <Route path="login-page" element={<LoginPage />} />
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/write" element={<CommunityWirtePage />} />
             <Route path="community/detail" element={<CommunityDetail />} />
