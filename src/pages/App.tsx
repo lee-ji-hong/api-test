@@ -2,7 +2,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
-import LoginPage from "./LoginTest/loginPage";
 import LoginPage from "./LoginPage";
 
 const HomePage = lazy(() => import("./HomePage"));
