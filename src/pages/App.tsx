@@ -5,6 +5,9 @@ import AppLayout from "../layout/AppLayout";
 import CommunityWirtePage from "./CommunityWirtePage";
 import CommunityDetail from "./CommunityDetail";
 import FullScreenMessage from "@/components/sections/FullScreenMessage";
+import LoginPage from "./LoginTest/loginPage";
+// import CommunityPage from "./CommunityPage";
+
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const DepositResultPage = lazy(() => import("./DepositResultPage"));
@@ -32,6 +35,8 @@ function App() {
             <Route path="deposit-result" element={<DepositResultPage />} />
             <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
+            <Route path="login-page" element={<LoginPage />} />
+            <Route path="login-result" element={<LoginSuccessPage />} />
             <Route path="login-success" element={<LoginSuccessPage />} />
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/write" element={<CommunityWirtePage />} />
