@@ -16,7 +16,7 @@ export const NAVIGATION_BAR_MENU = {
   courseRegister: {
     title: "커뮤니티",
     tabTitle: "커뮤니티",
-    path: "/",
+    path: "/community",
     icon: IMAGES.TabBarBoardIcon,
   },
 };
