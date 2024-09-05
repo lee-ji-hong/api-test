@@ -5,6 +5,7 @@ import classNames from "classnames/bind";
 import styles from "./DepositEntryPage.module.scss";
 const cx = classNames.bind(styles);
 
+import KeyboardModal from "@/components/shared/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
 import BadgeList from "@/components/shared/BadgeList";
 import Spacing from "@/components/shared/Spacing";
@@ -18,7 +19,11 @@ const DepositEntryPage = () => {
 
   const isInvalidValue = inputValue <= 5 || inputValue > 200000;
   const warningMessage =
-    inputValue <= 5 ? "보증금은 5만원 이상이어야 합니다." : "보증금은 20억원을 초과할 수 없습니다.";
+    inputValue === 0
+      ? ""
+      : inputValue <= 5
+        ? "보증금은 5만원 이상이어야 합니다."
+        : "보증금은 20억원을 초과할 수 없습니다.";
 
   const handleFocus = () => setIsInputFocused(true);
   const handleBlur = () => setIsInputFocused(false);
@@ -34,6 +39,19 @@ const DepositEntryPage = () => {
     const newValue = parseInt(rawValue, 10);
     if (!isNaN(newValue)) {
       setInputValue(Math.min(newValue, 210000));
+    }
+  };
+
+  const handleKeyPress = (key: string) => {
+    if (key === "⌫") {
+      // 백스페이스 키 동작
+      setInputValue((prevValue) => prevValue.slice(0, -1) || "");
+    } else {
+      setInputValue((prevValue) => {
+        const newValue = prevValue + key;
+        const numericValue = parseInt(newValue.replace(/,/g, "").replace(/만원/g, ""), 10);
+        return isNaN(numericValue) ? "" : Math.min(numericValue, 210000).toString();
+      });
     }
   };
 
@@ -55,7 +73,7 @@ const DepositEntryPage = () => {
 
   return (
     <div className={cx("container")}>
-      <Spacing size={179} />
+      <Spacing size={138} />
       <Text className={cx("txt-title")} text="전월세보증금은?" />
       <DepositInput
         id="standard-basic"
@@ -69,7 +87,7 @@ const DepositEntryPage = () => {
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         sx={{
           "& .MuiInputBase-input": {
-            color: isInvalidValue ? "#fc4a4a" : "#4169e1",
+            color: inputValue === 0 ? "#dadae1" : isInvalidValue ? "#fc4a4a" : "#4169e1",
           },
         }}
       />
@@ -77,13 +95,14 @@ const DepositEntryPage = () => {
         className={cx("txt-sub", { "text-alert": isInvalidValue })}
         text={isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
       />
-      <Spacing size={58} />
+      <Spacing size={38} />
       <BadgeList list={MONEY} onClick={handleChangeValue} />
       <Button
         onClick={() => navigate("/deposit-entry")}
         title="전월세 대출 상품 확인하기"
         className={cx("fixed-button", { "with-input-focus": isInputFocused })}
       />
+      {isInputFocused && <KeyboardModal onKeyPress={handleKeyPress} />}
     </div>
   );
 };
