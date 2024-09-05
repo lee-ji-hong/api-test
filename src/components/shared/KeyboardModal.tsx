@@ -7,7 +7,7 @@ const KeyboardModal = ({ onKeyPress }) => {
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0", "⌫"];
 
   return (
-    <div className={cx("keyboard-modal")}>
+    <div className={cx("keyboard-modal")} onMouseDown={(e) => e.preventDefault()}>
       <div className={cx("keyboard-content")}>
         {keys.map((key) => (
           <button key={key} className={cx("key-button")} onClick={() => onKeyPress(key)}>
