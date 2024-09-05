@@ -1,3 +1,31 @@
+/* HomePage.module.scss */
+
+.page-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.page-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    transform 500ms ease-in-out,
+    opacity 500ms ease-in-out;
+}
+
+.page-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.page-exit-active {
+  transform: translateY(100%);
+  opacity: 0;
+  transition:
+    transform 500ms ease-in-out,
+    opacity 500ms ease-in-out;
+}
+
 .section {
   background: linear-gradient(180deg, #e8e8fc 0%, #fafaff 50%, #ffffff 100%);
 }
