@@ -1,0 +1,19 @@
+.container {
+  text-align: left;
+  display: "flex";
+
+  .txt-name {
+    color: "#333347";
+    letter-spacing: -0.8px;
+    line-height: 19.6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .txt-time {
+    color: "#86869A";
+    letter-spacing: -0.8px;
+    line-height: 19.6px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
