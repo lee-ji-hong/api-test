@@ -1,11 +1,12 @@
-import styles from "./CommunityPage.module.scss";
+import { Typography } from "@mui/material";
+import styles from "./Profile.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
 const Profile = () => {
   return (
-    <div style={cx("container")}>
+    <div style={{ display: "flex" }} className={cx("container")}>
       <img
         src="https://via.placeholder.com/150" // 프로필 이미지 URL
         alt="Profile"
@@ -18,8 +19,8 @@ const Profile = () => {
         }}
       />
       <div style={{ marginLeft: "10px" }}>
-        <h3>김*니</h3>
-        <p>4시간 전</p>
+        <Typography className={cx("txt-name")}>김*니</Typography>
+        <Typography className={cx("txt-time")}>4시간 전</Typography>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { Button, Typography } from "@mui/material";
 
 import Spacing from "@/components/shared/Spacing";
 import { useState } from "react";
-import CommunityItem from "./CommunityContents";
+import CommunityContents from "./CommunityContents";
 
 const cx = classNames.bind(styles);
 
