@@ -6,6 +6,7 @@ import AppLayout from "../layout/AppLayout";
 
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
+const DepositResultPage = lazy(() => import("./DepositResultPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
 const ScssExample = lazy(() => import("./scss-example"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
             <Route path="deposit-entry" element={<DepositEntryPage />} />
+            <Route path="deposit-result" element={<DepositResultPage />} />
             <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
             <Route path="community" element={<CommunityPage />} />
