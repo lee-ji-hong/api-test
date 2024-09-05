@@ -1,7 +1,18 @@
-import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const DepositResultPage = () => {
-  return <div>보증금 결과 페이지</div>;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { inputValue } = location.state || { inputValue: 0 };
+
+  useEffect(() => {
+    if (!inputValue || inputValue === 0) {
+      navigate("/deposit-entry");
+    }
+  }, [inputValue, navigate]);
+
+  return <div>{inputValue}</div>;
 };
 
 export default DepositResultPage;
