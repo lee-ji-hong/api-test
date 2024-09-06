@@ -3,14 +3,14 @@ import { useState } from "react";
 import { MONEY } from "@/constants/money";
 import classNames from "classnames/bind";
 import styles from "./DepositEntryPage.module.scss";
-const cx = classNames.bind(styles);
-
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
 import BadgeList from "@/components/shared/BadgeList";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
+
+const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -44,14 +44,12 @@ const DepositEntryPage = () => {
 
   const handleKeyPress = (key: string) => {
     if (key === "⌫") {
-      // 백스페이스 키 동작
-      setInputValue((prevValue) => prevValue.slice(0, -1) || "");
+      setInputValue((prevValue) => Math.floor(prevValue / 10));
     } else {
-      setInputValue((prevValue) => {
-        const newValue = prevValue + key;
-        const numericValue = parseInt(newValue.replace(/,/g, "").replace(/만원/g, ""), 10);
-        return isNaN(numericValue) ? "" : Math.min(numericValue, 210000).toString();
-      });
+      const numKey = parseInt(key, 10);
+      if (!isNaN(numKey)) {
+        setInputValue((prevValue) => Math.min(prevValue * 10 + numKey, 210000));
+      }
     }
   };
 
@@ -84,7 +82,7 @@ const DepositEntryPage = () => {
         error={isInvalidValue ? true : false}
         value={`${formatNumber(inputValue)}`}
         onChange={handleInputChange}
-        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+        inputProps={{ inputMode: "numeric", pattern: "[0-9]*", readOnly: true }}
         sx={{
           "& .MuiInputBase-input": {
             color: inputValue === 0 ? "#dadae1" : isInvalidValue ? "#fc4a4a" : "#4169e1",
