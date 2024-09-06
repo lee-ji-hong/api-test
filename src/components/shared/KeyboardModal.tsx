@@ -1,9 +1,12 @@
-import React from "react";
 import classNames from "classnames/bind";
 import styles from "./KeyboardModal.module.scss";
 const cx = classNames.bind(styles);
 
-const KeyboardModal = ({ onKeyPress }) => {
+interface KeyboardModalProps {
+  onKeyPress: (key: string) => void; // onKeyPress의 타입을 정의
+}
+
+const KeyboardModal = ({ onKeyPress }: KeyboardModalProps) => {
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0", "⌫"];
 
   return (
