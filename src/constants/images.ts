@@ -6,6 +6,10 @@ import Cancel_btn from "@/assets/images/cancel_btn.svg";
 import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
+import CommunityHeartIcon from "@/assets/images/community/ico_heart.png";
+import CommunityCommentIcon from "@/assets/images/community/ico_comment.png";
+import CommunityLoanBankDummyIcon from "@/assets/images/community/ico_loan_bank_dummy.png";
+import CommunityProfileDummyIcon from "@/assets/images/community/ico_profile_dummy.png";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -39,5 +43,23 @@ export const IMAGES = {
   TabBarBoardIcon: {
     SVGComponent: TabBarBoardIcon,
     alt: "게시판 아이콘",
+  },
+  HeartIcon: {
+    src: CommunityHeartIcon,
+    alt: "하트",
+  },
+  CommentIcon: {
+    src: CommunityCommentIcon,
+    alt: "댓글",
+  },
+
+  // 더미 이미지 모음
+  LoanBankDummyIcon: {
+    src: CommunityLoanBankDummyIcon,
+    alt: "은행 아이콘",
+  },
+  ProfileDummyIcon: {
+    src: CommunityProfileDummyIcon,
+    alt: "프로필 이미지",
   },
 };
