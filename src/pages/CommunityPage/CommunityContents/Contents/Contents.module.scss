@@ -15,10 +15,9 @@
   }
 
   .img-loaninfo {
-    width: 42px;
-    height: 20px;
+    width: 41.4px;
+    height: 14.4px;
     margin-top: 13px;
-    margin-left: 20px;
   }
 
   .container-loaninfo {
@@ -26,22 +25,28 @@
     border-radius: 10px;
     height: 98px;
     display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .container-txt-loaninfo {
-    background-color: #dbdfeb;
+    // background-color: #dbdfeb;
     align-items: center;
+    margin: 5px;
   }
 
   .container-loaninfo-money {
-    background-color: aqua;
+    // background-color: aqua;
     align-content: center;
+    margin: 5px;
   }
 
   .txt-percent {
     font-size: 18px;
     color: #4169e1;
     text-align: right;
+    font-weight: 600;
   }
 
   .txt-loaninfo {

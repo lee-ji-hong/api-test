@@ -3,6 +3,8 @@ import styles from "./Contents.module.scss";
 import classNames from "classnames/bind";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import Spacing from "@/components/shared/Spacing";
+import Image from "@/components/shared/Image";
+import { IMAGES } from "@/constants/images";
 
 const cx = classNames.bind(styles);
 
@@ -20,11 +22,9 @@ const Contents = () => {
       {/* 대출 정보 */}
       <div className={cx("container-loaninfo")}>
         <div className={cx("container-txt-loaninfo")}>
-          <img
-            className={cx("img-loaninfo")}
-            src="https://images.unsplash.com/photo-1634142280675-9d6b8c3c9e7a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fHx8fHx8fHx8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-            alt="img"
-          />
+          <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
+
+          <Spacing size={4} />
           <Typography className={cx("txt-loaninfo")}>신한은행 전세자금 대출전세자금 대출</Typography>
           <Typography className={cx("txt-loaninfo")}>– 전세자금대출 금리우대형</Typography>
         </div>
@@ -35,19 +35,15 @@ const Contents = () => {
       </div>
 
       <Spacing size={18} />
+
       {/* 좋아요, 댓글 */}
       <div className={cx("container-like-comment")}>
-        <img
-          className={cx("img-like")}
-          src="https://images.unsplash.com/photo-1634142280675-9d6b8c3c9e7a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fHx8fHx8fHx8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-        />
+        <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} />
         <Typography className={cx("txt-like")}>12</Typography>
 
         <SpacingWidth size={15} />
-        <img
-          className={cx("img-commnet")}
-          src="https://images.unsplash.com/photo-1634142280675-9d6b8c3c9e7a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fHx8fHx8fHx8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-        />
+
+        <Image className={cx("img-comment")} imageInfo={IMAGES?.CommentIcon} />
         <Typography className={cx("txt-comment")}>12</Typography>
       </div>
     </div>
