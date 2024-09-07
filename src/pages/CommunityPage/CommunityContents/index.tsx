@@ -13,6 +13,7 @@ const CommunityContents = () => {
       <Spacing size={12} />
       <Contents />
       <Spacing size={16} />
+      <Spacing size={50} />
     </div>
   );
 };
