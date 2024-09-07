@@ -8,6 +8,7 @@ const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
 const ScssExample = lazy(() => import("./scss-example"));
+const LoginSuccessPage = lazy(() => import("./LoginPage/LoginResultPage"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
 const LoginSuccessPage = lazy(() => import("./LoginTest/LoginSuccessPage"));
 
