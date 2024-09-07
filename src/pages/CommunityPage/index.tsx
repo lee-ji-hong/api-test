@@ -40,7 +40,7 @@ const CommunityPage = () => {
         loader={<h4>Loading...</h4>} // 로딩 상태, 필요 없으면 제거 가능
         endMessage={<p>모두 불러왔습니다.</p>} // 끝났을 때 메시지
       >
-        {visibleItems.map((item, index) => (
+        {visibleItems.map((index) => (
           <CommunityContents key={index} />
         ))}
       </InfiniteScroll>
