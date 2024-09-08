@@ -7,10 +7,12 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommunityContents from "./CommunityContents";
 import FloatingButton from "./FloatingButton";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
+  const navigator = useNavigate();
 
   const InfiniteScrollComponent = () => {
     // 전체 데이터 배열 (30개)
@@ -79,6 +81,7 @@ const CommunityPage = () => {
       <FloatingButton
         onClick={() => {
           console.log("플로팅 버튼 클릭");
+          navigator("/community/write");
         }}></FloatingButton>
     </div>
   );
