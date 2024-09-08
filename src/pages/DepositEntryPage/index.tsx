@@ -80,9 +80,10 @@ const DepositEntryPage = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         error={isInvalidValue ? true : false}
-        value={`${formatNumber(inputValue)}`}
+        value={inputValue === 0 ? "" : formatNumber(inputValue)}
         onChange={handleInputChange}
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*", readOnly: true }}
+        className={cx({ shake: isInvalidValue })}
         sx={{
           "& .MuiInputBase-input": {
             color: inputValue === 0 ? "#dadae1" : isInvalidValue ? "#fc4a4a" : "#4169e1",
