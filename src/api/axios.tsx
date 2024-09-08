@@ -27,12 +27,41 @@ class Axios {
     return this.instance;
   }
 
-  static get(url: string) {
-    return this.getInstance().get(url);
+  // GET 요청
+  static get(url: string, withToken = false) {
+    const config: any = {
+      headers: {
+        ...this.getInstance().defaults.headers, // 기존 헤더 유지
+      },
+    };
+
+    if (withToken) {
+      const token = this.getCookie("accessToken");
+      if (token) {
+        // 기존 헤더에 Authorization 헤더 추가
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
+
+    return this.getInstance().get(url, config);
   }
 
-  static post(url: string, data: unknown) {
-    return this.getInstance().post(url, data);
+  // POST 요청
+  static post(url: string, data: unknown, withToken = false) {
+    const config: any = {
+      headers: {
+        ...this.getInstance().defaults.headers, // 기존 헤더 유지
+      },
+    };
+
+    if (withToken) {
+      const token = this.getCookie("accessToken");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
+
+    return this.getInstance().post(url, data, config);
   }
 
   static getCookie = (name: string) => {
