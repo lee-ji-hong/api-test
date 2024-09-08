@@ -17,7 +17,7 @@ const DepositEntryPage = () => {
   const [inputValue, setInputValue] = useState<number>(0);
   const navigate = useNavigate();
 
-  const isInvalidValue = inputValue <= 5 || inputValue > 200000;
+  const isInvalidValue = inputValue > 0 && (inputValue <= 5 || inputValue > 200000);
   const warningMessage =
     inputValue === 0
       ? ""
