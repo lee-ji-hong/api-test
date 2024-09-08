@@ -1,6 +1,7 @@
 import axios from "axios";
 import styles from "./api-page.module.scss";
 import classNames from "classnames/bind";
+import Axios from "@/api/axios";
 
 const cx = classNames.bind(styles);
 
@@ -294,6 +295,25 @@ const ApiPage = () => {
     }
   };
 
+  //원리금 계산기 커스텀 Axios 사용
+  const handleRepaymentCalctRequest2 = async () => {
+    const data = {
+      repaymentType: "AMORTIZING",
+      principal: 3.0e8,
+      term: 60,
+      gracePeriod: 0,
+      interestRatePercentage: 4.0,
+      maturityPaymentAmount: 0.0,
+    };
+
+    try {
+      const response = await Axios.post("/api/v1/repaymentCalc", data);
+      console.log("응답 데이터:", response.data);
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  };
+
   // LTV 계산기
   const handleLtvCalcCalcRequest = async () => {
     const data = {
@@ -504,6 +524,7 @@ const ApiPage = () => {
 
       <div style={{ fontSize: "20px", fontWeight: "bold" }}>Calculator API </div>
       <button onClick={handleRepaymentCalctRequest}>원리금 계산기</button>
+      <button onClick={handleRepaymentCalctRequest2}>원리금 계산기(커스텀 Axios)</button>
       <button onClick={handleLtvCalcCalcRequest}>LTV 계산기</button>
       <button onClick={handleDsrCalcRequest}>DSR 계산기</button>
       <button onClick={handleDtiCalcRequest}>DTI 계산기</button>
