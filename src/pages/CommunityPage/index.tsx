@@ -6,6 +6,7 @@ import Spacing from "@/components/shared/Spacing";
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommunityContents from "./CommunityContents";
+import FloatingButton from "./FloatingButton";
 
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
@@ -74,6 +75,11 @@ const CommunityPage = () => {
       <Spacing size={34} />
 
       {InfiniteScrollComponent()}
+
+      <FloatingButton
+        onClick={() => {
+          console.log("플로팅 버튼 클릭");
+        }}></FloatingButton>
     </div>
   );
 };
