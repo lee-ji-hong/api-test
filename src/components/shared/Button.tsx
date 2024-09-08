@@ -8,11 +8,12 @@ interface ButtonProps {
   className?: string;
   title: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 }
 
-const Button = ({ className, title, onClick }: ButtonProps) => {
+const Button = ({ className, title, onClick, disabled }: ButtonProps) => {
   return (
-    <button className={cx(["container", className])} onClick={onClick}>
+    <button className={cx(["container", className])} onClick={onClick} disabled={disabled}>
       {title}
     </button>
   );

@@ -15,4 +15,9 @@
   line-height: 20.29px;
   letter-spacing: -1px;
   text-align: center;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 }

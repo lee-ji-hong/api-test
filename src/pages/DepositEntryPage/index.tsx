@@ -96,6 +96,7 @@ const DepositEntryPage = () => {
       <Spacing size={38} />
       <BadgeList list={MONEY} onClick={handleChangeValue} />
       <Button
+        disabled={!inputValue}
         onClick={() => navigate("/deposit-result", { state: { inputValue } })}
         title="전월세 대출 상품 확인하기"
         className={cx("fixed-button", { "with-input-focus": isInputFocused })}
