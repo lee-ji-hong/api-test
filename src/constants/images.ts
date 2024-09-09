@@ -1,11 +1,5 @@
-import Onboarding_1 from "@/assets/images/onboarding_1.png";
-import Onboarding_2 from "@/assets/images/onboarding_2.png";
-import Onboarding_3 from "@/assets/images/onboarding_3.png";
-import Onboarding_4 from "@/assets/images/onboarding_4.png";
+import Back_btn from "@/assets/images/back.svg";
 import Cancel_btn from "@/assets/images/cancel_btn.svg";
-import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
-import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
-import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import CommunityHeartIcon from "@/assets/images/community/ico_heart.png";
 import CommunityHeartActiveIcon from "@/assets/images/community/ico_heart_active.png";
 import CommunityCommentIcon from "@/assets/images/community/ico_comment.png";
@@ -16,6 +10,15 @@ import DocumentIcon from "@/assets/images/community/ico_community_doc.png";
 import KeyboardIcon from "@/assets/images/community/ico_community_keyboard.png";
 import BackButton from "@/assets/images/community/ico_back.png";
 import MoreButton from "@/assets/images/community/ico_more.png";
+import Logo from "@/assets/images/logo.svg";
+import Onboarding_1 from "@/assets/images/onboarding_1.png";
+import Onboarding_2 from "@/assets/images/onboarding_2.png";
+import Onboarding_3 from "@/assets/images/onboarding_3.png";
+import Onboarding_4 from "@/assets/images/onboarding_4.png";
+import Setting_btn from "@/assets/images/setting.svg";
+import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
+import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
+import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -92,5 +95,17 @@ export const IMAGES = {
   ProfileDummyIcon: {
     src: CommunityProfileDummyIcon,
     alt: "프로필 이미지",
+  },
+  Back_btn: {
+    src: Back_btn,
+    alt: "뒤로가기",
+  },
+  Setting_btn: {
+    src: Setting_btn,
+    alt: "설정",
+  },
+  Logo: {
+    src: Logo,
+    alt: "로고",
   },
 };
