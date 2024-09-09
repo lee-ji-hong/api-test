@@ -1,21 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { MONEY } from "@/constants/money";
-import classNames from "classnames/bind";
 import styles from "./DepositEntryPage.module.scss";
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
 import BadgeList from "@/components/shared/BadgeList";
+import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
+import { useInternalRouter } from "@/hooks/useInternalRouter";
+import { MONEY } from "@/constants/money";
+import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState<number>(0);
   const navigate = useNavigate();
+  const router = useInternalRouter();
 
   const isInvalidValue = inputValue > 0 && (inputValue <= 5 || inputValue > 200000);
   const warningMessage =
@@ -70,40 +73,43 @@ const DepositEntryPage = () => {
   };
 
   return (
-    <div className={cx("container")}>
-      <Spacing size={138} />
-      <Text className={cx("txt-title")} text="전월세보증금은?" />
-      <DepositInput
-        id="standard-basic"
-        variant="standard"
-        placeholder="0만원"
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        error={isInvalidValue ? true : false}
-        value={inputValue === 0 ? "" : formatNumber(inputValue)}
-        onChange={handleInputChange}
-        inputProps={{ inputMode: "numeric", pattern: "[0-9]*", readOnly: true }}
-        className={cx({ shake: isInvalidValue })}
-        sx={{
-          "& .MuiInputBase-input": {
-            color: inputValue === 0 ? "#dadae1" : isInvalidValue ? "#fc4a4a" : "#4169e1",
-          },
-        }}
-      />
-      <Text
-        className={cx("txt-sub", { "text-alert": isInvalidValue })}
-        text={isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
-      />
-      <Spacing size={38} />
-      <BadgeList list={MONEY} onClick={handleChangeValue} />
-      <Button
-        disabled={!inputValue || isInvalidValue}
-        onClick={() => navigate("/deposit-result", { state: { inputValue } })}
-        title="전월세 대출 상품 확인하기"
-        className={cx("fixed-button", { "with-input-focus": isInputFocused })}
-      />
-      {isInputFocused && <KeyboardModal onKeyPress={handleKeyPress} />}
-    </div>
+    <>
+      <Header className={cx("cancel")} onClick={() => router.push("/")} right="Logo" left="Setting_btn" />
+      <div className={cx("container")}>
+        <Spacing size={138} />
+        <Text className={cx("txt-title")} text="전월세보증금은?" />
+        <DepositInput
+          id="standard-basic"
+          variant="standard"
+          placeholder="0만원"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          error={isInvalidValue ? true : false}
+          value={inputValue === 0 ? "" : formatNumber(inputValue)}
+          onChange={handleInputChange}
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]*", readOnly: true }}
+          className={cx({ shake: isInvalidValue })}
+          sx={{
+            "& .MuiInputBase-input": {
+              color: inputValue === 0 ? "#dadae1" : isInvalidValue ? "#fc4a4a" : "#4169e1",
+            },
+          }}
+        />
+        <Text
+          className={cx("txt-sub", { "text-alert": isInvalidValue })}
+          text={isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
+        />
+        <Spacing size={38} />
+        <BadgeList list={MONEY} onClick={handleChangeValue} />
+        <Button
+          disabled={!inputValue || isInvalidValue}
+          onClick={() => navigate("/deposit-result", { state: { inputValue } })}
+          title="전월세 대출 상품 확인하기"
+          className={cx("fixed-button", { "with-input-focus": isInputFocused })}
+        />
+        {isInputFocused && <KeyboardModal onKeyPress={handleKeyPress} />}
+      </div>
+    </>
   );
 };
 
