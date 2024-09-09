@@ -1,13 +1,12 @@
 import { CSSTransition } from "react-transition-group";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
+import Button from "@/components/shared/Button";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 import Box from "@/components/shared/Box";
-import Button from "@/components/shared/Button";
-
+import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { IMAGES } from "@/constants/images";
 import classNames from "classnames/bind";
 import styles from "./HomePage.module.scss";
@@ -15,12 +14,12 @@ const cx = classNames.bind(styles);
 
 const HomePage = () => {
   const [showPage, setShowPage] = useState(true);
-  const navigate = useNavigate();
+  const router = useInternalRouter();
 
   const handleCancelClick = () => {
     setShowPage(false);
     setTimeout(() => {
-      navigate("/deposit-entry");
+      router.push("/deposit-entry");
     }, 200);
   };
 
@@ -71,7 +70,7 @@ const HomePage = () => {
           <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_4} />
         </Box>
         <Spacing size={60} />
-        <Button onClick={() => navigate("/deposit-entry")} title="전월세 대출 상품 확인하러 가기" />
+        <Button onClick={() => router.push("/deposit-entry")} title="전월세 대출 상품 확인하러 가기" />
         <Spacing size={14} />
       </div>
     </CSSTransition>
