@@ -35,6 +35,7 @@ const setCookie = (name: string, value: string): void => {
 // 쿠키에서 특정 값을 가져오는 함수
 const getCookie = (name: string): string | null => {
   const cookieArr = document.cookie.split("; "); // 쿠키를 각각의 key=value 쌍으로 분리
+  console.log("로그인결과페이지" + cookieArr);
   for (const cookie of cookieArr) {
     const [cookieName, cookieValue] = cookie.split("=");
     if (cookieName === name) {

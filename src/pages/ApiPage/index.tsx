@@ -97,6 +97,16 @@ const ApiPage = () => {
       console.error("오류 발생:", error);
     }
   };
+
+  // 최근 대출추천 보고서 목록 조회
+  const handleLoanAdviceRequest2 = async () => {
+    try {
+      const response = await Axios.get("/api/v1/loanAdvice", true);
+      console.log("응답 데이터:", response.data);
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  };
   // 특정 대출추천 보고서 조회
   const handleSpecificRequest = async () => {
     try {
@@ -418,6 +428,15 @@ const ApiPage = () => {
     }
   };
 
+  const handleBoardRequest2 = async () => {
+    try {
+      const response = await Axios.get("/api/v1/board/posts?page=0&size=10", true);
+      console.log("응답 데이터:", response.data);
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  };
+
   // 게시글 조회
   const handlePostsRequest = async () => {
     try {
@@ -509,6 +528,7 @@ const ApiPage = () => {
 
       <div style={{ fontSize: "20px", fontWeight: "bold" }}>LoanAdvice API </div>
       <button onClick={handleLoanAdviceRequest}>최근 대출추천 보고서 목록 조회</button>
+      <button onClick={handleLoanAdviceRequest2}>최근 대출추천 보고서 목록 조회(커스텀 Axios)</button>
       <button onClick={handleSpecificRequest}>특정 대출추천 보고서 조회</button>
       <button onClick={handleLoanAdvicePostRequest}>전세대출상품 추천 보고서 산출</button>
       <button onClick={handleSpecificPostRequest}>특정 전세대출상품 추천 보고서 산출</button>
@@ -531,6 +551,7 @@ const ApiPage = () => {
 
       <div style={{ fontSize: "20px", fontWeight: "bold" }}>Board API </div>
       <button onClick={handleBoardRequest}>게시글 목록 조회</button>
+      <button onClick={handleBoardRequest2}>게시글 목록 조회(커스텀 Axios)</button>
       <button onClick={handlePostsRequest}>게시글 조회</button>
       <button onClick={handleWriteRequest}>게시글 작성</button>
       <button onClick={handleDeleteRequest}>게시글 삭제</button>
