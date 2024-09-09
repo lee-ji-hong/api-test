@@ -16,7 +16,7 @@ interface ListProps {
 export const DepositList = ({ list, className }: ListProps) => {
   return (
     <div className={cx(["container", className])}>
-      {list.map((item, index) => (
+      {list?.map((item, index) => (
         <div key={index} className={cx("item")}>
           <div className={cx("info")}>
             <div className={cx("logo")}>
