@@ -74,7 +74,13 @@ const DepositEntryPage = () => {
 
   return (
     <>
-      <Header className={cx("cancel")} onClick={() => router.push("/")} right="Logo" left="Setting_btn" />
+      <Header
+        className={cx("cancel")}
+        onRightClick={() => router.push("/")}
+        onLeftClick={() => alert("준비중입니다")}
+        right="Logo"
+        left="Setting_btn"
+      />
       <div className={cx("container")}>
         <Spacing size={138} />
         <Text className={cx("txt-title")} text="전월세보증금은?" />
