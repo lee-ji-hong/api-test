@@ -28,6 +28,12 @@ class Axios {
       this.instance.interceptors.response.use(
         (response) => {
           // 응답이 성공적일 때 처리할 로직
+
+          const accessToken = this.getCookie("accessToken");
+          const refreshToken = this.getCookie("refreshToken");
+
+          console.log("accessToken:", accessToken);
+          console.log("refreshToken:", refreshToken);
           return response;
         },
         async (error: AxiosError) => {
@@ -38,20 +44,25 @@ class Axios {
             originalRequest._retry = true; // 재요청 방지 플래그 설정
 
             const refreshToken = this.getCookie("refreshToken");
+
             if (refreshToken) {
               try {
-                // 리프레시 토큰으로 새로운 액세스 토큰 요청
-                const { data } = await this.instance!.post("/auth/refresh-token", {
-                  refreshToken,
-                });
-
-                // 새로운 액세스 토큰을 쿠키에 저장
-                this.setCookie("accessToken", data.accessToken);
-
-                // 기존 요청의 Authorization 헤더에 새 토큰 설정
                 originalRequest.headers = {
                   ...originalRequest.headers,
-                  Authorization: `Bearer ${data.accessToken}`,
+                  RefreshToken: refreshToken,
+                };
+
+                const { data } = await this.instance!(originalRequest);
+
+                console.log("토큰 갱신 성공:", data);
+
+                // this.setCookie("accessToken", data.accessToken);
+                // this.setCookie("refreshToken", data.refreshToken);
+
+                originalRequest.headers = {
+                  ...originalRequest.headers,
+                  AccessToken: data.accessToken,
+                  RefreshToken: null,
                 };
 
                 // 기존 요청을 새로운 액세스 토큰으로 재시도
@@ -82,7 +93,7 @@ class Axios {
     if (withToken) {
       const token = this.getCookie("accessToken");
       if (token) {
-        config.headers!.Authorization = `Bearer ${token}`;
+        config.headers!.AccessToken = `${token}`;
       }
     }
 
@@ -91,7 +102,7 @@ class Axios {
 
   // POST 요청
   static post(url: string, data: unknown, withToken = false) {
-    const config: any = {
+    const config = {
       headers: {
         ...this.getInstance().defaults.headers, // 기존 헤더 유지
       },
@@ -100,17 +111,25 @@ class Axios {
     if (withToken) {
       const token = this.getCookie("accessToken");
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers!.AccessToken = token;
+        config.headers!.RefreshToken = null;
       }
     }
 
-    return this.getInstance().post(url, data, config);
+    return this.getInstance().post(url, data, config as AxiosRequestConfig);
   }
 
-  static getCookie = (name: string) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift();
+  // 쿠키에서 특정 값을 가져오는 함수
+  static getCookie = (name: string): string | null => {
+    const cookieArr = document.cookie.split("; "); // 쿠키를 각각의 key=value 쌍으로 분리
+    console.log(cookieArr);
+    for (const cookie of cookieArr) {
+      const [cookieName, cookieValue] = cookie.split("=");
+      if (cookieName === name) {
+        return decodeURIComponent(cookieValue); // 쿠키 값이 있으면 반환
+      }
+    }
+    return null; // 쿠키가 없을 경우 null 반환
   };
 
   static setCookie = (name: string, value: string): void => {
