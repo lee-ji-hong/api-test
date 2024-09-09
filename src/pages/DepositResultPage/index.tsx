@@ -31,7 +31,7 @@ export const DepositResultPage = () => {
       />
       <Spacing size={10} />
       <Text className={cx("txt-sub")} text="추가 정보를 입력하고/n맞춤형 전월세대출을 알아보세요" />
-      <DepositList list={MOCK} />
+      <DepositList list={MOCK} color="white" />
       <Button
         className={cx("fixed-button")}
         onClick={() => navigate("/deposit-entry")}
