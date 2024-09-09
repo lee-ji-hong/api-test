@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
 // import CommunityPage from "./CommunityPage";
-
+import FullScreenMessage from "@/components/sections/FullScreenMessage";
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const DepositResultPage = lazy(() => import("./DepositResultPage"));
@@ -22,7 +22,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<FullScreenMessage type="loading" />}>
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />

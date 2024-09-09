@@ -15,7 +15,6 @@ export const DepositResultPage = () => {
   const navigate = useNavigate();
   const { inputValue } = location.state || { inputValue: 0 };
 
-  console.log(inputValue);
   useEffect(() => {
     if (!inputValue || inputValue === 0) {
       navigate("/deposit-entry");
