@@ -1,34 +1,37 @@
+import Image from "@/components/shared/Image";
+import { IMAGES } from "@/constants/images";
+import Spacing from "@/components/shared/Spacing";
+import Text from "@/components/shared/Text";
+
 import classNames from "classnames/bind";
 import styles from "./DepositList.module.scss";
 const cx = classNames.bind(styles);
 
+type ColorType = "white" | "grey";
 interface Item {
   name: string;
   rate: number;
   money: string;
 }
-
 interface ListProps {
   className?: string;
   list?: Item[];
+  color?: ColorType;
 }
 
-export const DepositList = ({ list, className }: ListProps) => {
+export const DepositList = ({ list, className, color }: ListProps) => {
   return (
     <div className={cx(["container", className])}>
       {list?.map((item, index) => (
-        <div key={index} className={cx("item")}>
-          <div className={cx("info")}>
-            <div className={cx("logo")}>
-              <img src="/path/to/logo.png" alt="logo" className={cx("logo-img")} /> {/* 로고 이미지 */}
-            </div>
-            <div>
-              <span className={cx("name")}>{item.name}</span>
-            </div>
+        <div key={index} className={cx(["container-loaninfo", color])}>
+          <div className={cx("container-txt-loaninfo")}>
+            <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
+            <Spacing size={4} />
+            <Text className={cx("txt-loaninfo")} text={item.name} />
           </div>
-          <div className={cx("details")}>
-            <span className={cx("rate")}>{item.rate}%</span>
-            <span className={cx("money")}>{item.money}</span>
+          <div className={cx("container-loaninfo-money")}>
+            <span className={cx("txt-percent")}>{item.rate}%</span>
+            <span className={cx("txt-loaninfo")}>{item.money}</span>
           </div>
         </div>
       ))}

@@ -2,7 +2,66 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px;
+  padding: 16px 0;
+
+  .txt-content {
+    text-align: left;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: "#86869A";
+  }
+
+  .img-loaninfo {
+    width: 41.4px;
+    height: 14.4px;
+    // margin-top: 13px;
+  }
+
+  .container-loaninfo {
+    border-radius: 10px;
+    height: 98px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .white {
+    box-shadow: 0px 1px 20px 0px #00000012;
+  }
+  .grey {
+    background-color: $grey200;
+  }
+
+  .container-txt-loaninfo {
+    @include column-flexbox($jc: center, $ai: start);
+    margin: 5px;
+  }
+
+  .container-loaninfo-money {
+    // background-color: aqua;
+    display: grid;
+    align-content: center;
+    margin: 5px;
+  }
+
+  .txt-percent {
+    font-size: 18px;
+    color: $blue500;
+    text-align: right;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: -1px;
+  }
+
+  .txt-loaninfo {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -1px;
+    color: $grey700;
+  }
 }
 
 .item {
@@ -29,26 +88,4 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-}
-
-.details {
-  display: flex;
-  flex-direction: column;
-}
-
-.name {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-}
-
-.money {
-  font-size: 14px;
-  color: #666;
-}
-
-.rate {
-  font-size: 18px;
-  font-weight: bold;
-  color: #4169e1;
 }
