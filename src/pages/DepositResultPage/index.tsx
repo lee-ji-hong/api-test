@@ -45,7 +45,7 @@ export const DepositResultPage = () => {
     <>
       <Header className={cx("cancel")} onRightClick={() => router.goBack()} right="Back_btn" />
       <div className={cx("container")}>
-        <Spacing size={26} />
+        <Spacing size={16} />
         <Text
           className={cx("txt-title")}
           text={`보증금 ${formatNumberWithUnits(inputValue)}을/n마련할 수 있는 상품이에요`}
@@ -57,7 +57,7 @@ export const DepositResultPage = () => {
         <DepositList list={MOCK} color="white" />
         <Button
           className={cx("fixed-button")}
-          onClick={() => navigate("/deposit-entry")}
+          onClick={() => router.push("/loan-info-entry")}
           title="맞춤형 전월세대출 더 알아보기"
         />
       </div>
