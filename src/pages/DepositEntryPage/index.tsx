@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./DepositEntryPage.module.scss";
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
@@ -17,8 +17,17 @@ const cx = classNames.bind(styles);
 const DepositEntryPage = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState<number>(0);
+  const [bottomOffset, setBottomOffset] = useState(0);
   const navigate = useNavigate();
   const router = useInternalRouter();
+
+  useEffect(() => {
+    if (isInputFocused) {
+      setBottomOffset(275); // 모달이 나타날 때
+    } else {
+      setBottomOffset(40); // 기본 상태
+    }
+  }, [isInputFocused]);
 
   const isInvalidValue = inputValue > 0 && (inputValue <= 5 || inputValue > 200000);
   const warningMessage =
@@ -110,8 +119,8 @@ const DepositEntryPage = () => {
         <Button
           disabled={!inputValue || isInvalidValue}
           onClick={() => navigate("/deposit-result", { state: { inputValue } })}
+          bottom={bottomOffset}
           title="전월세 대출 상품 확인하기"
-          className={cx("fixed-button", { "with-input-focus": isInputFocused })}
         />
         {isInputFocused && <KeyboardModal onKeyPress={handleKeyPress} />}
       </div>
