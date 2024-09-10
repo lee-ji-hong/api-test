@@ -8,7 +8,7 @@
   .container-write-header {
     display: flex;
     height: 44px;
-    background-color: aquamarine;
+    // background-color: aquamarine;
     width: 100%;
     align-items: center;
     justify-content: space-between;
@@ -33,7 +33,7 @@
 
   .container-write-body {
     flex: 1; /* 나머지 공간을 모두 차지 */
-    background-color: rgb(242, 255, 127);
+    // background-color: rgb(242, 255, 127);
     display: block;
     padding-left: 20px;
     padding-right: 20px;
@@ -78,13 +78,44 @@
         color: black;
       }
     }
+    .txt-limit-number {
+      position: absolute;
+      text-align: right;
+      bottom: 100px;
+      right: 8px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #dadae1;
+    }
   }
 
   .container-write-footer {
-    background-color: rgb(170, 196, 188);
+    // background-color: rgb(170, 196, 188);
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
-    height: 35px;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .container-img-footer {
+      display: flex;
+      align-items: center;
+    }
+
+    .img-picture {
+      width: 20px;
+      height: 20px;
+    }
+    .img-doc {
+      width: 20px;
+      height: 20px;
+      margin-right: 20px;
+    }
+    .img-keyboard {
+      width: 20px;
+      height: 20px;
+    }
   }
 }

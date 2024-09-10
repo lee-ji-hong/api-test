@@ -10,6 +10,9 @@ import CommunityHeartIcon from "@/assets/images/community/ico_heart.png";
 import CommunityCommentIcon from "@/assets/images/community/ico_comment.png";
 import CommunityLoanBankDummyIcon from "@/assets/images/community/ico_loan_bank_dummy.png";
 import CommunityProfileDummyIcon from "@/assets/images/community/ico_profile_dummy.png";
+import PictureIcon from "@/assets/images/community/ico_community_picture.png";
+import DocumentIcon from "@/assets/images/community/ico_community_doc.png";
+import KeyboardIcon from "@/assets/images/community/ico_community_keyboard.png";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -51,6 +54,18 @@ export const IMAGES = {
   CommentIcon: {
     src: CommunityCommentIcon,
     alt: "댓글",
+  },
+  PictureIcon: {
+    src: PictureIcon,
+    alt: "사진 아이콘",
+  },
+  DocumentIcon: {
+    src: DocumentIcon,
+    alt: "문서 아이콘",
+  },
+  KeyboardIcon: {
+    src: KeyboardIcon,
+    alt: "키보드 아이콘",
   },
 
   // 더미 이미지 모음
