@@ -13,6 +13,7 @@ import CommunityProfileDummyIcon from "@/assets/images/community/ico_profile_dum
 import PictureIcon from "@/assets/images/community/ico_community_picture.png";
 import DocumentIcon from "@/assets/images/community/ico_community_doc.png";
 import KeyboardIcon from "@/assets/images/community/ico_community_keyboard.png";
+import BackButton from "@/assets/images/community/ico_back.png";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -66,6 +67,11 @@ export const IMAGES = {
   KeyboardIcon: {
     src: KeyboardIcon,
     alt: "키보드 아이콘",
+  },
+
+  BackButton: {
+    src: BackButton,
+    alt: "뒤로가기",
   },
 
   // 더미 이미지 모음

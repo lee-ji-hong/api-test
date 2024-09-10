@@ -1,5 +1,4 @@
 import { Button, Divider } from "@mui/material";
-import { ChevronLeft } from "@mui/icons-material";
 import classNames from "classnames/bind";
 import styles from "./CommunityWritePage.module.scss";
 import Spacing from "@/components/shared/Spacing";
@@ -7,39 +6,71 @@ import { useState } from "react";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
+interface WriteHeaderProps {
+  inputValue: string;
+  textareaValue: string;
+}
+
+interface WriteBodyProps {
+  setInputValue: (value: string) => void;
+  setTextareaValue: (value: string) => void;
+  inputValue: string;
+  textareaValue: string;
+}
+
 const CommunityWirtePage = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState("");
+
   return (
     <div className={cx("container")}>
-      <WirteHeader />
-      <WriteBody />
+      <WriteHeader inputValue={inputValue} textareaValue={textareaValue} />
+      <WriteBody
+        setInputValue={setInputValue}
+        setTextareaValue={setTextareaValue}
+        inputValue={inputValue}
+        textareaValue={textareaValue}
+      />
       <Divider />
       <WriteFooter />
     </div>
   );
 };
 
-const WirteHeader = () => {
+const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue }) => {
+  const navigate = useNavigate();
+
+  // inputValue나 textareaValue에 값이 있으면 true, 없으면 false
+  const isButtonActive = inputValue.trim() !== "" && textareaValue.trim() !== "";
+
   return (
     <div className={cx("container-write-header")}>
-      <Button>
-        <ChevronLeft className={cx("btn-write-back")} />
-      </Button>
+      <button onClick={() => navigate(-1)}>
+        <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
+      </button>
+
+      {/* 완료 버튼을 활성/비활성화 */}
       <Button
-        className={cx("btn-write-complete", { active: true, inactive: false })}
-        onClick={() => console.log("텍스트 버튼 클릭!")}>
+        className={cx("btn-write-complete", { active: isButtonActive, inactive: !isButtonActive })}
+        onClick={() => {
+          if (isButtonActive) {
+            alert("완료버튼 클릭");
+          }
+        }}
+        disabled={!isButtonActive} // 버튼 비활성화
+      >
         완료
       </Button>
     </div>
   );
 };
 
-const WriteBody = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [textareaValue, setTextareaValue] = useState("");
-  const maxLength = 1000; // 최대 글자 수
+const WriteBody: React.FC<WriteBodyProps> = ({ setInputValue, setTextareaValue, inputValue, textareaValue }) => {
+  // const maxLength = 1000; // 최대 글자 수
 
   return (
     <div className={cx("container-write-body")}>
@@ -80,7 +111,7 @@ const WriteFooter = () => {
     <div className={cx("container-write-footer")}>
       <div className={cx("container-img-footer")}>
         <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} />
-        <SpacingWidth size={10} />
+        <SpacingWidth size={24} />
         <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
       </div>
 
