@@ -2,7 +2,7 @@ import { Button, Divider } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./CommunityWritePage.module.scss";
 import Spacing from "@/components/shared/Spacing";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
@@ -107,10 +107,39 @@ const WriteBody: React.FC<WriteBodyProps> = ({ setInputValue, setTextareaValue, 
 };
 
 const WriteFooter = () => {
+  // 각 input 태그에 접근하기 위한 ref 생성
+  const imagePickerRef = useRef(null);
+  const docPickerRef = useRef(null);
+  const keyboardPickerRef = useRef(null);
+
+  // 파일 선택 처리 함수
+  const handleImagePick = (ref) => {
+    if (ref && ref.current) {
+      ref.current.click(); // input 클릭을 트리거
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      console.log("선택한 파일:", file); // 여기에서 파일을 처리하거나 상태로 저장할 수 있음
+    }
+  };
+
   return (
     <div className={cx("container-write-footer")}>
       <div className={cx("container-img-footer")}>
-        <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} />
+        {/* <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} /> */}
+        <div onClick={() => handleImagePick(imagePickerRef)}>
+          <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} />
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          ref={imagePickerRef}
+          style={{ display: "none" }} // 파일 선택창을 숨김
+          onChange={handleFileChange}
+        />
         <SpacingWidth size={24} />
         <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
       </div>
