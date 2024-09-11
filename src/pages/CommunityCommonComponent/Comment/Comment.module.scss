@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  .txt-title {
+    text-align: left;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: "#333347";
+  }
+  .txt-content {
+    text-align: left;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: "#86869A";
+  }
+
+  .img-loaninfo {
+    width: 41.4px;
+    height: 14.4px;
+    margin-top: 13px;
+  }
+
+  .container-loaninfo {
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    height: 98px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .container-txt-loaninfo {
+    // background-color: #dbdfeb;
+    align-items: center;
+    margin: 5px;
+  }
+
+  .container-loaninfo-money {
+    // background-color: aqua;
+    align-content: center;
+    margin: 5px;
+  }
+
+  .txt-percent {
+    font-size: 18px;
+    color: #4169e1;
+    text-align: right;
+    font-weight: 600;
+  }
+
+  .txt-loaninfo {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -1px;
+  }
+
+  .container-loaninfo-percent {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: "#333347";
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  .container-loaninfo-money {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: "#333347";
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  // 좋아요, 댓글
+  .container-like-comment {
+    display: flex;
+  }
+  .img-like {
+    width: 20px;
+    height: 20px;
+  }
+  .txt-like {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #b3b3c8;
+  }
+
+  .img-comment {
+    width: 20px;
+    height: 20px;
+  }
+  .txt-comment {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #b3b3c8;
+  }
+}
