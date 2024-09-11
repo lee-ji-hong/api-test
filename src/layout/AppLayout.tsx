@@ -7,7 +7,7 @@ const AppLayout = () => {
   const { pathname } = useLocation();
   return (
     <>
-      {pathname === "/deposit-entry" ? (
+      {pathname === "/deposit-entry" || pathname === "/community" ? (
         <>
           <div className={cx("main")}>
             <Outlet />

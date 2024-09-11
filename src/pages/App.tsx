@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
+import CommunityWirtePage from "./CommunityWirtePage";
 // import CommunityPage from "./CommunityPage";
 import FullScreenMessage from "@/components/sections/FullScreenMessage";
 const HomePage = lazy(() => import("./HomePage"));
@@ -31,6 +32,7 @@ function App() {
             <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
             <Route path="community" element={<CommunityPage />} />
+            <Route path="community/write" element={<CommunityWirtePage />} />
           </Route>
         </Routes>
       </Suspense>
