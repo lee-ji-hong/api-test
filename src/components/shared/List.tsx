@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 
 interface Props {
   className?: string;
+  children?: React.ReactNode;
 }
 
 const List = ({ className, children }: PropsWithChildren<Props>) => {

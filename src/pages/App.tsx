@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { RecoilRoot } from "recoil";
+
 import AppLayout from "../layout/AppLayout";
 import LoginPage from "./LoginPage";
 import { GlobalPortal } from "@/components/shared/GlobalPortal";
@@ -26,25 +28,27 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <GlobalPortal.Provider>
-        <Suspense fallback={<FullScreenMessage type="loading" />}>
-          <Routes>
-            <Route path="/" element={<AppLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="deposit-entry" element={<DepositEntryPage />} />
-              <Route path="deposit-result" element={<DepositResultPage />} />
-              <Route path="test" element={<ApiPage />} />
-              <Route path="scss-example" element={<ScssExample />} />
-              <Route path="community" element={<CommunityPage />} />
-              <Route path="community/write" element={<CommunityWirtePage />} />
-              <Route path="community/detail" element={<CommunityDetail />} />
-              <Route path="loan-info-entry" element={<LoanInfoEntryPage />} />
-            </Route>
-          </Routes>
-        </Suspense>
-      </GlobalPortal.Provider>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <GlobalPortal.Provider>
+          <Suspense fallback={<FullScreenMessage type="loading" />}>
+            <Routes>
+              <Route path="/" element={<AppLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="deposit-entry" element={<DepositEntryPage />} />
+                <Route path="deposit-result" element={<DepositResultPage />} />
+                <Route path="test" element={<ApiPage />} />
+                <Route path="scss-example" element={<ScssExample />} />
+                <Route path="community" element={<CommunityPage />} />
+                <Route path="community/write" element={<CommunityWirtePage />} />
+                <Route path="community/detail" element={<CommunityDetail />} />
+                <Route path="loan-info-entry" element={<LoanInfoEntryPage />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </GlobalPortal.Provider>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 

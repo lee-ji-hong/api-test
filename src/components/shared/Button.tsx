@@ -8,22 +8,31 @@ const cx = classNames.bind(styles);
 export type ButtonType = "button" | "submit" | "reset";
 interface ButtonProps {
   className?: string;
-  title: string;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
-  bottom?: number;
   type?: ButtonType;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  usePortal?: boolean;
+  disabled?: boolean;
+  title: string;
+  bottom?: number;
 }
 
-const Button = ({ className, title, onClick, disabled, bottom = 0, type = "button" }: ButtonProps) => {
-  return (
-    <GlobalPortal.Consumer>
-      <div className={cx(["button-wrap", className])} style={{ bottom: `${bottom}px` }}>
-        <button className={cx("container")} onClick={onClick} disabled={disabled} type={type}>
-          {title}
-        </button>
-      </div>
-    </GlobalPortal.Consumer>
+const Button = ({
+  className,
+  title,
+  onClick,
+  disabled,
+  bottom = 0,
+  type = "button",
+  usePortal = false,
+}: ButtonProps) => {
+  const buttonContent = (
+    <div className={cx(["button-wrap", className])} style={{ bottom: `${bottom}px` }}>
+      <button className={cx("container")} onClick={onClick} disabled={disabled} type={type}>
+        {title}
+      </button>
+    </div>
   );
+
+  return usePortal ? <GlobalPortal.Consumer>{buttonContent}</GlobalPortal.Consumer> : buttonContent;
 };
 export default Button;
