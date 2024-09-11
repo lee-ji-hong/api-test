@@ -91,7 +91,7 @@ const DepositEntryPage = () => {
         left="Setting_btn"
       />
       <div className={cx("container")}>
-        <Spacing size={138} />
+        <Spacing size={90} />
         <Text className={cx("txt-title")} text="전월세보증금은?" />
         <DepositInput
           id="standard-basic"
@@ -112,7 +112,7 @@ const DepositEntryPage = () => {
         />
         <Text
           className={cx("txt-sub", { "text-alert": isInvalidValue })}
-          text={isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
+          text={inputValue === 0 ? "" : isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
         />
         <Spacing size={38} />
         <BadgeList list={MONEY} onClick={handleChangeValue} />
