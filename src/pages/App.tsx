@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
 import CommunityWirtePage from "./CommunityWirtePage";
-// import CommunityPage from "./CommunityPage";
+import CommunityWirteDetail from "./CommunityWriteDetail";
 
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
@@ -31,6 +31,7 @@ function App() {
             <Route path="scss-example" element={<ScssExample />} />
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/write" element={<CommunityWirtePage />} />
+            <Route path="community/write/detail" element={<CommunityWirteDetail />} />
           </Route>
         </Routes>
       </Suspense>
