@@ -36,7 +36,7 @@ const Row = ({ className, iconName, topText, bottomText, right, withArrow, onCli
       </div>
       <div className={cx("row-content")}>
         {right != null ? right : null}
-        {withArrow ? <Icon className={cx("icon")} name="icon-arrow-right-sidebar-mono" size={12} /> : null}
+        {withArrow ? <Icon className={cx("arrow")} name="icon-arrow-right-sidebar-mono" size={18} /> : null}
       </div>
     </li>
   );
