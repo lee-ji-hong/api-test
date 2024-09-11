@@ -109,17 +109,17 @@ const WriteBody: React.FC<WriteBodyProps> = ({ setInputValue, setTextareaValue, 
 const WriteFooter = () => {
   // 각 input 태그에 접근하기 위한 ref 생성
   const imagePickerRef = useRef(null);
-  const docPickerRef = useRef(null);
-  const keyboardPickerRef = useRef(null);
+  // const docPickerRef = useRef(null);
+  // const keyboardPickerRef = useRef(null);
 
   // 파일 선택 처리 함수
-  const handleImagePick = (ref) => {
+  const handleImagePick = (ref: any) => {
     if (ref && ref.current) {
       ref.current.click(); // input 클릭을 트리거
     }
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
       console.log("선택한 파일:", file); // 여기에서 파일을 처리하거나 상태로 저장할 수 있음
