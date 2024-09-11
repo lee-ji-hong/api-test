@@ -60,6 +60,7 @@ export const DepositResultPage = () => {
           className={cx("fixed-button")}
           onClick={() => router.push("/loan-info-entry")}
           title="맞춤형 전월세대출 더 알아보기"
+          usePortal
         />
       </div>
     </>

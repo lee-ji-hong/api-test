@@ -1,3 +1,4 @@
+import { useRecoilState } from "recoil";
 import React, { useState } from "react";
 import { DevTool } from "@hookform/devtools";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -10,8 +11,8 @@ import Text from "@/components/shared/Text";
 import List from "@/components/shared/List";
 
 import { useInternalRouter } from "@/hooks/useInternalRouter";
-import { useRecoilState } from "recoil";
 import { formData } from "@/recoil/atoms";
+import { FormValues } from "@/models";
 
 import classNames from "classnames/bind";
 import styles from "./LoanInfoEntryPage.module.scss";
@@ -20,8 +21,8 @@ const cx = classNames.bind(styles);
 export const LoanInfoEntryPage = () => {
   const router = useInternalRouter();
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<number>(null);
-  const [recoilFormData, setRecoilFormData] = useRecoilState(formData);
+  const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const [recoilFormData, setRecoilFormData] = useRecoilState<FormValues>(formData);
 
   const {
     control,
@@ -30,13 +31,12 @@ export const LoanInfoEntryPage = () => {
     getValues,
   } = useForm({
     defaultValues: recoilFormData,
-    // values: formData,
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    setRecoilFormData(getValues());
     console.log("폼이 제출되었습니다.", data); // 디버깅용 콘솔 로그 추가
     await new Promise((r) => setTimeout(r, 1000));
-    setRecoilFormData(getValues());
     alert(JSON.stringify(getValues()));
   };
 
@@ -48,6 +48,11 @@ export const LoanInfoEntryPage = () => {
   const handleModalClose = () => {
     setModalOpen(false);
     setSelectedItem(null);
+  };
+
+  const getFormDataValue = (name: keyof FormValues) => {
+    const value = getValues(name);
+    return value === "" || value === 0 || value === false ? "선택하기" : String(value);
   };
 
   return (
@@ -63,16 +68,21 @@ export const LoanInfoEntryPage = () => {
             <>
               {InfoArray.map((item) => {
                 const Component = item.component;
+
                 return (
                   <React.Fragment key={item.id}>
                     <List.Row
                       onClick={() => handleRowClick(item.id)}
                       topText={item.label}
-                      right={<Text className={cx("txt-right")} text={item.value === "" ? "선택하기" : item.value} />}
+                      right={<Text className={cx("txt-right")} text={getFormDataValue(item.name)} />}
                       withArrow={true}
                     />
                     {modalOpen && selectedItem === item.id && (
-                      <Component formFieldName={item.name} control={control} onClose={handleModalClose} />
+                      <Component
+                        formFieldName={item.name as keyof FormValues}
+                        control={control}
+                        onClose={handleModalClose}
+                      />
                     )}
                   </React.Fragment>
                 );
