@@ -13,7 +13,7 @@ interface LoanCardProps {
 const LoanCard: React.FC<LoanCardProps> = (props) => {
   const cx = classNames.bind(styles);
   return (
-    <div onClick={props.onClick}>
+    <div className={cx("container")} onClick={props.onClick}>
       <div className={cx("container-loaninfo")}>
         <div className={cx("container-txt-loaninfo")}>
           <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />

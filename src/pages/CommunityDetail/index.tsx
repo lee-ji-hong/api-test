@@ -1,23 +1,26 @@
 import { Button, Divider, Typography } from "@mui/material";
 import classNames from "classnames/bind";
-import styles from "./CommunityWriteDetail.module.scss";
-import { useState, useRef } from "react";
+import styles from "./CommunityDetail.module.scss";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import { useNavigate } from "react-router-dom";
-import CommunityContents from "../CommunityPage/CommunityContents";
 import Profile from "../CommunityPage/CommunityContents/Profile";
 import Spacing from "@/components/shared/Spacing";
+import LoanCard from "../CommunityCommonComponent/LoanCard";
+import Heart from "../CommunityCommonComponent/Heart/iindex";
+import Comment from "../CommunityCommonComponent/Comment";
 
 const cx = classNames.bind(styles);
 
-const CommunityWirtePage = () => {
+const CommunityDetail = () => {
   return (
     <div className={cx("container")}>
       <WriteHeader />
       <WriteBody />
-      <Divider />
+
+      <LoanCard onClick={() => alert("ㅇㅇ")} />
+      {/* 좋아요, 댓글 */}
       <WriteFooter />
     </div>
   );
@@ -46,12 +49,13 @@ const WriteHeader = () => {
 
 const WriteBody = () => {
   return (
-    <div>
+    <div className={cx("container-body")}>
       <Profile />
       <Spacing size={12} />
-      <Typography>전세대출 보고입니다. 어떤 은행이 유리한가요?</Typography>
+      <Typography className={cx("txt-title")}>전세대출 보고입니다. 어떤 은행이 유리한가요?</Typography>
+
       <Spacing size={8} />
-      <Typography>
+      <Typography className={cx("txt-content")}>
         안녕하세요, 전세대출 처음 알아보는 30대 직장인입니다. 지금 살고 있는 집 전세 만기가 다가오고 있어서 대출을
         알아보고 있는데, 어떤 은행이 조건이 좋을지 모르겠어요. 연소득은 4천만원 정도 되고, 신용점수는 800점대
         중반입니다. 금리나 대출 한도에서 유리한 은행 추천해주실 수 있을까요? 그리고 대출 받을 때 꼭 챙겨야 할 서류나
@@ -62,46 +66,27 @@ const WriteBody = () => {
 };
 
 const WriteFooter = () => {
-  // 각 input 태그에 접근하기 위한 ref 생성
-  const imagePickerRef = useRef(null);
-  // const docPickerRef = useRef(null);
-  // const keyboardPickerRef = useRef(null);
-
-  // 파일 선택 처리 함수
-  const handleImagePick = (ref: any) => {
-    if (ref && ref.current) {
-      ref.current.click(); // input 클릭을 트리거
-    }
-  };
-
-  const handleFileChange = (event: any) => {
-    const file = event.target.files[0];
-    if (file) {
-      console.log("선택한 파일:", file); // 여기에서 파일을 처리하거나 상태로 저장할 수 있음
-    }
-  };
-
   return (
-    <div className={cx("container-write-footer")}>
-      <div className={cx("container-img-footer")}>
-        {/* <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} /> */}
-        <div onClick={() => handleImagePick(imagePickerRef)}>
-          <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} />
-        </div>
-        <input
-          type="file"
-          accept="image/*"
-          ref={imagePickerRef}
-          style={{ display: "none" }} // 파일 선택창을 숨김
-          onChange={handleFileChange}
-        />
-        <SpacingWidth size={24} />
-        <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
-      </div>
+    <div className={cx("container-footer")}>
+      {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
+      <Heart
+        commentCnt={12}
+        onClick={() => {
+          alert("heart");
+        }}
+      />
 
-      <Image className={cx("img-keyboard")} imageInfo={IMAGES?.KeyboardIcon} />
+      <SpacingWidth size={15} />
+      {/*  */}
+
+      <Comment
+        commentCnt={12}
+        onClick={() => {
+          alert("comment");
+        }}
+      />
     </div>
   );
 };
 
-export default CommunityWirtePage;
+export default CommunityDetail;
