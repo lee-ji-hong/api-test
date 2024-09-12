@@ -117,11 +117,11 @@ const DepositEntryPage = () => {
         <Spacing size={38} />
         <BadgeList list={MONEY} onClick={handleChangeValue} />
         <Button
+          className={cx("button-wrap")}
           disabled={!inputValue || isInvalidValue}
           onClick={() => navigate("/deposit-result", { state: { inputValue } })}
           bottom={bottomOffset}
           title="전월세 대출 상품 확인하기"
-          usePortal
         />
         {isInputFocused && <KeyboardModal onKeyPress={handleKeyPress} />}
       </div>

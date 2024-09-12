@@ -26,7 +26,7 @@ const Button = ({
   usePortal = false,
 }: ButtonProps) => {
   const buttonContent = (
-    <div className={cx(["button-wrap", className])} style={{ bottom: `${bottom}px` }}>
+    <div className={cx([className])} style={{ bottom: `${bottom}px` }}>
       <button className={cx("container")} onClick={onClick} disabled={disabled} type={type}>
         {title}
       </button>

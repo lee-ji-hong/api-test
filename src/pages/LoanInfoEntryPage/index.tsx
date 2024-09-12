@@ -31,6 +31,7 @@ export const LoanInfoEntryPage = () => {
     getValues,
   } = useForm({
     defaultValues: recoilFormData,
+    mode: "onChange",
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -82,6 +83,8 @@ export const LoanInfoEntryPage = () => {
                         formFieldName={item.name as keyof FormValues}
                         control={control}
                         onClose={handleModalClose}
+                        modalTitle={item.modalTitle}
+                        buttonText={item.modalButton}
                       />
                     )}
                   </React.Fragment>
@@ -91,7 +94,7 @@ export const LoanInfoEntryPage = () => {
           </List>
           <Spacing size={90} />
           <Button
-            className={cx("fixed-button")}
+            className={cx("button-wrap")}
             title="맞춤형 전월세대출 더 알아보기"
             type="submit"
             disabled={isSubmitting}

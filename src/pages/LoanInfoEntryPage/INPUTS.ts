@@ -1,7 +1,15 @@
 import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
 
 export const INPUTS = [
-  { id: 1, label: "임차보증금", name: "rentalDeposit", value: "", component: UserInfo },
+  {
+    id: 1,
+    label: "임차보증금",
+    name: "rentalDeposit",
+    value: "",
+    modalTitle: "월세가 있다면 월세를 입력해주세요",
+    modalButton: "다음",
+    component: UserInfo,
+  },
   { id: 2, label: "월세", name: "monthlyRent", value: "", component: UserInfo },
   { id: 3, label: "보유현금", name: "cashOnHand", value: "", component: UserInfo },
   { id: 4, label: "만 나이", name: "age", value: "", component: UserInfo },

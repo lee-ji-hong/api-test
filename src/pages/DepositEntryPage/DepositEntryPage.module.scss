@@ -58,4 +58,12 @@
   .with-input-focus {
     top: 380px;
   }
+  .button-wrap {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+    // backdrop-filter: blur(2px); /* 배경에만 블러 효과 적용 */
+    // -webkit-backdrop-filter: blur(2px); /* Safari 호환성 */
+  }
 }

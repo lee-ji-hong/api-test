@@ -57,7 +57,7 @@ export const DepositResultPage = () => {
         <DepositList list={MOCK} color="white" />
         <Spacing size={80} />
         <Button
-          className={cx("fixed-button")}
+          className={cx("button-wrap")}
           onClick={() => router.push("/loan-info-entry")}
           title="맞춤형 전월세대출 더 알아보기"
           usePortal

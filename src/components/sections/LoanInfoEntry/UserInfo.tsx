@@ -1,12 +1,11 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-
-import classNames from "classnames/bind";
-import styles from "./UserInfo.module.scss";
-const cx = classNames.bind(styles);
+import InputModal from "@/components/shared/InputModal";
 
 interface UserInfoProps<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
+  modalTitle?: string;
+  buttonText?: string;
   onClose: () => void;
 }
 
@@ -14,21 +13,18 @@ export const UserInfo = <ControlType extends FieldValues>({
   onClose,
   formFieldName,
   control,
+  modalTitle,
+  buttonText,
 }: UserInfoProps<ControlType>) => {
   return (
     <>
       <Controller
         name={formFieldName}
         control={control}
-        render={
-          ({ field }) => <input {...field} placeholder="값을 입력하세요." className={cx("input")} />
-
-          // <TitleInput placeholder="여행지 이름을 입력하세요." disabled={disabled} {...field} />
-        }
+        render={({ field }) => (
+          <InputModal modalTitle={modalTitle} buttonText={buttonText} {...field} onClose={onClose} />
+        )}
       />
-      <button onClick={onClose} className={cx("close-button")}>
-        닫기
-      </button>
     </>
   );
 };
