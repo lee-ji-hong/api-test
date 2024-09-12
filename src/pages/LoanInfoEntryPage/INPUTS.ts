@@ -1,4 +1,5 @@
 import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
+import monthlyRentContrller from "@/components/sections/LoanInfoEntry/monthlyRentContrller";
 
 export const INPUTS = [
   {
@@ -10,7 +11,7 @@ export const INPUTS = [
     modalButton: "다음",
     component: UserInfo,
   },
-  { id: 2, label: "월세", name: "monthlyRent", value: "", component: UserInfo },
+  { id: 2, label: "월세", name: "monthlyRent", value: "", component: monthlyRentContrller },
   { id: 3, label: "보유현금", name: "cashOnHand", value: "", component: UserInfo },
   { id: 4, label: "만 나이", name: "age", value: "", component: UserInfo },
   { id: 5, label: "혼인상태", name: "maritalStatus", value: "", component: UserInfo },
