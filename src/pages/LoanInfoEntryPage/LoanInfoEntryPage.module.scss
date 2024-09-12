@@ -30,6 +30,12 @@
     }
   }
 
+  .txt-empty-color {
+    p {
+      color: $grey500 !important;
+    }
+  }
+
   .list-wrap {
     margin-top: 16px;
   }

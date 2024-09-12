@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import React, { useState } from "react";
 import { DevTool } from "@hookform/devtools";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { InfoArray } from "./mock";
+import { INPUTS } from "./INPUTS";
 
 import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";
@@ -50,11 +50,6 @@ export const LoanInfoEntryPage = () => {
     setSelectedItem(null);
   };
 
-  const getFormDataValue = (name: keyof FormValues) => {
-    const value = getValues(name);
-    return value === "" || value === 0 || value === false ? "선택하기" : String(value);
-  };
-
   return (
     <>
       <Header className={cx("cancel")} onRightClick={() => router.goBack()} right="Back_btn" />
@@ -66,15 +61,20 @@ export const LoanInfoEntryPage = () => {
         <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
           <List className={cx("list-wrap")}>
             <>
-              {InfoArray.map((item) => {
+              {INPUTS?.map((item) => {
                 const Component = item.component;
-
+                const value = getValues(item.name as keyof FormValues);
                 return (
                   <React.Fragment key={item.id}>
                     <List.Row
                       onClick={() => handleRowClick(item.id)}
                       topText={item.label}
-                      right={<Text className={cx("txt-right")} text={getFormDataValue(item.name)} />}
+                      right={
+                        <Text
+                          className={cx(["txt-right", value === undefined && "txt-empty-color"])}
+                          text={value === undefined ? "선택하기" : String(value)}
+                        />
+                      }
                       withArrow={true}
                     />
                     {modalOpen && selectedItem === item.id && (
