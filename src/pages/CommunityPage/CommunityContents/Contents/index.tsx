@@ -5,46 +5,50 @@ import SpacingWidth from "@/components/shared/SpacingWidth";
 import Spacing from "@/components/shared/Spacing";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
+import Comment from "@/pages/CommunityCommonComponent/Comment";
+import Heart from "@/pages/CommunityCommonComponent/Heart/iindex";
+import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 const Contents = () => {
+  const navigator = useNavigate();
   return (
     <div className={cx("container")}>
       {/* 글제목 및 내용 */}
-      <Typography className={cx("txt-title")}>전세대출 초보입니다. 어떤 은행이 유리한가요?</Typography>
-      <Typography className={cx("txt-contents")}>
-        안녕하세요, 전세대출 처음 알아보는 30대 직장인입니다. 지금 살고 있는 집 전세 만기가 다가오고 있어서 대출을
-        알아보..
-      </Typography>
+      <div onClick={() => navigator("/community/detail")}>
+        <Typography className={cx("txt-title")}>전세대출 초보입니다. 어떤 은행이 유리한가요?</Typography>
+        <Typography className={cx("txt-contents")}>
+          안녕하세요, 전세대출 처음 알아보는 30대 직장인입니다. 지금 살고 있는 집 전세 만기가 다가오고 있어서 대출을
+          알아보..
+        </Typography>
+      </div>
       <Spacing size={12} />
 
       {/* 대출 정보 */}
-      <div className={cx("container-loaninfo")}>
-        <div className={cx("container-txt-loaninfo")}>
-          <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
-
-          <Spacing size={4} />
-          <Typography className={cx("txt-loaninfo")}>신한은행 전세자금 대출전세자금 대출</Typography>
-          <Typography className={cx("txt-loaninfo")}>– 전세자금대출 금리우대형</Typography>
-        </div>
-        <div className={cx("container-loaninfo-money")}>
-          <Typography className={cx("txt-percent")}>6.8%</Typography>
-          <Typography className={cx("txt-loaninfo")}>3억8천만원</Typography>
-        </div>
-      </div>
+      <LoanCard onClick={() => alert("LoanCard")} />
 
       <Spacing size={18} />
 
       {/* 좋아요, 댓글 */}
       <div className={cx("container-like-comment")}>
-        <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} />
-        <Typography className={cx("txt-like")}>12</Typography>
+        {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
+        <Heart
+          commentCnt={12}
+          onClick={() => {
+            alert("heart");
+          }}
+        />
 
         <SpacingWidth size={15} />
 
-        <Image className={cx("img-comment")} imageInfo={IMAGES?.CommentIcon} />
-        <Typography className={cx("txt-comment")}>12</Typography>
+        <Comment
+          commentCnt={12}
+          onClick={() => {
+            alert("comment");
+          }}
+        />
       </div>
     </div>
   );

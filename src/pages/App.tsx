@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
 import CommunityWirtePage from "./CommunityWirtePage";
-// import CommunityPage from "./CommunityPage";
+import CommunityDetail from "./CommunityDetail";
 import FullScreenMessage from "@/components/sections/FullScreenMessage";
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
@@ -33,6 +33,7 @@ function App() {
             <Route path="scss-example" element={<ScssExample />} />
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/write" element={<CommunityWirtePage />} />
+            <Route path="community/detail" element={<CommunityDetail />} />
           </Route>
         </Routes>
       </Suspense>
