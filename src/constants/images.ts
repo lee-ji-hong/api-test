@@ -14,6 +14,7 @@ import PictureIcon from "@/assets/images/community/ico_community_picture.png";
 import DocumentIcon from "@/assets/images/community/ico_community_doc.png";
 import KeyboardIcon from "@/assets/images/community/ico_community_keyboard.png";
 import BackButton from "@/assets/images/community/ico_back.png";
+import MoreButton from "@/assets/images/community/ico_more.png";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -72,6 +73,10 @@ export const IMAGES = {
   BackButton: {
     src: BackButton,
     alt: "뒤로가기",
+  },
+  MoreButton: {
+    src: MoreButton,
+    alt: "더보기",
   },
 
   // 더미 이미지 모음
