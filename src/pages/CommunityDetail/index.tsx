@@ -19,7 +19,6 @@ const CommunityDetail = () => {
       <WriteHeader />
       <WriteBody />
 
-      <LoanCard onClick={() => alert("ㅇㅇ")} />
       {/* 좋아요, 댓글 */}
       <WriteFooter />
     </div>
@@ -35,14 +34,9 @@ const WriteHeader = () => {
         <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
       </button>
 
-      {/* 완료 버튼을 활성/비활성화 */}
-      <Button
-        className={cx("btn-write-complete")}
-        onClick={() => {
-          alert("완료버튼 클릭");
-        }}>
-        완료
-      </Button>
+      <button onClick={() => alert("더보기 클릭")}>
+        <Image className={cx("btn-write-back")} imageInfo={IMAGES?.MoreButton} />
+      </button>
     </div>
   );
 };
@@ -61,6 +55,29 @@ const WriteBody = () => {
         중반입니다. 금리나 대출 한도에서 유리한 은행 추천해주실 수 있을까요? 그리고 대출 받을 때 꼭 챙겨야 할 서류나
         준비물도 알려주시면 감사하겠습니다. 참고로 하우스핏에서는 하단 대출을 추천해줬습니다.
       </Typography>
+
+      <Spacing size={16} />
+
+      <LoanCard onClick={() => alert("ㅇㅇ")} />
+      <div className={cx("container-heart-comment")}>
+        {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
+        <Heart
+          commentCnt={12}
+          onClick={() => {
+            alert("heart");
+          }}
+        />
+
+        <SpacingWidth size={15} />
+        {/*  */}
+
+        <Comment
+          commentCnt={12}
+          onClick={() => {
+            alert("comment");
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -68,23 +85,9 @@ const WriteBody = () => {
 const WriteFooter = () => {
   return (
     <div className={cx("container-footer")}>
-      {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
-      <Heart
-        commentCnt={12}
-        onClick={() => {
-          alert("heart");
-        }}
-      />
-
-      <SpacingWidth size={15} />
-      {/*  */}
-
-      <Comment
-        commentCnt={12}
-        onClick={() => {
-          alert("comment");
-        }}
-      />
+      <div className={cx("container-inputbox")}>
+        <input type="text" placeholder="김*니님의 생각을 댓글로 남겨주세요." className={cx("input-comment")} />
+      </div>
     </div>
   );
 };
