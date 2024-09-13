@@ -4,9 +4,10 @@ import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
 import CommunityWirtePage from "./CommunityWirtePage";
 import CommunityDetail from "./CommunityDetail";
-
+import FullScreenMessage from "@/components/sections/FullScreenMessage";
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
+const DepositResultPage = lazy(() => import("./DepositResultPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
 const ScssExample = lazy(() => import("./scss-example"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
@@ -22,11 +23,12 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<FullScreenMessage type="loading" />}>
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
             <Route path="deposit-entry" element={<DepositEntryPage />} />
+            <Route path="deposit-result" element={<DepositResultPage />} />
             <Route path="test" element={<ApiPage />} />
             <Route path="scss-example" element={<ScssExample />} />
             <Route path="community" element={<CommunityPage />} />
