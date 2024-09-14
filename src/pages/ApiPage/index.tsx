@@ -1,6 +1,7 @@
 import axios from "axios";
 import styles from "./api-page.module.scss";
 import classNames from "classnames/bind";
+import Axios from "@/api/axios";
 
 const cx = classNames.bind(styles);
 
@@ -91,6 +92,16 @@ const ApiPage = () => {
           RefreshToken: g_refreshToken, // 여기에 실제 리프레시 토큰을 입력하세요
         },
       });
+      console.log("응답 데이터:", response.data);
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  };
+
+  // 최근 대출추천 보고서 목록 조회
+  const handleLoanAdviceRequest2 = async () => {
+    try {
+      const response = await Axios.get("/api/v1/loanAdvice", true);
       console.log("응답 데이터:", response.data);
     } catch (error) {
       console.error("오류 발생:", error);
@@ -294,6 +305,25 @@ const ApiPage = () => {
     }
   };
 
+  //원리금 계산기 커스텀 Axios 사용
+  const handleRepaymentCalctRequest2 = async () => {
+    const data = {
+      repaymentType: "AMORTIZING",
+      principal: 3.0e8,
+      term: 60,
+      gracePeriod: 0,
+      interestRatePercentage: 4.0,
+      maturityPaymentAmount: 0.0,
+    };
+
+    try {
+      const response = await Axios.post("/api/v1/repaymentCalc", data);
+      console.log("응답 데이터:", response.data);
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  };
+
   // LTV 계산기
   const handleLtvCalcCalcRequest = async () => {
     const data = {
@@ -398,6 +428,15 @@ const ApiPage = () => {
     }
   };
 
+  const handleBoardRequest2 = async () => {
+    try {
+      const response = await Axios.get("/api/v1/board/posts?page=0&size=10", true);
+      console.log("응답 데이터:", response.data);
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  };
+
   // 게시글 조회
   const handlePostsRequest = async () => {
     try {
@@ -489,6 +528,7 @@ const ApiPage = () => {
 
       <div style={{ fontSize: "20px", fontWeight: "bold" }}>LoanAdvice API </div>
       <button onClick={handleLoanAdviceRequest}>최근 대출추천 보고서 목록 조회</button>
+      <button onClick={handleLoanAdviceRequest2}>최근 대출추천 보고서 목록 조회(커스텀 Axios)</button>
       <button onClick={handleSpecificRequest}>특정 대출추천 보고서 조회</button>
       <button onClick={handleLoanAdvicePostRequest}>전세대출상품 추천 보고서 산출</button>
       <button onClick={handleSpecificPostRequest}>특정 전세대출상품 추천 보고서 산출</button>
@@ -504,12 +544,14 @@ const ApiPage = () => {
 
       <div style={{ fontSize: "20px", fontWeight: "bold" }}>Calculator API </div>
       <button onClick={handleRepaymentCalctRequest}>원리금 계산기</button>
+      <button onClick={handleRepaymentCalctRequest2}>원리금 계산기(커스텀 Axios)</button>
       <button onClick={handleLtvCalcCalcRequest}>LTV 계산기</button>
       <button onClick={handleDsrCalcRequest}>DSR 계산기</button>
       <button onClick={handleDtiCalcRequest}>DTI 계산기</button>
 
       <div style={{ fontSize: "20px", fontWeight: "bold" }}>Board API </div>
       <button onClick={handleBoardRequest}>게시글 목록 조회</button>
+      <button onClick={handleBoardRequest2}>게시글 목록 조회(커스텀 Axios)</button>
       <button onClick={handlePostsRequest}>게시글 조회</button>
       <button onClick={handleWriteRequest}>게시글 작성</button>
       <button onClick={handleDeleteRequest}>게시글 삭제</button>
