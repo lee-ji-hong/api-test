@@ -1,5 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import InputModal from "@/components/shared/InputModal";
+import SelectBottomSheet from "@/components/shared/SelectBottomSheet";
 
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
@@ -9,7 +9,7 @@ interface Props<ControlType extends FieldValues> {
   onClose: () => void;
 }
 
-export const monthlyRentContrller = <ControlType extends FieldValues>({
+export const SelectContrller = <ControlType extends FieldValues>({
   onClose,
   formFieldName,
   control,
@@ -22,10 +22,10 @@ export const monthlyRentContrller = <ControlType extends FieldValues>({
         name={formFieldName}
         control={control}
         render={({ field }) => (
-          <InputModal modalTitle={modalTitle} buttonText={buttonText} {...field} onClose={onClose} />
+          <SelectBottomSheet modalTitle={modalTitle} buttonText={buttonText} {...field} onClose={onClose} />
         )}
       />
     </>
   );
 };
-export default monthlyRentContrller;
+export default SelectContrller;
