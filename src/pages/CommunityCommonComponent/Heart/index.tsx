@@ -7,6 +7,7 @@ import styles from "./Heart.module.scss";
 
 interface HeartProps {
   commentCnt: number;
+  isActive: boolean;
   onClick: () => void;
 }
 
@@ -15,7 +16,12 @@ const Heart: React.FC<HeartProps> = (props) => {
 
   return (
     <div className={cx("container")} onClick={props.onClick}>
-      <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} />
+      {props.isActive ? (
+        <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIconActive} />
+      ) : (
+        <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} />
+      )}
+
       <Typography className={cx("txt-like")}>{props.commentCnt}</Typography>
     </div>
   );

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Profile from "../CommunityPage/CommunityContents/Profile";
 import Spacing from "@/components/shared/Spacing";
 import LoanCard from "../CommunityCommonComponent/LoanCard";
-import Heart from "../CommunityCommonComponent/Heart/iindex";
+import Heart from "../CommunityCommonComponent/Heart/index";
 import Comment from "../CommunityCommonComponent/Comment";
 
 const cx = classNames.bind(styles);
