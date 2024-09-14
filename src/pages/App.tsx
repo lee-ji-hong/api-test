@@ -5,6 +5,7 @@ import AppLayout from "../layout/AppLayout";
 import LoginPage from "./LoginPage";
 import LoginPage from "./LoginTest/loginPage";
 // import CommunityPage from "./CommunityPage";
+import LoginPage from "./LoginPage";
 
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
@@ -38,6 +39,7 @@ function App() {
             <Route path="community" element={<CommunityPage />} />
             <Route path="community/write" element={<CommunityWirtePage />} />
             <Route path="community/detail" element={<CommunityDetail />} />
+            <Route path="login-success" element={<LoginSuccessPage />} />
             <Route path="login-success" element={<LoginSuccessPage />} />
           </Route>
         </Routes>
