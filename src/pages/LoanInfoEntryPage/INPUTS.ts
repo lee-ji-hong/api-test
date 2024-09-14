@@ -1,6 +1,7 @@
 import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
 import InputContrller from "@/components/sections/LoanInfoEntry/InputContrller";
 import SelectContrller from "@/components/sections/LoanInfoEntry/SelectContrller";
+import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
 
 export const INPUTS = [
   {
@@ -30,7 +31,15 @@ export const INPUTS = [
     modalButton: "다음",
     component: InputContrller,
   },
-  { id: 4, label: "만 나이", name: "age", value: "", component: UserInfo },
+  {
+    id: 4,
+    label: "만 나이",
+    name: "age",
+    value: "",
+    modalTitle: "만 나이를 선택해주세요",
+    modalButton: "다음",
+    component: WheelContrller,
+  },
   {
     id: 5,
     label: "혼인상태",

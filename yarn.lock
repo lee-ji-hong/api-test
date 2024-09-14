@@ -3851,6 +3851,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"keen-slider@npm:^6.8.6":
+  version: 6.8.6
+  resolution: "keen-slider@npm:6.8.6"
+  checksum: 10c0/612553f15c5af61bf23f5defe414e7d314406a109e2d944c4253f7862e3666f2ab9bae0e43bf84f41678878ca1d90d38831845bb496dfd747ed84efc7d34efdd
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -5877,6 +5884,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.6"
     husky: "npm:^9.0.11"
     jsdom: "npm:^24.0.0"
+    keen-slider: "npm:^6.8.6"
     lint-staged: "npm:^15.2.4"
     lottie-web: "npm:^5.12.2"
     prettier: "npm:^3.2.5"

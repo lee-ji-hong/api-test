@@ -1,5 +1,6 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import InputModal from "@/components/shared/InputModal";
+import BottomSheet from "@/components/shared/BottomSheet";
+import WheelAgePicker from "@/components/shared/WheelAgePicker";
 
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
@@ -22,7 +23,15 @@ export const WheelContrller = <ControlType extends FieldValues>({
         name={formFieldName}
         control={control}
         render={({ field }) => (
-          <InputModal modalTitle={modalTitle} buttonText={buttonText} {...field} onClose={onClose} />
+          <BottomSheet modalTitle={modalTitle} buttonText={buttonText} onClose={onClose} {...field}>
+            <WheelAgePicker
+              initialValue={20}
+              onChange={(value) => {
+                onChange(value);
+                onClose;
+              }}
+            />
+          </BottomSheet>
         )}
       />
     </>

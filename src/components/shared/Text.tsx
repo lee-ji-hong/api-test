@@ -4,13 +4,13 @@ import styles from "./Text.module.scss";
 const cx = classNames.bind(styles);
 
 interface TextProps {
-  text?: string;
+  text?: string | number;
   className?: string;
   highlight?: string;
 }
 
 const Text = ({ text, className, highlight }: TextProps) => {
-  const titleParts = text ? text.split("/n") : [];
+  const titleParts = text ? String(text).split("/n") : [];
 
   return (
     <div className={cx(["container", className])}>
