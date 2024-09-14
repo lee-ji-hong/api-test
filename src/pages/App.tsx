@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AppLayout from "../layout/AppLayout";
 import LoginPage from "./LoginPage";
-import LoginPage from "./LoginTest/loginPage";
-// import CommunityPage from "./CommunityPage";
-import LoginPage from "./LoginPage";
+import FullScreenMessage from "@/components/sections/FullScreenMessage";
+import CommunityWirtePage from "./CommunityWirtePage";
+import CommunityDetail from "./CommunityDetail";
 
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
