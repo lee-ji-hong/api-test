@@ -7,6 +7,7 @@ import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import CommunityHeartIcon from "@/assets/images/community/ico_heart.png";
+import CommunityHeartActiveIcon from "@/assets/images/community/ico_heart_active.png";
 import CommunityCommentIcon from "@/assets/images/community/ico_comment.png";
 import CommunityLoanBankDummyIcon from "@/assets/images/community/ico_loan_bank_dummy.png";
 import CommunityProfileDummyIcon from "@/assets/images/community/ico_profile_dummy.png";
@@ -51,6 +52,10 @@ export const IMAGES = {
   },
   HeartIcon: {
     src: CommunityHeartIcon,
+    alt: "하트",
+  },
+  HeartIconActive: {
+    src: CommunityHeartActiveIcon,
     alt: "하트",
   },
   CommentIcon: {
