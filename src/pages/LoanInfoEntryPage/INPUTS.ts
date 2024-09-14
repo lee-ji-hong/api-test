@@ -1,7 +1,8 @@
 import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
 import InputContrller from "@/components/sections/LoanInfoEntry/InputContrller";
-import SelectContrller from "@/components/sections/LoanInfoEntry/SelectContrller";
-import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
+import maritalStatusContrller from "@/components/sections/LoanInfoEntry/maritalStatusContrller";
+// import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
+// import SelectContrller from "@/components/sections/LoanInfoEntry/SelectContrller";
 
 export const INPUTS = [
   {
@@ -38,7 +39,8 @@ export const INPUTS = [
     value: "",
     modalTitle: "만 나이를 선택해주세요",
     modalButton: "다음",
-    component: WheelContrller,
+    component: InputContrller,
+    // component: WheelContrller,
   },
   {
     id: 5,
@@ -46,8 +48,7 @@ export const INPUTS = [
     name: "maritalStatus",
     value: "",
     modalTitle: "혼인상태를 알려주세요",
-    modalButton: "다음",
-    component: SelectContrller,
+    component: maritalStatusContrller,
   },
   {
     id: 6,
