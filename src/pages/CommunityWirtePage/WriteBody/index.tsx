@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./CommunityWriteBody.module.scss";
 import Spacing from "@/components/shared/Spacing";
+import React, { useRef, useEffect } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,12 @@ interface WriteBodyProps {
   clearImagePreview: () => void;
 }
 
+interface TextAreaProps {
+  textareaValue: string;
+  setTextareaValue: (value: string) => void;
+  maxLines: number;
+}
+
 const WriteBody: React.FC<WriteBodyProps> = ({
   setInputValue,
   setTextareaValue,
@@ -22,13 +29,11 @@ const WriteBody: React.FC<WriteBodyProps> = ({
   imagePreview,
   clearImagePreview,
 }) => {
-  // const maxLength = 1000; // 최대 글자 수
-
   return (
-    <div className={cx("container-write-body")}>
+    <div className={cx("containerWriteBody")}>
       <input
         onChange={(e) => setInputValue(e.target.value)}
-        className={cx("input-title", {
+        className={cx("inputTitle", {
           gray: !inputValue,
           black: inputValue,
         })}
@@ -36,35 +41,69 @@ const WriteBody: React.FC<WriteBodyProps> = ({
         placeholder="제목을 입력해주세요"
       />
       <Spacing size={4} />
-      <textarea
-        style={{
-          // position: "absolute",
-          bottom: "35px", // 밑에서부터 500px 위에 위치
-          width: "100%", // 너비는 부모의 100%로 설정
-          height: "calc(100% - 35px - 100px)", // textarea의 높이를 상대적으로 설정
-        }}
-        onChange={(e) => setTextareaValue(e.target.value)}
-        className={cx("input-area", {
-          gray: !textareaValue,
-          black: textareaValue,
-        })}
-        placeholder="내용을 입력해주세요."
-      />
-      {/* 이미지 미리보기 (textarea 바로 밑에 배치) */}
-      {imagePreview && (
-        <div className={cx("image-preview-container")}>
-          <img src={imagePreview} alt="미리보기 이미지" className={cx("image-preview")} />
-          <button className={cx("btn-remove-image")} onClick={clearImagePreview}>
-            ✕
-          </button>
-        </div>
-      )}
+
+      {/* 텍스트 영역과 이미지 미리보기를 Flex로 관리 */}
+      <div className={cx("contentArea")}>
+        <TextArea textareaValue={textareaValue} setTextareaValue={setTextareaValue} maxLines={15} />
+        {imagePreview && (
+          <div className={cx("imagePreviewContainer")}>
+            <img src={imagePreview} alt="미리보기 이미지" className={cx("imagePreview")} />
+            <button className={cx("btn-remove-image")} onClick={clearImagePreview}>
+              ✕
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* 글자 수 표시 */}
-      <div className={cx("txt-limit-number")}>
+      <div className={cx("txtLimitNumber")}>
         {textareaValue.length}/{`1,000`}
       </div>
     </div>
+  );
+};
+
+const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, maxLines }) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // 입력된 줄 수 계산
+  const getLineCount = (value: string) => {
+    return value.split("\n").length;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    const lineCount = getLineCount(newValue);
+
+    // 줄 수가 최대 라인을 넘지 않을 때만 값 업데이트
+    if (lineCount <= maxLines) {
+      setTextareaValue(newValue);
+    }
+  };
+
+  // 텍스트가 입력될 때마다 textarea의 높이를 자동으로 조정
+  const autoResize = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"; // 높이를 초기화
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // 내용에 맞춰 높이 조정
+    }
+  };
+
+  useEffect(() => {
+    autoResize();
+  }, [textareaValue]);
+
+  return (
+    <textarea
+      ref={textareaRef}
+      onChange={handleInputChange}
+      value={textareaValue}
+      className={cx("inputArea", {
+        gray: !textareaValue,
+        black: textareaValue,
+      })}
+      placeholder="내용을 입력해주세요."
+    />
   );
 };
 

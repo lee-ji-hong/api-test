@@ -21,12 +21,12 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue }) 
   return (
     <div className={cx("container-write-header")}>
       <button onClick={() => navigate(-1)}>
-        <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
+        <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>
 
       {/* 완료 버튼을 활성/비활성화 */}
       <Button
-        className={cx("btn-write-complete", { active: isButtonActive, inactive: !isButtonActive })}
+        className={cx("btnWriteComplete", { active: isButtonActive, inactive: !isButtonActive })}
         onClick={async () => {
           if (isButtonActive) {
             const formData = new FormData();

@@ -1,149 +1,142 @@
-.container {
+.container-write-header {
   display: flex;
-  flex-direction: column;
+  height: 44px;
+  // background-color: aquamarine;
+  width: 100%;
   align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
-  height: 100vh; /* 전체 화면을 채우기 위해 100vh 설정 */
-  overflow: hidden; /* 부모 컨테이너의 스크롤 방지 */
+  justify-content: space-between;
 
-  .container-write-header {
-    display: flex;
-    height: 44px;
-    // background-color: aquamarine;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
+  .btn-write-back {
+    width: 26px;
+    height: 26px;
+    color: black;
+  }
+  .btn-write-complete {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
 
-    .btn-write-back {
-      width: 26px;
-      height: 26px;
+    &.active {
       color: black;
     }
-    .btn-write-complete {
-      font-size: 16px;
-      font-weight: 400;
-      color: black;
-
-      &.active {
-        color: black;
-      }
-      &.inactive {
-        color: #dadae1;
-      }
+    &.inactive {
+      color: #dadae1;
     }
   }
+}
 
-  .container-write-body {
-    flex: 1; /* 나머지 공간을 모두 차지 */
-    // background-color: rgb(242, 255, 127);
-    display: block;
+.container-write-body {
+  flex: 1; /* 나머지 공간을 모두 차지 */
+  // background-color: rgb(242, 255, 127);
+  display: block;
+  width: 100%;
+
+  .input-title {
     width: 100%;
+    height: 36px;
+    font-size: 24px;
+    font-weight: 400;
+    color: black;
+    font-weight: 700;
+    outline: none;
 
-    .input-title {
-      width: 100%;
-      height: 36px;
-      font-size: 24px;
-      font-weight: 400;
-      color: black;
-      font-weight: 700;
-      outline: none;
+    background-color: white;
 
-      background-color: white;
-
-      &.gray {
-        color: #dadae1;
-      }
-
-      &.black {
-        color: black;
-      }
-    }
-
-    .input-area {
-      width: 100%;
-      height: 100%;
-      font-size: 16px;
-      font-weight: 500;
-      color: black;
-      outline: none;
-      line-height: 28px;
-
-      background-color: white;
-
-      &.gray {
-        color: #dadae1;
-      }
-
-      &.black {
-        color: black;
-      }
-    }
-    .txt-limit-number {
-      position: absolute;
-      text-align: right;
-      bottom: 100px;
-      right: 8px;
-      font-size: 14px;
-      line-height: 20px;
+    &.gray {
       color: #dadae1;
     }
 
-    .image-preview-container {
-      position: relative;
-      margin-top: 10px;
-
-      .image-preview {
-        max-width: 100%;
-        border-radius: 8px;
-        margin-top: 8px;
-      }
-
-      .btn-remove-image {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        padding: 5px;
-        font-size: 16px;
-        line-height: 1;
-      }
-
-      .btn-remove-image:hover {
-        background-color: rgba(0, 0, 0, 0.7);
-      }
+    &.black {
+      color: black;
     }
   }
 
-  .container-write-footer {
-    // background-color: rgb(170, 196, 188);
+  .input-area {
     width: 100%;
-    height: 48px;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    outline: none;
+    line-height: 28px;
+
+    background-color: white;
+
+    &.gray {
+      color: #dadae1;
+    }
+
+    &.black {
+      color: black;
+    }
+  }
+  .txt-limit-number {
+    position: absolute;
+    text-align: right;
+    bottom: 100px;
+    right: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #dadae1;
+  }
+
+  .image-preview-container {
+    position: relative;
+    margin-top: 10px;
+
+    .image-preview {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-remove-image {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 5px;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .btn-remove-image:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+.container-write-footer {
+  // background-color: rgb(170, 196, 188);
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .container-img-footer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+  }
 
-    .container-img-footer {
-      display: flex;
-      align-items: center;
-    }
-
-    .img-picture {
-      width: 20px;
-      height: 20px;
-    }
-    .img-doc {
-      width: 20px;
-      height: 20px;
-      margin-right: 20px;
-    }
-    .img-keyboard {
-      width: 20px;
-      height: 20px;
-    }
+  .img-picture {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+  .img-doc {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+  }
+  .img-keyboard {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
   }
 }
