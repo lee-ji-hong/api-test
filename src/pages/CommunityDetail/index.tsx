@@ -1,4 +1,4 @@
-import { Button, Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./CommunityDetail.module.scss";
 import Image from "@/components/shared/Image";
@@ -66,6 +66,7 @@ const WriteBody = () => {
           onClick={() => {
             alert("heart");
           }}
+          isActive={true}
         />
 
         <SpacingWidth size={15} />

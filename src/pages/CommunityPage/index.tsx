@@ -3,11 +3,12 @@ import styles from "./CommunityPage.module.scss";
 import { Button, Typography } from "@mui/material";
 
 import Spacing from "@/components/shared/Spacing";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommunityContents from "./CommunityContents";
 import FloatingButton from "./FloatingButton";
 import { useNavigate } from "react-router-dom";
+import Axios from "@/api/axios";
 
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
@@ -19,20 +20,26 @@ const CommunityPage = () => {
     const allItems = Array.from({ length: 30 }, (_, index) => `Community Content #${index + 1}`);
 
     // 처음엔 5개만 표시되도록 설정
-    const [visibleItems, setVisibleItems] = useState(allItems.slice(0, 5));
+    const [visibleItems] = useState(allItems.slice(0, 5));
     const [hasMore, setHasMore] = useState(true); // 더 이상 추가로 로드하지 않음
 
+    useEffect(() => {
+      Axios.get("/api/v1/post", true).then((res) => {
+        console.log(res.data);
+      });
+    }, []);
+
     // 스크롤이 끝에 도달할 때 호출되는 함수 (5개씩 추가 로드)
-    const fetchMoreData = () => {
+    const fetchMoreData = async () => {
       if (visibleItems.length >= allItems.length) {
         setHasMore(false); // 모든 데이터를 다 로드하면 더 이상 로드하지 않도록 설정
         return;
       }
 
-      // 5개의 새로운 데이터를 추가로 가져옴
-      setTimeout(() => {
-        setVisibleItems((prevItems) => [...prevItems, ...allItems.slice(prevItems.length, prevItems.length + 5)]);
-      }, 500); // 로딩 시간 시뮬레이션 (선택 사항)
+      // // 5개의 새로운 데이터를 추가로 가져옴
+      // setTimeout(() => {
+      //   setVisibleItems((prevItems) => [...prevItems, ...allItems.slice(prevItems.length, prevItems.length + 5)]);
+      // }, 500); // 로딩 시간 시뮬레이션 (선택 사항)
     };
 
     return (
