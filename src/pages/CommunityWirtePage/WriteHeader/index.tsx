@@ -9,10 +9,11 @@ import Axios from "@/api/axios";
 interface WriteHeaderProps {
   inputValue: string;
   textareaValue: string;
+  selectedImage: File | null;
 }
 
 const cx = classNames.bind(styles);
-const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue }) => {
+const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, selectedImage }) => {
   const navigate = useNavigate();
 
   // inputValue나 textareaValue에 값이 있으면 true, 없으면 false
@@ -34,6 +35,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue }) 
             console.log("내용:", textareaValue);
             formData.append("title", inputValue);
             formData.append("content", textareaValue);
+            formData.append("image", selectedImage as File);
 
             try {
               await Axios.postMultipart("/api/v1/post", formData);
