@@ -1,6 +1,8 @@
 import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
-import InputContrller from "@/components/sections/LoanInfoEntry/InputContrller";
-import maritalStatusContrller from "@/components/sections/LoanInfoEntry/maritalStatusContrller";
+import InputController from "@/components/sections/LoanInfoEntry/InputController";
+import maritalStatusController from "@/components/sections/LoanInfoEntry/maritalStatusController";
+import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEmployeeController";
+import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
 // import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
 // import SelectContrller from "@/components/sections/LoanInfoEntry/SelectContrller";
 
@@ -12,7 +14,7 @@ export const INPUTS = [
     value: "",
     modalTitle: "보증금을 입력해주세요",
     modalButton: "다음",
-    component: InputContrller,
+    component: InputController,
   },
   {
     id: 2,
@@ -21,7 +23,7 @@ export const INPUTS = [
     value: "",
     modalTitle: "월세가 있다면 월세를 입력해주세요",
     modalButton: "다음",
-    component: InputContrller,
+    component: InputController,
   },
   {
     id: 3,
@@ -30,7 +32,7 @@ export const INPUTS = [
     value: "",
     modalTitle: "보유현금을 입력해주세요",
     modalButton: "다음",
-    component: InputContrller,
+    component: InputController,
   },
   {
     id: 4,
@@ -39,7 +41,7 @@ export const INPUTS = [
     value: "",
     modalTitle: "만 나이를 선택해주세요",
     modalButton: "다음",
-    component: InputContrller,
+    component: InputController,
     // component: WheelContrller,
   },
   {
@@ -48,7 +50,7 @@ export const INPUTS = [
     name: "maritalStatus",
     value: "",
     modalTitle: "혼인상태를 알려주세요",
-    component: maritalStatusContrller,
+    component: maritalStatusController,
   },
   {
     id: 6,
@@ -57,10 +59,33 @@ export const INPUTS = [
     value: "",
     modalTitle: "배우자 연소득을 입력해주세요",
     modalButton: "다음",
-    component: InputContrller,
+    component: InputController,
   },
   { id: 7, label: "자녀유무", name: "childStatus", value: "", component: UserInfo },
-  { id: 8, label: "중소기업재직여부", name: "isSMEEmployee", value: "", component: UserInfo },
-  { id: 9, label: "순자산 3.45억 초과여부", name: "isNetAssetOver345M", value: "", component: UserInfo },
-  { id: 10, label: "주택정보", name: "rentHousingType", value: "", component: UserInfo },
+  {
+    id: 8,
+    label: "중소기업재직여부",
+    name: "isSMEEmployee",
+    value: "",
+    modalTitle: "중소기업에 다니고 계신가요?",
+    modalSubTitle: "중소기업 기준은 직원 수 300명 이하, 연매출 1천억원 이하로 자세한 기준은 링크를 통해 확인해주세요.",
+    component: isSMEEmployeeController,
+  },
+  {
+    id: 9,
+    label: "순자산 3.45억 초과여부",
+    name: "isNetAssetOver345M",
+    value: "",
+    modalTitle: "순자산 3.45억원 초과여부를 알려주세요",
+    component: isSMEEmployeeController,
+  },
+  {
+    id: 10,
+    label: "주택정보",
+    name: "rentHousingType",
+    value: "",
+    modalTitle: "주택정보를 찾아주세요",
+
+    component: AddressSearchInputControllter,
+  },
 ];

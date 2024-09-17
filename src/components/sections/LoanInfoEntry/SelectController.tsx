@@ -5,16 +5,14 @@ interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
   modalTitle?: string;
-  buttonText?: string;
   onClose: () => void;
 }
 
-export const SelectContrller = <ControlType extends FieldValues>({
+export const SelectController = <ControlType extends FieldValues>({
   onClose,
   formFieldName,
   control,
   modalTitle,
-  buttonText,
 }: Props<ControlType>) => {
   return (
     <>
@@ -22,10 +20,10 @@ export const SelectContrller = <ControlType extends FieldValues>({
         name={formFieldName}
         control={control}
         render={({ field }) => (
-          <SelectBottomSheet modalTitle={modalTitle} buttonText={buttonText} {...field} onClose={onClose} />
+          <SelectBottomSheet modalTitle={modalTitle} onClose={onClose} onChange={field.onChange} />
         )}
       />
     </>
   );
 };
-export default SelectContrller;
+export default SelectController;

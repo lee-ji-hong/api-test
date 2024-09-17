@@ -1,28 +1,29 @@
-import { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
 import classNames from "classnames/bind";
-import styles from "./InputModal.module.scss";
+import styles from "./BottomSheet.module.scss";
 const cx = classNames.bind(styles);
 
-interface InputModalProps extends InputHTMLAttributes<HTMLInputElement> {
+interface BottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
   modalTitle: string;
   buttonText?: string;
+  children: React.ReactNode;
   onClose: () => void;
 }
 
-export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
-  ({ modalTitle, buttonText, onClose, ...props }, ref) => {
+export const BottomSheet = forwardRef<HTMLInputElement, BottomSheetProps>(
+  ({ modalTitle, buttonText, onClose, children }) => {
     return (
       <div className={cx("back-drop")}>
         <div className={cx("container")} aria-label="alert-modal">
           <Spacing size={30} />
           <Text className={cx("txt-title")} text={modalTitle} />
           <Spacing size={30} />
-          <input className={cx("input")} ref={ref} maxLength={30} {...props} />
+          {children}
           <Spacing size={30} />
           <Button className={cx("close-button")} title={buttonText} onClick={onClose} />
         </div>
@@ -31,4 +32,4 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
   },
 );
 
-export default InputModal;
+export default BottomSheet;

@@ -9,7 +9,7 @@ interface Props<ControlType extends FieldValues> {
   onClose: () => void;
 }
 
-export const InputContrller = <ControlType extends FieldValues>({
+export const InputController = <ControlType extends FieldValues>({
   onClose,
   formFieldName,
   control,
@@ -28,4 +28,4 @@ export const InputContrller = <ControlType extends FieldValues>({
     </>
   );
 };
-export default InputContrller;
+export default InputController;
