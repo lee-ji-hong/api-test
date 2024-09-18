@@ -21,6 +21,12 @@ const CommunityDetail = () => {
   const location = useLocation();
   const { postId } = location.state as { postId: number };
   const [post, setPost] = useState<Post>();
+  const [commentUpdated, setCommentUpdated] = useState(false); // 댓글 업데이트 여부 상태 추가
+
+  // 댓글 작성 후 업데이트 트리거 함수
+  const handleCommentUpdate = () => {
+    setCommentUpdated((prev) => !prev); // commentUpdated 상태 반전
+  };
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -34,7 +40,7 @@ const CommunityDetail = () => {
     };
 
     fetchPostData();
-  }, [postId]);
+  }, [postId, commentUpdated]);
   return (
     <div className={cx("container")}>
       <Spacing size={9} />
@@ -45,7 +51,7 @@ const CommunityDetail = () => {
       {post && <WriteBody {...post} />}
 
       {/* 좋아요, 댓글 */}
-      <WriteFooter postId={postId} author={post?.author} />
+      <WriteFooter postId={postId} author={post?.author} onCommentAdded={handleCommentUpdate} />
     </div>
   );
 };
@@ -157,15 +163,18 @@ const WriteBody: React.FC<Post> = (props) => {
 interface WriteFooterProps {
   postId: number;
   author: string | undefined;
+  onCommentAdded: () => void;
 }
 
-const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author }) => {
+const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author, onCommentAdded }) => {
   const [commentContent, setCommentContent] = useState(""); // 댓글 내용을 저장할 상태
 
   const requestWriteComment = async () => {
     try {
       const res = await Axios.post(`/api/v1/comment/${postId}`, { postId: postId, content: commentContent }, true);
       console.log("댓글 작성 성공", res);
+      onCommentAdded(); // 댓글 작성 후 부모 컴포넌트에게 알림
+      setCommentContent(""); // 댓글 작성 후 입력창 초기화
     } catch (error) {
       console.error("댓글 작성 실패", error);
     }
