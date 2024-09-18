@@ -20,10 +20,14 @@ const Contents: React.FC<Post> = (props) => {
   return (
     <div className={cx("container")}>
       {/* 글제목 및 내용 */}
-      <div onClick={() => navigator("/community/detail", { state: { postId: props.id } })}>
-        <Typography className={cx("txt-title")}>{props.title}</Typography>
-        <Typography className={cx("txt-contents")}>{props.content}</Typography>
+      <div className={cx("textContainer")}>
+        <div onClick={() => navigator("/community/detail", { state: { postId: props.id } })}>
+          <Typography className={cx("txt-title")}>{props.title}</Typography>
+          <Typography className={cx("txt-contents")}>{props.content}</Typography>
+        </div>
+        {props.imageUrl && <img src={props.imageUrl} alt="post" className={cx("imgPost")} />}
       </div>
+
       <Spacing size={12} />
 
       {/* 대출 정보 */}
