@@ -39,6 +39,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, se
 
             try {
               await Axios.postMultipart("/api/v1/post", formData);
+              navigate(-1);
             } catch (error) {
               alert(`글 작성에 실패했습니다. ${error}`);
             }

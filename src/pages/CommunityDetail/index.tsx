@@ -131,7 +131,7 @@ const WriteBody: React.FC<Post> = (props) => {
 
 interface WriteFooterProps {
   postId: number;
-  author: string;
+  author: string | undefined;
 }
 
 const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author }) => {

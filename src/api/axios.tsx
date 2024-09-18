@@ -1,5 +1,15 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
 
+// AxiosRequestConfig을 확장하여 커스텀 헤더 추가
+interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+  headers?:
+    | {
+        AccessToken?: string | null;
+        RefreshToken?: string | null;
+      }
+    | RawAxiosRequestHeaders;
+}
+
 class Axios {
   static instance: AxiosInstance | null | undefined = null;
 
@@ -122,17 +132,19 @@ class Axios {
   // POST 요청 (Multipart Form Data)
   static postMultipart(url: string, formData: FormData) {
     const token = this.getCookie("accessToken");
-    const config = {
+    const config: CustomAxiosRequestConfig = {
       headers: {
         ...this.getInstance().defaults.headers,
         "Content-Type": "multipart/form-data", // Ensure the request is treated as multipart/form-data
+        AccessToken: "",
+        RefreshToken: null,
       },
     };
     if (token) {
       config.headers!.AccessToken = token;
       config.headers!.RefreshToken = null;
     }
-    return this.getInstance().post(url, formData, config as AxiosRequestConfig);
+    return this.getInstance().post(url, formData, config as CustomAxiosRequestConfig);
   }
 
   // 쿠키에서 특정 값을 가져오는 함수
