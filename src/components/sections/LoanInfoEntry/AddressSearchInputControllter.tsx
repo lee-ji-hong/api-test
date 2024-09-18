@@ -4,7 +4,7 @@ import AddressSearchInputModal from "@/components/shared/AddressSearchInputModal
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
-  modalTitle?: string;
+  modalTitle?: string | undefined;
   onClose: () => void;
 }
 
@@ -19,7 +19,15 @@ export const AddressSearchInputControllter = <ControlType extends FieldValues>({
       <Controller
         name={formFieldName}
         control={control}
-        render={({ field }) => <AddressSearchInputModal modalTitle={modalTitle} {...field} onClose={onClose} />}
+        render={({ field }) => (
+          <AddressSearchInputModal
+            modalTitle={modalTitle}
+            selectedAddress={field.value}
+            onChange={field.onChange}
+            onClose={onClose}
+            {...field}
+          />
+        )}
       />
     </>
   );

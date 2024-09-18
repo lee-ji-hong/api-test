@@ -90,6 +90,7 @@ export const LoanInfoEntryPage = () => {
                         onClose={handleModalClose}
                         modalTitle={item.modalTitle}
                         modalSubTitle={item.modalSubTitle}
+                        options={item.options}
                         buttonText={item.modalButton}
                       />
                     )}
