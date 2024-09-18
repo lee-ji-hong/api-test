@@ -13,6 +13,7 @@ import Comment from "../CommunityCommonComponent/Comment";
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/axios";
 import { Post } from "@/api/model/CommunityResponse";
+import CommunityService from "@/api/service/CommunityService";
 
 const cx = classNames.bind(styles);
 
@@ -33,7 +34,7 @@ const CommunityDetail = () => {
     };
 
     fetchPostData();
-  }, []);
+  }, [postId]);
   return (
     <div className={cx("container")}>
       <Spacing size={9} />
@@ -44,7 +45,6 @@ const CommunityDetail = () => {
       {post && <WriteBody {...post} />}
 
       {/* 좋아요, 댓글 */}
-      {/* <Divider orientation="horizontal" sx={{ borderBottomWidth: 2, borderColor: "black" }} /> */}
       <WriteFooter postId={postId} author={post?.author} />
     </div>
   );
@@ -67,6 +67,8 @@ const WriteHeader = () => {
 };
 
 const WriteBody: React.FC<Post> = (props) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(props.likes);
   console.log("props:", props);
   return (
     <div className={cx("container-body")}>
@@ -83,22 +85,44 @@ const WriteBody: React.FC<Post> = (props) => {
       <div className={cx("container-heart-comment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
         <Heart
-          commentCnt={props.likes}
-          onClick={() => {
-            alert("heart");
+          commentCnt={likeCount}
+          onClick={async () => {
+            switch (isLiked) {
+              case true:
+                try {
+                  const res = await CommunityService.requestUnlike(props.id);
+                  if (res.status === 200) {
+                    setIsLiked(!isLiked);
+                    setLikeCount(likeCount - 1);
+                  } else {
+                    console.log("Failed to like post:", res);
+                  }
+                } catch (error) {
+                  console.error("Failed to like post:", error);
+                }
+                break;
+              default:
+                try {
+                  const res = await CommunityService.requestLike(props.id);
+                  if (res.status === 200) {
+                    setIsLiked(!isLiked);
+                    setLikeCount(likeCount + 1);
+                  } else {
+                    console.log("Failed to like post:", res);
+                  }
+                } catch (error) {
+                  console.error("Failed to like post:", error);
+                }
+                break;
+            }
           }}
-          isActive={true}
+          isActive={isLiked}
         />
 
         <SpacingWidth size={15} />
         {/*  */}
 
-        <Comment
-          commentCnt={props.commentCount}
-          onClick={() => {
-            alert("comment");
-          }}
-        />
+        <Comment commentCnt={props.commentCount} onClick={() => {}} />
       </div>
 
       {/* 댓글들 리스트 */}
