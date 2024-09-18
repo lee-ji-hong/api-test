@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  background-color: white;
   flex-direction: column;
   align-items: center;
   height: 100vh; /* 전체 화면을 채우기 위해 100vh 설정 */
@@ -8,7 +9,7 @@
   .container-write-header {
     display: flex;
     height: 44px;
-    // background-color: aquamarine;
+    background-color: white;
     width: 100%;
     align-items: center;
     justify-content: space-between;
@@ -33,10 +34,27 @@
   }
 
   .container-body {
-    flex: 1; /* 나머지 공간을 모두 차지 */
+    background-color: white;
+    flex: 10;
     // background-color: rgb(242, 255, 127);
     display: block;
     width: 100%;
+
+    .containerComment {
+      // flex-grow: 1; /* 남은 공간을 차지 */
+      margin-top: 10px;
+      height: calc(100vh - 300px); /* 120px은 댓글 입력창 높이 */
+      overflow-y: auto; /* 세로 스크롤 활성화 */
+      scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+      // overflow: hidden;
+      padding-right: 16px; /* 스크롤이 생겼을 때, 내용이 잘리지 않도록 패딩 추가 */
+      .txtComment {
+        font-size: 16px;
+        font-weight: 400;
+        color: #333347;
+        line-height: 24px;
+      }
+    }
 
     .txt-title {
       width: 100%;
@@ -112,34 +130,27 @@
     }
   }
 
-  .container-footer {
+  .containerFooter {
+    // background-color: rgb(77, 85, 13);
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 48px;
     display: flex;
-    // justify-content: space-between;
     align-items: center;
 
-    .container-img-footer {
-      display: flex;
-      align-items: center;
-    }
-
-    .img-picture {
-      width: 20px;
-      height: 20px;
-    }
-    .img-doc {
-      width: 20px;
-      height: 20px;
-      margin-right: 20px;
-    }
-    .img-keyboard {
-      width: 20px;
-      height: 20px;
+    .txtComment {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 400;
+      color: #333347;
+      line-height: 24px;
+      text-align: center;
     }
 
     .container-inputbox {
-      width: 100%;
+      flex: 10;
       font-size: 14px;
       font-weight: 400;
       background-color: #f7f7f7;

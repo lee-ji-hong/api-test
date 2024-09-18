@@ -1,26 +1,51 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./CommunityDetail.module.scss";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Profile from "../CommunityPage/CommunityContents/Profile";
 import Spacing from "@/components/shared/Spacing";
 import LoanCard from "../CommunityCommonComponent/LoanCard";
-import Heart from "../CommunityCommonComponent/Heart/iindex";
+import Heart from "../CommunityCommonComponent/Heart/index";
 import Comment from "../CommunityCommonComponent/Comment";
+import React, { useEffect, useState } from "react";
+import Axios from "@/api/axios";
+import { Post } from "@/api/model/CommunityResponse";
 
 const cx = classNames.bind(styles);
 
 const CommunityDetail = () => {
+  const location = useLocation();
+  const { postId } = location.state as { postId: number };
+  const [post, setPost] = useState<Post>();
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        const res = await Axios.get(`/api/v1/post/${postId}`, true);
+        setPost(res.data.data); // 3. 상태 업데이트
+        console.log("Fetched Post:", res.data);
+      } catch (error) {
+        console.error("Failed to fetch post:", error);
+      }
+    };
+
+    fetchPostData();
+  }, []);
   return (
     <div className={cx("container")}>
+      <Spacing size={9} />
       <WriteHeader />
-      <WriteBody />
+      <Spacing size={9} />
+      <Spacing size={12} />
+
+      {post && <WriteBody {...post} />}
 
       {/* 좋아요, 댓글 */}
-      <WriteFooter />
+      {/* <Divider orientation="horizontal" sx={{ borderBottomWidth: 2, borderColor: "black" }} /> */}
+      <WriteFooter postId={postId} author={post?.author} />
     </div>
   );
 };
@@ -41,20 +66,16 @@ const WriteHeader = () => {
   );
 };
 
-const WriteBody = () => {
+const WriteBody: React.FC<Post> = (props) => {
+  console.log("props:", props);
   return (
     <div className={cx("container-body")}>
-      <Profile />
+      <Profile {...props} />
       <Spacing size={12} />
-      <Typography className={cx("txt-title")}>전세대출 보고입니다. 어떤 은행이 유리한가요?</Typography>
+      <Typography className={cx("txt-title")}>{props.title}</Typography>
 
       <Spacing size={8} />
-      <Typography className={cx("txt-content")}>
-        안녕하세요, 전세대출 처음 알아보는 30대 직장인입니다. 지금 살고 있는 집 전세 만기가 다가오고 있어서 대출을
-        알아보고 있는데, 어떤 은행이 조건이 좋을지 모르겠어요. 연소득은 4천만원 정도 되고, 신용점수는 800점대
-        중반입니다. 금리나 대출 한도에서 유리한 은행 추천해주실 수 있을까요? 그리고 대출 받을 때 꼭 챙겨야 할 서류나
-        준비물도 알려주시면 감사하겠습니다. 참고로 하우스핏에서는 하단 대출을 추천해줬습니다.
-      </Typography>
+      <Typography className={cx("txt-content")}>{props.content}</Typography>
 
       <Spacing size={16} />
 
@@ -62,32 +83,82 @@ const WriteBody = () => {
       <div className={cx("container-heart-comment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
         <Heart
-          commentCnt={12}
+          commentCnt={props.likes}
           onClick={() => {
             alert("heart");
           }}
+          isActive={true}
         />
 
         <SpacingWidth size={15} />
         {/*  */}
 
         <Comment
-          commentCnt={12}
+          commentCnt={props.commentCount}
           onClick={() => {
             alert("comment");
           }}
         />
       </div>
+
+      {/* 댓글들 리스트 */}
+      <div className={cx("containerComment")}>
+        {props.comments &&
+          props.comments.map((comment) => (
+            <div key={comment.id}>
+              <Spacing size={8} />
+              <Profile {...props} />
+              <Spacing size={8} />
+              <div style={{ marginLeft: "40px" }}>
+                <Typography className={cx("txtComment")}>{comment.content}</Typography>
+                <Spacing size={8} />
+                <Heart
+                  commentCnt={props.likes}
+                  onClick={() => {
+                    alert("heart");
+                  }}
+                  isActive={true}
+                />
+              </div>
+
+              <Spacing size={24} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
 
-const WriteFooter = () => {
+interface WriteFooterProps {
+  postId: number;
+  author: string | undefined;
+}
+
+const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author }) => {
+  const [commentContent, setCommentContent] = useState(""); // 댓글 내용을 저장할 상태
+
+  const requestWriteComment = async () => {
+    try {
+      const res = await Axios.post(`/api/v1/comment/${postId}`, { postId: postId, content: commentContent }, true);
+      console.log("댓글 작성 성공", res);
+    } catch (error) {
+      console.error("댓글 작성 실패", error);
+    }
+  };
   return (
-    <div className={cx("container-footer")}>
+    <div className={cx("containerFooter")}>
       <div className={cx("container-inputbox")}>
-        <input type="text" placeholder="김*니님의 생각을 댓글로 남겨주세요." className={cx("input-comment")} />
+        <input
+          type="text"
+          placeholder={`${author}님의 생각을 댓글로 남겨주세요.`}
+          className={cx("input-comment")}
+          value={commentContent}
+          onChange={(e) => setCommentContent(e.target.value)}
+        />
       </div>
+      <Button onClick={async () => await requestWriteComment()} variant="contained">
+        <Typography className={cx("txtComment")}>등록</Typography>
+      </Button>
     </div>
   );
 };
