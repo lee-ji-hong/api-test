@@ -36,6 +36,7 @@ function App() {
             <Routes>
               <Route path="/" element={<AppLayout />}>
                 <Route index element={<HomePage />} />
+                <Route path="login-page" element={<LoginPage />} />
                 <Route path="deposit-entry" element={<DepositEntryPage />} />
                 <Route path="deposit-result" element={<DepositResultPage />} />
                 <Route path="test" element={<ApiPage />} />
@@ -45,6 +46,7 @@ function App() {
                 <Route path="community/detail" element={<CommunityDetail />} />
                 <Route path="loan-info-entry" element={<LoanInfoEntryPage />} />
                 <Route path="report" element={<ReportPage />} />
+                <Route path="login-success" element={<LoginSuccessPage />} />
               </Route>
             </Routes>
           </Suspense>
