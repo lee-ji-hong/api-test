@@ -87,7 +87,7 @@ const WriteBody: React.FC<Post> = (props) => {
 
       <Spacing size={16} />
 
-      {props.loanAdviceSummaryReport && <LoanCard {...props} onClick={() => alert("ㅇㅇ")} />}
+      {props.loanAdviceSummaryReport && <LoanCard {...props} />}
 
       <div className={cx("container-heart-comment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
