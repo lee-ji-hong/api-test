@@ -13,6 +13,7 @@ import Comment from "../CommunityCommonComponent/Comment";
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/axios";
 import { Post } from "@/api/model/CommunityResponse";
+import CommunityService from "@/api/service/CommunityService";
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,12 @@ const CommunityDetail = () => {
   const location = useLocation();
   const { postId } = location.state as { postId: number };
   const [post, setPost] = useState<Post>();
+  const [commentUpdated, setCommentUpdated] = useState(false); // 댓글 업데이트 여부 상태 추가
+
+  // 댓글 작성 후 업데이트 트리거 함수
+  const handleCommentUpdate = () => {
+    setCommentUpdated((prev) => !prev); // commentUpdated 상태 반전
+  };
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -33,7 +40,7 @@ const CommunityDetail = () => {
     };
 
     fetchPostData();
-  }, []);
+  }, [postId, commentUpdated]);
   return (
     <div className={cx("container")}>
       <Spacing size={9} />
@@ -44,8 +51,7 @@ const CommunityDetail = () => {
       {post && <WriteBody {...post} />}
 
       {/* 좋아요, 댓글 */}
-      {/* <Divider orientation="horizontal" sx={{ borderBottomWidth: 2, borderColor: "black" }} /> */}
-      <WriteFooter postId={postId} author={post?.author} />
+      <WriteFooter postId={postId} author={post?.author} onCommentAdded={handleCommentUpdate} />
     </div>
   );
 };
@@ -67,6 +73,8 @@ const WriteHeader = () => {
 };
 
 const WriteBody: React.FC<Post> = (props) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(props.likes);
   console.log("props:", props);
   return (
     <div className={cx("container-body")}>
@@ -79,26 +87,49 @@ const WriteBody: React.FC<Post> = (props) => {
 
       <Spacing size={16} />
 
-      <LoanCard onClick={() => alert("ㅇㅇ")} />
+      {props.loanAdviceSummaryReport && <LoanCard {...props} />}
+
       <div className={cx("container-heart-comment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
         <Heart
-          commentCnt={props.likes}
-          onClick={() => {
-            alert("heart");
+          commentCnt={likeCount}
+          onClick={async () => {
+            switch (isLiked) {
+              case true:
+                try {
+                  const res = await CommunityService.requestUnlike(props.id);
+                  if (res.status === 200) {
+                    setIsLiked(!isLiked);
+                    setLikeCount(likeCount - 1);
+                  } else {
+                    console.log("Failed to like post:", res);
+                  }
+                } catch (error) {
+                  console.error("Failed to like post:", error);
+                }
+                break;
+              default:
+                try {
+                  const res = await CommunityService.requestLike(props.id);
+                  if (res.status === 200) {
+                    setIsLiked(!isLiked);
+                    setLikeCount(likeCount + 1);
+                  } else {
+                    console.log("Failed to like post:", res);
+                  }
+                } catch (error) {
+                  console.error("Failed to like post:", error);
+                }
+                break;
+            }
           }}
-          isActive={true}
+          isActive={isLiked}
         />
 
         <SpacingWidth size={15} />
         {/*  */}
 
-        <Comment
-          commentCnt={props.commentCount}
-          onClick={() => {
-            alert("comment");
-          }}
-        />
+        <Comment commentCnt={props.commentCount} onClick={() => {}} />
       </div>
 
       {/* 댓글들 리스트 */}
@@ -132,15 +163,18 @@ const WriteBody: React.FC<Post> = (props) => {
 interface WriteFooterProps {
   postId: number;
   author: string | undefined;
+  onCommentAdded: () => void;
 }
 
-const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author }) => {
+const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author, onCommentAdded }) => {
   const [commentContent, setCommentContent] = useState(""); // 댓글 내용을 저장할 상태
 
   const requestWriteComment = async () => {
     try {
       const res = await Axios.post(`/api/v1/comment/${postId}`, { postId: postId, content: commentContent }, true);
       console.log("댓글 작성 성공", res);
+      onCommentAdded(); // 댓글 작성 후 부모 컴포넌트에게 알림
+      setCommentContent(""); // 댓글 작성 후 입력창 초기화
     } catch (error) {
       console.error("댓글 작성 실패", error);
     }

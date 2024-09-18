@@ -35,7 +35,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, se
             console.log("내용:", textareaValue);
             formData.append("title", inputValue);
             formData.append("content", textareaValue);
-            formData.append("image", selectedImage as File);
+            formData.append("imageFile", selectedImage as File);
 
             try {
               await Axios.postMultipart("/api/v1/post", formData);
