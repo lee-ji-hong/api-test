@@ -8,6 +8,7 @@ export const formData = atom<FormValues>({
     monthlyRent: undefined,
     cashOnHand: undefined,
     age: undefined,
+    hasNewborn: false,
     maritalStatus: undefined,
     annualIncome: undefined,
     childStatus: undefined,

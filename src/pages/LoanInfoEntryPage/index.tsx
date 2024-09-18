@@ -35,7 +35,12 @@ export const LoanInfoEntryPage = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    setRecoilFormData(getValues());
+    // setRecoilFormData(getValues());
+    setRecoilFormData((prevState) => ({
+      ...prevState,
+      ...data,
+    }));
+    console.log(recoilFormData); // 디버깅용 콘솔 로그 추가
     console.log("폼이 제출되었습니다.", data); // 디버깅용 콘솔 로그 추가
     await new Promise((r) => setTimeout(r, 1000));
     alert(JSON.stringify(getValues()));

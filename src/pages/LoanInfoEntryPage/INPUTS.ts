@@ -61,7 +61,15 @@ export const INPUTS = [
     modalButton: "다음",
     component: InputController,
   },
-  { id: 7, label: "자녀유무", name: "childStatus", value: "", component: UserInfo },
+  {
+    id: 7,
+    label: "자녀유무",
+    name: "childStatus",
+    value: "",
+    modalTitle: "자녀 유무 여부를 확인해주세요",
+    modalButton: "다음",
+    component: UserInfo,
+  },
   {
     id: 8,
     label: "중소기업재직여부",

@@ -19,6 +19,7 @@ export interface FormValues {
   maritalStatus: MaritalStatus | undefined; // 혼인상태: 문자열 (미혼, 기혼 등)
   annualIncome: number | undefined; // 배우자 연소득: 숫자형
   childStatus: boolean | undefined; // 자녀유무: 논리형
+  hasNewborn: boolean | undefined; //신생아 여부: 논리형
   isSMEEmployee: boolean | undefined; // 중소기업 재직 여부: 논리형
   isNetAssetOver345M: boolean | undefined; // 순자산 3.45억 초과 여부: 논리형
   rentHousingType: HouseType | undefined; // 주택정보: 문자열
