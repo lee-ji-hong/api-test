@@ -3,8 +3,6 @@ import styles from "./Contents.module.scss";
 import classNames from "classnames/bind";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import Spacing from "@/components/shared/Spacing";
-import Image from "@/components/shared/Image";
-import { IMAGES } from "@/constants/images";
 import Comment from "@/pages/CommunityCommonComponent/Comment";
 import Heart from "@/pages/CommunityCommonComponent/Heart/iindex";
 import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
