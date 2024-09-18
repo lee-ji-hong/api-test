@@ -43,7 +43,7 @@ export const DepositResultPage = () => {
 
   return (
     <>
-      <Header className={cx("cancel")} onRightClick={() => router.goBack()} right="Back_btn" />
+      <Header className={cx("cancel")} onLeftClick={() => router.goBack()} left="Back_btn" />
       <div className={cx("container")}>
         <Spacing size={16} />
         <Text
@@ -60,7 +60,6 @@ export const DepositResultPage = () => {
           className={cx("button-wrap")}
           onClick={() => router.push("/loan-info-entry")}
           title="맞춤형 전월세대출 더 알아보기"
-          usePortal
         />
       </div>
     </>

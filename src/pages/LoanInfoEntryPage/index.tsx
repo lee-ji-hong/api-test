@@ -53,7 +53,7 @@ export const LoanInfoEntryPage = () => {
 
   return (
     <>
-      <Header className={cx("cancel")} onRightClick={() => router.goBack()} right="Back_btn" />
+      <Header className={cx("cancel")} onLeftClick={() => router.goBack()} left="Back_btn" />
       <div className={cx("container")}>
         <Spacing size={16} />
         <Text className={cx("txt-title")} text="당신에게 맞는 대출은?" />

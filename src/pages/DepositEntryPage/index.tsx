@@ -85,10 +85,10 @@ const DepositEntryPage = () => {
     <>
       <Header
         className={cx("cancel")}
-        onRightClick={() => router.push("/")}
-        onLeftClick={() => alert("준비중입니다")}
-        right="Logo"
-        left="Setting_btn"
+        onRightClick={() => alert("준비중입니다")}
+        onLeftClick={() => router.push("/")}
+        right="Setting_btn"
+        left="Logo"
       />
       <div className={cx("container")}>
         <Spacing size={90} />
