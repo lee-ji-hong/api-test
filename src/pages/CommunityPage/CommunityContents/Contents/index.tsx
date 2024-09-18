@@ -27,7 +27,7 @@ const Contents: React.FC<Post> = (props) => {
       <Spacing size={12} />
 
       {/* 대출 정보 */}
-      {props.loanAdviceSummaryReport && <LoanCard onClick={() => alert("LoanCard")} />}
+      {props.loanAdviceSummaryReport && <LoanCard {...props} onClick={() => alert("LoanCard")} />}
 
       <Spacing size={18} />
 
