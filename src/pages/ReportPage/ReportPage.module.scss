@@ -1,3 +1,151 @@
 .container {
   text-align: center;
 }
+
+.page-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.page-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    transform 500ms ease-in-out,
+    opacity 500ms ease-in-out;
+}
+
+.page-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.page-exit-active {
+  transform: translateY(100%);
+  opacity: 0;
+  transition:
+    transform 500ms ease-in-out,
+    opacity 500ms ease-in-out;
+}
+
+.section {
+  margin: 0 -20px;
+  justify-content: flex-start !important;
+  background: linear-gradient(180deg, #e8e8fc 0%, #fafaff 50%, #ffffff 100%);
+}
+
+.section-wrap {
+  margin: 0 20px;
+}
+
+.section-bottom {
+  @include flexbox(start, center);
+  gap: 49px;
+}
+
+.bottom-txt-title {
+  p {
+    color: $grey700;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: -1px;
+    text-align: left;
+  }
+}
+
+.bottom-txt-sub {
+  p {
+    color: $grey800;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 23.87px;
+    text-align: left;
+  }
+}
+
+.box {
+  @include column-flexbox(between, start);
+}
+
+.txt-top {
+  p {
+    color: $grey800;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 33.8px;
+    letter-spacing: -0.8px;
+    text-align: left;
+  }
+}
+
+.txt-box {
+  p {
+    color: $grey800;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 25.5px;
+    letter-spacing: -1px;
+    text-align: center;
+  }
+}
+
+.img-logo {
+  width: 74.4px;
+  height: 30px;
+}
+
+.txt-title {
+  p {
+    color: $grey800;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 28.5px;
+    letter-spacing: -1px;
+    text-align: left;
+  }
+}
+
+.txt-sub {
+  p {
+    color: $grey500;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: -1px;
+    text-align: left;
+  }
+}
+.cancel {
+  width: 100%;
+  height: 26px;
+  position: absolute;
+  right: 0px;
+  top: 12px;
+}
+.top-img {
+  width: 367px;
+}
+.img {
+  width: 100%px;
+  height: 223px;
+}
+
+.list-button {
+  @include flexbox();
+  width: 100%;
+  color: $grey700;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -1px;
+}
+
+.button-wrap {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 0 20px;
+  // backdrop-filter: blur(2px); /* 배경에만 블러 효과 적용 */
+  // -webkit-backdrop-filter: blur(2px); /* Safari 호환성 */
+}

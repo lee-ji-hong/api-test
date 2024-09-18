@@ -22,12 +22,12 @@ export const Header = ({ className, onRightClick, onLeftClick, title, right, lef
   const leftImage = left ? IMAGES?.[left] : null;
   return (
     <header className={cx(["header", className])}>
-      <button className={cx("backButton")} onClick={onRightClick}>
-        {rightImage ? <Image className={cx("Icon")} imageInfo={rightImage} /> : null}
-      </button>
-      {title && <Text className={cx("txt-title")} text={title} />}
       <button className={cx("backButton")} onClick={onLeftClick}>
         {leftImage ? <Image className={cx("Icon")} imageInfo={leftImage} /> : null}
+      </button>
+      {title && <Text className={cx("txt-title")} text={title} />}
+      <button className={cx("backButton")} onClick={onRightClick}>
+        {rightImage ? <Image className={cx("Icon")} imageInfo={rightImage} /> : null}
       </button>
     </header>
   );

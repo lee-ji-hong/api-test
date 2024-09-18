@@ -15,6 +15,7 @@ import Onboarding_1 from "@/assets/images/onboarding_1.png";
 import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
 import Onboarding_4 from "@/assets/images/onboarding_4.png";
+import Report_1 from "@/assets/images/report_1.png";
 import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
@@ -85,6 +86,10 @@ export const IMAGES = {
   MoreButton: {
     src: MoreButton,
     alt: "더보기",
+  },
+  Report_1: {
+    src: Report_1,
+    alt: "리포트 사용 이미지1",
   },
 
   // 더미 이미지 모음

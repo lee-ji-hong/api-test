@@ -17,8 +17,12 @@ const Section01 = ({
 }) => {
   return (
     <section className={cx(["container", className])}>
-      <Spacing size={126} />
-      {title != null ? <Text className={cx("text")} text={title} /> : null}
+      {title != null ? (
+        <>
+          <Spacing size={126} />
+          <Text className={cx("text")} text={title} />{" "}
+        </>
+      ) : null}
       {children}
     </section>
   );
