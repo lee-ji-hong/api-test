@@ -29,7 +29,7 @@ const CommunityWirtePage = () => {
   return (
     <div className={cx("container")}>
       <div className={cx("containerHeader")}>
-        <WriteHeader inputValue={inputValue} textareaValue={textareaValue} />
+        <WriteHeader inputValue={inputValue} textareaValue={textareaValue} selectedImage={selectedImage} />
       </div>
       <div className={cx("containerBody")}>
         <WriteBody
