@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IMAGES } from "@/constants/images";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
@@ -6,15 +7,13 @@ import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 const cx = classNames.bind(styles);
 
-type ImageKeys = keyof typeof IMAGES;
-
 interface HeaderProps {
   className?: string;
   onRightClick?: () => void;
   onLeftClick?: () => void;
   title?: string;
-  right?: ImageKeys;
-  left?: ImageKeys;
+  right?: any;
+  left?: any;
 }
 
 export const Header = ({ className, onRightClick, onLeftClick, title, right, left }: HeaderProps) => {

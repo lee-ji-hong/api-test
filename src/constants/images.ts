@@ -1,3 +1,4 @@
+import React from "react";
 import Back_btn from "@/assets/images/back.svg";
 import Cancel_btn from "@/assets/images/cancel_btn.svg";
 import CommunityHeartIcon from "@/assets/images/community/ico_heart.png";
@@ -21,7 +22,13 @@ import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
 
-export const IMAGES = {
+export type ImageType = {
+  src?: string;
+  alt: string;
+  SVGComponent?: React.ReactNode;
+};
+
+export const IMAGES: Record<string, ImageType> = {
   Onboarding_1: {
     src: Onboarding_1,
     alt: "집",
