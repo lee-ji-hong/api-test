@@ -98,6 +98,19 @@ export const INPUTS = [
   },
   {
     id: 10,
+    label: "주택 소유 형태",
+    name: "houseOwnershipType",
+    value: "",
+    modalTitle: "주택 소유 형태를 선택해주세요",
+    options: [
+      { label: "무주택", value: "NO_HOUSE" },
+      { label: "1주택", value: "SINGLE_HOUSE" },
+      { label: "다주택", value: "MULTI_HOUSE" },
+    ],
+    component: isSMEEmployeeController,
+  },
+  {
+    id: 11,
     label: "주택유형",
     name: "rentHousingType",
     value: "",
@@ -105,7 +118,7 @@ export const INPUTS = [
     component: rentHousingTypeController,
   },
   {
-    id: 11,
+    id: 12,
     label: "주택정보",
     name: "search",
     value: "",
