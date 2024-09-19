@@ -17,7 +17,7 @@ export interface sendLoanAdviceReportRequest {
   maritalStatus: MaritalStatus | undefined; // 혼인상태: 문자열 (미혼, 기혼 등)
   annualIncome: number | undefined; // 연소득: 숫자형
   spouseAnnualIncome: number | undefined; // 배우자 연소득: 숫자형
-  childStatus: boolean | undefined; // 자녀유무: 논리형
+  childStatus: ChildStatus | undefined; // 자녀유무: 논리형
   hasNewborn: boolean | undefined; //신생아 여부: 논리형
   isSMEEmployee: boolean | undefined; // 중소기업 재직 여부: 논리형
   houseOwnershipType: HouseOwnershipType | undefined; // 주택 소유 상태 ("NO_HOUSE","SINGLE_HOUSE", "MULTI_HOUSE")
