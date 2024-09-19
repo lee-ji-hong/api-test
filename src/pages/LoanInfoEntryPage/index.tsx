@@ -102,12 +102,7 @@ export const LoanInfoEntryPage = () => {
             </>
           </List>
           <Spacing size={90} />
-          <Button
-            className={cx("button-wrap")}
-            title="맞춤형 전월세대출 더 알아보기"
-            type="submit"
-            disabled={isSubmitting}
-          />
+          <Button className={cx("button-wrap")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
         </form>
       </div>
       <DevTool control={control} />
