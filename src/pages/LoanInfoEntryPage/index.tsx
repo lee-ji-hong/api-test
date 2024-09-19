@@ -10,9 +10,10 @@ import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 import List from "@/components/shared/List";
 
+import { useSendLoanAdviceReport } from "@/hooks/queries/useSendLoanAdviceReport";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { formData } from "@/recoil/atoms";
-import { FormValues } from "@/models";
+import { sendLoanAdviceReportRequest } from "@/models";
 
 import classNames from "classnames/bind";
 import styles from "./LoanInfoEntryPage.module.scss";
@@ -22,8 +23,8 @@ export const LoanInfoEntryPage = () => {
   const router = useInternalRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
-  const [recoilFormData, setRecoilFormData] = useRecoilState<FormValues>(formData);
-
+  const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+  const { loanAdviceReport } = useSendLoanAdviceReport();
   const {
     control,
     handleSubmit,
@@ -43,6 +44,7 @@ export const LoanInfoEntryPage = () => {
     console.log(recoilFormData); // 디버깅용 콘솔 로그 추가
     console.log("폼이 제출되었습니다.", data); // 디버깅용 콘솔 로그 추가
     await new Promise((r) => setTimeout(r, 1000));
+    loanAdviceReport(data as sendLoanAdviceReportRequest);
     alert(JSON.stringify(getValues()));
   };
 
@@ -69,7 +71,7 @@ export const LoanInfoEntryPage = () => {
             <>
               {INPUTS?.map((item) => {
                 const Component = item.component;
-                const value = getValues(item.name as keyof FormValues);
+                const value = getValues(item.name as keyof sendLoanAdviceReportRequest);
                 return (
                   <React.Fragment key={item.id}>
                     <List.Row
@@ -85,7 +87,7 @@ export const LoanInfoEntryPage = () => {
                     />
                     {modalOpen && selectedItem === item.id && (
                       <Component
-                        formFieldName={item.name as keyof FormValues}
+                        formFieldName={item.name as keyof sendLoanAdviceReportRequest}
                         control={control}
                         onClose={handleModalClose}
                         modalTitle={item.modalTitle}

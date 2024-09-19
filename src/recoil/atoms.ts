@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { FormValues } from "@/models";
+import { sendLoanAdviceReportRequest } from "@/models";
 
-export const formData = atom<FormValues>({
+export const formData = atom<sendLoanAdviceReportRequest>({
   key: "formState",
   default: {
     rentalDeposit: undefined,
@@ -13,6 +13,7 @@ export const formData = atom<FormValues>({
     annualIncome: undefined,
     childStatus: undefined,
     isSMEEmployee: undefined,
+    houseOwnershipType: undefined,
     isNetAssetOver345M: undefined,
     rentHousingType: undefined,
     exclusiveArea: undefined,

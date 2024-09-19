@@ -7,7 +7,7 @@ import BottomSheet from "@/components/shared/BottomSheet";
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
 import { formData } from "@/recoil/atoms";
-import { FormValues } from "@/models";
+import { sendLoanAdviceReportRequest } from "@/models";
 
 import classNames from "classnames/bind";
 import styles from "./UserInfo.module.scss";
@@ -29,7 +29,7 @@ export const UserInfo = <ControlType extends FieldValues>({
   modalTitle,
   buttonText,
 }: UserInfoProps<ControlType>) => {
-  const [recoilFormData, setRecoilFormData] = useRecoilState<FormValues>(formData);
+  const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
 
   const handleCheckboxChange = () => {
     setRecoilFormData((prevState) => ({

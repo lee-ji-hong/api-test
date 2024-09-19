@@ -111,7 +111,7 @@ class Axios {
   }
 
   // POST 요청
-  static post(url: string, data: unknown, withToken = false) {
+  static post<T = unknown>(url: string, data: unknown, withToken = false) {
     const config = {
       headers: {
         ...this.getInstance().defaults.headers, // 기존 헤더 유지
@@ -120,13 +120,14 @@ class Axios {
 
     if (withToken) {
       const token = this.getCookie("accessToken");
+      console.log("Access Token:", token);
       if (token) {
         config.headers!.AccessToken = token;
         config.headers!.RefreshToken = null;
       }
     }
 
-    return this.getInstance().post(url, data, config as AxiosRequestConfig);
+    return this.getInstance().post<T>(url, data, config as AxiosRequestConfig);
   }
 
   // POST 요청 (Multipart Form Data)
