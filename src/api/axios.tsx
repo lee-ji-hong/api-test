@@ -127,7 +127,9 @@ class Axios {
       }
     }
 
-    return this.getInstance().post<T>(url, data, config as AxiosRequestConfig);
+    return this.getInstance()
+      .post<T>(url, data, config as AxiosRequestConfig)
+      .then((response) => response.data);
   }
 
   // POST 요청 (Multipart Form Data)

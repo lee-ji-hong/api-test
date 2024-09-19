@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import Axios from "@/api/axios";
 
 import {
@@ -20,19 +19,9 @@ export function sendSimpleRentalProduct(requestBody: SendSimpleRentalProductRequ
 }
 
 //전세대출상품 추천 보고서 산출
-// export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
-//   return Axios.post<LoanAdviceReport>("/api/v1/loanAdvice", requestBody, true);
-// }
-
-export const sendLoanAdviceReport = async (requestBody: sendLoanAdviceReportRequest): Promise<LoanAdviceReport> => {
-  const { data }: AxiosResponse<LoanAdviceReport> = await Axios.post<LoanAdviceReport>(
-    "/api/v1/loanAdvice",
-    requestBody,
-    true,
-  );
-
-  return data;
-};
+export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
+  return Axios.post<LoanAdviceReport>("/api/v1/loanAdvice", requestBody, true);
+}
 
 // 특정 전세대출상품 추천 보고서 산출
 export function sendSpecificLoanAdvice(requestBody: sendSpecificLoanAdviceRequest) {
