@@ -265,7 +265,7 @@ const ApiPage = () => {
       dongName: "역삼동",
     };
     try {
-      const response = await axios.post("/api/v1/housing-info/info", data, {
+      const response = await axios.post("/api/v1/housingInfoApi", data, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

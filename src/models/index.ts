@@ -5,12 +5,8 @@ export interface InfoItem {
 }
 
 export type MaritalStatus = "SINGLE" | "NEWLY_MARRIED" | "MARRIED" | "ENGAGED";
-export type HouseType =
-  | "APARTMENT" // 아파트
-  | "OFFICETEL" // 오피스텔
-  | "HOUSEHOLD_HOUSE" // 연립다세대
-  | "FAMILY_HOUSE"; // 단독/다가구
-
+export type ChildStatus = "NO_CHILD" | "ONE_CHILD" | "TWO_CHILD" | "THREE_OR_MORE_CHILDREN";
+export type HouseType = "APARTMENT" | "OFFICETEL" | "HOUSEHOLD_HOUSE" | "FAMILY_HOUSE";
 export type HouseOwnershipType = "NO_HOUSE" | "SINGLE_HOUSE" | "MULTI_HOUSE";
 
 export interface sendLoanAdviceReportRequest {
@@ -19,7 +15,8 @@ export interface sendLoanAdviceReportRequest {
   cashOnHand: number | undefined; // 보유현금: 숫자형
   age: number | undefined; // 만 나이: 숫자형
   maritalStatus: MaritalStatus | undefined; // 혼인상태: 문자열 (미혼, 기혼 등)
-  annualIncome: number | undefined; // 배우자 연소득: 숫자형
+  annualIncome: number | undefined; // 연소득: 숫자형
+  spouseAnnualIncome: number | undefined; // 배우자 연소득: 숫자형
   childStatus: boolean | undefined; // 자녀유무: 논리형
   hasNewborn: boolean | undefined; //신생아 여부: 논리형
   isSMEEmployee: boolean | undefined; // 중소기업 재직 여부: 논리형

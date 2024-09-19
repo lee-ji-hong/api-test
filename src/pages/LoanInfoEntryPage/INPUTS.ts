@@ -55,15 +55,25 @@ export const INPUTS = [
   },
   {
     id: 6,
-    label: "배우자 연소득",
+    label: "연소득",
     name: "annualIncome",
+    value: "",
+    modalTitle: "연소득을 입력해주세요",
+    modalButton: "다음",
+    component: InputController,
+  },
+
+  {
+    id: 7,
+    label: "배우자 연소득",
+    name: "spouseAnnualIncome",
     value: "",
     modalTitle: "배우자 연소득을 입력해주세요",
     modalButton: "다음",
     component: InputController,
   },
   {
-    id: 7,
+    id: 8,
     label: "자녀유무",
     name: "childStatus",
     value: "",
@@ -72,7 +82,7 @@ export const INPUTS = [
     component: UserInfo,
   },
   {
-    id: 8,
+    id: 9,
     label: "중소기업재직여부",
     name: "isSMEEmployee",
     value: "",
@@ -85,7 +95,7 @@ export const INPUTS = [
     component: isSMEEmployeeController,
   },
   {
-    id: 9,
+    id: 10,
     label: "순자산 3.45억 초과여부",
     name: "isNetAssetOver345M",
     value: "",
@@ -97,7 +107,7 @@ export const INPUTS = [
     component: isSMEEmployeeController,
   },
   {
-    id: 10,
+    id: 11,
     label: "주택 소유 형태",
     name: "houseOwnershipType",
     value: "",
@@ -110,7 +120,7 @@ export const INPUTS = [
     component: isSMEEmployeeController,
   },
   {
-    id: 11,
+    id: 12,
     label: "주택유형",
     name: "rentHousingType",
     value: "",
@@ -118,9 +128,17 @@ export const INPUTS = [
     component: rentHousingTypeController,
   },
   {
-    id: 12,
+    id: 13,
     label: "주택정보",
-    name: "search",
+    name: "jibun",
+    value: "",
+    modalTitle: "주택정보를 찾아주세요",
+    component: AddressSearchInputControllter,
+  },
+  {
+    id: 14,
+    label: "주택정보",
+    name: "jibun",
     value: "",
     modalTitle: "주택정보를 찾아주세요",
     component: AddressSearchInputControllter,

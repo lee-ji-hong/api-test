@@ -20,13 +20,7 @@ export const AddressSearchInputControllter = <ControlType extends FieldValues>({
         name={formFieldName}
         control={control}
         render={({ field }) => (
-          <AddressSearchInputModal
-            modalTitle={modalTitle}
-            selectedAddress={field.value}
-            onChange={field.onChange}
-            onClose={onClose}
-            {...field}
-          />
+          <AddressSearchInputModal modalTitle={modalTitle} onChange={field.onChange} onClose={onClose} {...field} />
         )}
       />
     </>

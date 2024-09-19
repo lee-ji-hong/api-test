@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import styles from "./DepositEntryPage.module.scss";
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
@@ -10,11 +11,14 @@ import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
 import { useInternalRouter } from "@/hooks/useInternalRouter";
+import { sendLoanAdviceReportRequest } from "@/models";
+import { formData } from "@/recoil/atoms";
 import { MONEY } from "@/constants/money";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
+  const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState<number>(0);
   const [bottomOffset, setBottomOffset] = useState(0);
@@ -28,6 +32,8 @@ const DepositEntryPage = () => {
       setBottomOffset(40); // 기본 상태
     }
   }, [isInputFocused]);
+
+  console.log(recoilFormData);
 
   const isInvalidValue = inputValue > 0 && (inputValue <= 5 || inputValue > 200000);
   const warningMessage =
@@ -49,6 +55,7 @@ const DepositEntryPage = () => {
     const { value } = e.target;
     const rawValue = value.replace(/,/g, "").replace(/만원/g, "");
     const newValue = parseInt(rawValue, 10);
+
     if (!isNaN(newValue)) {
       setInputValue(Math.min(newValue, 210000));
     }
@@ -79,6 +86,14 @@ const DepositEntryPage = () => {
       return `${billion}억`;
     }
     return formatNumber(number); // 억 단위 미만
+  };
+
+  const handleNavigate = (inputValue: number) => {
+    setRecoilFormData((prevState) => ({
+      ...prevState,
+      rentalDeposit: inputValue,
+    }));
+    navigate("/deposit-result", { state: { inputValue } });
   };
 
   return (
@@ -119,7 +134,7 @@ const DepositEntryPage = () => {
         <Button
           className={cx("button-wrap")}
           disabled={!inputValue || isInvalidValue}
-          onClick={() => navigate("/deposit-result", { state: { inputValue } })}
+          onClick={() => handleNavigate(inputValue)}
           bottom={bottomOffset}
           title="전월세 대출 상품 확인하기"
         />

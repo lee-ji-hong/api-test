@@ -7,7 +7,7 @@ import BottomSheet from "@/components/shared/BottomSheet";
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
 import { formData } from "@/recoil/atoms";
-import { sendLoanAdviceReportRequest } from "@/models";
+import { ChildStatus, sendLoanAdviceReportRequest } from "@/models";
 
 import classNames from "classnames/bind";
 import styles from "./UserInfo.module.scss";
@@ -21,6 +21,13 @@ interface UserInfoProps<ControlType extends FieldValues> {
   buttonText?: string;
   onClose: () => void;
 }
+
+const statusLabels: Record<ChildStatus, string> = {
+  NO_CHILD: "무자녀",
+  ONE_CHILD: "1자녀",
+  TWO_CHILD: "2자녀",
+  THREE_OR_MORE_CHILDREN: "3자녀 이상",
+};
 
 export const UserInfo = <ControlType extends FieldValues>({
   onClose,
@@ -47,12 +54,12 @@ export const UserInfo = <ControlType extends FieldValues>({
           <BottomSheet modalTitle={modalTitle} buttonText={buttonText} onClose={onClose} {...field}>
             <Spacing size={30} />
             <ul className={cx("options")}>
-              {(["무자녀", "1자녀", "2자녀", "3자녀 이상"] as string[]).map((status) => (
+              {(["NO_CHILD", "ONE_CHILD", "TWO_CHILD", "THREE_OR_MORE_CHILDREN"] as ChildStatus[]).map((status) => (
                 <li
                   key={status}
                   className={cx("option-button", { selected: field.value === status })}
                   onClick={() => field.onChange(status)}>
-                  {status}
+                  {statusLabels[status]}
                 </li>
               ))}
             </ul>
