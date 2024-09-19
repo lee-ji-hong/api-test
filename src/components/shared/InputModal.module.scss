@@ -50,4 +50,40 @@
     position: relative !important;
     margin-bottom: -20px;
   }
+
+  .list-item {
+    padding: 15px 0px;
+
+    .list-txt-top {
+      p {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20.8px;
+        letter-spacing: -0.8px;
+        text-align: left;
+      }
+    }
+
+    .list-txt-bottom {
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18.2px;
+        letter-spacing: -0.8px;
+        text-align: left;
+        color: #86869a;
+      }
+    }
+  }
+  .no-result {
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20.8px;
+      letter-spacing: -0.8px;
+      text-align: center;
+      color: $grey500;
+      padding: 50px 0;
+    }
+  }
 }

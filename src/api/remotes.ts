@@ -4,9 +4,11 @@ import {
   SimpleRentalProduct,
   LoanAdviceReport,
   SpecificLoanAdvice,
+  Address,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
   sendSpecificLoanAdviceRequest,
+  sendaddressSearchRequest,
 } from "@/models";
 
 /*************
@@ -26,4 +28,13 @@ export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
 // 특정 전세대출상품 추천 보고서 산출
 export function sendSpecificLoanAdvice(requestBody: sendSpecificLoanAdviceRequest) {
   return Axios.post<SpecificLoanAdvice>("/api/v1/loanAdvice/specific", requestBody, true);
+}
+
+/*************
+ * HousingInfo API
+ ************/
+
+// 주소 검색
+export function sendaddressSearch(requestBody: sendaddressSearchRequest) {
+  return Axios.post<Address>("/api/v1/addressSearch", requestBody, false);
 }

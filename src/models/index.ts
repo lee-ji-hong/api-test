@@ -41,6 +41,10 @@ export interface sendSpecificLoanAdviceRequest {
   productCode: string;
 }
 
+export interface sendaddressSearchRequest {
+  keyword: string;
+}
+
 export interface BaseLoanProduct {
   loanProductName: string; // 대출 상품 이름
   loanProductCode: string; // 대출 상품 코드
@@ -102,4 +106,18 @@ export interface LoanAdviceReport {
   recommendedProducts: RecommendedProduct[]; // 추천 상품 리스트
   availableBanks: string[]; // 이용 가능한 은행 리스트
   rentalLoanGuide: string; // 전세 대출 안내 사항
+}
+export interface Address {
+  apiResultCode: string;
+  apiResultMessage: string;
+  addressInfos: AddressInfo[];
+}
+
+export interface AddressInfo {
+  roadAddress: string; // 도로명 주소
+  jibunAddress: string; // 지번 주소
+  buildingName: string; // 건물명
+  districtCode: string; // 법정동 코드
+  dongName: string; // 동명
+  jibun: string; // 지번
 }
