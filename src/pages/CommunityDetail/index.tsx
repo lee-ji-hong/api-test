@@ -51,13 +51,15 @@ const CommunityDetail = () => {
     <div className={cx("container")}>
       <Spacing size={9} />
       <WriteHeader />
-      <Spacing size={9} />
-      <Spacing size={12} />
+      <div className={cx("containerContents")}>
+        <Spacing size={9} />
+        <Spacing size={12} />
 
-      {post && <WriteBody {...post} />}
+        {post && <WriteBody {...post} />}
 
-      {/* 좋아요, 댓글 */}
-      <WriteFooter postId={postId} author={post?.author} onCommentAdded={handleCommentUpdate} />
+        {/* 좋아요, 댓글 */}
+        <WriteFooter postId={postId} author={post?.author} onCommentAdded={handleCommentUpdate} />
+      </div>
     </div>
   );
 };
@@ -90,12 +92,16 @@ const WriteBody: React.FC<Post> = (props) => {
 
       <Spacing size={8} />
       <Typography className={cx("txt-content")}>{props.content}</Typography>
-
       <Spacing size={16} />
 
+      {/* 이미지 */}
+      {props.imageUrl && <img src={props.imageUrl} alt="post" className={cx("imgPost")} />}
+
+      {/* 대출 정보 */}
+      <Spacing size={16} />
       {props.loanAdviceSummaryReport && <LoanCard {...props} />}
 
-      <div className={cx("container-heart-comment")}>
+      <div className={cx("containerHeartComment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
         <Heart
           commentCnt={likeCount}
