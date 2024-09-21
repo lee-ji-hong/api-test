@@ -8,6 +8,13 @@ class CommunityService {
   static async requestLike(postId: number) {
     return Axios.post(`/api/v1/post/${postId}/like`, {}, true);
   }
+  static async requestCommentUnlike(postId: number) {
+    return Axios.post(`/api/v1/comment/${postId}/unlike`, {}, true);
+  }
+
+  static async requestCommentLike(postId: number) {
+    return Axios.post(`/api/v1/comment/${postId}/like`, {}, true);
+  }
 }
 
 export default CommunityService;

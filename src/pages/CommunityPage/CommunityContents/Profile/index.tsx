@@ -3,11 +3,16 @@ import styles from "./Profile.module.scss";
 import classNames from "classnames/bind";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
-import { Post } from "@/api/model/CommunityResponse";
 
 const cx = classNames.bind(styles);
 
-const Profile: React.FC<Post> = (props) => {
+interface ProfileProps {
+  author: string;
+  timeAgo: string;
+  imgUrl?: string;
+}
+
+const Profile: React.FC<ProfileProps> = (props) => {
   return (
     <div style={{ display: "flex" }} className={cx("container")}>
       <Image className={cx("img-profile")} imageInfo={IMAGES?.ProfileDummyIcon} />

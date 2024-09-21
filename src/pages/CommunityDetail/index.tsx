@@ -16,6 +16,8 @@ import { Post } from "@/api/model/CommunityResponse";
 import CommunityService from "@/api/service/CommunityService";
 import { useGetCommunityDetail } from "@/hooks/queries/useGetCommunityDetail";
 import FullScreenMessage from "@/components/sections/FullScreenMessage";
+import CommentList from "./Comment";
+
 const cx = classNames.bind(styles);
 
 const CommunityDetail = () => {
@@ -86,7 +88,7 @@ const WriteBody: React.FC<Post> = (props) => {
   console.log("props:", props);
   return (
     <div className={cx("container-body")}>
-      <Profile {...props} />
+      <Profile author={props.author} timeAgo={props.timeAgo} />
       <Spacing size={12} />
       <Typography className={cx("txt-title")}>{props.title}</Typography>
 
@@ -144,30 +146,8 @@ const WriteBody: React.FC<Post> = (props) => {
         <Comment commentCnt={props.commentCount} onClick={() => {}} />
       </div>
 
-      {/* 댓글들 리스트 */}
-      <div className={cx("containerComment")}>
-        {props.comments &&
-          props.comments.map((comment) => (
-            <div key={comment.id}>
-              <Spacing size={8} />
-              <Profile {...props} />
-              <Spacing size={8} />
-              <div style={{ marginLeft: "40px" }}>
-                <Typography className={cx("txtComment")}>{comment.content}</Typography>
-                <Spacing size={8} />
-                <Heart
-                  commentCnt={props.likes}
-                  onClick={() => {
-                    alert("heart");
-                  }}
-                  isActive={true}
-                />
-              </div>
-
-              <Spacing size={24} />
-            </div>
-          ))}
-      </div>
+      {/* 댓글 리스트 */}
+      <CommentList {...props} />
     </div>
   );
 };
