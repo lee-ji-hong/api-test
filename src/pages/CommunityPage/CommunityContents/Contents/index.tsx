@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 
 const Contents: React.FC<Post> = (props) => {
   const navigator = useNavigate();
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(props.like);
   const [likeCount, setLikeCount] = useState(props.likes);
   return (
     <div className={cx("container")}>

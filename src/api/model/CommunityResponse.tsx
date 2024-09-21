@@ -27,6 +27,7 @@ interface Post {
   avatarUrl: string | null;
   timeAgo: string;
   loanAdviceSummaryReport: LoanAdviceSummaryReport; // 대출 요약 보고서
+  like: boolean;
 }
 
 // 댓글(Comment) 모델 정의
