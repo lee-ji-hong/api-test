@@ -81,7 +81,7 @@ const WriteHeader = () => {
 };
 
 const WriteBody: React.FC<Post> = (props) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(props.like);
   const [likeCount, setLikeCount] = useState(props.likes);
   console.log("props:", props);
   return (
