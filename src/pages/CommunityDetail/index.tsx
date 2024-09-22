@@ -52,7 +52,7 @@ const CommunityDetail = () => {
   return (
     <div className={cx("container")}>
       <Spacing size={9} />
-      <WriteHeader />
+      <WriteHeader {...post!} />
       <div className={cx("containerContents")}>
         <Spacing size={9} />
         <Spacing size={12} />
@@ -66,7 +66,7 @@ const CommunityDetail = () => {
   );
 };
 
-const WriteHeader = () => {
+const WriteHeader: React.FC<Post> = (props) => {
   const navigate = useNavigate();
 
   return (
@@ -75,7 +75,7 @@ const WriteHeader = () => {
         <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
       </button>
 
-      <button onClick={() => alert("더보기 클릭")}>
+      <button onClick={() => navigate("/community/modify", { state: { post: props } })}>
         <Image className={cx("btn-write-back")} imageInfo={IMAGES?.MoreButton} />
       </button>
     </div>

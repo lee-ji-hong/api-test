@@ -9,6 +9,8 @@ import { GlobalPortal } from "@/components/shared/GlobalPortal";
 import FullScreenMessage from "@/components/sections/FullScreenMessage";
 import CommunityWirtePage from "./CommunityWirtePage";
 import CommunityDetail from "./CommunityDetail";
+import CommunityModifyPage from "./CommunityModify";
+
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const DepositResultPage = lazy(() => import("./DepositResultPage"));
@@ -45,6 +47,7 @@ function App() {
                 <Route path="community" element={<CommunityPage />} />
                 <Route path="community/write" element={<CommunityWirtePage />} />
                 <Route path="community/detail" element={<CommunityDetail />} />
+                <Route path="community/modify" element={<CommunityModifyPage />} />
                 <Route path="loan-info-entry" element={<LoanInfoEntryPage />} />
                 <Route path="report" element={<ReportPage />} />
                 <Route path="login-success" element={<LoginSuccessPage />} />
@@ -54,6 +57,7 @@ function App() {
         </GlobalPortal.Provider>
       </QueryClientProvider>
     </RecoilRoot>
+            
   );
 }
 
