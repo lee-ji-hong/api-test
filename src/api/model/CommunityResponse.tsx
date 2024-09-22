@@ -39,6 +39,8 @@ interface Comment {
   createdDate: [number, number, number, number, number, number, number]; // 연, 월, 일, 시, 분, 초, 밀리초 배열
   lastModifiedDate: [number, number, number, number, number, number, number];
   like: boolean;
+  likes: number;
+  timeAgo: string;
 }
 
 export type { CommunityListResponse, Post, Comment, LoanAdviceSummaryReport };

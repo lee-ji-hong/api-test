@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./CommunityDetail.module.scss";
 import Image from "@/components/shared/Image";
@@ -173,18 +173,18 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author, onCommentAdde
   };
   return (
     <div className={cx("containerFooter")}>
-      <div className={cx("container-inputbox")}>
+      <div className={cx("containerInputbox")}>
         <input
           type="text"
           placeholder={`${author}님의 생각을 댓글로 남겨주세요.`}
-          className={cx("input-comment")}
+          className={cx("inputComment")}
           value={commentContent}
           onChange={(e) => setCommentContent(e.target.value)}
         />
       </div>
-      <Button onClick={async () => await requestWriteComment()} variant="contained">
+      <div onClick={requestWriteComment}>
         <Typography className={cx("txtComment")}>등록</Typography>
-      </Button>
+      </div>
     </div>
   );
 };

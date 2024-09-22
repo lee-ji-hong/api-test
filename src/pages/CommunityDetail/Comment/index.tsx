@@ -25,7 +25,7 @@ interface CommentItemProps {
 
 const CommentListItem: React.FC<CommentItemProps> = ({ comment }) => {
   const [isCommentLiked, setIsCommentLiked] = useState(comment.like);
-  const [commentLikeCount, setCommentLikeCount] = useState(3);
+  const [commentLikeCount, setCommentLikeCount] = useState(comment.likes);
 
   const handleLikeToggle = async () => {
     if (isCommentLiked) {
@@ -60,7 +60,7 @@ const CommentListItem: React.FC<CommentItemProps> = ({ comment }) => {
   return (
     <div>
       <Spacing size={8} />
-      <Profile author={comment.author} timeAgo={"n일전"} />
+      <Profile author={comment.author} timeAgo={comment.timeAgo} />
       <Spacing size={8} />
       <div style={{ marginLeft: "40px" }}>
         <Typography className={cx("txtComment")}>{comment.content}</Typography>
