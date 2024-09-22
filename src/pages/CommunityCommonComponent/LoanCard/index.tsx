@@ -4,7 +4,6 @@ import Spacing from "@/components/shared/Spacing";
 import { IMAGES } from "@/constants/images";
 import { Typography } from "@mui/material";
 import classNames from "classnames/bind";
-
 import styles from "./LoanCard.module.scss";
 
 const LoanCard: React.FC<Post> = (props) => {
@@ -44,16 +43,69 @@ const LoanCard: React.FC<Post> = (props) => {
 
     return chunkResult;
   }
+
+  // loanProductCode와 대출 상품 이름을 매핑하는 객체 타입 정의
+  type LoanProductMap = {
+    [key: string]: string;
+  };
+
+  // loanProductCode와 대출 상품 이름을 매핑하는 객체
+  const loanProductMap: LoanProductMap = {
+    "HF-01": "서울시신혼부부임차보증금대출",
+    "HF-02": "서울시청년임차보증금대출",
+    "HF-03": "주택신보전세자금대출",
+    "HF-04": "청년전세론",
+    "HF-05": "(특례)무주택청년",
+    "HF-06": "(특례)다자녀가구",
+    "HF-07": "고정금리 협약전세자금보증",
+    "NHUF-01": "신생아특례버팀목전세자금대출",
+    "NHUF-02": "청년전용버팀목전세자금대출",
+    "NHUF-03": "중소기업취업청년전월세대출",
+    "NHUF-04": "신혼부부전용전세자금대출",
+    "NHUF-05": "버팀목전세자금",
+    "SGI-01": "우량주택전세론",
+    "HUG-01": "전세안심대출",
+  };
+  // loanProductCode에 따라 대출 이름을 반환하는 함수
+  function getLoanProductName(loanProductCode: string): string {
+    return loanProductMap[loanProductCode] || "알 수 없는 대출 상품";
+  }
+
+  // loanProductCode를 받아 은행 코드를 추출하고, 그에 맞는 이미지를 반환하는 함수
+  type ImageInfo = {
+    src: string;
+    alt: string;
+  };
+  function getBankImage(loanProductCode: string): ImageInfo {
+    const bankCode = loanProductCode.split("-")[0]; // 'HF-01'에서 'HF' 추출
+
+    switch (bankCode) {
+      case "HF":
+        return IMAGES?.LoanBankHFIcon;
+      case "NHUF":
+        return IMAGES?.LoanBankNHUFIcon;
+      case "SGI":
+        return IMAGES?.LoanBankSGIIcon;
+      case "HUG":
+        return IMAGES?.LoanBankHUGIcon;
+      default:
+        return IMAGES?.LoanBankDummyIcon;
+    }
+  }
+
   const cx = classNames.bind(styles);
+  const loanAdviceSummaryReport = props.loanAdviceSummaryReport;
   return (
     <div className={cx("container")}>
       <div className={cx("container-loaninfo")}>
         <div className={cx("container-txt-loaninfo")}>
-          <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
+          <Image className={cx("imgLoaninfo")} imageInfo={getBankImage(loanAdviceSummaryReport.loanProductCode)} />
 
           <Spacing size={4} />
-          <Typography className={cx("txt-loaninfo")}>{props.loanAdviceSummaryReport.loanProductName}</Typography>
-          <Typography className={cx("txt-loaninfo")}>{props.loanAdviceSummaryReport.loanProductCode} </Typography>
+          <Typography className={cx("txt-loaninfo")}>{loanAdviceSummaryReport.loanProductName}</Typography>
+          <Typography className={cx("txt-loaninfo")}>
+            {getLoanProductName(loanAdviceSummaryReport.loanProductCode)}{" "}
+          </Typography>
         </div>
         <div className={cx("container-loaninfo-money")}>
           <Typography className={cx("txt-percent")}>
