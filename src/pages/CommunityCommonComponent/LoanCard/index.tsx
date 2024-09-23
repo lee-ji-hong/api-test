@@ -1,4 +1,4 @@
-import { Post } from "@/api/model/CommunityResponse";
+import { LoanAdviceSummaryReport } from "@/api/model/LoanAdviceReport";
 import Image from "@/components/shared/Image";
 import Spacing from "@/components/shared/Spacing";
 import { IMAGES } from "@/constants/images";
@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./LoanCard.module.scss";
 
-const LoanCard: React.FC<Post> = (props) => {
+const LoanCard: React.FC<LoanAdviceSummaryReport> = (loanAdviceSummaryReport) => {
   function convertToKoreanNumber(num: number): string {
     const units = ["", "만", "억", "조"];
     let result = "";
@@ -94,7 +94,6 @@ const LoanCard: React.FC<Post> = (props) => {
   }
 
   const cx = classNames.bind(styles);
-  const loanAdviceSummaryReport = props.loanAdviceSummaryReport;
   return (
     <div className={cx("container")}>
       <div className={cx("container-loaninfo")}>
@@ -108,11 +107,9 @@ const LoanCard: React.FC<Post> = (props) => {
           </Typography> */}
         </div>
         <div className={cx("container-loaninfo-money")}>
-          <Typography className={cx("txt-percent")}>
-            {props.loanAdviceSummaryReport.expectedLoanRate.toFixed(1)}%
-          </Typography>
+          <Typography className={cx("txt-percent")}>{loanAdviceSummaryReport.expectedLoanRate.toFixed(1)}%</Typography>
           <Typography className={cx("txtLoaninfo")}>
-            {convertToKoreanNumber(props.loanAdviceSummaryReport.possibleLoanLimit)}원
+            {convertToKoreanNumber(loanAdviceSummaryReport.possibleLoanLimit)}원
           </Typography>
         </div>
       </div>

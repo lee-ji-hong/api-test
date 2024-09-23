@@ -4,7 +4,6 @@ import styles from "./CommunityRecentReportHeader.module.scss";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import { useNavigate } from "react-router-dom";
-import RecentReportBody from "../RecentReportBody";
 
 const cx = classNames.bind(styles);
 const RecentReportHeader = () => {
@@ -17,7 +16,6 @@ const RecentReportHeader = () => {
       </button>
 
       <Typography className={cx("txtTitle")}>최근 보고서</Typography>
-      <RecentReportBody />
     </div>
   );
 };

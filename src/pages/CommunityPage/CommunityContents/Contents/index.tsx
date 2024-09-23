@@ -31,7 +31,7 @@ const Contents: React.FC<Post> = (props) => {
       <Spacing size={12} />
 
       {/* 대출 정보 */}
-      {props.loanAdviceSummaryReport && <LoanCard {...props} />}
+      {props.loanAdviceSummaryReport && <LoanCard {...props.loanAdviceSummaryReport} />}
 
       <Spacing size={18} />
 
