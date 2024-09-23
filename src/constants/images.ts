@@ -24,6 +24,10 @@ import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf.png";
 import LoanHFIcon from "@/assets/images/community/ico_loan_HF.png";
 import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi.png";
 import LoanHUGIcon from "@/assets/images/community/ico_loan_hug.png";
+import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf_full.png";
+import LoanHFIcon from "@/assets/images/community/ico_loan_HF_full.png";
+import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi_full.png";
+import LoanHUGIcon from "@/assets/images/community/ico_loan_hug_full.png";
 
 export const IMAGES = {
   Onboarding_1: {
