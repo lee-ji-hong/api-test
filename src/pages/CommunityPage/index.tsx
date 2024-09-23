@@ -24,8 +24,8 @@ const CommunityPage = () => {
 
     useEffect(() => {
       try {
-        Axios.get("/api/v1/post/sorted?sortType=POPULAR", true).then((res) => {
-          const resData: CommunityListResponse = res;
+        Axios.get("/api/v1/post", true).then((res) => {
+          const resData: CommunityListResponse = res.data;
           setContentItems(resData);
         });
       } catch (error) {
@@ -35,8 +35,8 @@ const CommunityPage = () => {
 
     // 스크롤이 끝에 도달할 때 호출되는 함수 (5개씩 추가 로드)
     const fetchMoreData = async () => {
-      const res = await Axios.get("/api/v1/post/sorted?sortType=POPULAR", true);
-      const posts: Post[] = res;
+      const res = await Axios.get("/api/v1/post", true);
+      const posts: Post[] = res.data;
       console.log(posts);
       setHasMore(false);
     };
@@ -65,7 +65,7 @@ const CommunityPage = () => {
             console.log("최신순 클릭");
             setIsLatest(true);
             try {
-              const res = await Axios.get("/api/v1/post/sorted?sortType=POPULAR", true);
+              const res = await Axios.get("/api/v1/post", true);
               setContentItems(undefined);
               setContentItems(res.data);
             } catch (error) {
@@ -81,7 +81,7 @@ const CommunityPage = () => {
             console.log("인기순 클릭");
             setIsLatest(false);
             try {
-              const res = await Axios.get("/api/v1/post", true);
+              const res = await Axios.get("/api/v1/post/sorted?sortType=POPULAR", true);
               setContentItems(undefined);
               setContentItems(res.data);
             } catch (error) {
