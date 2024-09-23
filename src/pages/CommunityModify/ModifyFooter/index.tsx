@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -15,8 +16,7 @@ interface WriteFooterProps {
 const WriteFooter: React.FC<WriteFooterProps> = ({ setSelectedImage, setImagePreview }: WriteFooterProps) => {
   // 각 input 태그에 접근하기 위한 ref 생성
   const imagePickerRef = useRef(null);
-  // const docPickerRef = useRef(null);
-  // const keyboardPickerRef = useRef(null);
+  const navigate = useNavigate();
 
   // 파일 선택 처리 함수
   const handleImagePick = (ref: React.RefObject<HTMLInputElement>) => {
@@ -52,7 +52,9 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ setSelectedImage, setImagePre
           onChange={handleFileChange} // 파일 선택 시 처리 함수
         />
         <SpacingWidth size={24} />
-        <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
+        <div onClick={() => navigate("/community/recent-report")}>
+          <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
+        </div>
       </div>
     </div>
   );
