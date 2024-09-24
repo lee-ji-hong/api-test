@@ -28,7 +28,7 @@ export const isSMEEmployeeController = <ControlType extends FieldValues>({
         name={formFieldName}
         control={control}
         render={({ field }) => {
-          const handleSelect = (value: boolean) => {
+          const handleSelect = (value: boolean | string) => {
             field.onChange(value);
             onClose();
           };
