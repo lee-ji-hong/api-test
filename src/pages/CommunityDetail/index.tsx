@@ -34,7 +34,7 @@ const CommunityDetail = () => {
     const fetchPostData = async () => {
       try {
         const res = await Axios.get(`/api/v1/post/${postId}`, true);
-        setPost(res.data.data); // 3. 상태 업데이트
+        setPost(res.data); // 3. 상태 업데이트
         console.log("Fetched Post:", res.data);
       } catch (error) {
         console.error("Failed to fetch post:", error);
