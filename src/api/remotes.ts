@@ -4,7 +4,7 @@ import {
   SimpleRentalProduct,
   LoanAdviceReport,
   SpecificLoanAdvice,
-  Address,
+  AddressResponse,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
   sendSpecificLoanAdviceRequest,
@@ -36,5 +36,5 @@ export function sendSpecificLoanAdvice(requestBody: sendSpecificLoanAdviceReques
 
 // 주소 검색
 export function sendaddressSearch(requestBody: sendaddressSearchRequest) {
-  return Axios.post<Address>("/api/v1/addressSearch", requestBody, false);
+  return Axios.post<AddressResponse>("/api/v1/addressSearch", requestBody, false).then((response) => response.data);
 }

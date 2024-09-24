@@ -12,7 +12,7 @@ interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   usePortal?: boolean;
   disabled?: boolean;
-  title: string;
+  title?: string;
   bottom?: number;
 }
 

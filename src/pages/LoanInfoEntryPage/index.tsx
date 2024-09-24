@@ -27,7 +27,7 @@ export const LoanInfoEntryPage = () => {
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
   const [currentInputIndex, setCurrentInputIndex] = useState(1);
   const [loading, setLoading] = useState(false);
-  const { loanAdviceReport, isLoanAdviceLoading } = useSendLoanAdviceReport();
+  const { loanAdviceReport } = useSendLoanAdviceReport();
   const {
     control,
     handleSubmit,
@@ -68,7 +68,7 @@ export const LoanInfoEntryPage = () => {
       setCurrentInputIndex(currentInputIndex + 1);
     }
   };
-  if (loading || isLoanAdviceLoading) return <FullScreenMessage type="loading" />;
+  if (loading) return <FullScreenMessage type="loading" />;
 
   return (
     <>

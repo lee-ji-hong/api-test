@@ -6,11 +6,7 @@ import { LoanAdviceReport, sendLoanAdviceReportRequest } from "@/models";
 export const useSendLoanAdviceReport = () => {
   const router = useInternalRouter();
 
-  const { mutate: loanAdviceReport, isLoading: isLoanAdviceLoading } = useMutation<
-    LoanAdviceReport,
-    Error,
-    sendLoanAdviceReportRequest
-  >({
+  const { mutate: loanAdviceReport } = useMutation<LoanAdviceReport, Error, sendLoanAdviceReportRequest>({
     mutationFn: sendLoanAdviceReport,
     onSuccess: (data) => {
       console.log(data);
@@ -21,5 +17,5 @@ export const useSendLoanAdviceReport = () => {
     },
   });
 
-  return { loanAdviceReport, isLoanAdviceLoading };
+  return { loanAdviceReport };
 };

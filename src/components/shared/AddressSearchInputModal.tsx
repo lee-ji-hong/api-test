@@ -21,7 +21,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
   ({ modalTitle, onClose, onChange, ...props }, ref) => {
     const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
     const [inputValue, setInputValue] = useState("");
-    const { searchAddress, addressList, isAddressLoading } = useSendAddressSearch();
+    const { searchAddress, addressList } = useSendAddressSearch();
 
     useEffect(() => {
       const delayDebounceFn = setTimeout(() => {
@@ -68,9 +68,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
           />
           <Spacing size={15} />
           <div className={cx("list-container")}>
-            {isAddressLoading ? (
-              <Text className={cx("loading")} text="로딩 중..." />
-            ) : addressList && addressList?.length > 0 ? (
+            {addressList && addressList?.length > 0 ? (
               // 우선 최대 3개만 노출되도록 구현 추후 페이징 처리 수정 예정
               addressList?.slice(0, 5).map((item, index) => (
                 <div className={cx("list-item")} key={index} onClick={() => handleAddressSelect(item)}>

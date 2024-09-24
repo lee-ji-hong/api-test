@@ -104,10 +104,18 @@ export interface LoanAdviceReport {
   availableBanks: string[]; // 이용 가능한 은행 리스트
   rentalLoanGuide: string; // 전세 대출 안내 사항
 }
+
+export interface AddressResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: Address;
+}
+
 export interface Address {
   apiResultCode: string;
   apiResultMessage: string;
-  addressInfos: AddressInfo[];
+  addressInfoList: AddressInfo[];
 }
 
 export interface AddressInfo {

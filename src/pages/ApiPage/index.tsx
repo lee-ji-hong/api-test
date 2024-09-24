@@ -318,7 +318,7 @@ const ApiPage = () => {
 
     try {
       const response = await Axios.post("/api/v1/repaymentCalc", data);
-      console.log("응답 데이터:", response.data);
+      console.log("응답 데이터:", response);
     } catch (error) {
       console.error("오류 발생:", error);
     }

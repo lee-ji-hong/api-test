@@ -1,3 +1,4 @@
+import React from "react";
 import classNames from "classnames/bind";
 import styles from "./Text.module.scss";
 
@@ -7,13 +8,14 @@ interface TextProps {
   text?: string | number;
   className?: string;
   highlight?: string;
+  style?: React.CSSProperties;
 }
 
-const Text = ({ text, className, highlight }: TextProps) => {
+const Text = ({ text, className, style, highlight }: TextProps) => {
   const titleParts = text ? String(text).split("/n") : [];
 
   return (
-    <div className={cx(["container", className])}>
+    <div className={cx(["container", className])} style={style}>
       {titleParts.map((part, index) => (
         <p key={index}>
           {highlight && part.includes(highlight) ? (

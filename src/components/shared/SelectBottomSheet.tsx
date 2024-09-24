@@ -14,7 +14,7 @@ interface SelectBottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
   children: React.ReactNode;
 }
 
-export const SelectBottomSheet = forwardRef<HTMLInputElement, SelectBottomSheetProps>(
+export const SelectBottomSheet = forwardRef<HTMLUListElement, SelectBottomSheetProps>(
   ({ modalTitle, modalSubTitle, children }, ref) => {
     return (
       <div className={cx("back-drop")}>
