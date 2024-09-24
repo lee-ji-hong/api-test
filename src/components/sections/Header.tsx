@@ -17,7 +17,9 @@ interface HeaderProps {
 }
 
 export const Header = ({ className, onRightClick, onLeftClick, title, right, left }: HeaderProps) => {
+  // @ts-expect-error: TypeScript cannot infer types from dynamic keys in IMAGES
   const rightImage = right ? IMAGES?.[right] : null;
+  // @ts-expect-error: TypeScript cannot infer types from dynamic keys in IMAGES
   const leftImage = left ? IMAGES?.[left] : null;
   return (
     <header className={cx(["header", className])}>

@@ -10,7 +10,7 @@ interface Props<ControlType extends FieldValues> {
   control: Control<ControlType>;
   modalTitle?: string;
   modalSubTitle?: string;
-  options?: { label: string; value: boolean }[];
+  options?: { label: string; value: boolean | string }[];
   onClose: () => void;
 }
 
