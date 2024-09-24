@@ -10,24 +10,24 @@ export type HouseType = "APARTMENT" | "OFFICETEL" | "HOUSEHOLD_HOUSE" | "FAMILY_
 export type HouseOwnershipType = "NO_HOUSE" | "SINGLE_HOUSE" | "MULTI_HOUSE";
 
 export interface sendLoanAdviceReportRequest {
-  rentalDeposit: number | undefined; // 임차보증금: 숫자형
-  monthlyRent: number | undefined; //월세
-  cashOnHand: number | undefined; // 보유현금: 숫자형
-  age: number | undefined; // 만 나이: 숫자형
-  maritalStatus: MaritalStatus | undefined; // 혼인상태: 문자열 (미혼, 기혼 등)
-  annualIncome: number | undefined; // 연소득: 숫자형
-  spouseAnnualIncome: number | undefined; // 배우자 연소득: 숫자형
-  childStatus: ChildStatus | undefined; // 자녀유무: 논리형
-  hasNewborn: boolean | undefined; //신생아 여부: 논리형
-  isSMEEmployee: boolean | undefined; // 중소기업 재직 여부: 논리형
-  houseOwnershipType: HouseOwnershipType | undefined; // 주택 소유 상태 ("NO_HOUSE","SINGLE_HOUSE", "MULTI_HOUSE")
-  isNetAssetOver345M: boolean | undefined; // 순자산 3.45억 초과 여부: 논리형
-  rentHousingType: HouseType | undefined; // 주택정보: 문자열
-  exclusiveArea: number | undefined; //전용면적
-  buildingName: string | undefined; //건물명
-  districtCode: string | undefined; //법정동 코드
-  dongName: string | undefined; //읍명동이름
-  jibun: string | undefined; //지번
+  rentalDeposit: number; // 임차보증금: 숫자형
+  monthlyRent: number; //월세
+  cashOnHand: number; // 보유현금: 숫자형
+  age: number; // 만 나이: 숫자형
+  maritalStatus: MaritalStatus; // 혼인상태: 문자열 (미혼, 기혼 등)
+  annualIncome: number; // 연소득: 숫자형
+  spouseAnnualIncome: number; // 배우자 연소득: 숫자형
+  childStatus: ChildStatus; // 자녀유무: 논리형
+  hasNewborn: boolean; //신생아 여부: 논리형
+  isSMEEmployee: boolean; // 중소기업 재직 여부: 논리형
+  houseOwnershipType: HouseOwnershipType; // 주택 소유 상태 ("NO_HOUSE","SINGLE_HOUSE", "MULTI_HOUSE")
+  isNetAssetOver345M: boolean; // 순자산 3.45억 초과 여부: 논리형
+  rentHousingType: HouseType; // 주택정보: 문자열
+  exclusiveArea: number; //전용면적
+  buildingName: string; //건물명
+  districtCode: string; //법정동 코드
+  dongName: string; //읍명동이름
+  jibun: string; //지번
 }
 
 export interface SendSimpleRentalProductRequest {
