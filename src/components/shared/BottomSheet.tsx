@@ -8,7 +8,7 @@ import styles from "./BottomSheet.module.scss";
 const cx = classNames.bind(styles);
 
 interface BottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
-  modalTitle: string;
+  modalTitle?: string;
   buttonText?: string;
   children: React.ReactNode;
   onClose: () => void;

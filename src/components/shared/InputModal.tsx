@@ -9,7 +9,7 @@ import styles from "./InputModal.module.scss";
 const cx = classNames.bind(styles);
 
 interface InputModalProps extends InputHTMLAttributes<HTMLInputElement> {
-  modalTitle: string;
+  modalTitle?: string;
   buttonText?: string;
   onClose: () => void;
 }

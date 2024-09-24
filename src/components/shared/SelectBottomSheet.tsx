@@ -9,7 +9,7 @@ import styles from "./SelectBottomSheet.module.scss";
 const cx = classNames.bind(styles);
 
 interface SelectBottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
-  modalTitle: string;
+  modalTitle?: string;
   modalSubTitle?: string;
   onClose: () => void;
   children: React.ReactNode;

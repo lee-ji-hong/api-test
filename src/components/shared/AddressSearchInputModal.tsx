@@ -12,7 +12,7 @@ import styles from "./InputModal.module.scss";
 const cx = classNames.bind(styles);
 
 interface AddressProps extends InputHTMLAttributes<HTMLInputElement> {
-  modalTitle: string;
+  modalTitle?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onClose: () => void;
 }
