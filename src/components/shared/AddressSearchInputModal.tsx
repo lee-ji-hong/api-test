@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes, useState, useEffect } from "react";
+import { forwardRef, ChangeEvent, InputHTMLAttributes, useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import Spacing from "@/components/shared/Spacing";
@@ -6,21 +6,21 @@ import Text from "@/components/shared/Text";
 
 import { useSendAddressSearch } from "@/hooks/queries/useSendAddressSearch";
 import { formData } from "@/recoil/atoms";
-import { sendaddressSearchRequest, AddressInfo, sendLoanAdviceReportRequest } from "@/models";
+import { AddressInfo, sendLoanAdviceReportRequest } from "@/models";
 import classNames from "classnames/bind";
 import styles from "./InputModal.module.scss";
 const cx = classNames.bind(styles);
 
 interface AddressProps extends InputHTMLAttributes<HTMLInputElement> {
   modalTitle: string;
-  onChange: (value: string) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onClose: () => void;
 }
 
 export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps>(
   ({ modalTitle, onClose, onChange, ...props }, ref) => {
     const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
-    const [inputValue, setInputValue] = useState<sendaddressSearchRequest>();
+    const [inputValue, setInputValue] = useState();
     const { searchAddress, addressList, isAddressLoading } = useSendAddressSearch();
 
     useEffect(() => {
