@@ -93,7 +93,7 @@ class Axios {
   }
 
   // GET 요청
-  static get(url: string, withToken = false) {
+  static get<T = unknown>(url: string, withToken = false) {
     const config: AxiosRequestConfig = {
       headers: {
         ...(this.getInstance().defaults.headers as RawAxiosRequestHeaders),
@@ -107,7 +107,9 @@ class Axios {
       }
     }
 
-    return this.getInstance().get(url, config);
+    return this.getInstance()
+      .get<T>(url, config)
+      .then((response) => response.data);
   }
 
   // POST 요청

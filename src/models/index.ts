@@ -126,3 +126,44 @@ export interface AddressInfo {
   dongName: string; // 동명
   jibun: string; // 지번
 }
+
+export interface CommunityDetailResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: CommunityDetail;
+}
+export interface CommunityDetail {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  imageUrl: string;
+  likes: number;
+  comments: Comment[];
+  commentCount: number;
+  createdDate: number[];
+  lastModifiedDate: number[];
+  avatarUrl: string;
+  timeAgo: string;
+  loanAdviceSummaryReport: LoanAdviceSummaryReport;
+  like: boolean;
+}
+
+export interface Comment {
+  id: number;
+  postId: number;
+  author: string;
+  content: string;
+  createdDate: number[];
+  lastModifiedDate: number[];
+  like: boolean;
+}
+
+export interface LoanAdviceSummaryReport {
+  loanAdviceResultId: number;
+  loanProductName: string;
+  loanProductCode: string;
+  possibleLoanLimit: number;
+  expectedLoanRate: number;
+}

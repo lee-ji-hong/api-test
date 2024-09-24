@@ -5,6 +5,7 @@ import {
   LoanAdviceReport,
   SpecificLoanAdvice,
   AddressResponse,
+  CommunityDetailResponse,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
   sendSpecificLoanAdviceRequest,
@@ -37,4 +38,13 @@ export function sendSpecificLoanAdvice(requestBody: sendSpecificLoanAdviceReques
 // 주소 검색
 export function sendaddressSearch(requestBody: sendaddressSearchRequest) {
   return Axios.post<AddressResponse>("/api/v1/addressSearch", requestBody, false).then((response) => response.data);
+}
+
+/*************
+ * Community API
+ ************/
+
+// 게시글 상세 조회
+export function getCommunityDetail({ postId }: { postId: number }) {
+  return Axios.get<CommunityDetailResponse>(`/api/v1/post/${postId}`, true).then((response) => response.data);
 }
