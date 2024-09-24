@@ -14,7 +14,8 @@ import React, { useEffect, useState } from "react";
 import Axios from "@/api/axios";
 import { Post } from "@/api/model/CommunityResponse";
 import CommunityService from "@/api/service/CommunityService";
-
+import { useGetCommunityDetail } from "@/hooks/queries/useGetCommunityDetail";
+import FullScreenMessage from "@/components/sections/FullScreenMessage";
 const cx = classNames.bind(styles);
 
 const CommunityDetail = () => {
@@ -22,6 +23,7 @@ const CommunityDetail = () => {
   const { postId } = location.state as { postId: number };
   const [post, setPost] = useState<Post>();
   const [commentUpdated, setCommentUpdated] = useState(false); // 댓글 업데이트 여부 상태 추가
+  const { communityDetail, isCommunityDetailLoading } = useGetCommunityDetail(postId);
 
   // 댓글 작성 후 업데이트 트리거 함수
   const handleCommentUpdate = () => {
@@ -41,6 +43,10 @@ const CommunityDetail = () => {
 
     fetchPostData();
   }, [postId, commentUpdated]);
+
+  if (isCommunityDetailLoading) return <FullScreenMessage type="loading" />;
+  console.log(communityDetail);
+
   return (
     <div className={cx("container")}>
       <Spacing size={9} />
