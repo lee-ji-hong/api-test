@@ -27,7 +27,7 @@ export const WheelContrller = <ControlType extends FieldValues>({
             <WheelAgePicker
               initialValue={20}
               onChange={(value) => {
-                onChange(value);
+                field.onChange(value);
                 onClose;
               }}
             />

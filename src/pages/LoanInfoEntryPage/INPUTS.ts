@@ -5,7 +5,6 @@ import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEm
 import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
 import rentHousingTypeController from "@/components/sections/LoanInfoEntry/rentHousingTypeController";
 // import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
-// import SelectContrller from "@/components/sections/LoanInfoEntry/SelectContrller";
 
 export const INPUTS = [
   {

@@ -13,14 +13,14 @@ const cx = classNames.bind(styles);
 
 interface AddressProps extends InputHTMLAttributes<HTMLInputElement> {
   modalTitle?: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement> | string) => void;
   onClose: () => void;
 }
 
 export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps>(
   ({ modalTitle, onClose, onChange, ...props }, ref) => {
     const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
-    const [inputValue, setInputValue] = useState();
+    const [inputValue, setInputValue] = useState("");
     const { searchAddress, addressList, isAddressLoading } = useSendAddressSearch();
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       setInputValue(value);
-      onChange(value);
+      onChange(e);
     };
 
     const handleAddressSelect = (address: AddressInfo) => {

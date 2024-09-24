@@ -22,10 +22,15 @@ import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
 
+interface TabBarIconProps {
+  title?: string;
+  color: string;
+}
+
 export type ImageType = {
   src?: string;
   alt: string;
-  SVGComponent?: React.ReactNode;
+  SVGComponent?: React.FC<TabBarIconProps>;
 };
 
 export const IMAGES: Record<string, ImageType> = {

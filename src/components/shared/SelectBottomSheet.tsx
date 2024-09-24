@@ -2,7 +2,6 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
-import { MaritalStatus } from "@/models";
 
 import classNames from "classnames/bind";
 import styles from "./SelectBottomSheet.module.scss";
@@ -13,7 +12,6 @@ interface SelectBottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
   modalSubTitle?: string;
   onClose: () => void;
   children: React.ReactNode;
-  onChange: (status: MaritalStatus) => void;
 }
 
 export const SelectBottomSheet = forwardRef<HTMLInputElement, SelectBottomSheetProps>(

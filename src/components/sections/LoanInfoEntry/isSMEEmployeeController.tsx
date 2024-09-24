@@ -35,7 +35,7 @@ export const isSMEEmployeeController = <ControlType extends FieldValues>({
 
           return (
             <SelectBottomSheet modalTitle={modalTitle} modalSubTitle={modalSubTitle} onClose={onClose}>
-              {options.map(({ label, value }) => (
+              {options?.map(({ label, value }) => (
                 <li key={value.toString()} className={cx("option-button")} onClick={() => handleSelect(value)}>
                   {label}
                 </li>
