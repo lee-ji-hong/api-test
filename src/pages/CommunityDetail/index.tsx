@@ -12,30 +12,30 @@ import Heart from "../CommunityCommonComponent/Heart/index";
 import Comment from "../CommunityCommonComponent/Comment";
 import React, { useEffect, useState } from "react";
 import Axios from "@/api/axios";
-import { Post } from "@/api/model/CommunityResponse";
 import CommunityService from "@/api/service/CommunityService";
 import { useGetCommunityDetail } from "@/hooks/queries/useGetCommunityDetail";
 import FullScreenMessage from "@/components/sections/FullScreenMessage";
 import CommentList from "./Comment";
+import { CommunityDetail, CommunityDetailResponse, LikeResponse } from "@/models";
 
 const cx = classNames.bind(styles);
 
-const CommunityDetail = () => {
+const CommunityDetailPage = () => {
   const location = useLocation();
   const { postId } = location.state as { postId: number };
-  const [post, setPost] = useState<Post>();
+  const [post, setPost] = useState<CommunityDetail>();
   const [commentUpdated, setCommentUpdated] = useState(false); // 댓글 업데이트 여부 상태 추가
   const { communityDetail, isCommunityDetailLoading } = useGetCommunityDetail(postId);
 
   // 댓글 작성 후 업데이트 트리거 함수
   const handleCommentUpdate = () => {
-    setCommentUpdated((prev) => !prev); // commentUpdated 상태 반전
+    setCommentUpdated((prev) => !prev);
   };
 
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const res = await Axios.get(`/api/v1/post/${postId}`, true);
+        const res = await Axios.get<CommunityDetailResponse>(`/api/v1/post/${postId}`, true);
         setPost(res.data); // 3. 상태 업데이트
         console.log("Fetched Post:", res.data);
       } catch (error) {
@@ -66,7 +66,7 @@ const CommunityDetail = () => {
   );
 };
 
-const WriteHeader: React.FC<Post> = (props) => {
+const WriteHeader: React.FC<CommunityDetail> = (props) => {
   const navigate = useNavigate();
 
   return (
@@ -82,7 +82,7 @@ const WriteHeader: React.FC<Post> = (props) => {
   );
 };
 
-const WriteBody: React.FC<Post> = (props) => {
+const WriteBody: React.FC<CommunityDetail> = (props) => {
   const [isLiked, setIsLiked] = useState(props.like);
   const [likeCount, setLikeCount] = useState(props.likes);
   console.log("props:", props);
@@ -101,7 +101,7 @@ const WriteBody: React.FC<Post> = (props) => {
 
       {/* 대출 정보 */}
       <Spacing size={16} />
-      {props.loanAdviceSummaryReport && <LoanCard {...props} />}
+      {props.loanAdviceSummaryReport && <LoanCard {...props.loanAdviceSummaryReport} />}
 
       <div className={cx("containerHeartComment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
@@ -111,8 +111,8 @@ const WriteBody: React.FC<Post> = (props) => {
             switch (isLiked) {
               case true:
                 try {
-                  const res = await CommunityService.requestUnlike(props.id);
-                  if (res.status === 200) {
+                  const res: LikeResponse = await CommunityService.requestUnlike(props.id);
+                  if (res.code === 200) {
                     setIsLiked(!isLiked);
                     setLikeCount(likeCount - 1);
                   } else {
@@ -124,8 +124,8 @@ const WriteBody: React.FC<Post> = (props) => {
                 break;
               default:
                 try {
-                  const res = await CommunityService.requestLike(props.id);
-                  if (res.status === 200) {
+                  const res: LikeResponse = await CommunityService.requestLike(props.id);
+                  if (res.code === 200) {
                     setIsLiked(!isLiked);
                     setLikeCount(likeCount + 1);
                   } else {
@@ -189,4 +189,4 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author, onCommentAdde
   );
 };
 
-export default CommunityDetail;
+export default CommunityDetailPage;

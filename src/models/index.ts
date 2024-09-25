@@ -158,6 +158,8 @@ export interface Comment {
   createdDate: number[];
   lastModifiedDate: number[];
   like: boolean;
+  likes: number;
+  timeAgo: string;
 }
 
 export interface LoanAdviceSummaryReport {
@@ -166,4 +168,11 @@ export interface LoanAdviceSummaryReport {
   loanProductCode: string;
   possibleLoanLimit: number;
   expectedLoanRate: number;
+}
+
+export interface LikeResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: string;
 }

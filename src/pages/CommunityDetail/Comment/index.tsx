@@ -1,4 +1,3 @@
-import { Comment, Post } from "@/api/model/CommunityResponse";
 import CommunityService from "@/api/service/CommunityService";
 import Spacing from "@/components/shared/Spacing";
 import Heart from "@/pages/CommunityCommonComponent/Heart";
@@ -8,10 +7,11 @@ import { useState } from "react";
 
 import classNames from "classnames/bind";
 import styles from "./Comment.module.scss";
+import { Comment, CommunityDetail, LikeResponse } from "@/models";
 
 const cx = classNames.bind(styles);
 
-const CommentList: React.FC<Post> = (props) => {
+const CommentList: React.FC<CommunityDetail> = (props) => {
   return (
     <div className={cx("containerComment")}>
       {props.comments && props.comments.map((comment) => <CommentListItem key={comment.id} comment={comment} />)}
@@ -31,8 +31,8 @@ const CommentListItem: React.FC<CommentItemProps> = ({ comment }) => {
     if (isCommentLiked) {
       // 좋아요 취소
       try {
-        const res = await CommunityService.requestCommentUnlike(comment.id);
-        if (res.status === 200) {
+        const res: LikeResponse = await CommunityService.requestCommentUnlike(comment.id);
+        if (res.code === 200) {
           setIsCommentLiked(false);
           setCommentLikeCount(commentLikeCount - 1);
         } else {
@@ -45,7 +45,7 @@ const CommentListItem: React.FC<CommentItemProps> = ({ comment }) => {
       // 좋아요 등록
       try {
         const res = await CommunityService.requestCommentLike(comment.id);
-        if (res.status === 200) {
+        if (res.code === 200) {
           setIsCommentLiked(true);
           setCommentLikeCount(commentLikeCount + 1);
         } else {
