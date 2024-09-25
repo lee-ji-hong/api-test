@@ -23,7 +23,7 @@ const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, 
 
   return (
     <div className={cx("container-write-header")}>
-      <button onClick={() => navigate(-1)}>
+      <button onClick={() => navigate("/community", { replace: true })}>
         <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>
 

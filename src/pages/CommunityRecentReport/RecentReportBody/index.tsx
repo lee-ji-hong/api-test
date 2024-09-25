@@ -21,7 +21,7 @@ const RecentReportBody = () => {
       },
     };
     console.log(updatedCommunityDetail);
-    navigate("/community/modify", { state: { communityDetail: updatedCommunityDetail } });
+    navigate("/community/modify", { state: { communityDetail: updatedCommunityDetail }, replace: true });
   }
 
   useEffect(() => {
