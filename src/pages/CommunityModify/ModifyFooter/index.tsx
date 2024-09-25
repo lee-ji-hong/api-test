@@ -5,15 +5,21 @@ import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import { useNavigate } from "react-router-dom";
+import { CommunityDetail } from "@/models";
 
 const cx = classNames.bind(styles);
 
 interface WriteFooterProps {
+  communityDetail: CommunityDetail;
   setSelectedImage: (file: File | null) => void;
   setImagePreview: (preview: string | null) => void;
 }
 
-const WriteFooter: React.FC<WriteFooterProps> = ({ setSelectedImage, setImagePreview }: WriteFooterProps) => {
+const WriteFooter: React.FC<WriteFooterProps> = ({
+  communityDetail,
+  setSelectedImage,
+  setImagePreview,
+}: WriteFooterProps) => {
   // 각 input 태그에 접근하기 위한 ref 생성
   const imagePickerRef = useRef(null);
   const navigate = useNavigate();
@@ -52,7 +58,7 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ setSelectedImage, setImagePre
           onChange={handleFileChange} // 파일 선택 시 처리 함수
         />
         <SpacingWidth size={24} />
-        <div onClick={() => navigate("/community/recent-report")}>
+        <div onClick={() => navigate("/community/recent-report", { state: { communityDetail: communityDetail } })}>
           <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
         </div>
       </div>

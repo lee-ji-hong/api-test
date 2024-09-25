@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./CommunityModifyBody.module.scss";
 import Spacing from "@/components/shared/Spacing";
 import React, { useRef, useEffect } from "react";
+import { LoanAdviceSummaryReport } from "@/models";
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,7 @@ interface WriteBodyProps {
   selectedImage: File | null;
   imagePreview: string | null;
   clearImagePreview: () => void;
+  loanAdviceReport: LoanAdviceSummaryReport;
 }
 
 interface TextAreaProps {
@@ -28,6 +30,7 @@ const WriteBody: React.FC<WriteBodyProps> = ({
   textareaValue,
   imagePreview,
   clearImagePreview,
+  loanAdviceReport,
 }) => {
   return (
     <div className={cx("containerWriteBody")}>
@@ -44,6 +47,7 @@ const WriteBody: React.FC<WriteBodyProps> = ({
             </button>
           </div>
         )}
+        {loanAdviceReport && <div>대출 상담 보고서</div>}
       </div>
 
       {/* 글자 수 표시 */}

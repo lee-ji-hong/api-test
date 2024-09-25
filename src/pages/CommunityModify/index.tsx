@@ -6,18 +6,18 @@ import ModifyHeader from "./ModifyHeader";
 import ModifyBody from "./ModifyBody";
 import ModifyFooter from "./ModifyFooter";
 import { useLocation } from "react-router-dom";
-import { Post } from "@/api/model/CommunityResponse";
+import { CommunityDetail } from "@/models";
 
 const cx = classNames.bind(styles);
 
 const CommunityModifyPage = () => {
   const location = useLocation();
-  const { post } = location.state as { post: Post };
+  const { communityDetail } = location.state as { communityDetail: CommunityDetail };
 
-  const [inputValue, setInputValue] = useState(post.title);
-  const [textareaValue, setTextareaValue] = useState(post.content);
+  const [inputValue, setInputValue] = useState(communityDetail.title);
+  const [textareaValue, setTextareaValue] = useState(communityDetail.content);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(post.imageUrl);
+  const [imagePreview, setImagePreview] = useState<string | null>(communityDetail.imageUrl);
 
   // Function to clear image preview
   const clearImagePreview = () => {
@@ -38,7 +38,7 @@ const CommunityModifyPage = () => {
           inputValue={inputValue}
           textareaValue={textareaValue}
           selectedImage={selectedImage}
-          postId={post.id}
+          postId={communityDetail.id}
         />
       </div>
       <div className={cx("containerBody")}>
@@ -50,12 +50,17 @@ const CommunityModifyPage = () => {
           selectedImage={selectedImage}
           imagePreview={imagePreview}
           clearImagePreview={clearImagePreview}
+          loanAdviceReport={communityDetail.loanAdviceSummaryReport}
         />
       </div>
 
       <Divider />
       <div className={cx("containerFooter")}></div>
-      <ModifyFooter setSelectedImage={setSelectedImage} setImagePreview={setImagePreview} />
+      <ModifyFooter
+        communityDetail={communityDetail}
+        setSelectedImage={setSelectedImage}
+        setImagePreview={setImagePreview}
+      />
     </div>
   );
 };

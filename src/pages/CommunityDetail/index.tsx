@@ -75,7 +75,7 @@ const WriteHeader: React.FC<CommunityDetail> = (props) => {
         <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
       </button>
 
-      <button onClick={() => navigate("/community/modify", { state: { post: props } })}>
+      <button onClick={() => navigate("/community/modify", { state: { communityDetail: props } })}>
         <Image className={cx("btn-write-back")} imageInfo={IMAGES?.MoreButton} />
       </button>
     </div>
