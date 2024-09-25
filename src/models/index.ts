@@ -176,3 +176,10 @@ export interface LikeResponse {
   message: string;
   data: string;
 }
+
+export interface LoanAdviceReportResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: LoanAdviceReport[];
+}

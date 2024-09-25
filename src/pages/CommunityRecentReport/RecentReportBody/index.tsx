@@ -3,19 +3,20 @@ import LoanAdviceService from "@/api/service/LoanAdviceService";
 import Spacing from "@/components/shared/Spacing";
 import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
 import { useEffect, useState } from "react";
+import { LoanAdviceReport, LoanAdviceReportResponse } from "@/models";
 
 const RecentReportBody = () => {
   // 상태로 loanAdviceList 관리
-  const [loanAdviceList, setLoanAdviceList] = useState([]);
+  const [loanAdviceList, setLoanAdviceList] = useState<LoanAdviceReport[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await LoanAdviceService.requestLoanAdvice();
-      console.log(response.data);
-      console.log(response.data.data);
+      const res: LoanAdviceReportResponse = await LoanAdviceService.requestLoanAdvice();
+      console.log(res.data);
+      console.log(res.data);
 
       // 상태 업데이트
-      setLoanAdviceList(response.data.data);
+      setLoanAdviceList(res.data);
     };
 
     fetchData().then(() => console.log("Data fetched"));
