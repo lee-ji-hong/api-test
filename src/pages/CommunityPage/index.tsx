@@ -9,7 +9,7 @@ import CommunityContents from "./CommunityContents";
 import FloatingButton from "./FloatingButton";
 import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
-import { CommunityListResponse, Post } from "@/api/model/CommunityResponse";
+import { CommunityListResponse } from "@/api/model/CommunityResponse";
 
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
@@ -19,14 +19,10 @@ const CommunityPage = () => {
   const navigator = useNavigate();
 
   const InfiniteScrollComponent = () => {
-    // 전체 데이터 배열 (30개)
-    // const allItems = Array.from({ length: 0 }, (_, index) => `Community Content #${index + 1}`);
-
     useEffect(() => {
       try {
-        Axios.get("/api/v1/post", true).then((res) => {
-          const resData: CommunityListResponse = res.data;
-          setContentItems(resData);
+        Axios.get<CommunityListResponse>("/api/v1/post", true).then((res) => {
+          setContentItems(res);
         });
       } catch (error) {
         console.error("커뮤니티 데이터를 불러오는데 실패했습니다.", error);
@@ -35,9 +31,8 @@ const CommunityPage = () => {
 
     // 스크롤이 끝에 도달할 때 호출되는 함수 (5개씩 추가 로드)
     const fetchMoreData = async () => {
-      const res = await Axios.get("/api/v1/post", true);
-      const posts: Post[] = res.data;
-      console.log(posts);
+      const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
+      console.log(res.data);
       setHasMore(false);
     };
 
@@ -65,9 +60,9 @@ const CommunityPage = () => {
             console.log("최신순 클릭");
             setIsLatest(true);
             try {
-              const res = await Axios.get("/api/v1/post", true);
+              const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
               setContentItems(undefined);
-              setContentItems(res.data);
+              setContentItems(res);
             } catch (error) {
               console.error("최신순 데이터를 불러오는데 실패했습니다.", error);
             }
@@ -81,9 +76,9 @@ const CommunityPage = () => {
             console.log("인기순 클릭");
             setIsLatest(false);
             try {
-              const res = await Axios.get("/api/v1/post/sorted?sortType=POPULAR", true);
+              const res = await Axios.get<CommunityListResponse>("/api/v1/post/sorted?sortType=POPULAR", true);
               setContentItems(undefined);
-              setContentItems(res.data);
+              setContentItems(res);
             } catch (error) {
               console.error("인기순 데이터를 불러오는데 실패했습니다.", error);
             }
