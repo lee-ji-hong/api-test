@@ -54,8 +54,8 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
     };
 
     return (
-      <div className={cx("back-drop")}>
-        <div className={cx("container")} aria-label="alert-modal">
+      <div className={cx("back-drop")} onClick={onClose}>
+        <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
           <Text className={cx("txt-title")} text={modalTitle} />
           <Spacing size={30} />
           <input
