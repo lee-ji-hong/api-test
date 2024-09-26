@@ -38,6 +38,16 @@ const CommunityModifyPage = () => {
     console.log("이미지 미리보기 삭제");
   };
 
+  const clearLoanAdviceReport = () => {
+    setLoanAdviceReport(null);
+    const updatedCommunityDetail = {
+      ...communityDetail,
+      loanAdviceSummaryReport: null,
+    };
+
+    setCommunityDetail(updatedCommunityDetail);
+  };
+
   useEffect(() => {
     console.log("inputValue:", inputValue);
     console.log("textareaValue:", textareaValue);
@@ -65,6 +75,7 @@ const CommunityModifyPage = () => {
           imagePreview={imagePreview}
           loanAdviceReport={loanAdviceReport!}
           setLoanAdviceReport={setLoanAdviceReport}
+          clearLoanAdviceReport={clearLoanAdviceReport}
         />
       </div>
 

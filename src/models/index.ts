@@ -146,7 +146,7 @@ export interface CommunityDetail {
   lastModifiedDate: number[];
   avatarUrl: string;
   timeAgo: string;
-  loanAdviceSummaryReport: LoanAdviceSummaryReport;
+  loanAdviceSummaryReport: LoanAdviceSummaryReport | null;
   like: boolean;
 }
 
