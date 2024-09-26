@@ -68,6 +68,16 @@
   @include column-flexbox(between, start);
 }
 
+.reason-box {
+  border-radius: 10px;
+  height: 98px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.0705882353);
+}
+
 .txt-top {
   p {
     color: $grey800;
@@ -104,6 +114,63 @@
     letter-spacing: -1px;
     text-align: left;
   }
+}
+
+.badge-icon {
+  margin: 8px 4px 0 0;
+}
+
+.order-wrap {
+  @include flexbox(start, center);
+  gap: 10px;
+  margin: 10px 0;
+
+  .img {
+    width: 90px;
+    height: 80px;
+  }
+  .txt-title {
+    p {
+      color: $blue500;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 21px;
+      letter-spacing: -1px;
+      text-align: left;
+    }
+  }
+
+  .txt-sub {
+    p {
+      color: $grey700;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: -1px;
+      text-align: left;
+    }
+  }
+}
+
+.txt-warning {
+  p {
+    color: $grey600;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22.4px;
+    letter-spacing: -1px;
+    text-align: left;
+  }
+}
+
+.warning-list {
+  font-size: 12px;
+  text-align: left;
+  line-height: 20px;
+  color: $grey600;
+  padding-bottom: 11px;
+  padding-left: 9px;
+  background: url(https://s.pstatic.net/static/rules/r8/ico_hyphen.png) 0 8px no-repeat;
 }
 
 .txt-sub {
