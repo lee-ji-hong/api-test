@@ -1,5 +1,7 @@
 // controller 만들어서 컴포넌트 나눌 예정
 import { CSSTransition } from "react-transition-group";
+import { useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import { useState } from "react";
 import ReportList from "@/components/shared/ReportList";
 import Spacing from "@/components/shared/Spacing";
@@ -11,6 +13,7 @@ import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { IMAGES } from "@/constants/images";
+import { formData } from "@/recoil/atoms";
 import classNames from "classnames/bind";
 import styles from "./ReportPage.module.scss";
 const cx = classNames.bind(styles);
@@ -30,6 +33,11 @@ const ReportPage = () => {
   const [showMore, setShowMore] = useState(false);
   const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
+  const location = useLocation();
+  const reportData = location.state?.reportData?.data;
+  const userInputData = useRecoilValue(formData);
+  console.log(reportData);
+  console.log(userInputData);
 
   const handleToggle = () => {
     setShowMore(!showMore);

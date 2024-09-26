@@ -10,7 +10,7 @@ export const useSendLoanAdviceReport = () => {
     mutationFn: sendLoanAdviceReport,
     onSuccess: (data) => {
       console.log(data);
-      router.push(`/report`, { state: { reportData: data } });
+      router.push(`/report`, { reportData: data });
     },
     onError: (error) => {
       console.error(" 생성 실패:", error);
