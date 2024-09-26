@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./CommunityModifyPage.module.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ModifyHeader from "./ModifyHeader";
 import ModifyBody from "./ModifyBody";
 import ModifyFooter from "./ModifyFooter";
@@ -24,13 +24,13 @@ const CommunityModifyPage = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(communityDetail.imageUrl);
 
   // Function to clear image preview
-  const clearImagePreview = () => {
-    setSelectedImage(null);
-    setImagePreview(null);
+  const changeImage = (imgUrl: string, imgFile: File | null) => {
+    setSelectedImage(imgFile);
+    setImagePreview(imgUrl);
 
     const updatedCommunityDetail = {
       ...communityDetail,
-      imageUrl: "",
+      imageUrl: imgFile ? "" : imgUrl,
     };
 
     setCommunityDetail(updatedCommunityDetail);
@@ -48,12 +48,6 @@ const CommunityModifyPage = () => {
     setCommunityDetail(updatedCommunityDetail);
   };
 
-  useEffect(() => {
-    console.log("inputValue:", inputValue);
-    console.log("textareaValue:", textareaValue);
-    console.log("communityDetail:", communityDetail);
-  }, [textareaValue, inputValue, communityDetail]);
-
   return (
     <div className={cx("container")}>
       <div className={cx("containerHeader")}>
@@ -61,7 +55,7 @@ const CommunityModifyPage = () => {
           inputValue={inputValue}
           textareaValue={textareaValue}
           selectedImage={selectedImage}
-          postId={communityDetail.id}
+          communityDetail={communityDetail}
         />
       </div>
       <div className={cx("containerBody")}>
@@ -71,7 +65,7 @@ const CommunityModifyPage = () => {
           textareaValue={textareaValue}
           setTextareaValue={setTextareaValue}
           selectedImage={selectedImage}
-          clearImagePreview={clearImagePreview}
+          changeImage={changeImage}
           imagePreview={imagePreview}
           loanAdviceReport={loanAdviceReport!}
           setLoanAdviceReport={setLoanAdviceReport}
@@ -81,11 +75,7 @@ const CommunityModifyPage = () => {
 
       <Divider />
       <div className={cx("containerFooter")}></div>
-      <ModifyFooter
-        communityDetail={communityDetail}
-        setSelectedImage={setSelectedImage}
-        setImagePreview={setImagePreview}
-      />
+      <ModifyFooter communityDetail={communityDetail} changeImage={changeImage} />
     </div>
   );
 };

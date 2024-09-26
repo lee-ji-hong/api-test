@@ -14,7 +14,7 @@ interface WriteBodyProps {
   textareaValue: string;
   selectedImage: File | null;
   imagePreview: string | null;
-  clearImagePreview: () => void;
+  changeImage: (imgUrl: string, imgFile: File | null) => void;
   clearLoanAdviceReport: () => void;
   loanAdviceReport: LoanAdviceSummaryReport;
   setLoanAdviceReport: (value: LoanAdviceSummaryReport | null) => void;
@@ -32,7 +32,7 @@ const WriteBody: React.FC<WriteBodyProps> = ({
   inputValue,
   textareaValue,
   imagePreview,
-  clearImagePreview,
+  changeImage,
   loanAdviceReport,
   clearLoanAdviceReport,
 }) => {
@@ -59,7 +59,7 @@ const WriteBody: React.FC<WriteBodyProps> = ({
         {imagePreview && (
           <div className={cx("imagePreviewContainer")}>
             <img src={imagePreview} alt="미리보기 이미지" className={cx("imagePreview")} />
-            <button className={cx("btn-remove-image")} onClick={clearImagePreview}>
+            <button className={cx("btn-remove-image")} onClick={() => changeImage("", null)}>
               ✕
             </button>
           </div>

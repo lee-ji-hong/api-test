@@ -11,15 +11,10 @@ const cx = classNames.bind(styles);
 
 interface WriteFooterProps {
   communityDetail: CommunityDetail;
-  setSelectedImage: (file: File | null) => void;
-  setImagePreview: (preview: string | null) => void;
+  changeImage: (imgUrl: string, imgFile: File | null) => void;
 }
 
-const WriteFooter: React.FC<WriteFooterProps> = ({
-  communityDetail,
-  setSelectedImage,
-  setImagePreview,
-}: WriteFooterProps) => {
+const WriteFooter: React.FC<WriteFooterProps> = ({ communityDetail, changeImage }: WriteFooterProps) => {
   // 각 input 태그에 접근하기 위한 ref 생성
   const imagePickerRef = useRef(null);
   const navigate = useNavigate();
@@ -34,11 +29,14 @@ const WriteFooter: React.FC<WriteFooterProps> = ({
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedImage(file); // Store the selected file
+      // setSelectedImage(file); // Store the selected file
 
-      // Create a preview URL for the image
+      // // Create a preview URL for the image
+      // setImagePreview(previewURL);
+
       const previewURL = URL.createObjectURL(file);
-      setImagePreview(previewURL);
+
+      changeImage(previewURL, file); // 이미지 변경
     }
   };
 

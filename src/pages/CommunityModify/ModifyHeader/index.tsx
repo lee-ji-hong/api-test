@@ -5,21 +5,21 @@ import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
+import { CommunityDetail } from "@/models";
 
 interface ModifyHeaderProps {
   inputValue: string;
   textareaValue: string;
   selectedImage: File | null;
-  postId: number;
+  communityDetail: CommunityDetail;
 }
 
 const cx = classNames.bind(styles);
-const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, selectedImage, postId }) => {
+const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, selectedImage, communityDetail }) => {
   const navigate = useNavigate();
 
   // inputValue나 textareaValue에 값이 있으면 true, 없으면 false
   const isButtonActive = inputValue.trim() !== "" && textareaValue.trim() !== "";
-  console.log(postId);
 
   return (
     <div className={cx("container-write-header")}>
@@ -33,14 +33,19 @@ const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, 
         onClick={async () => {
           if (isButtonActive) {
             const formData = new FormData();
-            console.log("제목:", inputValue);
-            console.log("내용:", textareaValue);
+            const postId = communityDetail.id;
+            const loanAdviceId = communityDetail?.loanAdviceSummaryReport?.loanAdviceResultId;
+            const imageUrl = communityDetail.imageUrl;
+            console.log("imgurl :", imageUrl);
             formData.append("title", inputValue);
             formData.append("content", textareaValue);
-            formData.append("imageFile", selectedImage as File);
+            formData.append("loanAdviceResultId", loanAdviceId?.toString() || "");
+            imageUrl
+              ? formData.append("existingImageUrl", imageUrl)
+              : formData.append("imageFile", selectedImage as File);
 
             try {
-              await Axios.postMultipart("/api/v1/post", formData);
+              await Axios.postMultipart(`/api/v1/post/${postId}`, formData);
               navigate(-1);
             } catch (error) {
               alert(`글 작성에 실패했습니다. ${error}`);
