@@ -51,17 +51,14 @@ const ReportPage = () => {
     setShowMoreDepositList(!showMoreDepositList);
   };
 
-  const handleCancelClick = () => {
+  const handleGoBack = () => {
     setShowPage(false);
-    setTimeout(() => {
-      router.push("/deposit-entry");
-      alert("취소버튼입니다");
-    }, 200);
+    router.goBack();
   };
 
   return (
     <>
-      <Header className={cx("cancel")} onRightClick={() => alert("취소버튼입니다")} right="Cancel_btn" />
+      <Header className={cx("cancel")} onRightClick={handleGoBack} right="Cancel_btn" />
       <CSSTransition
         in={showPage}
         timeout={500}
@@ -243,7 +240,7 @@ const ReportPage = () => {
 
           {/* 버튼 */}
           <Spacing size={100} />
-          <Button className={cx("button-wrap")} onClick={handleCancelClick} title="전월세 대출 상품 확인하러 가기" />
+          <Button className={cx("button-wrap")} onClick={handleGoBack} title="리포트 다시 산출하기" />
           <Spacing size={14} />
         </div>
       </CSSTransition>
