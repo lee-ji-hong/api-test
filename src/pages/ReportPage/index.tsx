@@ -3,6 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useState } from "react";
+import DepositList from "@/components/shared/DepositList";
 import ReportList from "@/components/shared/ReportList";
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
@@ -14,6 +15,7 @@ import Text from "@/components/shared/Text";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { IMAGES } from "@/constants/images";
 import { formData } from "@/recoil/atoms";
+import { MOCK } from "@/pages/DepositResultPage/mock";
 import classNames from "classnames/bind";
 import styles from "./ReportPage.module.scss";
 const cx = classNames.bind(styles);
@@ -30,7 +32,8 @@ const feeData = [
 ];
 
 const ReportPage = () => {
-  const [showMore, setShowMore] = useState(false);
+  const [showMoreExtraCost, setShowMoreExtraCost] = useState(false);
+  const [showMoreDepositList, setShowMoreDepositList] = useState(false);
   const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
   const location = useLocation();
@@ -39,8 +42,12 @@ const ReportPage = () => {
   console.log(reportData);
   console.log(userInputData);
 
-  const handleToggle = () => {
-    setShowMore(!showMore);
+  const handleExtraCostListToggle = () => {
+    setShowMoreExtraCost(!showMoreExtraCost);
+  };
+
+  const handleDepositListToggle = () => {
+    setShowMoreDepositList(!showMoreDepositList);
   };
 
   const handleCancelClick = () => {
@@ -70,7 +77,10 @@ const ReportPage = () => {
             <Spacing size={65} />
             <div className={cx("section-wrap")}>
               <Image className={cx("img-logo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
-              <Text className={cx("txt-top")} text="HUG 청년전용/n버팀목전세자금 대출" />
+              <Text
+                className={cx("txt-top")}
+                text={`${reportData.loanProductName || "HUG 청년전용/n버팀목전세자금 대출"}`}
+              />
               <Spacing size={10} />
               {["#20대인기상품", "#초저금리", "#최대한도"].map((item, index) => (
                 <Badge2 key={index} title={item} />
@@ -79,11 +89,11 @@ const ReportPage = () => {
               <div className={cx("section-bottom")}>
                 <div>
                   <Text className={cx("bottom-txt-title")} text="최대한도" />
-                  <Text className={cx("bottom-txt-sub")} text="4억원" />
+                  <Text className={cx("bottom-txt-sub")} text={`${reportData?.possibleLoanLimit || "4억원"}`} />
                 </div>
                 <div>
                   <Text className={cx("bottom-txt-title")} text="금리" />
-                  <Text className={cx("bottom-txt-sub")} text="2.4%" />
+                  <Text className={cx("bottom-txt-sub")} text={`${reportData?.expectedLoanRate || "2.4%"}`} />
                 </div>
               </div>
             </div>
@@ -106,9 +116,9 @@ const ReportPage = () => {
               text="4억원 대출시 약 800,291원의/n부수비용이 들어가요!"
               highlight="800,291원"
             />
-            <ReportList list={feeData} show={showMore} />
-            <button className={cx("list-button")} onClick={handleToggle}>
-              {showMore ? "부수 비용 더 보기 ∧" : "부수 비용 더 보기 ∨"}
+            <ReportList list={feeData} show={showMoreExtraCost} />
+            <button className={cx("list-button")} onClick={handleExtraCostListToggle}>
+              {showMoreExtraCost ? "부수 비용 더 보기 ∧" : "부수 비용 더 보기 ∨"}
             </button>
           </div>
           {/* Section04 */}
@@ -134,12 +144,17 @@ const ReportPage = () => {
           {/* Section06 */}
           <div className={cx("box")}>
             <Spacing size={70} />
-            <Text
-              className={cx("txt-title")}
-              text="이 대출을 추천한 이유는/n#20대 인기상품 #초저금리 #최대한도"
-              highlight="#20대 인기상품 #초저금리 #최대한도"
-            />
+            <Text className={cx("txt-title")} text="다른 가능한 대출 상품도 확인해보세요!" />
             <Spacing size={8} />
+            <DepositList
+              list={MOCK || reportData?.recommendedProducts}
+              isShow={true}
+              toggle={showMoreDepositList}
+              color="white"
+            />
+            <button className={cx("list-button")} onClick={handleDepositListToggle}>
+              {showMoreDepositList ? "다른 상품 더 보기 ∧" : "다른 상품 더 보기 ∨"}
+            </button>
             <Text className={cx("txt-sub")} text="숨겨진 비용까지 철저히 분석하여/n현명한 결정을 할 수 있어요" />
             <div>박스 UI</div>
           </div>

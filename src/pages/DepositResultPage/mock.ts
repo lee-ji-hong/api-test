@@ -1,6 +1,52 @@
-export const MOCK = [
-  { name: "지방자치단체 전세자금", rate: 6.8, money: "3억7천만원" },
-  { name: "신한은행 전세자금 대출(전세보증금 대출)", rate: 5.8, money: "5억7천만원" },
-  { name: "지방자치단체 전세자금", rate: 6.8, money: "3억7천만원" },
-  { name: "신한은행 전세자금 대출(전세보증금 대출)", rate: 6.5, money: "3억4천만원" },
+import { DepositLists } from "@/models";
+export const MOCK: DepositLists[] = [
+  {
+    expectedLoanRate: 4.6,
+    loanProductCode: "HF-01",
+    loanProductName: "서울시신혼부부임차보증금대출",
+    notEligibleReasons: ["서울시 거주자만 가능합니다."],
+    possibleLoanLimit: 180000000,
+  },
+  {
+    expectedLoanRate: 4.6,
+    loanProductCode: "HF-01",
+    loanProductName: "서울시신혼부부임차보증금대출",
+    notEligibleReasons: ["서울시 거주자만 가능합니다."],
+    possibleLoanLimit: 180000000,
+  },
+  {
+    expectedLoanRate: 4.6,
+    loanProductCode: "HF-01",
+    loanProductName: "서울시신혼부부임차보증금대출",
+    notEligibleReasons: ["서울시 거주자만 가능합니다."],
+    possibleLoanLimit: 180000000,
+  },
+  {
+    expectedLoanRate: 4.6,
+    loanProductCode: "HF-01",
+    loanProductName: "서울시신혼부부임차보증금대출",
+    notEligibleReasons: ["서울시 거주자만 가능합니다."],
+    possibleLoanLimit: 180000000,
+  },
+  {
+    expectedLoanRate: 4.6,
+    loanProductCode: "HF-01",
+    loanProductName: "서울시신혼부부임차보증금대출",
+    notEligibleReasons: ["서울시 거주자만 가능합니다."],
+    possibleLoanLimit: 180000000,
+  },
+  {
+    expectedLoanRate: 4.6,
+    loanProductCode: "HF-01",
+    loanProductName: "서울시신혼부부임차보증금대출",
+    notEligibleReasons: ["서울시 거주자만 가능합니다."],
+    possibleLoanLimit: 180000000,
+  },
+  {
+    expectedLoanRate: 4.6,
+    loanProductCode: "HF-01",
+    loanProductName: "서울시신혼부부임차보증금대출",
+    notEligibleReasons: ["서울시 거주자만 가능합니다."],
+    possibleLoanLimit: 180000000,
+  },
 ];
