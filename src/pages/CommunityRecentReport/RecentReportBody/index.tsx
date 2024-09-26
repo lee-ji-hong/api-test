@@ -1,25 +1,23 @@
 import { LoanAdviceSummaryReport } from "@/api/model/CommunityResponse";
 import LoanAdviceService from "@/api/service/LoanAdviceService";
 import Spacing from "@/components/shared/Spacing";
+import { CommunityDetail, LoanAdviceReport, LoanAdviceReportResponse } from "@/models";
 import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
 import { useEffect, useState } from "react";
-import { CommunityDetail, LoanAdviceReport, LoanAdviceReportResponse } from "@/models";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const RecentReportBody = () => {
+const RecentReportBody: React.FC<CommunityDetail> = (communityDetail) => {
   // 상태로 loanAdviceList 관리
   const [loanAdviceList, setLoanAdviceList] = useState<LoanAdviceReport[]>([]);
-  const { communityDetail } = useLocation().state as { communityDetail: CommunityDetail };
   const navigate = useNavigate();
 
   function selectLoanAdvice(loanAdvice: LoanAdviceSummaryReport) {
     const updatedCommunityDetail = {
       ...communityDetail,
-      loanAdviceSummaryReport: {
-        ...communityDetail.loanAdviceSummaryReport,
-        loanAdviceResultId: loanAdvice, // 새로운 값으로 변경
-      },
+      loanAdviceSummaryReport: loanAdvice,
     };
+
+    console.log("updatedCommunityDetail");
     console.log(updatedCommunityDetail);
     navigate("/community/modify", { state: { communityDetail: updatedCommunityDetail }, replace: true });
   }

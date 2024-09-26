@@ -7,29 +7,42 @@ import ModifyBody from "./ModifyBody";
 import ModifyFooter from "./ModifyFooter";
 import { useLocation } from "react-router-dom";
 import { CommunityDetail } from "@/models";
+import { LoanAdviceSummaryReport } from "@/api/model/CommunityResponse";
 
 const cx = classNames.bind(styles);
 
 const CommunityModifyPage = () => {
   const location = useLocation();
-  const { communityDetail } = location.state as { communityDetail: CommunityDetail };
-
+  const recvCommunityDetail = location.state as { communityDetail: CommunityDetail };
+  const [communityDetail, setCommunityDetail] = useState<CommunityDetail>(recvCommunityDetail.communityDetail);
   const [inputValue, setInputValue] = useState(communityDetail.title);
   const [textareaValue, setTextareaValue] = useState(communityDetail.content);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [loanAdviceReport, setLoanAdviceReport] = useState<LoanAdviceSummaryReport | null>(
+    communityDetail.loanAdviceSummaryReport,
+  );
   const [imagePreview, setImagePreview] = useState<string | null>(communityDetail.imageUrl);
 
   // Function to clear image preview
   const clearImagePreview = () => {
     setSelectedImage(null);
     setImagePreview(null);
+
+    const updatedCommunityDetail = {
+      ...communityDetail,
+      imageUrl: "",
+    };
+
+    setCommunityDetail(updatedCommunityDetail);
+
     console.log("이미지 미리보기 삭제");
   };
 
   useEffect(() => {
     console.log("inputValue:", inputValue);
     console.log("textareaValue:", textareaValue);
-  }, [textareaValue, inputValue]);
+    console.log("communityDetail:", communityDetail);
+  }, [textareaValue, inputValue, communityDetail]);
 
   return (
     <div className={cx("container")}>
@@ -43,14 +56,15 @@ const CommunityModifyPage = () => {
       </div>
       <div className={cx("containerBody")}>
         <ModifyBody
-          setInputValue={setInputValue}
-          setTextareaValue={setTextareaValue}
           inputValue={inputValue}
+          setInputValue={setInputValue}
           textareaValue={textareaValue}
+          setTextareaValue={setTextareaValue}
           selectedImage={selectedImage}
-          imagePreview={imagePreview}
           clearImagePreview={clearImagePreview}
-          loanAdviceReport={communityDetail.loanAdviceSummaryReport}
+          imagePreview={imagePreview}
+          loanAdviceReport={loanAdviceReport!}
+          setLoanAdviceReport={setLoanAdviceReport}
         />
       </div>
 

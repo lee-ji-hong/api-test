@@ -3,16 +3,23 @@ import classNames from "classnames/bind";
 import styles from "./CommunityRecentReport.module.scss";
 import RecentReportBody from "./RecentReportBody";
 import RecentReportHeader from "./RecentReportHeader";
+import { CommunityDetail } from "@/models";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const cx = classNames.bind(styles);
 
 const CommunityRecentReportPage = () => {
+  const { communityDetail } = useLocation().state as { communityDetail: CommunityDetail };
+  useEffect(() => {
+    console.log("communityDetai22l:", communityDetail);
+  });
   return (
     <div className={cx("container")}>
       <div className={cx("containerHeader")}>
-        <RecentReportHeader />
+        <RecentReportHeader {...communityDetail} />
         <Spacing size={16} />
-        <RecentReportBody />
+        <RecentReportBody {...communityDetail} />
       </div>
     </div>
   );
