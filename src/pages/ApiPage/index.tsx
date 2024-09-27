@@ -98,6 +98,16 @@ const ApiPage = () => {
     }
   };
 
+  // 최근 대출추천 보고서 목록 조회
+  // const handleLoanAdviceRequest2 = async () => {
+  //   try {
+  //     const response = await Axios.get("/api/v1/loanAdvice", true);
+  //     console.log("응답 데이터:", response);
+  //   } catch (error) {
+  //     console.error("오류 발생:", error);
+  //   }
+  // };
+
   // 특정 대출추천 보고서 조회
   const handleSpecificRequest = async () => {
     try {
@@ -232,14 +242,15 @@ const ApiPage = () => {
 
   // 주소 검색
   const handleAddressSearchRequest = async () => {
-    const data = {
-      keyword: "청라한내로 100번길",
-    };
     try {
-      const response = await axios.post("/api/v1/addressSearch", data, {
+      const response = await axios.get("/api/v1/addressSearch", {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+        },
+        params: {
+          keyword: "청라한내로 100번길",
+          page: 0,
         },
       });
       console.log("응답 데이터:", response.data);
@@ -256,11 +267,12 @@ const ApiPage = () => {
       dongName: "역삼동",
     };
     try {
-      const response = await axios.post("/api/v1/housingInfoApi", data, {
+      const response = await axios.get("/api/v1/housingInfoApi", {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        params: data,
       });
       console.log("응답 데이터:", response.data);
     } catch (error) {
