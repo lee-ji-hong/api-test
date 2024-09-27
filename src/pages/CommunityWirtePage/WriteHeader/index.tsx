@@ -5,15 +5,16 @@ import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
+import { CommunityDetail } from "@/models";
 
 interface WriteHeaderProps {
   inputValue: string;
   textareaValue: string;
-  selectedImage: File | null;
+  communityDetail: CommunityDetail;
 }
 
 const cx = classNames.bind(styles);
-const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, selectedImage }) => {
+const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, communityDetail }) => {
   const navigate = useNavigate();
 
   // inputValue나 textareaValue에 값이 있으면 true, 없으면 false
@@ -21,7 +22,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, se
 
   return (
     <div className={cx("container-write-header")}>
-      <button onClick={() => navigate(-1)}>
+      <button onClick={() => navigate("/community", { replace: true })}>
         <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>
 
@@ -31,15 +32,17 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, se
         onClick={async () => {
           if (isButtonActive) {
             const formData = new FormData();
+            const loanAdviceId = communityDetail?.loanAdviceSummaryReport?.loanAdviceResultId;
             console.log("제목:", inputValue);
             console.log("내용:", textareaValue);
             formData.append("title", inputValue);
             formData.append("content", textareaValue);
-            formData.append("imageFile", selectedImage as File);
+            formData.append("loanAdviceResultId", loanAdviceId?.toString() || "");
+            communityDetail.imageFile && formData.append("imageFile", communityDetail.imageFile);
 
             try {
               await Axios.postMultipart("/api/v1/post", formData);
-              navigate(-1);
+              navigate("/community");
             } catch (error) {
               alert(`글 작성에 실패했습니다. ${error}`);
             }

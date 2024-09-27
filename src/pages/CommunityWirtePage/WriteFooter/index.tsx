@@ -5,15 +5,27 @@ import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import { useNavigate } from "react-router-dom";
+import { CommunityDetail } from "@/models";
 
 const cx = classNames.bind(styles);
 
 interface WriteFooterProps {
+  inputValue: string;
+  textAreaValue: string;
+  contentDetail: CommunityDetail;
   setSelectedImage: (file: File | null) => void;
   setImagePreview: (preview: string | null) => void;
+  setContentDetail: React.Dispatch<React.SetStateAction<CommunityDetail>>;
 }
 
-const WriteFooter: React.FC<WriteFooterProps> = ({ setSelectedImage, setImagePreview }: WriteFooterProps) => {
+const WriteFooter: React.FC<WriteFooterProps> = ({
+  inputValue,
+  textAreaValue,
+  contentDetail,
+  setContentDetail,
+  setSelectedImage,
+  setImagePreview,
+}: WriteFooterProps) => {
   // 각 input 태그에 접근하기 위한 ref 생성
   const imagePickerRef = useRef(null);
   const navigate = useNavigate();
@@ -33,6 +45,12 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ setSelectedImage, setImagePre
       // Create a preview URL for the image
       const previewURL = URL.createObjectURL(file);
       setImagePreview(previewURL);
+      const updateContentDetail = {
+        ...contentDetail,
+        imageUrl: previewURL,
+        imageFile: file,
+      };
+      setContentDetail(updateContentDetail);
     }
   };
 
@@ -52,7 +70,17 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ setSelectedImage, setImagePre
           onChange={handleFileChange} // 파일 선택 시 처리 함수
         />
         <SpacingWidth size={24} />
-        <div onClick={() => navigate("/community/recent-report")}>
+        <div
+          onClick={() => {
+            const updatedCommunityDetail = {
+              ...contentDetail,
+              title: inputValue,
+              content: textAreaValue,
+            };
+            navigate("/community/recent-report", {
+              state: { from: "write", communityDetail: updatedCommunityDetail },
+            });
+          }}>
           <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
         </div>
       </div>

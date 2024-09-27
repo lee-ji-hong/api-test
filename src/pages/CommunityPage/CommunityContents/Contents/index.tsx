@@ -46,7 +46,7 @@ const Contents: React.FC<Post> = (props) => {
               case true:
                 try {
                   const res = await CommunityService.requestUnlike(props.id);
-                  if (res.status === 200) {
+                  if (res.code === 200) {
                     setIsLiked(!isLiked);
                     setLikeCount(likeCount - 1);
                   } else {
@@ -59,7 +59,7 @@ const Contents: React.FC<Post> = (props) => {
               default:
                 try {
                   const res = await CommunityService.requestLike(props.id);
-                  if (res.status === 200) {
+                  if (res.code === 200) {
                     setIsLiked(!isLiked);
                     setLikeCount(likeCount + 1);
                   } else {

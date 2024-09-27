@@ -2,17 +2,23 @@ import classNames from "classnames/bind";
 import styles from "./CommunityWriteBody.module.scss";
 import Spacing from "@/components/shared/Spacing";
 import React, { useRef, useEffect } from "react";
+import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
+import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
 
 const cx = classNames.bind(styles);
 
 interface WriteBodyProps {
-  setInputValue: (value: string) => void;
-  setTextareaValue: (value: string) => void;
   inputValue: string;
   textareaValue: string;
   selectedImage: File | null;
   imagePreview: string | null;
-  clearImagePreview: () => void;
+  loanAdviceReport: LoanAdviceSummaryReport;
+  contentDetail: CommunityDetail;
+  setInputValue: (value: string) => void;
+  setTextareaValue: (value: string) => void;
+  changeImage: (imgUrl: string, imgFile: File | null) => void;
+  clearLoanAdviceReport: () => void;
+  setLoanAdviceReport: (value: LoanAdviceSummaryReport | null) => void;
 }
 
 interface TextAreaProps {
@@ -22,12 +28,14 @@ interface TextAreaProps {
 }
 
 const WriteBody: React.FC<WriteBodyProps> = ({
-  setInputValue,
-  setTextareaValue,
   inputValue,
   textareaValue,
-  imagePreview,
-  clearImagePreview,
+  loanAdviceReport,
+  changeImage,
+  clearLoanAdviceReport,
+  setInputValue,
+  setTextareaValue,
+  contentDetail,
 }) => {
   return (
     <div className={cx("containerWriteBody")}>
@@ -45,10 +53,23 @@ const WriteBody: React.FC<WriteBodyProps> = ({
       {/* 텍스트 영역과 이미지 미리보기를 Flex로 관리 */}
       <div className={cx("contentArea")}>
         <TextArea textareaValue={textareaValue} setTextareaValue={setTextareaValue} maxLines={15} />
-        {imagePreview && (
+
+        <div className={cx("imagePreviewContainer")}>
+          {contentDetail.loanAdviceSummaryReport && (
+            <div>
+              <LoanCard {...loanAdviceReport} />
+              <button className={cx("btn-remove-image")} onClick={clearLoanAdviceReport}>
+                ✕
+              </button>
+            </div>
+          )}
+        </div>
+
+        <Spacing size={16} />
+        {contentDetail.imageUrl && (
           <div className={cx("imagePreviewContainer")}>
-            <img src={imagePreview} alt="미리보기 이미지" className={cx("imagePreview")} />
-            <button className={cx("btn-remove-image")} onClick={clearImagePreview}>
+            <img src={contentDetail.imageUrl} alt="미리보기 이미지" className={cx("imagePreview")} />
+            <button className={cx("btn-remove-image")} onClick={() => changeImage("", null)}>
               ✕
             </button>
           </div>

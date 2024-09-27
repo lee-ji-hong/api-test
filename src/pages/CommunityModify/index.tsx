@@ -6,8 +6,7 @@ import ModifyHeader from "./ModifyHeader";
 import ModifyBody from "./ModifyBody";
 import ModifyFooter from "./ModifyFooter";
 import { useLocation } from "react-router-dom";
-import { CommunityDetail } from "@/models";
-import { LoanAdviceSummaryReport } from "@/api/model/CommunityResponse";
+import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 
 const cx = classNames.bind(styles);
 
@@ -18,10 +17,10 @@ const CommunityModifyPage = () => {
   const [inputValue, setInputValue] = useState(communityDetail.title);
   const [textareaValue, setTextareaValue] = useState(communityDetail.content);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(communityDetail.imageUrl);
   const [loanAdviceReport, setLoanAdviceReport] = useState<LoanAdviceSummaryReport | null>(
     communityDetail.loanAdviceSummaryReport,
   );
-  const [imagePreview, setImagePreview] = useState<string | null>(communityDetail.imageUrl);
 
   // Function to clear image preview
   const changeImage = (imgUrl: string, imgFile: File | null) => {
@@ -51,12 +50,7 @@ const CommunityModifyPage = () => {
   return (
     <div className={cx("container")}>
       <div className={cx("containerHeader")}>
-        <ModifyHeader
-          inputValue={inputValue}
-          textareaValue={textareaValue}
-          selectedImage={selectedImage}
-          communityDetail={communityDetail}
-        />
+        <ModifyHeader inputValue={inputValue} textareaValue={textareaValue} communityDetail={communityDetail} />
       </div>
       <div className={cx("containerBody")}>
         <ModifyBody
@@ -70,12 +64,20 @@ const CommunityModifyPage = () => {
           loanAdviceReport={loanAdviceReport!}
           setLoanAdviceReport={setLoanAdviceReport}
           clearLoanAdviceReport={clearLoanAdviceReport}
+          communityDetail={communityDetail}
         />
       </div>
 
       <Divider />
       <div className={cx("containerFooter")}></div>
-      <ModifyFooter communityDetail={communityDetail} changeImage={changeImage} />
+      <ModifyFooter
+        setSelectedImage={setSelectedImage}
+        setImagePreview={setImagePreview}
+        inputValue={inputValue}
+        textAreaValue={textareaValue}
+        contentDetail={communityDetail}
+        setContentDetail={setCommunityDetail}
+      />
     </div>
   );
 };

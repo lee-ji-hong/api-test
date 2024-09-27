@@ -10,12 +10,11 @@ import { CommunityDetail } from "@/models";
 interface ModifyHeaderProps {
   inputValue: string;
   textareaValue: string;
-  selectedImage: File | null;
   communityDetail: CommunityDetail;
 }
 
 const cx = classNames.bind(styles);
-const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, selectedImage, communityDetail }) => {
+const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, communityDetail }) => {
   const navigate = useNavigate();
 
   // inputValue나 textareaValue에 값이 있으면 true, 없으면 false
@@ -23,7 +22,7 @@ const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, 
 
   return (
     <div className={cx("container-write-header")}>
-      <button onClick={() => navigate("/community", { replace: true })}>
+      <button onClick={() => navigate("/community/detail", { state: { postId: communityDetail.id } })}>
         <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>
 
@@ -36,16 +35,16 @@ const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, 
             const postId = communityDetail.id;
             const loanAdviceId = communityDetail?.loanAdviceSummaryReport?.loanAdviceResultId;
             const imageUrl = communityDetail.imageUrl;
-            console.log("imgurl :", imageUrl);
+            const imageFile = communityDetail.imageFile;
+
             formData.append("title", inputValue);
             formData.append("content", textareaValue);
-            formData.append("loanAdviceResultId", loanAdviceId?.toString() || "");
-            imageUrl
-              ? formData.append("existingImageUrl", imageUrl)
-              : formData.append("imageFile", selectedImage as File);
+            loanAdviceId && formData.append("loanAdviceResultId", loanAdviceId?.toString() || "");
+            imageFile && formData.append("imageFile", imageFile);
+            !imageFile && imageUrl && formData.append("existingImageUrl", imageUrl);
 
             try {
-              await Axios.postMultipart(`/api/v1/post/${postId}`, formData);
+              await Axios.putMultipart(`/api/v1/post/${postId}`, formData);
               navigate(-1);
             } catch (error) {
               alert(`글 작성에 실패했습니다. ${error}`);

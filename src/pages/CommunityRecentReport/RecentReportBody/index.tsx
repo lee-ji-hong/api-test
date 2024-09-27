@@ -6,7 +6,12 @@ import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const RecentReportBody: React.FC<CommunityDetail> = (communityDetail) => {
+interface RecentReportBodyProps {
+  from: string;
+  communityDetail: CommunityDetail;
+}
+
+const RecentReportBody: React.FC<RecentReportBodyProps> = ({ from, communityDetail }) => {
   // 상태로 loanAdviceList 관리
   const [loanAdviceList, setLoanAdviceList] = useState<LoanAdviceReport[]>([]);
   const navigate = useNavigate();
@@ -19,7 +24,7 @@ const RecentReportBody: React.FC<CommunityDetail> = (communityDetail) => {
 
     console.log("updatedCommunityDetail");
     console.log(updatedCommunityDetail);
-    navigate("/community/modify", { state: { communityDetail: updatedCommunityDetail }, replace: true });
+    navigate(`/community/${from}`, { state: { communityDetail: updatedCommunityDetail }, replace: true });
   }
 
   useEffect(() => {

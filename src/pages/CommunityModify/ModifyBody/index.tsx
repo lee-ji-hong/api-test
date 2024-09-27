@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./CommunityModifyBody.module.scss";
 import Spacing from "@/components/shared/Spacing";
 import React, { useRef, useEffect } from "react";
-import { LoanAdviceSummaryReport } from "@/models";
+import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
 
 const cx = classNames.bind(styles);
@@ -18,6 +18,7 @@ interface WriteBodyProps {
   clearLoanAdviceReport: () => void;
   loanAdviceReport: LoanAdviceSummaryReport;
   setLoanAdviceReport: (value: LoanAdviceSummaryReport | null) => void;
+  communityDetail: CommunityDetail;
 }
 
 interface TextAreaProps {
@@ -31,10 +32,10 @@ const WriteBody: React.FC<WriteBodyProps> = ({
   setTextareaValue,
   inputValue,
   textareaValue,
-  imagePreview,
   changeImage,
   loanAdviceReport,
   clearLoanAdviceReport,
+  communityDetail,
 }) => {
   return (
     <div className={cx("containerWriteBody")}>
@@ -45,7 +46,7 @@ const WriteBody: React.FC<WriteBodyProps> = ({
         <TextArea textareaValue={textareaValue} setTextareaValue={setTextareaValue} maxLines={15} />
 
         <div className={cx("imagePreviewContainer")}>
-          {loanAdviceReport && (
+          {communityDetail.loanAdviceSummaryReport && (
             <div>
               <LoanCard {...loanAdviceReport} />
               <button className={cx("btn-remove-image")} onClick={clearLoanAdviceReport}>
@@ -56,9 +57,9 @@ const WriteBody: React.FC<WriteBodyProps> = ({
         </div>
 
         <Spacing size={16} />
-        {imagePreview && (
+        {communityDetail.imageUrl && (
           <div className={cx("imagePreviewContainer")}>
-            <img src={imagePreview} alt="미리보기 이미지" className={cx("imagePreview")} />
+            <img src={communityDetail.imageUrl} alt="미리보기 이미지" className={cx("imagePreview")} />
             <button className={cx("btn-remove-image")} onClick={() => changeImage("", null)}>
               ✕
             </button>

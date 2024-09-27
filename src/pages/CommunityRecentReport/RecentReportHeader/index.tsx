@@ -7,11 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { CommunityDetail } from "@/models";
 
 const cx = classNames.bind(styles);
-const RecentReportHeader: React.FC<CommunityDetail> = (communityDetail) => {
+
+interface RecentReportHeaderProps {
+  from: string;
+  communityDetail: CommunityDetail;
+}
+const RecentReportHeader: React.FC<RecentReportHeaderProps> = ({ from, communityDetail }) => {
   const navigate = useNavigate();
 
   function onBackPress() {
-    navigate("/community/modify", { state: { communityDetail: communityDetail }, replace: true });
+    navigate(`/community/${from}`, { state: { communityDetail: communityDetail }, replace: true });
   }
 
   return (

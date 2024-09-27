@@ -1,51 +1,104 @@
 import { Divider } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./CommunityWritePage.module.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import WriteHeader from "./WriteHeader";
 import WriteBody from "./WriteBody";
 import WriteFooter from "./WriteFooter";
+import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 
 const cx = classNames.bind(styles);
 
 const CommunityWirtePage = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [textareaValue, setTextareaValue] = useState("");
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const location = useLocation();
+  const recvCommunityDetail = location.state as { communityDetail: CommunityDetail };
+  const defaultCommunityDetail: CommunityDetail = {
+    id: 0, // 기본값 0
+    title: "", // 빈 문자열
+    content: "", // 빈 문자열
+    author: "", // 빈 문자열
+    imageUrl: "", // 빈 문자열
+    imageFile: null, // null로 초기화 (파일이 없을 때)
+    likes: 0, // 기본값 0
+    comments: [], // 빈 배열
+    commentCount: 0, // 기본값 0
+    createdDate: [], // 빈 배열
+    lastModifiedDate: [], // 빈 배열
+    avatarUrl: "", // 빈 문자열
+    timeAgo: "", // 빈 문자열
+    loanAdviceSummaryReport: null, // null로 초기화
+    like: false, // 기본값 false
+  };
+  const [communityDetail, setCommunityDetail] = useState<CommunityDetail>(
+    recvCommunityDetail.communityDetail ?? defaultCommunityDetail,
+  );
+
+  const [inputValue, setInputValue] = useState(communityDetail.title);
+  const [textareaValue, setTextareaValue] = useState(communityDetail.content);
+  const [selectedImage, setSelectedImage] = useState<File | null>(communityDetail.imageFile || null);
+  const [imagePreview, setImagePreview] = useState<string | null>(communityDetail.imageUrl);
+  const [loanAdviceReport, setLoanAdviceReport] = useState<LoanAdviceSummaryReport | null>(
+    communityDetail.loanAdviceSummaryReport,
+  );
 
   // Function to clear image preview
-  const clearImagePreview = () => {
-    setSelectedImage(null);
-    setImagePreview(null);
-    console.log("이미지 미리보기 삭제");
+  const changeImage = (imgUrl: string, imgFile: File | null) => {
+    setSelectedImage(imgFile);
+    setImagePreview(imgUrl);
+
+    const updatedCommunityDetail = {
+      ...communityDetail,
+      imageUrl: imgUrl,
+      imgFile: imgFile,
+    };
+
+    setCommunityDetail(updatedCommunityDetail);
+
+    console.log("이미지 삭제");
   };
 
-  useEffect(() => {
-    console.log("inputValue:", inputValue);
-    console.log("textareaValue:", textareaValue);
-  }, [textareaValue, inputValue]);
+  const clearLoanAdviceReport = () => {
+    setLoanAdviceReport(null);
+    const updatedCommunityDetail = {
+      ...communityDetail,
+      loanAdviceSummaryReport: null,
+    };
+
+    setCommunityDetail(updatedCommunityDetail);
+  };
 
   return (
     <div className={cx("container")}>
       <div className={cx("containerHeader")}>
-        <WriteHeader inputValue={inputValue} textareaValue={textareaValue} selectedImage={selectedImage} />
+        <WriteHeader inputValue={inputValue} textareaValue={textareaValue} communityDetail={communityDetail} />
       </div>
       <div className={cx("containerBody")}>
         <WriteBody
-          setInputValue={setInputValue}
-          setTextareaValue={setTextareaValue}
           inputValue={inputValue}
+          setInputValue={setInputValue}
           textareaValue={textareaValue}
+          setTextareaValue={setTextareaValue}
           selectedImage={selectedImage}
+          changeImage={changeImage}
           imagePreview={imagePreview}
-          clearImagePreview={clearImagePreview}
+          loanAdviceReport={loanAdviceReport!}
+          setLoanAdviceReport={setLoanAdviceReport}
+          clearLoanAdviceReport={clearLoanAdviceReport}
+          contentDetail={communityDetail}
         />
       </div>
 
       <Divider />
       <div className={cx("containerFooter")}></div>
-      <WriteFooter setSelectedImage={setSelectedImage} setImagePreview={setImagePreview} />
+      <WriteFooter
+        setSelectedImage={setSelectedImage}
+        setImagePreview={setImagePreview}
+        inputValue={inputValue}
+        textAreaValue={textareaValue}
+        contentDetail={communityDetail}
+        setContentDetail={setCommunityDetail}
+      />
     </div>
   );
 };

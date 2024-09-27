@@ -139,6 +139,7 @@ export interface CommunityDetail {
   content: string;
   author: string;
   imageUrl: string;
+  imageFile: File | null;
   likes: number;
   comments: Comment[];
   commentCount: number;

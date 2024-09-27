@@ -71,7 +71,7 @@ const WriteHeader: React.FC<CommunityDetail> = (props) => {
 
   return (
     <div className={cx("container-write-header")}>
-      <button onClick={() => navigate(-1)}>
+      <button onClick={() => navigate("/community")}>
         <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
       </button>
 

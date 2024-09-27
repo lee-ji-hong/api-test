@@ -152,6 +152,24 @@ class Axios {
     return this.getInstance().post(url, formData, config as CustomAxiosRequestConfig);
   }
 
+  // POST 요청 (Multipart Form Data)
+  static putMultipart(url: string, formData: FormData) {
+    const token = this.getCookie("accessToken");
+    const config: CustomAxiosRequestConfig = {
+      headers: {
+        ...this.getInstance().defaults.headers,
+        "Content-Type": "multipart/form-data", // Ensure the request is treated as multipart/form-data
+        AccessToken: "",
+        RefreshToken: null,
+      },
+    };
+    if (token) {
+      config.headers!.AccessToken = token;
+      config.headers!.RefreshToken = null;
+    }
+    return this.getInstance().put(url, formData, config as CustomAxiosRequestConfig);
+  }
+
   // 쿠키에서 특정 값을 가져오는 함수
   static getCookie = (name: string): string | null => {
     const cookieArr = document.cookie.split("; "); // 쿠키를 각각의 key=value 쌍으로 분리

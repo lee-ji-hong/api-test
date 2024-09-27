@@ -9,14 +9,14 @@ import { useLocation } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 const CommunityRecentReportPage = () => {
-  const { communityDetail } = useLocation().state as { communityDetail: CommunityDetail };
+  const { from, communityDetail } = useLocation().state as { from: string; communityDetail: CommunityDetail };
 
   return (
     <div className={cx("container")}>
       <div className={cx("containerHeader")}>
-        <RecentReportHeader {...communityDetail} />
+        <RecentReportHeader from={from} communityDetail={communityDetail} />
         <Spacing size={16} />
-        <RecentReportBody {...communityDetail} />
+        <RecentReportBody from={from} communityDetail={communityDetail} />
       </div>
     </div>
   );

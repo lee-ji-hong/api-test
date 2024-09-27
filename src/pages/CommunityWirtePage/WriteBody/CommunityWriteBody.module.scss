@@ -53,11 +53,11 @@
       position: relative; /* 컨테이너가 기준이 되도록 설정 */
       flex: 1;
       height: 300px;
-      width: fit-content;
+      width: 100%;
       margin-top: 12px;
 
       .imagePreview {
-        width: auto;
+        width: 100%;
         height: auto;
         object-fit: cover;
       }

@@ -10,11 +10,22 @@ import { CommunityDetail } from "@/models";
 const cx = classNames.bind(styles);
 
 interface WriteFooterProps {
-  communityDetail: CommunityDetail;
-  changeImage: (imgUrl: string, imgFile: File | null) => void;
+  setSelectedImage: (file: File | null) => void;
+  setImagePreview: (preview: string | null) => void;
+  inputValue: string;
+  textAreaValue: string;
+  contentDetail: CommunityDetail;
+  setContentDetail: React.Dispatch<React.SetStateAction<CommunityDetail>>;
 }
 
-const WriteFooter: React.FC<WriteFooterProps> = ({ communityDetail, changeImage }: WriteFooterProps) => {
+const WriteFooter: React.FC<WriteFooterProps> = ({
+  setSelectedImage,
+  setImagePreview,
+  inputValue,
+  textAreaValue,
+  contentDetail,
+  setContentDetail,
+}: WriteFooterProps) => {
   // 각 input 태그에 접근하기 위한 ref 생성
   const imagePickerRef = useRef(null);
   const navigate = useNavigate();
@@ -29,14 +40,17 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ communityDetail, changeImage 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      // setSelectedImage(file); // Store the selected file
+      setSelectedImage(file); // Store the selected file
 
-      // // Create a preview URL for the image
-      // setImagePreview(previewURL);
-
+      // Create a preview URL for the image
       const previewURL = URL.createObjectURL(file);
-
-      changeImage(previewURL, file); // 이미지 변경
+      setImagePreview(previewURL);
+      const updateContentDetail = {
+        ...contentDetail,
+        imageUrl: previewURL,
+        imageFile: file,
+      };
+      setContentDetail(updateContentDetail);
     }
   };
 
@@ -56,7 +70,17 @@ const WriteFooter: React.FC<WriteFooterProps> = ({ communityDetail, changeImage 
           onChange={handleFileChange} // 파일 선택 시 처리 함수
         />
         <SpacingWidth size={24} />
-        <div onClick={() => navigate("/community/recent-report", { state: { communityDetail: communityDetail } })}>
+        <div
+          onClick={() => {
+            const updatedCommunityDetail = {
+              ...contentDetail,
+              title: inputValue,
+              content: textAreaValue,
+            };
+            navigate("/community/recent-report", {
+              state: { from: "modify", communityDetail: updatedCommunityDetail },
+            });
+          }}>
           <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
         </div>
       </div>
