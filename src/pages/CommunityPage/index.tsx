@@ -15,40 +15,11 @@ import { CommunityDetail } from "@/models";
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
-  const [contentItems, setContentItems] = useState<CommunityListResponse>();
+  const [contentItems, setContentItems] = useState<CommunityListResponse | null>(null);
   const [hasMore, setHasMore] = useState(true); // 더 이상 추가로 로드하지 않음
+  const [page, setPage] = useState(0); // 페이지 번호 상태
+
   const navigator = useNavigate();
-
-  const InfiniteScrollComponent = () => {
-    useEffect(() => {
-      try {
-        Axios.get<CommunityListResponse>("/api/v1/post?page=0&size=100", true).then((res) => {
-          setContentItems(res);
-        });
-      } catch (error) {
-        console.error("커뮤니티 데이터를 불러오는데 실패했습니다.", error);
-      }
-    }, []);
-
-    // 스크롤이 끝에 도달할 때 호출되는 함수 (5개씩 추가 로드)
-    const fetchMoreData = async () => {
-      const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
-      console.log(res.data);
-      setHasMore(false);
-    };
-
-    return (
-      <InfiniteScroll
-        dataLength={contentItems ? contentItems.data.length : 0} // 현재 표시 중인 데이터 수
-        next={fetchMoreData} // 더 가져오는 데이터가 없으므로 빈 함수
-        hasMore={hasMore} // 더 불러올 데이터가 없으므로 false
-        loader={<h4>Loading...</h4>} // 로딩 상태, 필요 없으면 제거 가능
-        endMessage={<p>모두 불러왔습니다.</p>} // 끝났을 때 메시지
-      >
-        {contentItems?.data.map((data) => <CommunityContents key={data.id} {...data} />)}
-      </InfiniteScroll>
-    );
-  };
 
   function createCommunityDetail(): CommunityDetail {
     return {
@@ -70,6 +41,58 @@ const CommunityPage = () => {
     };
   }
 
+  const InfiniteScrollComponent = () => {
+    useEffect(() => {
+      setContentItems(null);
+      loadInitialData();
+      setPage(0);
+    }, [isLatest]);
+
+    // 데이터를 처음 불러오는 함수
+    const loadInitialData = async () => {
+      try {
+        const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=0&size=5`, true);
+        setContentItems(res); // 초기 데이터를 설정
+        setHasMore(res.data.length > 0); // 데이터가 더 있는지 확인
+      } catch (error) {
+        console.error("커뮤니티 데이터를 불러오는데 실패했습니다.", error);
+      }
+    };
+
+    // 더 많은 데이터를 불러오는 함수
+    const fetchMoreData = async () => {
+      try {
+        const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=${page + 1}&size=5`, true);
+        if (res.data.length > 0) {
+          setContentItems((prevItems) => ({
+            ...prevItems,
+            data: [...(prevItems?.data || []), ...res.data], // 기존 데이터에 새 데이터 추가
+          }));
+          setPage(page + 1); // 페이지 증가
+        } else {
+          setHasMore(false); // 더 이상 불러올 데이터가 없음
+        }
+      } catch (error) {
+        console.error("더 많은 데이터를 불러오는데 실패했습니다.", error);
+        setHasMore(false);
+      }
+    };
+
+    return (
+      <InfiniteScroll
+        dataLength={contentItems ? contentItems.data.length : 0} // 현재 표시 중인 데이터 수
+        next={fetchMoreData} // 더 가져오는 데이터가 없으므로 빈 함수
+        hasMore={hasMore} // 더 불러올 데이터가 없으므로 false
+        loader={<h4>Loading...</h4>} // 로딩 상태, 필요 없으면 제거 가능
+        endMessage={<p>모두 불러왔습니다.</p>} // 끝났을 때 메시지
+      >
+        {contentItems?.data.map((data) => <CommunityContents key={data.id} {...data} />)}
+      </InfiniteScroll>
+    );
+  };
+
   return (
     <div className={cx("container")}>
       <Typography className={cx("txt-title")}>커뮤니티</Typography>
@@ -80,13 +103,13 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("최신순 클릭");
             setIsLatest(true);
-            try {
-              const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
-              setContentItems(undefined);
-              setContentItems(res);
-            } catch (error) {
-              console.error("최신순 데이터를 불러오는데 실패했습니다.", error);
-            }
+            // try {
+            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
+            //   setContentItems(undefined);
+            //   setContentItems(res);
+            // } catch (error) {
+            //   console.error("최신순 데이터를 불러오는데 실패했습니다.", error);
+            // }
           }}
           isActive={isLatest}
         />
@@ -96,13 +119,13 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("인기순 클릭");
             setIsLatest(false);
-            try {
-              const res = await Axios.get<CommunityListResponse>("/api/v1/post/sorted?sortType=POPULAR", true);
-              setContentItems(undefined);
-              setContentItems(res);
-            } catch (error) {
-              console.error("인기순 데이터를 불러오는데 실패했습니다.", error);
-            }
+            // try {
+            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post/sorted?sortType=POPULAR", true);
+            //   setContentItems(undefined);
+            //   setContentItems(res);
+            // } catch (error) {
+            //   console.error("인기순 데이터를 불러오는데 실패했습니다.", error);
+            // }
           }}
           isActive={!isLatest}
         />
