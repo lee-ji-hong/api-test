@@ -180,11 +180,14 @@ const ReportPage = () => {
             <Spacing size={70} />
             <Text className={cx("txt-title")} text="아래 은행에서 취급하는 상품이예요!" />
             <Spacing size={8} />
-            {reportData?.availableBanks?.map((icon: string) => (
-              <div key={icon}>
-                <Text className={cx("txt-title")} text={icon} />
-              </div>
-            ))}
+            <div className={cx("logo-wrap")}>
+              {reportData?.availableBanks?.map((icon: string) => (
+                <div key={icon}>
+                  <Image className={cx("logo")} imageInfo={IMAGES.small[icon as keyof typeof IMAGES.small]} />
+                  <Text className={cx("txt-sub")} text={IMAGES.small[icon as keyof typeof IMAGES.small].alt} />
+                </div>
+              ))}
+            </div>
           </div>
           {/* Section09 */}
           <div className={cx("box")}>

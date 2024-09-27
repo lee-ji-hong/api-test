@@ -100,6 +100,21 @@
   }
 }
 
+.logo-wrap {
+  @include flexbox();
+  gap: 16px;
+
+  .txt-sub {
+    p {
+      color: $grey700;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: -1px;
+      text-align: center;
+    }
+  }
+}
 .img-logo {
   width: 74.4px;
   height: 30px;
