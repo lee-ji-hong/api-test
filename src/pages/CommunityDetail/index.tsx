@@ -94,14 +94,14 @@ const WriteBody: React.FC<CommunityDetail> = (props) => {
 
       <Spacing size={8} />
       <Typography className={cx("txt-content")}>{props.content}</Typography>
-      <Spacing size={16} />
-
-      {/* 이미지 */}
-      {props.imageUrl && <img src={props.imageUrl} alt="post" className={cx("imgPost")} />}
 
       {/* 대출 정보 */}
       <Spacing size={16} />
       {props.loanAdviceSummaryReport && <LoanCard {...props.loanAdviceSummaryReport} />}
+
+      <Spacing size={16} />
+      {/* 이미지 */}
+      {props.imageUrl && <img src={props.imageUrl} alt="post" className={cx("imgPost")} />}
 
       <div className={cx("containerHeartComment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
