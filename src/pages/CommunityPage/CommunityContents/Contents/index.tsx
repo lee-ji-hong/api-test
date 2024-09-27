@@ -23,7 +23,7 @@ const Contents: React.FC<Post> = (props) => {
       <div className={cx("textContainer")}>
         <div onClick={() => navigator("/community/detail", { state: { postId: props.id } })}>
           <Typography className={cx("txt-title")}>{props.title}</Typography>
-          <Typography className={cx("txt-contents")}>{props.content}</Typography>
+          <Typography className={cx("txtContent")}>{props.content}</Typography>
         </div>
         {props.imageUrl && <img src={props.imageUrl} alt="post" className={cx("imgPost")} />}
       </div>

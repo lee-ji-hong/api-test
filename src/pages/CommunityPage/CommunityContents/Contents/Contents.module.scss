@@ -5,27 +5,41 @@
     align-items: center;
     margin-top: 10px;
 
+    .txt-title {
+      text-align: left;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      color: "#333347";
+      padding-right: 8px;
+      display: -webkit-box; /* Flexbox 기반의 레이아웃, 텍스트를 박스에 맞추기 */
+      -webkit-box-orient: vertical; /* Flex 방향을 수직으로 설정 */
+      -webkit-line-clamp: 1; /* 2줄까지만 표시 */
+      overflow: hidden; /* 넘치는 텍스트 숨김 */
+      text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시 */
+      white-space: normal; /* 줄바꿈 허용 */
+    }
+
+    .txtContent {
+      text-align: left;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 21px;
+      color: "#86869A";
+      padding-right: 8px;
+      display: -webkit-box; /* Flexbox 기반의 레이아웃, 텍스트를 박스에 맞추기 */
+      -webkit-box-orient: vertical; /* Flex 방향을 수직으로 설정 */
+      -webkit-line-clamp: 2; /* 2줄까지만 표시 */
+      overflow: hidden; /* 넘치는 텍스트 숨김 */
+      text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시 */
+      white-space: normal; /* 줄바꿈 허용 */
+    }
+
     .imgPost {
       width: 68px;
       height: 68px;
       border-radius: 10px;
     }
-  }
-
-  .txt-title {
-    text-align: left;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: "#333347";
-  }
-
-  .txt-content {
-    text-align: left;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
-    color: "#86869A";
   }
 
   .img-loaninfo {
