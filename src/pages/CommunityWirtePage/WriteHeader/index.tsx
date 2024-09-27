@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import classNames from "classnames/bind";
 import styles from "./CommunityWriteHeader.module.scss";
 import Image from "@/components/shared/Image";
@@ -27,7 +26,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, co
       </button>
 
       {/* 완료 버튼을 활성/비활성화 */}
-      <Button
+      <button
         className={cx("btnWriteComplete", { active: isButtonActive, inactive: !isButtonActive })}
         onClick={async () => {
           if (isButtonActive) {
@@ -51,7 +50,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, co
         disabled={!isButtonActive} // 버튼 비활성화
       >
         완료
-      </Button>
+      </button>
     </div>
   );
 };
