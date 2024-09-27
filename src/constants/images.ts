@@ -24,6 +24,15 @@ import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf_full.png";
 import LoanHFIcon from "@/assets/images/community/ico_loan_hf_full.png";
 import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi_full.png";
 import LoanHUGIcon from "@/assets/images/community/ico_loan_hug_full.png";
+import HANA_small from "@/assets/images/logo_mini/HANA_small.svg";
+import SHINHAN_small from "@/assets/images/logo_mini/SHINHAN_small.svg";
+import KB_small from "@/assets/images/logo_mini/KB_small.svg";
+import WOORI_small from "@/assets/images/logo_mini/WOORI_small.svg";
+import NH_small from "@/assets/images/logo_mini/NH_small.svg";
+import KAKAO_small from "@/assets/images/logo_mini/KAKAO_small.svg";
+import TOSS_small from "@/assets/images/logo_mini/TOSS_small.svg";
+import IM_small from "@/assets/images/logo_mini/IM_small.svg";
+import BNK_small from "@/assets/images/logo_mini/BNK_small.svg";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -138,4 +147,27 @@ export const IMAGES = {
     src: Logo,
     alt: "로고",
   },
+
+  small: {
+    HANA: { src: HANA_small, alt: "하나은행" },
+    SHINHAN: { src: SHINHAN_small, alt: "신한은행" },
+    KB: { src: KB_small, alt: "국민은행" },
+    WOORI: { src: WOORI_small, alt: "우리은행" },
+    KAKAO: { src: KAKAO_small, alt: "카카오뱅크" },
+    NH: { src: NH_small, alt: "농협은행" },
+    TOSS: { src: TOSS_small, alt: "토스뱅크" },
+    IM: { src: IM_small, alt: "iM뱅크" },
+    BNK: { src: BNK_small, alt: "부산은행" },
+  },
+  // large: {
+  // HANA: { src: HANA_large, alt: "하나은행" },
+  // SHINHAN: { src: SHINHAN_large, alt: "신한은행" },
+  // KB: { src: KB_large, alt: "국민은행" },
+  // WOORI: { src: WOORI_large, alt: "우리은행" },
+  // KAKAO: { src: KAKAO_large, alt: "카카오뱅크" },
+  // NH: { src: NH_large, alt: "농협은행" },
+  // TOSS: { src: TOSS_large, alt: "토스뱅크" },
+  // IM: { src: IM_large, alt: "iM뱅크" },
+  // BNK: { src: BNK_large, alt: "부산은행" },
+  // },
 };
