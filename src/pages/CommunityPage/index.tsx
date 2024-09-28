@@ -56,6 +56,10 @@ const CommunityPage = () => {
         setHasMore(res.data.length > 0); // 데이터가 더 있는지 확인
       } catch (error) {
         console.error("커뮤니티 데이터를 불러오는데 실패했습니다.", error);
+
+        // 임시 로그인 처리
+        const kakaoAuthUrl = `http://52.78.180.147:8080/oauth2/authorization/kakao`;
+        window.location.href = kakaoAuthUrl;
       }
     };
 
