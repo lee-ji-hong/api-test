@@ -20,6 +20,10 @@ import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
+import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf_full.png";
+import LoanHFIcon from "@/assets/images/community/ico_loan_hf_full.png";
+import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi_full.png";
+import LoanHUGIcon from "@/assets/images/community/ico_loan_hug_full.png";
 
 export const IMAGES = {
   Onboarding_1: {
@@ -90,6 +94,27 @@ export const IMAGES = {
   Report_1: {
     src: Report_1,
     alt: "리포트 사용 이미지1",
+  },
+
+  // 대출기관 아이콘 모음
+  LoanBankNHUFIcon: {
+    src: LoanNHUFIcon,
+    alt: "NHUF",
+  },
+
+  LoanBankHFIcon: {
+    src: LoanHFIcon,
+    alt: "HF",
+  },
+
+  LoanBankSGIIcon: {
+    src: LoanSGIIcon,
+    alt: "SGI",
+  },
+
+  LoanBankHUGIcon: {
+    src: LoanHUGIcon,
+    alt: "HUG",
   },
 
   // 더미 이미지 모음

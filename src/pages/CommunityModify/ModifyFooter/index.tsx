@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./CommunityWriteFooter.module.scss";
+import styles from "./CommunityModifyFooter.module.scss";
 import { useRef } from "react";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
@@ -10,21 +10,21 @@ import { CommunityDetail } from "@/models";
 const cx = classNames.bind(styles);
 
 interface WriteFooterProps {
+  setSelectedImage: (file: File | null) => void;
+  setImagePreview: (preview: string | null) => void;
   inputValue: string;
   textAreaValue: string;
   contentDetail: CommunityDetail;
-  setSelectedImage: (file: File | null) => void;
-  setImagePreview: (preview: string | null) => void;
   setContentDetail: React.Dispatch<React.SetStateAction<CommunityDetail>>;
 }
 
 const WriteFooter: React.FC<WriteFooterProps> = ({
+  setSelectedImage,
+  setImagePreview,
   inputValue,
   textAreaValue,
   contentDetail,
   setContentDetail,
-  setSelectedImage,
-  setImagePreview,
 }: WriteFooterProps) => {
   // 각 input 태그에 접근하기 위한 ref 생성
   const imagePickerRef = useRef(null);
@@ -78,14 +78,12 @@ const WriteFooter: React.FC<WriteFooterProps> = ({
               content: textAreaValue,
             };
             navigate("/community/recent-report", {
-              state: { from: "write", communityDetail: updatedCommunityDetail },
+              state: { from: "modify", communityDetail: updatedCommunityDetail },
             });
           }}>
           <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
         </div>
       </div>
-
-      <Image className={cx("img-keyboard")} imageInfo={IMAGES?.KeyboardIcon} />
     </div>
   );
 };

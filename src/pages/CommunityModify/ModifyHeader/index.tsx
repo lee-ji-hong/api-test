@@ -1,19 +1,19 @@
 import classNames from "classnames/bind";
-import styles from "./CommunityWriteHeader.module.scss";
+import styles from "./CommunityModifyHeader.module.scss";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
 import { CommunityDetail } from "@/models";
 
-interface WriteHeaderProps {
+interface ModifyHeaderProps {
   inputValue: string;
   textareaValue: string;
   communityDetail: CommunityDetail;
 }
 
 const cx = classNames.bind(styles);
-const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, communityDetail }) => {
+const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, communityDetail }) => {
   const navigate = useNavigate();
 
   // inputValue나 textareaValue에 값이 있으면 true, 없으면 false
@@ -21,7 +21,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, co
 
   return (
     <div className={cx("container-write-header")}>
-      <button onClick={() => navigate("/community", { replace: true })}>
+      <button onClick={() => navigate("/community/detail", { state: { postId: communityDetail.id } })}>
         <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>
 
@@ -31,17 +31,20 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, co
         onClick={async () => {
           if (isButtonActive) {
             const formData = new FormData();
+            const postId = communityDetail.id;
             const loanAdviceId = communityDetail?.loanAdviceSummaryReport?.loanAdviceResultId;
-            console.log("제목:", inputValue);
-            console.log("내용:", textareaValue);
+            const imageUrl = communityDetail.imageUrl;
+            const imageFile = communityDetail.imageFile;
+
             formData.append("title", inputValue);
             formData.append("content", textareaValue);
-            formData.append("loanAdviceResultId", loanAdviceId?.toString() || "");
-            communityDetail.imageFile && formData.append("imageFile", communityDetail.imageFile);
+            loanAdviceId && formData.append("loanAdviceResultId", loanAdviceId?.toString() || "");
+            imageFile && formData.append("imageFile", imageFile);
+            !imageFile && imageUrl && formData.append("existingImageUrl", imageUrl);
 
             try {
-              await Axios.postMultipart("/api/v1/post", formData);
-              navigate("/community");
+              await Axios.putMultipart(`/api/v1/post/${postId}`, formData);
+              navigate(-1);
             } catch (error) {
               alert(`글 작성에 실패했습니다. ${error}`);
             }
@@ -55,4 +58,4 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, co
   );
 };
 
-export default WriteHeader;
+export default ModifyHeader;

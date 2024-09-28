@@ -1,0 +1,34 @@
+.containerRecentReportHeader {
+  // background-color: aquamarine;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+
+  .btnWriteBack {
+    width: 26px;
+    height: 26px;
+    color: black;
+  }
+  .txtTitle {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Center the title */
+  }
+  .btnWriteComplete {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+
+    &.active {
+      color: black;
+    }
+    &.inactive {
+      color: #dadae1;
+    }
+  }
+}

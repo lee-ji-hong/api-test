@@ -139,6 +139,7 @@ export interface CommunityDetail {
   content: string;
   author: string;
   imageUrl: string;
+  imageFile: File | null;
   likes: number;
   comments: Comment[];
   commentCount: number;
@@ -146,7 +147,7 @@ export interface CommunityDetail {
   lastModifiedDate: number[];
   avatarUrl: string;
   timeAgo: string;
-  loanAdviceSummaryReport: LoanAdviceSummaryReport;
+  loanAdviceSummaryReport: LoanAdviceSummaryReport | null;
   like: boolean;
 }
 
@@ -158,6 +159,8 @@ export interface Comment {
   createdDate: number[];
   lastModifiedDate: number[];
   like: boolean;
+  likes: number;
+  timeAgo: string;
 }
 
 export interface LoanAdviceSummaryReport {
@@ -166,4 +169,18 @@ export interface LoanAdviceSummaryReport {
   loanProductCode: string;
   possibleLoanLimit: number;
   expectedLoanRate: number;
+}
+
+export interface LikeResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: string;
+}
+
+export interface LoanAdviceReportResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: LoanAdviceReport[];
 }

@@ -21,6 +21,26 @@
       color: black;
     }
   }
+  .inputContent {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    outline: none;
+    line-height: 28px;
+    background-color: white;
+
+    resize: none; /* 사용자가 크기를 변경하지 못하게 설정 */
+    overflow-y: auto; /* 스크롤 가능하게 설정 */
+
+    &.gray {
+      color: #dadae1;
+    }
+
+    &.black {
+      color: black;
+    }
+  }
 
   .contentArea {
     display: flex;
@@ -60,6 +80,7 @@
         width: 100%;
         height: auto;
         object-fit: cover;
+        border-radius: 10px;
       }
       .btn-remove-image {
         position: absolute;

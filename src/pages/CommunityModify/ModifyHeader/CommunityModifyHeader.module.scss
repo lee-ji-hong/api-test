@@ -1,0 +1,26 @@
+.container-write-header {
+  // background-color: aquamarine;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+
+  .btnWriteBack {
+    width: 26px;
+    height: 26px;
+    color: black;
+  }
+  .btnWriteComplete {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+
+    &.active {
+      color: black;
+    }
+    &.inactive {
+      color: #dadae1;
+    }
+  }
+}

@@ -9,36 +9,75 @@ import CommunityContents from "./CommunityContents";
 import FloatingButton from "./FloatingButton";
 import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
-import { CommunityListResponse, Post } from "@/api/model/CommunityResponse";
+import { CommunityListResponse } from "@/api/model/CommunityResponse";
+import { CommunityDetail } from "@/models";
 
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
-  const [contentItems, setContentItems] = useState<CommunityListResponse>();
+  const [contentItems, setContentItems] = useState<CommunityListResponse | null>(null);
   const [hasMore, setHasMore] = useState(true); // 더 이상 추가로 로드하지 않음
+  const [page, setPage] = useState(0); // 페이지 번호 상태
+
   const navigator = useNavigate();
 
-  const InfiniteScrollComponent = () => {
-    // 전체 데이터 배열 (30개)
-    // const allItems = Array.from({ length: 0 }, (_, index) => `Community Content #${index + 1}`);
+  function createCommunityDetail(): CommunityDetail {
+    return {
+      id: 0, // 고유 ID를 생성하는 간단한 방법
+      title: "", // 기본 값으로 설정
+      content: "", // 매개변수로 받은 내용
+      author: "", // 매개변수로 받은 작성자
+      imageUrl: "", // 매개변수로 받은 이미지 URL
+      imageFile: null,
+      likes: 0, // 초기 좋아요 수
+      comments: [], // 초기 댓글 목록은 빈 배열
+      commentCount: 0, // 초기 댓글 수
+      createdDate: new Date().toISOString().split("T")[0].split("-").map(Number), // 현재 날짜를 배열로 변환
+      lastModifiedDate: new Date().toISOString().split("T")[0].split("-").map(Number), // 마지막 수정 날짜는 생성 시 동일
+      avatarUrl: "", // 기본 아바타 URL
+      timeAgo: "", // 생성 시에는 "방금 전"으로 설정
+      loanAdviceSummaryReport: null, // 초기값은 null
+      like: false, // 초기값은 좋아요 미선택
+    };
+  }
 
+  const InfiniteScrollComponent = () => {
     useEffect(() => {
+      setContentItems(null);
+      loadInitialData();
+      setPage(0);
+    }, [isLatest]);
+
+    // 데이터를 처음 불러오는 함수
+    const loadInitialData = async () => {
       try {
-        Axios.get("/api/v1/post/sorted?sortType=POPULAR", true).then((res) => {
-          const resData: CommunityListResponse = res;
-          setContentItems(resData);
-        });
+        const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=0&size=5`, true);
+        setContentItems(res); // 초기 데이터를 설정
+        setHasMore(res.data.length > 0); // 데이터가 더 있는지 확인
       } catch (error) {
         console.error("커뮤니티 데이터를 불러오는데 실패했습니다.", error);
       }
-    }, []);
+    };
 
-    // 스크롤이 끝에 도달할 때 호출되는 함수 (5개씩 추가 로드)
+    // 더 많은 데이터를 불러오는 함수
     const fetchMoreData = async () => {
-      const res = await Axios.get("/api/v1/post/sorted?sortType=POPULAR", true);
-      const posts: Post[] = res;
-      console.log(posts);
-      setHasMore(false);
+      try {
+        const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=${page + 1}&size=5`, true);
+        if (res.data.length > 0) {
+          setContentItems((prevItems) => ({
+            ...prevItems,
+            data: [...(prevItems?.data || []), ...res.data], // 기존 데이터에 새 데이터 추가
+          }));
+          setPage(page + 1); // 페이지 증가
+        } else {
+          setHasMore(false); // 더 이상 불러올 데이터가 없음
+        }
+      } catch (error) {
+        console.error("더 많은 데이터를 불러오는데 실패했습니다.", error);
+        setHasMore(false);
+      }
     };
 
     return (
@@ -64,13 +103,13 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("최신순 클릭");
             setIsLatest(true);
-            try {
-              const res = await Axios.get("/api/v1/post/sorted?sortType=POPULAR", true);
-              setContentItems(undefined);
-              setContentItems(res.data);
-            } catch (error) {
-              console.error("최신순 데이터를 불러오는데 실패했습니다.", error);
-            }
+            // try {
+            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
+            //   setContentItems(undefined);
+            //   setContentItems(res);
+            // } catch (error) {
+            //   console.error("최신순 데이터를 불러오는데 실패했습니다.", error);
+            // }
           }}
           isActive={isLatest}
         />
@@ -80,13 +119,13 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("인기순 클릭");
             setIsLatest(false);
-            try {
-              const res = await Axios.get("/api/v1/post", true);
-              setContentItems(undefined);
-              setContentItems(res.data);
-            } catch (error) {
-              console.error("인기순 데이터를 불러오는데 실패했습니다.", error);
-            }
+            // try {
+            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post/sorted?sortType=POPULAR", true);
+            //   setContentItems(undefined);
+            //   setContentItems(res);
+            // } catch (error) {
+            //   console.error("인기순 데이터를 불러오는데 실패했습니다.", error);
+            // }
           }}
           isActive={!isLatest}
         />
@@ -99,7 +138,8 @@ const CommunityPage = () => {
       <FloatingButton
         onClick={() => {
           console.log("플로팅 버튼 클릭");
-          navigator("/community/write");
+          // navigator("/community/write", );
+          navigator("/community/write", { state: { communityDetail: createCommunityDetail() }, replace: true });
         }}></FloatingButton>
     </div>
   );

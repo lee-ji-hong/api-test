@@ -1,42 +1,22 @@
 import { Divider } from "@mui/material";
 import classNames from "classnames/bind";
-import styles from "./CommunityWritePage.module.scss";
+import styles from "./CommunityModifyPage.module.scss";
 import { useState } from "react";
+import ModifyHeader from "./ModifyHeader";
+import ModifyBody from "./ModifyBody";
+import ModifyFooter from "./ModifyFooter";
 import { useLocation } from "react-router-dom";
-import WriteHeader from "./WriteHeader";
-import WriteBody from "./WriteBody";
-import WriteFooter from "./WriteFooter";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 
 const cx = classNames.bind(styles);
 
-const CommunityWirtePage = () => {
+const CommunityModifyPage = () => {
   const location = useLocation();
   const recvCommunityDetail = location.state as { communityDetail: CommunityDetail };
-  const defaultCommunityDetail: CommunityDetail = {
-    id: 0, // 기본값 0
-    title: "", // 빈 문자열
-    content: "", // 빈 문자열
-    author: "", // 빈 문자열
-    imageUrl: "", // 빈 문자열
-    imageFile: null, // null로 초기화 (파일이 없을 때)
-    likes: 0, // 기본값 0
-    comments: [], // 빈 배열
-    commentCount: 0, // 기본값 0
-    createdDate: [], // 빈 배열
-    lastModifiedDate: [], // 빈 배열
-    avatarUrl: "", // 빈 문자열
-    timeAgo: "", // 빈 문자열
-    loanAdviceSummaryReport: null, // null로 초기화
-    like: false, // 기본값 false
-  };
-  const [communityDetail, setCommunityDetail] = useState<CommunityDetail>(
-    recvCommunityDetail.communityDetail ?? defaultCommunityDetail,
-  );
-
+  const [communityDetail, setCommunityDetail] = useState<CommunityDetail>(recvCommunityDetail.communityDetail);
   const [inputValue, setInputValue] = useState(communityDetail.title);
   const [textareaValue, setTextareaValue] = useState(communityDetail.content);
-  const [selectedImage, setSelectedImage] = useState<File | null>(communityDetail.imageFile || null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(communityDetail.imageUrl);
   const [loanAdviceReport, setLoanAdviceReport] = useState<LoanAdviceSummaryReport | null>(
     communityDetail.loanAdviceSummaryReport,
@@ -49,13 +29,12 @@ const CommunityWirtePage = () => {
 
     const updatedCommunityDetail = {
       ...communityDetail,
-      imageUrl: imgUrl,
-      imgFile: imgFile,
+      imageUrl: imgFile ? "" : imgUrl,
     };
 
     setCommunityDetail(updatedCommunityDetail);
 
-    console.log("이미지 삭제");
+    console.log("이미지 미리보기 삭제");
   };
 
   const clearLoanAdviceReport = () => {
@@ -71,10 +50,10 @@ const CommunityWirtePage = () => {
   return (
     <div className={cx("container")}>
       <div className={cx("containerHeader")}>
-        <WriteHeader inputValue={inputValue} textareaValue={textareaValue} communityDetail={communityDetail} />
+        <ModifyHeader inputValue={inputValue} textareaValue={textareaValue} communityDetail={communityDetail} />
       </div>
       <div className={cx("containerBody")}>
-        <WriteBody
+        <ModifyBody
           inputValue={inputValue}
           setInputValue={setInputValue}
           textareaValue={textareaValue}
@@ -85,13 +64,13 @@ const CommunityWirtePage = () => {
           loanAdviceReport={loanAdviceReport!}
           setLoanAdviceReport={setLoanAdviceReport}
           clearLoanAdviceReport={clearLoanAdviceReport}
-          contentDetail={communityDetail}
+          communityDetail={communityDetail}
         />
       </div>
 
       <Divider />
       <div className={cx("containerFooter")}></div>
-      <WriteFooter
+      <ModifyFooter
         setSelectedImage={setSelectedImage}
         setImagePreview={setImagePreview}
         inputValue={inputValue}
@@ -103,4 +82,4 @@ const CommunityWirtePage = () => {
   );
 };
 
-export default CommunityWirtePage;
+export default CommunityModifyPage;

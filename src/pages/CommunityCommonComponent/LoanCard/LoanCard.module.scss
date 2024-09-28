@@ -14,13 +14,14 @@
     color: "#86869A";
   }
 
-  .img-loaninfo {
-    width: 41.4px;
+  .imgLoaninfo {
+    width: auto;
     height: 14.4px;
     margin-top: 13px;
   }
 
   .container-loaninfo {
+    box-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1);
     background-color: #f7f7f7;
     border-radius: 10px;
     height: 98px;
@@ -33,6 +34,7 @@
   .container-txt-loaninfo {
     // background-color: #dbdfeb;
     align-items: center;
+    align-content: center;
     margin: 5px;
   }
 
@@ -49,7 +51,7 @@
     font-weight: 600;
   }
 
-  .txt-loaninfo {
+  .txtLoaninfo {
     font-weight: 400;
     font-size: 14px;
     line-height: 21px;
