@@ -8,6 +8,7 @@ import Header from "@/components/sections/Header";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
+import { formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import classNames from "classnames/bind";
 import styles from "./DepositResultPage.module.scss";
@@ -24,22 +25,6 @@ export const DepositResultPage = () => {
       navigate("/deposit-entry");
     }
   }, [inputValue, navigate]);
-
-  const formatNumber = (number: number) => {
-    return `${new Intl.NumberFormat().format(number)}만원`;
-  };
-
-  const formatNumberWithUnits = (number: number): string => {
-    if (number >= 10000) {
-      const billion = Math.floor(number / 10000); // 억 단위 계산
-      const million = number % 10000; // 만 단위 계산
-      if (million > 0) {
-        return `${billion}억 ${new Intl.NumberFormat().format(million)}만원`;
-      }
-      return `${billion}억`;
-    }
-    return formatNumber(number); // 억 단위 미만
-  };
 
   return (
     <>

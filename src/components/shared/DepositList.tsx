@@ -3,6 +3,8 @@ import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
+
+import { formatNumberWithUnits } from "@/utils/formatters";
 import { DepositLists } from "@/models";
 import classNames from "classnames/bind";
 import styles from "./DepositList.module.scss";
@@ -40,7 +42,7 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
               </div>
               <div className={cx("container-loaninfo-money")}>
                 <span className={cx("txt-percent")}>{item.expectedLoanRate}%</span>
-                <span className={cx("txt-loaninfo")}>{item.possibleLoanLimit}</span>
+                <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit)}`}</span>
               </div>
             </div>
           ))}
@@ -54,7 +56,7 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
                 </div>
                 <div className={cx("container-loaninfo-money")}>
                   <span className={cx("txt-percent")}>{item.expectedLoanRate}%</span>
-                  <span className={cx("txt-loaninfo")}>{item.possibleLoanLimit}</span>
+                  <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit)}`}</span>
                 </div>
               </div>
             ))}
@@ -71,7 +73,7 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
               </div>
               <div className={cx("container-loaninfo-money")}>
                 <span className={cx("txt-percent")}>{item.expectedLoanRate}%</span>
-                <span className={cx("txt-loaninfo")}>{item.possibleLoanLimit}</span>
+                <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit)}`}</span>
               </div>
             </div>
           ))}
