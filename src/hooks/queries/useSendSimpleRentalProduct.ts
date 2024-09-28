@@ -11,7 +11,7 @@ export const useSendSimpleRentalProduct = () => {
     mutationFn: sendSimpleRentalProduct,
     onSuccess: (data) => {
       console.log(data);
-      router.push(`/deposit-result`, { resultData: data });
+      router.push(`/deposit-result`, { rentalProductData: data });
     },
     onError: (error) => {
       console.error(" 생성 실패:", error);

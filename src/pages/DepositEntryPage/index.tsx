@@ -74,7 +74,7 @@ const DepositEntryPage = () => {
   };
 
   const handleNavigate = (inputValue: number) => {
-    const adjustedValue = inputValue * 1000;
+    const adjustedValue = inputValue * 10000;
     setRecoilFormData((prevState) => ({
       ...prevState,
       rentalDeposit: inputValue,
