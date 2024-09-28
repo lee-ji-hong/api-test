@@ -10,6 +10,7 @@ import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
+import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { sendLoanAdviceReportRequest } from "@/models";
 import { formData } from "@/recoil/atoms";
@@ -70,22 +71,6 @@ const DepositEntryPage = () => {
         setInputValue((prevValue) => Math.min(prevValue * 10 + numKey, 210000));
       }
     }
-  };
-
-  const formatNumber = (number: number) => {
-    return `${new Intl.NumberFormat().format(number)}만원`;
-  };
-
-  const formatNumberWithUnits = (number: number): string => {
-    if (number >= 10000) {
-      const billion = Math.floor(number / 10000); // 억 단위 계산
-      const million = number % 10000; // 만 단위 계산
-      if (million > 0) {
-        return `${billion}억 ${new Intl.NumberFormat().format(million)}만원`;
-      }
-      return `${billion}억`;
-    }
-    return formatNumber(number); // 억 단위 미만
   };
 
   const handleNavigate = (inputValue: number) => {
