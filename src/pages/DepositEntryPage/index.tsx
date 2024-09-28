@@ -36,12 +36,12 @@ const DepositEntryPage = () => {
 
   console.log(recoilFormData);
 
-  const isInvalidValue = inputValue > 0 && (inputValue <= 5 || inputValue > 200000);
+  const isInvalidValue = inputValue > 0 && (inputValue <= 100 || inputValue > 200000);
   const warningMessage =
     inputValue === 0
       ? ""
-      : inputValue <= 5
-        ? "보증금은 5만원 이상이어야 합니다."
+      : inputValue <= 100
+        ? "보증금은 100만원 이상이어야 합니다."
         : "보증금은 20억원을 초과할 수 없습니다.";
 
   const handleFocus = () => setIsInputFocused(true);
