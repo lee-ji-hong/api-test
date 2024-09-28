@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import styles from "./DepositEntryPage.module.scss";
@@ -10,6 +9,7 @@ import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
+import { useSendSimpleRentalProduct } from "@/hooks/queries/useSendSimpleRentalProduct";
 import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { sendLoanAdviceReportRequest } from "@/models";
@@ -23,7 +23,7 @@ const DepositEntryPage = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState<number>(0);
   const [bottomOffset, setBottomOffset] = useState(0);
-  const navigate = useNavigate();
+  const { simpleRentalProduct } = useSendSimpleRentalProduct();
   const router = useInternalRouter();
 
   useEffect(() => {
@@ -74,11 +74,12 @@ const DepositEntryPage = () => {
   };
 
   const handleNavigate = (inputValue: number) => {
+    const adjustedValue = inputValue * 1000;
     setRecoilFormData((prevState) => ({
       ...prevState,
       rentalDeposit: inputValue,
     }));
-    navigate("/deposit-result", { state: { inputValue } });
+    simpleRentalProduct({ rentalDeposit: adjustedValue });
   };
 
   return (

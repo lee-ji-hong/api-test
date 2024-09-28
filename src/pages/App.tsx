@@ -60,8 +60,6 @@ function App() {
         </GlobalPortal.Provider>
       </QueryClientProvider>
     </RecoilRoot>
-            
-            
   );
 }
 

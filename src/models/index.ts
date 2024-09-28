@@ -49,6 +49,12 @@ export interface BaseLoanProduct {
   expectedLoanRate: number; // 예상 대출 금리
 }
 
+export interface RentalProductResponse {
+  code: number;
+  status: string;
+  message: SimpleRentalProduct;
+  data: SimpleRentalProduct[];
+}
 export interface SimpleRentalProduct extends BaseLoanProduct {
   loanAdviceResultId: number; // 대출 상담 결과 ID
 }

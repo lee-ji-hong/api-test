@@ -1,7 +1,7 @@
 import Axios from "@/api/axios";
 
 import {
-  SimpleRentalProduct,
+  RentalProductResponse,
   LoanAdviceReport,
   SpecificLoanAdvice,
   AddressResponse,
@@ -18,7 +18,9 @@ import {
 
 // 전세상품 간단 조회
 export function sendSimpleRentalProduct(requestBody: SendSimpleRentalProductRequest) {
-  return Axios.post<SimpleRentalProduct[]>("/api/v1/loanAdvice/simple", requestBody, false);
+  return Axios.post<RentalProductResponse>("/api/v1/loanAdvice/simple", requestBody, false).then(
+    (response) => response.data,
+  );
 }
 
 //전세대출상품 추천 보고서 산출
