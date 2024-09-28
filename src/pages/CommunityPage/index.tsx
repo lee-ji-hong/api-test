@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
 import { CommunityListResponse } from "@/api/model/CommunityResponse";
 import { CommunityDetail } from "@/models";
-
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
@@ -57,6 +56,10 @@ const CommunityPage = () => {
         setHasMore(res.data.length > 0); // 데이터가 더 있는지 확인
       } catch (error) {
         console.error("커뮤니티 데이터를 불러오는데 실패했습니다.", error);
+
+        // 임시 로그인 처리
+        const kakaoAuthUrl = `http://52.78.180.147:8080/oauth2/authorization/kakao`;
+        window.location.href = kakaoAuthUrl;
       }
     };
 
@@ -103,13 +106,6 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("최신순 클릭");
             setIsLatest(true);
-            // try {
-            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
-            //   setContentItems(undefined);
-            //   setContentItems(res);
-            // } catch (error) {
-            //   console.error("최신순 데이터를 불러오는데 실패했습니다.", error);
-            // }
           }}
           isActive={isLatest}
         />
@@ -119,13 +115,6 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("인기순 클릭");
             setIsLatest(false);
-            // try {
-            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post/sorted?sortType=POPULAR", true);
-            //   setContentItems(undefined);
-            //   setContentItems(res);
-            // } catch (error) {
-            //   console.error("인기순 데이터를 불러오는데 실패했습니다.", error);
-            // }
           }}
           isActive={!isLatest}
         />
