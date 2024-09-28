@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
 import { CommunityListResponse } from "@/api/model/CommunityResponse";
 import { CommunityDetail } from "@/models";
-
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
@@ -103,13 +102,6 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("최신순 클릭");
             setIsLatest(true);
-            // try {
-            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post", true);
-            //   setContentItems(undefined);
-            //   setContentItems(res);
-            // } catch (error) {
-            //   console.error("최신순 데이터를 불러오는데 실패했습니다.", error);
-            // }
           }}
           isActive={isLatest}
         />
@@ -119,13 +111,6 @@ const CommunityPage = () => {
           onClick={async () => {
             console.log("인기순 클릭");
             setIsLatest(false);
-            // try {
-            //   const res = await Axios.get<CommunityListResponse>("/api/v1/post/sorted?sortType=POPULAR", true);
-            //   setContentItems(undefined);
-            //   setContentItems(res);
-            // } catch (error) {
-            //   console.error("인기순 데이터를 불러오는데 실패했습니다.", error);
-            // }
           }}
           isActive={!isLatest}
         />

@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 const CommunityContents: React.FC<Post> = (props) => {
   return (
     <div className={cx("container")}>
-      <Profile {...props} />
+      <Profile author={props.author} timeAgo={props.timeAgo} avatarUrl={props.avatarUrl ?? ""} />
       <Spacing size={12} />
       <Contents {...props} />
       <Spacing size={16} />
