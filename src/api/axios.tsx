@@ -170,6 +170,26 @@ class Axios {
     return this.getInstance().put(url, formData, config as CustomAxiosRequestConfig);
   }
 
+  static delete<T = unknown>(url: string, withToken = false) {
+    const config = {
+      headers: {
+        ...this.getInstance().defaults.headers,
+      },
+    };
+
+    if (withToken) {
+      const token = this.getCookie("accessToken");
+      if (token) {
+        config.headers!.AccessToken = token;
+        config.headers!.RefreshToken = null;
+      }
+    }
+
+    return this.getInstance()
+      .delete<T>(url, config as AxiosRequestConfig)
+      .then((response) => response.data);
+  }
+
   // 쿠키에서 특정 값을 가져오는 함수
   static getCookie = (name: string): string | null => {
     const cookieArr = document.cookie.split("; "); // 쿠키를 각각의 key=value 쌍으로 분리
