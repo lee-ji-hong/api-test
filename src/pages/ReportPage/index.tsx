@@ -12,6 +12,8 @@ import Button from "@/components/shared/Button";
 import Badge2 from "@/components/shared/Badge2";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
+
+import { formatNumberWithUnits2 } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { IMAGES } from "@/constants/images";
 import { formData } from "@/recoil/atoms";
@@ -87,7 +89,10 @@ const ReportPage = () => {
               <div className={cx("section-bottom")}>
                 <div>
                   <Text className={cx("bottom-txt-title")} text="최대한도" />
-                  <Text className={cx("bottom-txt-sub")} text={`${reportData?.possibleLoanLimit || "4억원"}`} />
+                  <Text
+                    className={cx("bottom-txt-sub")}
+                    text={`${formatNumberWithUnits2(reportData?.possibleLoanLimit) || "4억원"}`}
+                  />
                 </div>
                 <div>
                   <Text className={cx("bottom-txt-title")} text="금리" />
