@@ -13,8 +13,8 @@ const LoginSuccessPage = () => {
       setCookie("refreshToken", objToken.refreshToken);
 
       console.log("쿠키 저장 완료");
-      console.log(getCookie("accessToken"));
-      console.log(getCookie("refreshToken"));
+      console.log(`accessToken 쿠키 저장 완료 ${getCookie("accessToken")}`);
+      console.log(`refreshToken 쿠키 저장 완료 ${getCookie("refreshToken")}`);
     }
   });
 
