@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginSuccessPage = () => {
+  const navigate = useNavigate();
   const token = getTokens();
 
   useEffect(() => {
@@ -11,10 +13,7 @@ const LoginSuccessPage = () => {
       alert("로그인 성공!");
       setCookie("accessToken", objToken.accessToken);
       setCookie("refreshToken", objToken.refreshToken);
-
-      console.log("쿠키 저장 완료");
-      console.log(`accessToken 쿠키 저장 완료 ${getCookie("accessToken")}`);
-      console.log(`refreshToken 쿠키 저장 완료 ${getCookie("refreshToken")}`);
+      navigate("/"); // 메인 페이지로 이동
     }
   });
 
