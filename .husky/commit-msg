@@ -2,13 +2,13 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 message="$(cat $1)"
-requiredPattern="^(Feat|Fix|Refactor|Chore|Design):.*$"
+requiredPattern="^(Feat|Fix|Refactor|Chore|Design|Hotfix):.*$"
 if ! [[ $message =~ $requiredPattern ]];
 then
   echo "=========================================================================="
   echo "======================   🚨 WRONG COMMIT MESSAGE!   ======================"
   echo "=========================================================================="
-  echo "== Allowed Headers: Feat, Fix, Refactor, Chore, Design 만 사용가능합니다     =="
+  echo "== Allowed Headers: Feat, Fix, Refactor, Chore, Design, Hotfix 만 사용가능합니다     =="
   echo "== EXAMPLE => Feat: 커밋 예제입니다                                          =="
   echo "=========================================================================="
   echo "== Your commit message was =>" $message 
