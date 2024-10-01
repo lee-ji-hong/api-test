@@ -1,5 +1,5 @@
 import { DepositLists } from "@/models";
-export const rentalProductData: DepositLists[] = [
+export const MOCK: DepositLists[] = [
   {
     expectedLoanRate: 4.6,
     loanProductCode: "HF-01",
