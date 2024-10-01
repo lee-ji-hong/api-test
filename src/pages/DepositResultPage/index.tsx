@@ -1,7 +1,4 @@
-import {
-  // useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useEffect } from "react";
 
@@ -14,7 +11,7 @@ import Text from "@/components/shared/Text";
 import { formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { formData } from "@/recoil/atoms";
-import { rentalProductData } from "./mock";
+// import { rentalProductData } from "./mock";
 import classNames from "classnames/bind";
 import styles from "./DepositResultPage.module.scss";
 const cx = classNames.bind(styles);
@@ -22,10 +19,10 @@ const cx = classNames.bind(styles);
 export const DepositResultPage = () => {
   const formDataState = useRecoilValue(formData);
   const rentalDeposit = formDataState?.rentalDeposit;
-  // const location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
   const router = useInternalRouter();
-  // const { rentalProductData } = location.state;
+  const { rentalProductData } = location.state;
 
   console.log(rentalProductData);
 
