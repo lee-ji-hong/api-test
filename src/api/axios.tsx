@@ -16,7 +16,7 @@ class Axios {
   static getInstance() {
     if (!this.instance) {
       this.instance = axios.create({
-        baseURL: "http://52.78.180.147:8080/",
+        baseURL: "",
         headers: {
           "Content-Type": "application/json",
         },
