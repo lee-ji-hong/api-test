@@ -40,8 +40,15 @@ export const LoanInfoEntryPage = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async () => {
     setLoading(true);
+    const updatedFormData = {
+      ...recoilFormData,
+      rentalDeposit: recoilFormData.rentalDeposit ? recoilFormData.rentalDeposit * 10000 : 0,
+    };
+
+    setRecoilFormData(updatedFormData);
+
     await new Promise((r) => setTimeout(r, 5000));
-    loanAdviceReport(recoilFormData as sendLoanAdviceReportRequest);
+    loanAdviceReport(updatedFormData as sendLoanAdviceReportRequest);
     setLoading(false);
   };
 
@@ -84,37 +91,33 @@ export const LoanInfoEntryPage = () => {
               {INPUTS?.map((item) => {
                 const Component = item.component;
                 const value = getValues(item.name as keyof sendLoanAdviceReportRequest);
-                const isFieldActive = item.id <= currentInputIndex;
+                // const isFieldActive = item.id <= currentInputIndex;
                 return (
                   <React.Fragment key={item.id}>
-                    {isFieldActive && (
-                      <>
-                        <List.Row
-                          onClick={() => handleRowClick(item.id)}
-                          topText={item.label}
-                          right={
-                            <Text
-                              className={cx(["txt-right", value === undefined && "txt-empty-color"])}
-                              text={value === undefined ? "선택하기" : String(value)}
-                            />
-                          }
-                          withArrow={true}
+                    <List.Row
+                      onClick={() => handleRowClick(item.id)}
+                      topText={item.label}
+                      right={
+                        <Text
+                          className={cx(["txt-right", value === undefined && "txt-empty-color"])}
+                          text={value === undefined ? "선택하기" : String(value)}
                         />
-                        {modalOpen && selectedItem === item.id && (
-                          <Component
-                            formFieldName={item.name as keyof sendLoanAdviceReportRequest}
-                            control={control}
-                            onClose={() => {
-                              handleModalClose();
-                              handleInputComplete(item.name);
-                            }}
-                            modalTitle={item.modalTitle}
-                            modalSubTitle={item.modalSubTitle}
-                            options={item.options}
-                            buttonText={item.modalButton}
-                          />
-                        )}
-                      </>
+                      }
+                      withArrow={true}
+                    />
+                    {modalOpen && selectedItem === item.id && (
+                      <Component
+                        formFieldName={item.name as keyof sendLoanAdviceReportRequest}
+                        control={control}
+                        onClose={() => {
+                          handleModalClose();
+                          handleInputComplete(item.name);
+                        }}
+                        modalTitle={item.modalTitle}
+                        modalSubTitle={item.modalSubTitle}
+                        options={item.options}
+                        buttonText={item.modalButton}
+                      />
                     )}
                   </React.Fragment>
                 );
