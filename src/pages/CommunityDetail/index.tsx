@@ -18,7 +18,7 @@ import FullScreenMessage from "@/components/sections/FullScreenMessage";
 import CommentList from "./Comment";
 import { CommunityDetail, CommunityDetailResponse, LikeResponse } from "@/models";
 import BottomModal from "@/components/modal/BottomModal";
-import Modal from "@/components/modal/CenterModal";
+import CenterModal from "@/components/modal/CenterModal";
 
 const cx = classNames.bind(styles);
 
@@ -124,7 +124,7 @@ const CommunityDetailPage = () => {
         )}
 
         {isCenterModalOpen && (
-          <Modal
+          <CenterModal
             message={`게시글을 삭제할까요?\n게시글을 삭제하면 모든 데이터가 삭제되고\n다시 볼 수 없어요.`}
             subMessage="게시글을 삭제하면 모든 데이터가 삭제되고 다시 볼 수 없어요."
             confirmLabel="확인"

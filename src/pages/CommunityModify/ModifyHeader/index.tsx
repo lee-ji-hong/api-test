@@ -10,10 +10,11 @@ interface ModifyHeaderProps {
   inputValue: string;
   textareaValue: string;
   communityDetail: CommunityDetail;
+  onBackPressed: () => void;
 }
 
 const cx = classNames.bind(styles);
-const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, communityDetail }) => {
+const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, communityDetail, onBackPressed }) => {
   const navigate = useNavigate();
 
   // inputValue나 textareaValue에 값이 있으면 true, 없으면 false
@@ -21,7 +22,7 @@ const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, 
 
   return (
     <div className={cx("container-write-header")}>
-      <button onClick={() => navigate("/community/detail", { state: { postId: communityDetail.id } })}>
+      <button onClick={onBackPressed}>
         <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>
 

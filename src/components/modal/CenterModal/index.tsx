@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Modal.module.scss"; // SCSS 파일 import
 
-interface ModalProps {
+interface CenterModalProps {
   message: string;
   subMessage: string;
   confirmLabel: string;
@@ -10,7 +10,7 @@ interface ModalProps {
   onConfirm: () => void;
 }
 
-const Modal: React.FC<ModalProps> = (props) => {
+const CenterModal: React.FC<CenterModalProps> = (props) => {
   return (
     <div className={styles["modal-overlay"]}>
       <div className={styles["modal-content"]}>
@@ -36,4 +36,4 @@ const Modal: React.FC<ModalProps> = (props) => {
   );
 };
 
-export default Modal;
+export default CenterModal;
