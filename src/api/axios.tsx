@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
+import { reqLogin } from "./kakao-api";
 
 // AxiosRequestConfig을 확장하여 커스텀 헤더 추가
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
@@ -30,6 +31,7 @@ class Axios {
           return config;
         },
         (error) => {
+          console.log("에러가 났습니다");
           return Promise.reject(error);
         },
       );
@@ -38,12 +40,6 @@ class Axios {
       this.instance.interceptors.response.use(
         (response) => {
           // 응답이 성공적일 때 처리할 로직
-
-          const accessToken = this.getCookie("accessToken");
-          const refreshToken = this.getCookie("refreshToken");
-
-          console.log("accessToken:", accessToken);
-          console.log("refreshToken:", refreshToken);
           return response;
         },
         async (error: AxiosError) => {
@@ -51,6 +47,7 @@ class Axios {
 
           // 401 Unauthorized 에러 처리
           if (error.response?.status === 401 && !originalRequest._retry) {
+            console.log("401뜸");
             originalRequest._retry = true; // 재요청 방지 플래그 설정
 
             const refreshToken = this.getCookie("refreshToken");
@@ -64,11 +61,6 @@ class Axios {
 
                 const { data } = await this.instance!(originalRequest);
 
-                console.log("토큰 갱신 성공:", data);
-
-                // this.setCookie("accessToken", data.accessToken);
-                // this.setCookie("refreshToken", data.refreshToken);
-
                 originalRequest.headers = {
                   ...originalRequest.headers,
                   AccessToken: data.accessToken,
@@ -80,8 +72,13 @@ class Axios {
               } catch (refreshError) {
                 console.error("리프레시 토큰 갱신 실패:", refreshError);
                 // 리프레시 토큰도 만료되었거나 문제가 생긴 경우 로그아웃 등 처리
+                reqLogin();
                 return Promise.reject(refreshError);
               }
+            } else {
+              // 리프레시 토큰이 없는 경우 로그인 페이지로 이동
+              reqLogin();
+              console.log("로그인 페이지로 이동");
             }
           }
           // 401 이외의 에러는 그대로 처리
