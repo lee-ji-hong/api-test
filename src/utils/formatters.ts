@@ -2,7 +2,17 @@ export const formatNumber = (number: number): string => {
   return `${new Intl.NumberFormat().format(number)}만원`;
 };
 
+export const modalformatNumber = (number: number): string => {
+  if (number === undefined || isNaN(number)) {
+    return "";
+  }
+  return `${new Intl.NumberFormat().format(number)}`;
+};
+
 export const formatNumberWithUnits = (number: number): string => {
+  if (number === undefined || isNaN(number)) {
+    return "";
+  }
   if (number >= 10000) {
     const billion = Math.floor(number / 10000); // 억 단위 계산
     const million = number % 10000; // 만 단위 계산

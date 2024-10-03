@@ -5,7 +5,7 @@ import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
-import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
+import { modalformatNumber, formatNumberWithUnits } from "@/utils/formatters";
 
 import classNames from "classnames/bind";
 import styles from "./InputModal.module.scss";
@@ -23,6 +23,7 @@ interface InputModalProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
   ({ warningMessage, modalTitle, buttonText, error, value, onClose, handleKeyPress, ...props }, ref) => {
+    console.log(value);
     return (
       <>
         <div className={cx("back-drop")}>
@@ -30,14 +31,18 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             <Spacing size={30} />
             <Text className={cx("txt-title")} text={modalTitle} />
             <Spacing size={30} />
-            <input
-              className={cx("input", { shake: error })}
-              ref={ref}
-              maxLength={30}
-              value={formatNumber(value)}
-              {...props}
-              readOnly={true}
-            />
+            <div className={cx("input-container")}>
+              <input
+                className={cx("input", { shake: error })}
+                ref={ref}
+                maxLength={30}
+                value={modalformatNumber(value)}
+                placeholder="금액을 입력하세요"
+                readOnly={true}
+                {...props}
+              />
+              <Text className={cx("unit")} text="만원" />
+            </div>
             <Text
               className={cx("txt-sub", { "text-alert": error })}
               text={value === 0 ? "" : error ? warningMessage : formatNumberWithUnits(value)}

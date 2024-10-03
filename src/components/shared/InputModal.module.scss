@@ -52,18 +52,28 @@
   animation: shake 0.3s ease-in-out;
 }
 
-.input {
-  @include text-style(2, 500, $grey800);
-  padding-bottom: 1rem;
-  border-bottom: 2px solid $blue500;
-  width: 100%;
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .input {
+    @include text-style(2, 500, $grey800);
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $blue500;
+    width: 100%;
 
-  @include responsive("M") {
-    font-size: 1.8rem;
+    @include responsive("M") {
+      font-size: 1.8rem;
+    }
+
+    &::placeholder {
+      color: $grey400;
+    }
   }
 
-  &::placeholder {
-    color: $grey400;
+  .unit {
+    margin-left: 10px; // 간격을 조절하고 싶을 경우
+    color: #333;
   }
 }
 
