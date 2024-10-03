@@ -31,7 +31,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             <Spacing size={30} />
             <Text className={cx("txt-title")} text={modalTitle} />
             <Spacing size={30} />
-            <div className={cx("input-container")}>
+            <div className={cx("input-container", { "input-alert": error })}>
               <input
                 className={cx("input", { shake: error })}
                 ref={ref}
