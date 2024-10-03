@@ -37,6 +37,7 @@ const CommunityPage = () => {
       timeAgo: "", // 생성 시에는 "방금 전"으로 설정
       loanAdviceSummaryReport: null, // 초기값은 null
       like: false, // 초기값은 좋아요 미선택
+      updateDeleteAuthority: "", // 수정 및 삭제 권한은 빈 문자열
     };
   }
 
@@ -92,7 +93,7 @@ const CommunityPage = () => {
         loader={<h4>Loading...</h4>} // 로딩 상태, 필요 없으면 제거 가능
         endMessage={<p>모두 불러왔습니다.</p>} // 끝났을 때 메시지
       >
-        {contentItems?.data.map((data) => <CommunityContents key={data.id} {...data} />)}
+        {contentItems?.data.map((data, index) => <CommunityContents key={index} {...data} />)}
       </InfiniteScroll>
     );
   };

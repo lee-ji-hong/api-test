@@ -155,6 +155,7 @@ export interface CommunityDetail {
   timeAgo: string;
   loanAdviceSummaryReport: LoanAdviceSummaryReport | null;
   like: boolean;
+  updateDeleteAuthority: string;
 }
 
 export interface Comment {

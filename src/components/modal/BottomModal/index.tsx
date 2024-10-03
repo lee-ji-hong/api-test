@@ -96,7 +96,7 @@ const BottomModal: React.FC<BottomModalProps> = ({ onClose, onEdit, onDelete }) 
           onTouchStart={handleDragStart}
           onMouseDown={handleDragStart}
           onClick={handleClose} // 핸들바 클릭 시 모달 닫기
-        ></div>
+        ></div>{" "}
         <button className={styles["edit-button"]} onClick={onEdit}>
           수정하기
         </button>

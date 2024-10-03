@@ -105,7 +105,11 @@ const CommunityDetailPage = () => {
   return (
     <div className={cx("container")}>
       <Spacing size={9} />
-      <WriteHeader isModal={isModalOpen} setIsModal={setIsModalOpen} />
+      <WriteHeader
+        isAuthor={communityDetail?.updateDeleteAuthority === "ALL"}
+        isModal={isModalOpen}
+        setIsModal={setIsModalOpen}
+      />
       <div className={cx("containerContents")}>
         <Spacing size={9} />
         <Spacing size={12} />
@@ -135,11 +139,12 @@ const CommunityDetailPage = () => {
 };
 
 interface WriteHeaderProps {
+  isAuthor: boolean; // 모달 상태
   isModal: boolean; // 모달 상태
   setIsModal: (value: boolean) => void; // 모달 상태를 설정하는 함수
 }
 
-const WriteHeader: React.FC<WriteHeaderProps> = ({ isModal, setIsModal }) => {
+const WriteHeader: React.FC<WriteHeaderProps> = ({ isAuthor, isModal, setIsModal }) => {
   const navigate = useNavigate();
 
   // 모달 상태를 on/off 토글하는 함수
@@ -153,9 +158,11 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ isModal, setIsModal }) => {
         <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
       </button>
 
-      <button onClick={toggleModal}>
-        <Image className={cx("btn-write-back")} imageInfo={IMAGES?.MoreButton} />
-      </button>
+      {isAuthor && (
+        <button onClick={toggleModal}>
+          <Image className={cx("btn-write-back")} imageInfo={IMAGES?.MoreButton} />
+        </button>
+      )}
     </div>
   );
 };
