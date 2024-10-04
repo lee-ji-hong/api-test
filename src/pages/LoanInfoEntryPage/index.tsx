@@ -13,8 +13,9 @@ import List from "@/components/shared/List";
 
 import { useSendLoanAdviceReport } from "@/hooks/queries/useSendLoanAdviceReport";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
-import { formData } from "@/recoil/atoms";
+import { getUnitForField } from "@/utils/loanAdviceValues";
 import { sendLoanAdviceReportRequest } from "@/models";
+import { formData } from "@/recoil/atoms";
 
 import classNames from "classnames/bind";
 import styles from "./LoanInfoEntryPage.module.scss";
@@ -52,8 +53,6 @@ export const LoanInfoEntryPage = () => {
     setLoading(false);
   };
 
-  console.log(loading);
-
   const handleRowClick = (item: number) => {
     setSelectedItem(item);
     setModalOpen(true);
@@ -75,6 +74,7 @@ export const LoanInfoEntryPage = () => {
       setCurrentInputIndex(currentInputIndex + 1);
     }
   };
+
   if (loading) return <FullScreenMessage type="loading" />;
 
   return (
@@ -91,7 +91,7 @@ export const LoanInfoEntryPage = () => {
               {INPUTS?.map((item) => {
                 const Component = item.component;
                 const value = getValues(item.name as keyof sendLoanAdviceReportRequest);
-                // const isFieldActive = item.id <= currentInputIndex;
+                const value2 = getUnitForField(item.name, value);
                 return (
                   <React.Fragment key={item.id}>
                     <List.Row
@@ -100,7 +100,7 @@ export const LoanInfoEntryPage = () => {
                       right={
                         <Text
                           className={cx(["txt-right", value === undefined && "txt-empty-color"])}
-                          text={value === undefined ? "선택하기" : String(value)}
+                          text={value === undefined ? "선택하기" : String(value2)}
                         />
                       }
                       withArrow={true}
