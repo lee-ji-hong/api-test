@@ -30,6 +30,7 @@ export const InputController = <ControlType extends FieldValues>({
                 ? "보증금은 100만원 이상이어야 합니다."
                 : "보증금은 20억원을 초과할 수 없습니다.";
           const handleKeyPress = (key: string) => {
+            console.log(key);
             if (key === "⌫") {
               field.onChange(Math.floor(field.value / 10));
             } else {

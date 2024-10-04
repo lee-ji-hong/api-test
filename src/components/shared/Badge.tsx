@@ -12,7 +12,7 @@ interface BadgeProps {
 
 const Badge = ({ className, title, onClick }: BadgeProps) => {
   return (
-    <button className={cx(["container", className])} onClick={onClick}>
+    <button className={cx(["container", className])} onClick={onClick} type="button">
       {title}
     </button>
   );

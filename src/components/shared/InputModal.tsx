@@ -50,7 +50,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             <Spacing size={30} />
             <Button className={cx("close-button")} title={buttonText} onClick={onClose} disabled={!value || error} />
           </div>
-          <KeyboardModal onKeyPress={handleKeyPress} />
+          <KeyboardModal onKeyPress={handleKeyPress} isBadge={true} />
         </div>
       </>
     );
