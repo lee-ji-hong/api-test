@@ -28,6 +28,7 @@ const CommunityDetailPage = () => {
   const [post, setPost] = useState<CommunityDetail>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCenterModalOpen, setIsCenterModalOpen] = useState(false);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [commentUpdated, setCommentUpdated] = useState(false); // 댓글 업데이트 여부 상태 추가
   const { communityDetail, isCommunityDetailLoading } = useGetCommunityDetail(postId);
   const navigate = useNavigate();
@@ -86,6 +87,19 @@ const CommunityDetailPage = () => {
     setIsCenterModalOpen(false);
   };
 
+  // 댓글삭제모달 취소
+  const handleCommentModalClose = () => {
+    setIsCommentModalOpen(false);
+  };
+
+  // 댓글삭제모달 확인
+  const handleCommentModalConfirm = async () => {
+    const res = await Axios.delete<LikeResponse>(`/api/v1/comment/${postId}`, true);
+    if (res.code === 200) {
+      setCommentUpdated((prev) => !prev);
+    }
+  };
+
   useEffect(() => {
     const fetchPostData = async () => {
       try {
@@ -131,6 +145,17 @@ const CommunityDetailPage = () => {
             cancelLabel="취소"
             onCancel={handleCancel}
             onConfirm={handleConfirm}
+          />
+        )}
+
+        {isCommentModalOpen && (
+          <CenterModal
+            message={`댓글을 삭제할까요?\n댓글을 삭제하면 모든 데이터가 삭제되고\n다시 볼 수 없어요.`}
+            subMessage="댓글을 삭제하면 모든 데이터가 삭제되고 다시 볼 수 없어요."
+            confirmLabel="확인"
+            cancelLabel="취소"
+            onCancel={handleCommentModalClose}
+            onConfirm={handleCommentModalConfirm}
           />
         )}
       </div>

@@ -60,7 +60,12 @@ const CommentListItem: React.FC<CommentItemProps> = ({ comment }) => {
   return (
     <div>
       <Spacing size={8} />
-      <Profile author={comment.author} timeAgo={comment.timeAgo} avatarUrl={""} />
+      <Profile
+        author={comment.author}
+        timeAgo={comment.timeAgo}
+        avatarUrl={comment.avatarUrl}
+        updateDeleteAuthority={comment.updateDeleteAuthority}
+      />
       <Spacing size={8} />
       <div style={{ marginLeft: "40px" }}>
         <Typography className={cx("txtComment")}>{comment.content}</Typography>

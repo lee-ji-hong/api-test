@@ -168,6 +168,8 @@ export interface Comment {
   like: boolean;
   likes: number;
   timeAgo: string;
+  avatarUrl: string;
+  updateDeleteAuthority: string;
 }
 
 export interface LoanAdviceSummaryReport {

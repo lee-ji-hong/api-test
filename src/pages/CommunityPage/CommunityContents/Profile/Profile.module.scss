@@ -1,7 +1,8 @@
 .container {
   text-align: left;
-  display: "flex";
+  display: flex;
   // background-color: antiquewhite;
+  justify-content: space-between;
 
   .img-profile {
     width: 40px;
@@ -22,5 +23,10 @@
     line-height: 19.6px;
     font-size: 14px;
     font-weight: 400;
+  }
+  .btnMore {
+    height: 20px;
+    width: 20px;
+    margin-left: auto;
   }
 }
