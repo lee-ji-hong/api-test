@@ -19,11 +19,14 @@ interface InputModalProps extends InputHTMLAttributes<HTMLInputElement> {
   value: number;
   onClose: () => void;
   handleKeyPress: (key: string) => void;
+  handleBadgeClick: (label: string) => void;
 }
 
 export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
-  ({ warningMessage, modalTitle, buttonText, error, value, onClose, handleKeyPress, ...props }, ref) => {
-    console.log(value);
+  (
+    { warningMessage, modalTitle, buttonText, error, value, onClose, handleKeyPress, handleBadgeClick, ...props },
+    ref,
+  ) => {
     return (
       <>
         <div className={cx("back-drop")}>
@@ -50,7 +53,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             <Spacing size={30} />
             <Button className={cx("close-button")} title={buttonText} onClick={onClose} disabled={!value || error} />
           </div>
-          <KeyboardModal onKeyPress={handleKeyPress} isBadge={true} />
+          <KeyboardModal onKeyPress={handleKeyPress} isBadge={true} handleBadgeClick={handleBadgeClick} />
         </div>
       </>
     );

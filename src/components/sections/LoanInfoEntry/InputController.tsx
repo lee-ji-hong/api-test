@@ -1,5 +1,6 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import InputModal from "@/components/shared/InputModal";
+import { MONEY } from "@/constants/money";
 
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
@@ -23,14 +24,16 @@ export const InputController = <ControlType extends FieldValues>({
         control={control}
         render={({ field }) => {
           const isInvalidValue = field.value > 0 && (field.value <= 100 || field.value > 200000);
+
           const warningMessage =
             field.value === 0
               ? ""
               : field.value <= 100
                 ? "보증금은 100만원 이상이어야 합니다."
                 : "보증금은 20억원을 초과할 수 없습니다.";
+
+          // 키보드 입력 이벤트
           const handleKeyPress = (key: string) => {
-            console.log(key);
             if (key === "⌫") {
               field.onChange(Math.floor(field.value / 10));
             } else {
@@ -40,6 +43,16 @@ export const InputController = <ControlType extends FieldValues>({
                 const newValue = currentValue * 10 + numKey;
                 field.onChange(Math.min(newValue, 210000));
               }
+            }
+          };
+
+          // 금액 뱃지 이벤트
+          const handleBadgeClick = (label: string) => {
+            const item = MONEY.find((item) => item.label === label)!;
+            if (item) {
+              const currentValue = field.value || 0;
+              const newValue = currentValue + item.value;
+              field.onChange(Math.min(newValue, 210000));
             }
           };
 
@@ -54,6 +67,7 @@ export const InputController = <ControlType extends FieldValues>({
               onClose={onClose}
               onChange={field.onChange}
               handleKeyPress={handleKeyPress}
+              handleBadgeClick={handleBadgeClick}
             />
           );
         }}
