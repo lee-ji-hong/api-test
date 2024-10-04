@@ -91,7 +91,7 @@ export const LoanInfoEntryPage = () => {
               {INPUTS?.map((item) => {
                 const Component = item.component;
                 const value = getValues(item.name as keyof sendLoanAdviceReportRequest);
-                const value2 = getUnitForField(item.name, value);
+                const value2 = getUnitForField(item.name, value !== undefined ? value : "");
                 return (
                   <React.Fragment key={item.id}>
                     <List.Row

@@ -31,6 +31,10 @@ const HouseOwnershipTypeLabel: Record<HouseOwnershipType, string> = {
 type FieldValues = number | boolean | MaritalStatus | ChildStatus | HouseType | HouseOwnershipType | string;
 
 export const getUnitForField = (fieldName: string, fieldValue: FieldValues) => {
+  if (fieldValue === undefined) {
+    return "선택하기"; // 기본 처리
+  }
+
   switch (fieldName) {
     case "rentalDeposit":
     case "monthlyRent":
