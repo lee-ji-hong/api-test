@@ -1,9 +1,9 @@
 import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
 import InputController from "@/components/sections/LoanInfoEntry/InputController";
-import maritalStatusController from "@/components/sections/LoanInfoEntry/maritalStatusController";
 import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEmployeeController";
 import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
-import rentHousingTypeController from "@/components/sections/LoanInfoEntry/rentHousingTypeController";
+// import maritalStatusController from "@/components/sections/LoanInfoEntry/maritalStatusController";
+// import rentHousingTypeController from "@/components/sections/LoanInfoEntry/rentHousingTypeController";
 // import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
 
 export const INPUTS = [
@@ -50,7 +50,14 @@ export const INPUTS = [
     name: "maritalStatus",
     value: "",
     modalTitle: "혼인상태를 알려주세요",
-    component: maritalStatusController,
+    options: [
+      { label: "미혼", value: "SINGLE" },
+      { label: "신혼", value: "NEWLY_MARRIED" },
+      { label: "기혼", value: "MARRIED" },
+      { label: "결혼 예정", value: "ENGAGED" },
+    ],
+    component: isSMEEmployeeController,
+    // component: maritalStatusController,
   },
   {
     id: 6,
@@ -124,18 +131,17 @@ export const INPUTS = [
     name: "rentHousingType",
     value: "",
     modalTitle: "주택유형을 선택하세요",
-    component: rentHousingTypeController,
+    options: [
+      { label: "아파트", value: "APARTMENT" },
+      { label: "오피스텔", value: "OFFICETEL" },
+      { label: "연립다세대", value: "HOUSEHOLD_HOUSE" },
+      { label: "단독/다가구", value: "FAMILY_HOUSE" },
+    ],
+    component: isSMEEmployeeController,
+    // component: rentHousingTypeController,
   },
   {
     id: 13,
-    label: "주택정보",
-    name: "jibun",
-    value: "",
-    modalTitle: "주택정보를 찾아주세요",
-    component: AddressSearchInputControllter,
-  },
-  {
-    id: 14,
     label: "주택정보",
     name: "jibun",
     value: "",
