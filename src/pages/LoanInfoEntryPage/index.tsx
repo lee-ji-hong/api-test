@@ -43,10 +43,12 @@ export const LoanInfoEntryPage = () => {
     setLoading(true);
     const updatedFormData = {
       ...recoilFormData,
-      rentalDeposit: recoilFormData.rentalDeposit ? recoilFormData.rentalDeposit * 10000 : 0,
+      rentalDeposit: (recoilFormData.rentalDeposit ?? 0) * 10000,
+      monthlyRent: (recoilFormData.monthlyRent ?? 0) * 10000,
+      cashOnHand: (recoilFormData.cashOnHand ?? 0) * 10000,
+      annualIncome: (recoilFormData.annualIncome ?? 0) * 10000,
+      spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
     };
-
-    setRecoilFormData(updatedFormData);
 
     await new Promise((r) => setTimeout(r, 5000));
     loanAdviceReport(updatedFormData as sendLoanAdviceReportRequest);
