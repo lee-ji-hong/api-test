@@ -40,16 +40,20 @@
 }
 
 .txt-sub {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  text-align: center;
-  color: $grey600;
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: left;
+    color: $grey600;
+  }
 }
 
 .text-alert {
-  color: $red500;
-  animation: shake 0.3s ease-in-out;
+  p {
+    color: $red500;
+    animation: shake 0.3s ease-in-out;
+  }
 }
 
 .input-container {

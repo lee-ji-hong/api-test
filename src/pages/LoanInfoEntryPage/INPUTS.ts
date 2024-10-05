@@ -14,6 +14,10 @@ export const INPUTS = [
     value: "",
     modalTitle: "보증금을 입력해주세요",
     modalButton: "다음",
+    limit: {
+      min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
+      max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+    },
     component: InputController,
   },
   {
@@ -23,6 +27,10 @@ export const INPUTS = [
     value: "",
     modalTitle: "월세가 있다면 월세를 입력해주세요",
     modalButton: "다음",
+    limit: {
+      // min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
+      max: { value: 10000000, ment: "1,000억원 이하로 입력이 가능합니다." },
+    },
     component: InputController,
   },
   {
@@ -32,6 +40,10 @@ export const INPUTS = [
     value: "",
     modalTitle: "보유현금을 입력해주세요",
     modalButton: "다음",
+    // limit: {
+    //   min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
+    //   max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+    // },
     component: InputController,
   },
   {
@@ -41,6 +53,10 @@ export const INPUTS = [
     value: "",
     modalTitle: "만 나이를 선택해주세요",
     modalButton: "다음",
+    limit: {
+      min: { value: 19, ment: "19세 이상만 대출 가능합니다" },
+      max: { value: 99, ment: "장수하잖아 한잔해~~" },
+    },
     component: InputController,
     // component: WheelContrller,
   },
@@ -66,6 +82,10 @@ export const INPUTS = [
     value: "",
     modalTitle: "연소득을 입력해주세요",
     modalButton: "다음",
+    // limit: {
+    //   min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
+    //   max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+    // },
     component: InputController,
   },
 
@@ -76,6 +96,10 @@ export const INPUTS = [
     value: "",
     modalTitle: "배우자 연소득을 입력해주세요",
     modalButton: "다음",
+    // limit: {
+    //   min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
+    //   max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+    // },
     component: InputController,
   },
   {

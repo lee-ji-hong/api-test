@@ -41,6 +41,7 @@ export const LoanInfoEntryPage = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async () => {
     setLoading(true);
+
     const updatedFormData = {
       ...recoilFormData,
       rentalDeposit: (recoilFormData.rentalDeposit ?? 0) * 10000,
@@ -119,6 +120,8 @@ export const LoanInfoEntryPage = () => {
                         modalSubTitle={item.modalSubTitle}
                         options={item.options}
                         buttonText={item.modalButton}
+                        min={item.limit?.min}
+                        max={item.limit?.max}
                       />
                     )}
                   </React.Fragment>

@@ -2,11 +2,17 @@ import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import InputModal from "@/components/shared/InputModal";
 import { MONEY } from "@/constants/money";
 
+interface Limit {
+  value: number;
+  ment: string;
+}
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
   modalTitle?: string;
   buttonText?: string;
+  min?: Limit;
+  max?: Limit;
   onClose: () => void;
 }
 
@@ -16,6 +22,8 @@ export const InputController = <ControlType extends FieldValues>({
   control,
   modalTitle,
   buttonText,
+  min,
+  max,
 }: Props<ControlType>) => {
   return (
     <>
@@ -23,14 +31,11 @@ export const InputController = <ControlType extends FieldValues>({
         name={formFieldName}
         control={control}
         render={({ field }) => {
-          const isInvalidValue = field.value > 0 && (field.value <= 100 || field.value > 200000);
+          const isInvalidValue =
+            field.value > 0 && (field.value <= (min?.value ?? -1) || field.value > (max?.value ?? Infinity));
 
           const warningMessage =
-            field.value === 0
-              ? ""
-              : field.value <= 100
-                ? "보증금은 100만원 이상이어야 합니다."
-                : "보증금은 20억원을 초과할 수 없습니다.";
+            field.value === 0 ? "" : field.value <= (min?.value ?? 0) ? (min?.ment ?? "") : (max?.ment ?? "");
 
           // 키보드 입력 이벤트
           const handleKeyPress = (key: string) => {
@@ -41,7 +46,7 @@ export const InputController = <ControlType extends FieldValues>({
               if (!isNaN(numKey)) {
                 const currentValue = field.value || 0;
                 const newValue = currentValue * 10 + numKey;
-                field.onChange(Math.min(newValue, 210000));
+                field.onChange(Math.min(newValue, 99999999));
               }
             }
           };
@@ -52,7 +57,7 @@ export const InputController = <ControlType extends FieldValues>({
             if (item) {
               const currentValue = field.value || 0;
               const newValue = currentValue + item.value;
-              field.onChange(Math.min(newValue, 210000));
+              field.onChange(Math.min(newValue, 99999999));
             }
           };
 
