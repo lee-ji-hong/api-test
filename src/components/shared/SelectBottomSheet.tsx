@@ -15,10 +15,10 @@ interface SelectBottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const SelectBottomSheet = forwardRef<HTMLUListElement, SelectBottomSheetProps>(
-  ({ modalTitle, modalSubTitle, children }, ref) => {
+  ({ modalTitle, modalSubTitle, children, onClose }, ref) => {
     return (
-      <div className={cx("back-drop")}>
-        <div className={cx("container")} aria-label="alert-modal">
+      <div className={cx("back-drop")} onClick={onClose}>
+        <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
           <Spacing size={30} />
           <Text className={cx("txt-title")} text={modalTitle} />
           {modalSubTitle && (

@@ -29,8 +29,8 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
   ) => {
     return (
       <>
-        <div className={cx("back-drop")}>
-          <div className={cx("container")} aria-label="alert-modal">
+        <div className={cx("back-drop")} onClick={onClose}>
+          <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
             <Spacing size={30} />
             <Text className={cx("txt-title")} text={modalTitle} />
             <Spacing size={30} />
@@ -53,7 +53,9 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             <Spacing size={30} />
             <Button className={cx("close-button")} title={buttonText} onClick={onClose} disabled={error} />
           </div>
-          <KeyboardModal onKeyPress={handleKeyPress} isBadge={true} handleBadgeClick={handleBadgeClick} />
+          <div onClick={(e) => e.stopPropagation()}>
+            <KeyboardModal onKeyPress={handleKeyPress} isBadge={true} handleBadgeClick={handleBadgeClick} />
+          </div>
         </div>
       </>
     );
