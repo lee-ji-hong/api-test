@@ -51,7 +51,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
               text={value === 0 ? "" : error ? warningMessage : formatNumberWithUnits(value)}
             />
             <Spacing size={30} />
-            <Button className={cx("close-button")} title={buttonText} onClick={onClose} disabled={!value || error} />
+            <Button className={cx("close-button")} title={buttonText} onClick={onClose} disabled={error} />
           </div>
           <KeyboardModal onKeyPress={handleKeyPress} isBadge={true} handleBadgeClick={handleBadgeClick} />
         </div>
