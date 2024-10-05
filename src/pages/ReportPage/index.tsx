@@ -13,7 +13,7 @@ import Badge2 from "@/components/shared/Badge2";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 
-import { formatNumberWithUnits } from "@/utils/formatters";
+import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { IMAGES } from "@/constants/images";
 import { formData } from "@/recoil/atoms";
@@ -23,27 +23,27 @@ import classNames from "classnames/bind";
 import styles from "./ReportPage.module.scss";
 const cx = classNames.bind(styles);
 
-const feeData = [
-  { label: "대출 취급 수수료", amount: "200,000원" },
-  { label: "인지세", amount: "90,000원" },
-  { label: "보증보험료", amount: "10,291원" },
-  { label: "기타 비용 1", amount: "50,000원" },
-  { label: "기타 비용 2", amount: "30,000원" },
-  { label: "기타 비용 3", amount: "25,000원" },
-  { label: "기타 비용 4", amount: "15,000원" },
-  { label: "기타 비용 5", amount: "12,000원" },
-];
+interface ListItem {
+  label: string;
+  amount: number;
+}
 
 const ReportPage = () => {
   const [showMoreExtraCost, setShowMoreExtraCost] = useState(false);
   const [showMoreDepositList, setShowMoreDepositList] = useState(false);
   const [showPage, setShowPage] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const router = useInternalRouter();
   const location = useLocation();
   const reportData = location.state?.reportData?.data;
+  const MAX_LENGTH = 100;
   const userInputData = useRecoilValue(formData);
-  console.log(reportData);
   console.log(userInputData);
+
+  const feeData: ListItem[] = [
+    { label: "보증보험료", amount: reportData?.guaranteeInsuranceFee },
+    { label: "인지세", amount: reportData?.stampDuty },
+  ];
 
   const handleExtraCostListToggle = () => {
     setShowMoreExtraCost(!showMoreExtraCost);
@@ -58,6 +58,13 @@ const ReportPage = () => {
     router.goBack();
   };
 
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const recommendationReason = reportData?.recommendationReason || "이 대출을 추천한 이유";
+  const shouldShowMore = recommendationReason.length > MAX_LENGTH;
+  console.log(reportData?.recommendedProducts.length);
   return (
     <>
       <Header className={cx("cancel")} onRightClick={handleGoBack} right="Cancel_btn" />
@@ -106,8 +113,8 @@ const ReportPage = () => {
             <Spacing size={70} />
             <Text
               className={cx("txt-title")}
-              text="내가 4억원 대출시/n약 3,000,291원의 이자를 내요!"
-              highlight="4억원"
+              text={`내가 ${formatNumberWithUnits(reportData?.loanAmount / 10000)} 대출시/n약 ${formatNumber(reportData?.monthlyInterestCost)}원의 이자를 내요!`}
+              highlight={formatNumberWithUnits(reportData?.loanAmount / 10000)}
             />
             <div>프로그레스 바 자리</div>
           </div>
@@ -116,13 +123,15 @@ const ReportPage = () => {
             <Spacing size={70} />
             <Text
               className={cx("txt-title")}
-              text="4억원 대출시 약 800,291원의/n부수비용이 들어가요!"
-              highlight="800,291원"
+              text={`${formatNumberWithUnits(reportData?.loanAmount / 10000)} 대출시 약 ${formatNumber(reportData?.guaranteeInsuranceFee + reportData?.stampDuty)}원의/n부수비용이 들어가요!`}
+              highlight={`${formatNumber(reportData?.guaranteeInsuranceFee + reportData?.stampDuty)}원`}
             />
             <ReportList list={feeData} show={showMoreExtraCost} />
-            <button className={cx("list-button")} onClick={handleExtraCostListToggle}>
-              {showMoreExtraCost ? "부수 비용 더 보기 ∧" : "부수 비용 더 보기 ∨"}
-            </button>
+            {feeData.length > 3 && (
+              <button className={cx("list-button")} onClick={handleExtraCostListToggle}>
+                {showMoreExtraCost ? "부수 비용 더 보기 ∧" : "부수 비용 더 보기 ∨"}
+              </button>
+            )}
           </div>
           {/* Section04 */}
           <div className={cx("box")}>
@@ -146,7 +155,23 @@ const ReportPage = () => {
             />
             <Spacing size={16} />
             <div className={cx("reason-box")}>
-              <Text className={cx("txt-sub")} text={`${reportData.recommendationReason || "이 대출을 추천한 이유"}`} />
+              <Text
+                className={cx("txt-sub")}
+                text={
+                  isExpanded || !shouldShowMore
+                    ? recommendationReason
+                    : `${recommendationReason.substring(0, MAX_LENGTH)}...`
+                }
+              />
+              {shouldShowMore && (
+                <button className={cx("show-more-btn")} onClick={toggleExpanded}>
+                  <Text
+                    className={cx("txt-sub")}
+                    text={isExpanded ? "간략히" : "더보기"}
+                    highlight={isExpanded ? "간략히" : "더보기"}
+                  />
+                </button>
+              )}
             </div>
           </div>
           {/* Section06 */}
@@ -155,14 +180,16 @@ const ReportPage = () => {
             <Text className={cx("txt-title")} text="다른 가능한 대출 상품도 확인해보세요!" />
             <Spacing size={8} />
             <DepositList
-              list={MOCK || reportData?.recommendedProducts}
-              isShow={true}
+              list={reportData?.recommendedProducts || MOCK}
+              isShow={reportData?.recommendedProducts.length > 3}
               toggle={showMoreDepositList}
               color="white"
             />
-            <button className={cx("list-button")} onClick={handleDepositListToggle}>
-              {showMoreDepositList ? "다른 상품 더 보기 ∧" : "다른 상품 더 보기 ∨"}
-            </button>
+            {reportData?.recommendedProducts.length > 3 && (
+              <button className={cx("list-button")} onClick={handleDepositListToggle}>
+                {showMoreDepositList ? "다른 상품 더 보기 ∧" : "다른 상품 더 보기 ∨"}
+              </button>
+            )}
           </div>
           {/* Section07 */}
           <div className={cx("box")}>
@@ -170,14 +197,16 @@ const ReportPage = () => {
             <Text className={cx("txt-title")} text="대출 불가 상품들의 사유를 확인해보세요!" />
             <Spacing size={8} />
             <DepositList
-              list={MOCK || reportData?.recommendedProducts}
-              isShow={true}
+              list={reportData?.recommendedProducts || MOCK}
+              isShow={reportData?.recommendedProducts.length > 3}
               toggle={showMoreDepositList}
               color="white"
             />
-            <button className={cx("list-button")} onClick={handleDepositListToggle}>
-              {showMoreDepositList ? "다른 상품 더 보기 ∧" : "다른 상품 더 보기 ∨"}
-            </button>
+            {reportData?.recommendedProducts.length > 3 && (
+              <button className={cx("list-button")} onClick={handleDepositListToggle}>
+                {showMoreDepositList ? "다른 상품 더 보기 ∧" : "다른 상품 더 보기 ∨"}
+              </button>
+            )}
           </div>
 
           {/* Section08 */}

@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 interface ListItem {
   label: string;
-  amount: string;
+  amount: number;
 }
 
 interface ListProps {
@@ -30,14 +30,14 @@ const ReportList = ({ list, className, show }: ListProps) => {
       {list.slice(0, 3).map((item, index) => (
         <div className={cx("list-item")} key={index}>
           <Text className={cx("list-txt-left")} text={item.label} />
-          <Text className={cx("list-txt-right")} text={item.amount} />
+          <Text className={cx("list-txt-right")} text={`${item.amount} 원` ?? "없음"} />
         </div>
       ))}
       <CollapseList in={show}>
         {list.slice(3).map((item, index) => (
           <div className={cx("list-item")} key={index}>
             <Text className={cx("list-txt-left")} text={item.label} />
-            <Text className={cx("list-txt-right")} text={item.amount} />
+            <Text className={cx("list-txt-right")} text={`${item.amount} 원` ?? "없음"} />
           </div>
         ))}
       </CollapseList>

@@ -4,7 +4,7 @@ import { IMAGES } from "@/constants/images";
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
 
-import { formatNumberWithUnits2 } from "@/utils/formatters";
+import { formatNumberWithUnits } from "@/utils/formatters";
 import { DepositLists } from "@/models";
 import classNames from "classnames/bind";
 import styles from "./DepositList.module.scss";
@@ -41,7 +41,7 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
               </div>
               <div className={cx("container-loaninfo-money")}>
                 <span className={cx("txt-percent")}>{item.expectedLoanRate}%</span>
-                <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits2(item.possibleLoanLimit)}`}</span>
+                <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit / 10000)}`}</span>
               </div>
             </div>
           ))}
@@ -55,7 +55,8 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
                 </div>
                 <div className={cx("container-loaninfo-money")}>
                   <span className={cx("txt-percent")}>{item.expectedLoanRate}%</span>
-                  <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits2(item.possibleLoanLimit)}`}</span>
+                  <span
+                    className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit / 10000)}`}</span>
                 </div>
               </div>
             ))}
@@ -72,7 +73,7 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
               </div>
               <div className={cx("container-loaninfo-money")}>
                 <span className={cx("txt-percent")}>{item.expectedLoanRate}%</span>
-                <span className={cx("txt-loaninfo")}>{formatNumberWithUnits2(item.possibleLoanLimit)}</span>
+                <span className={cx("txt-loaninfo")}>{formatNumberWithUnits(item.possibleLoanLimit / 10000)}</span>
               </div>
             </div>
           ))}

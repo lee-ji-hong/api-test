@@ -1,5 +1,5 @@
 export const formatNumber = (number: number): string => {
-  return `${new Intl.NumberFormat().format(number)}만원`;
+  return `${new Intl.NumberFormat().format(number)}`;
 };
 
 export const modalformatNumber = (number: number): string => {
