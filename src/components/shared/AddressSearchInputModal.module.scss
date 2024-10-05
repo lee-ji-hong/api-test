@@ -1,0 +1,89 @@
+.back-drop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  .container {
+    width: 100%;
+    margin: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .txt-title {
+    p {
+      color: $grey800;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 23.5px;
+      letter-spacing: -0.8px;
+      text-align: left;
+    }
+  }
+
+  .input {
+    @include text-style(2, 500, $grey800);
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $blue500;
+    width: 100%;
+
+    @include responsive("M") {
+      font-size: 1.8rem;
+    }
+
+    &::placeholder {
+      color: $grey400;
+    }
+  }
+
+  .close-button {
+    position: relative !important;
+    margin-bottom: -20px;
+  }
+
+  .list-item {
+    padding: 15px 0px;
+
+    .list-txt-top {
+      p {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20.8px;
+        letter-spacing: -0.8px;
+        text-align: left;
+      }
+    }
+
+    .list-txt-bottom {
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18.2px;
+        letter-spacing: -0.8px;
+        text-align: left;
+        color: #86869a;
+      }
+    }
+  }
+  .no-result {
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20.8px;
+      letter-spacing: -0.8px;
+      text-align: center;
+      color: $grey500;
+      padding: 50px 0;
+    }
+  }
+}
