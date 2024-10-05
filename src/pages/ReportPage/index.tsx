@@ -13,7 +13,7 @@ import Badge2 from "@/components/shared/Badge2";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 
-import { formatNumberWithUnits2 } from "@/utils/formatters";
+import { formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { IMAGES } from "@/constants/images";
 import { formData } from "@/recoil/atoms";
@@ -91,12 +91,12 @@ const ReportPage = () => {
                   <Text className={cx("bottom-txt-title")} text="최대한도" />
                   <Text
                     className={cx("bottom-txt-sub")}
-                    text={`${formatNumberWithUnits2(reportData?.possibleLoanLimit) || "4억원"}`}
+                    text={`${formatNumberWithUnits(reportData?.possibleLoanLimit / 10000) || "4억원"}`}
                   />
                 </div>
                 <div>
                   <Text className={cx("bottom-txt-title")} text="금리" />
-                  <Text className={cx("bottom-txt-sub")} text={`${reportData?.expectedLoanRate || "2.4%"}`} />
+                  <Text className={cx("bottom-txt-sub")} text={`${reportData?.expectedLoanRate || "2.4"}%`} />
                 </div>
               </div>
             </div>
