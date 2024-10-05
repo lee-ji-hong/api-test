@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 export type ButtonType = "button" | "submit" | "reset";
 interface ButtonProps {
   className?: string;
+  subClassName?: string;
   type?: ButtonType;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   usePortal?: boolean;
@@ -18,6 +19,7 @@ interface ButtonProps {
 
 const Button = ({
   className,
+  subClassName,
   title,
   onClick,
   disabled,
@@ -27,7 +29,7 @@ const Button = ({
 }: ButtonProps) => {
   const buttonContent = (
     <div className={cx([className])} style={{ bottom: `${bottom}px` }}>
-      <button className={cx("container")} onClick={onClick} disabled={disabled} type={type}>
+      <button className={cx(["container", subClassName])} onClick={onClick} disabled={disabled} type={type}>
         {title}
       </button>
     </div>

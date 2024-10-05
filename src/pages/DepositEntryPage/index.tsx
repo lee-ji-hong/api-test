@@ -28,9 +28,9 @@ const DepositEntryPage = () => {
 
   useEffect(() => {
     if (isInputFocused) {
-      setBottomOffset(275); // 모달이 나타날 때
+      setBottomOffset(295); // 모달이 나타날 때
     } else {
-      setBottomOffset(40); // 기본 상태
+      setBottomOffset(60); // 기본 상태
     }
   }, [isInputFocused]);
   console.log(recoilFormData);
@@ -119,6 +119,7 @@ const DepositEntryPage = () => {
         <BadgeList list={MONEY} onClick={handleChangeValue} />
         <Button
           className={cx("button-wrap")}
+          subClassName={cx("button-container")}
           disabled={!inputValue || isInvalidValue}
           onClick={() => handleNavigate(inputValue)}
           bottom={bottomOffset}
