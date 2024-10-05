@@ -8,6 +8,7 @@ import { useState } from "react";
 import CenterModal from "@/components/modal/CenterModal";
 import Axios from "@/api/axios";
 import { Comment, LikeResponse } from "@/models";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 interface ProfileProps {
@@ -22,6 +23,7 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = (props) => {
   const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
   const [isCenterModalOpen, setIsCenterModalOpen] = useState(false);
+  const navigate = useNavigate();
   const isAuthor = props.updateDeleteAuthority === "ALL";
 
   // URL 유효성 검증 함수
@@ -65,7 +67,9 @@ const Profile: React.FC<ProfileProps> = (props) => {
       {isBottomModalOpen && (
         <BottomModal
           onClose={() => setIsBottomModalOpen(false)}
-          onEdit={() => {}}
+          onEdit={() => {
+            navigate("/community/detail/modify-comment", { state: { comment: props.comment } });
+          }}
           onDelete={() => {
             setIsBottomModalOpen(false);
             setIsCenterModalOpen(true);

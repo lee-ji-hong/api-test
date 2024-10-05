@@ -11,6 +11,7 @@ import CommunityWirtePage from "./CommunityWirtePage";
 import CommunityDetail from "./CommunityDetail";
 import CommunityModifyPage from "./CommunityModify";
 import CommunityRecentReportPage from "./CommunityRecentReport";
+import CommunityModifyCommentPage from "./CommunityModifyComment";
 
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
@@ -48,6 +49,7 @@ function App() {
                 <Route path="community" element={<CommunityPage />} />
                 <Route path="community/write" element={<CommunityWirtePage />} />
                 <Route path="community/detail" element={<CommunityDetail />} />
+                <Route path="community/detail/modify-comment" element={<CommunityModifyCommentPage />} />
                 <Route path="community/modify" element={<CommunityModifyPage />} />
                 <Route path="loan-info-entry" element={<LoanInfoEntryPage />} />
 

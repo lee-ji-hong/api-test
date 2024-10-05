@@ -1,0 +1,35 @@
+.containerModifyHeader {
+  // background-color: aquamarine;
+  display: flex;
+  height: auto;
+  width: 100%;
+  margin-top: 10px;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+
+  .txtTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+  }
+
+  .btnWriteBack {
+    width: 26px;
+    height: 26px;
+    color: black;
+  }
+  .btnWriteComplete {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+
+    &.active {
+      color: black;
+    }
+    &.inactive {
+      color: #dadae1;
+    }
+  }
+}

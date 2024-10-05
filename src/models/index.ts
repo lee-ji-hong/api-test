@@ -158,6 +158,13 @@ export interface CommunityDetail {
   updateDeleteAuthority: string;
 }
 
+export interface CommentResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: Comment;
+}
+
 export interface Comment {
   id: number;
   postId: number;
