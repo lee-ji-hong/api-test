@@ -1,12 +1,11 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import BottomSheet from "@/components/shared/BottomSheet";
+import SelectBottomSheet from "@/components/shared/SelectBottomSheet";
 import WheelAgePicker from "@/components/shared/WheelAgePicker";
 
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
   modalTitle?: string;
-  buttonText?: string;
   onClose: () => void;
 }
 
@@ -15,24 +14,30 @@ export const WheelContrller = <ControlType extends FieldValues>({
   formFieldName,
   control,
   modalTitle,
-  buttonText,
 }: Props<ControlType>) => {
   return (
     <>
       <Controller
         name={formFieldName}
         control={control}
-        render={({ field }) => (
-          <BottomSheet modalTitle={modalTitle} buttonText={buttonText} onClose={onClose} {...field}>
-            <WheelAgePicker
-              initialValue={20}
-              onChange={(value) => {
-                field.onChange(value);
-                onClose;
-              }}
-            />
-          </BottomSheet>
-        )}
+        render={({ field }) => {
+          // const handleSelect = (value: number) => {
+          //   field.onChange(value);
+          //   onClose();
+          // };
+
+          return (
+            <SelectBottomSheet modalTitle={modalTitle} onClose={onClose}>
+              <WheelAgePicker
+                initialValue={19}
+                onChange={(value) => {
+                  field.onChange(value);
+                  onClose;
+                }}
+              />
+            </SelectBottomSheet>
+          );
+        }}
       />
     </>
   );

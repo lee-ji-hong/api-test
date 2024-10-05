@@ -17,7 +17,7 @@ const WheelAgePicker: React.FC<Props> = ({ onChange, initialValue = 20 }) => {
         e.stopPropagation();
       }}>
       <div className={cx("innerContainer")}>
-        <Wheel options={range(20, 100)} initialIndex={initialValue} onChange={onChange} />
+        <Wheel options={range(19, 104)} initialIndex={initialValue} onChange={onChange} />
       </div>
     </div>
   );

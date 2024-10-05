@@ -4,7 +4,7 @@ import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEm
 import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
 // import maritalStatusController from "@/components/sections/LoanInfoEntry/maritalStatusController";
 // import rentHousingTypeController from "@/components/sections/LoanInfoEntry/rentHousingTypeController";
-// import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
+import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
 
 export const INPUTS = [
   {
@@ -53,12 +53,12 @@ export const INPUTS = [
     value: "",
     modalTitle: "만 나이를 선택해주세요",
     modalButton: "다음",
-    limit: {
-      min: { value: 19, ment: "19세 이상만 대출 가능합니다" },
-      max: { value: 99, ment: "장수하잖아 한잔해~~" },
-    },
-    component: InputController,
-    // component: WheelContrller,
+    // limit: {
+    //   min: { value: 19, ment: "19세 이상만 대출 가능합니다" },
+    //   max: { value: 99, ment: "99세 이하만 대출 가능합니다" },
+    // },
+    // component: InputController,
+    component: WheelContrller,
   },
   {
     id: 5,
