@@ -27,7 +27,11 @@ class Axios {
 
       this.instance.interceptors.request.use(
         (config) => {
-          // 요청을 보내기 전에 실행할 로직 추가 가능
+          // 요청 시 로그 출력
+          console.log(`[Request] ${config.method?.toUpperCase()} ${config.url}`, {
+            headers: config.headers,
+            data: config.data,
+          });
           return config;
         },
         (error) => {
@@ -39,7 +43,11 @@ class Axios {
       // 응답 인터셉터 추가
       this.instance.interceptors.response.use(
         (response) => {
-          // 응답이 성공적일 때 처리할 로직
+          // 응답 시 로그 출력
+          console.log(`[Response] ${response.status} ${response.config.url}`, {
+            headers: response.headers,
+            data: response.data,
+          });
           return response;
         },
         async (error: AxiosError) => {
@@ -128,6 +136,27 @@ class Axios {
 
     return this.getInstance()
       .post<T>(url, data, config as AxiosRequestConfig)
+      .then((response) => response.data);
+  }
+
+  // PUT 요청
+  static put<T = unknown>(url: string, data: unknown, withToken = false) {
+    const config = {
+      headers: {
+        ...this.getInstance().defaults.headers,
+      },
+    };
+
+    if (withToken) {
+      const token = this.getCookie("accessToken");
+      if (token) {
+        config.headers!.AccessToken = token;
+        config.headers!.RefreshToken = null;
+      }
+    }
+
+    return this.getInstance()
+      .put<T>(url, data, config as AxiosRequestConfig)
       .then((response) => response.data);
   }
 
