@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 interface KeyboardModalProps {
   onKeyPress: (key: string) => void;
-  handleBadgeClick: (label: string) => void;
+  handleBadgeClick?: (label: string) => void;
   isBadge?: boolean;
 }
 

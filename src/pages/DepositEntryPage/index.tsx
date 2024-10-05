@@ -91,6 +91,7 @@ const DepositEntryPage = () => {
         right="Setting_btn"
         left="Logo"
       />
+      <Spacing size={53} />
       <div className={cx("container")}>
         <Spacing size={90} />
         <Text className={cx("txt-title")} text="전월세보증금은?" />
