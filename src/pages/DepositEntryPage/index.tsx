@@ -33,7 +33,6 @@ const DepositEntryPage = () => {
       setBottomOffset(40); // 기본 상태
     }
   }, [isInputFocused]);
-
   console.log(recoilFormData);
 
   const isInvalidValue = inputValue > 0 && (inputValue <= 100 || inputValue > 200000);
@@ -125,7 +124,8 @@ const DepositEntryPage = () => {
           bottom={bottomOffset}
           title="전월세 대출 상품 확인하기"
         />
-        {isInputFocused && <KeyboardModal onKeyPress={handleKeyPress} />}
+
+        {isInputFocused && <KeyboardModal className={cx("keyboard-container")} onKeyPress={handleKeyPress} />}
       </div>
     </>
   );

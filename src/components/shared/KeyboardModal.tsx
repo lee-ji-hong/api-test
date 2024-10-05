@@ -8,14 +8,15 @@ const cx = classNames.bind(styles);
 interface KeyboardModalProps {
   onKeyPress: (key: string) => void;
   handleBadgeClick?: (label: string) => void;
+  className?: string;
   isBadge?: boolean;
 }
 
-const KeyboardModal = ({ onKeyPress, handleBadgeClick, isBadge = false }: KeyboardModalProps) => {
+const KeyboardModal = ({ onKeyPress, handleBadgeClick, className, isBadge = false }: KeyboardModalProps) => {
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0", "⌫"];
 
   return (
-    <div className={cx("keyboard-modal")} onMouseDown={(e) => e.preventDefault()}>
+    <div className={cx(["keyboard-modal", className])} onMouseDown={(e) => e.preventDefault()}>
       {isBadge && <BadgeList className={cx("badge-list")} list={MONEY} onClick={handleBadgeClick} />}
       <div className={cx("keyboard-content")}>
         {keys.map((key) => (
