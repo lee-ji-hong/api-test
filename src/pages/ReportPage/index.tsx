@@ -3,7 +3,11 @@ import { CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useState } from "react";
+
+import Box from "@mui/material/Box";
+
 import DepositList from "@/components/shared/DepositList";
+import ProgressBar from "@/components/shared/ProgressBar";
 import ReportList from "@/components/shared/ReportList";
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
@@ -36,14 +40,24 @@ const ReportPage = () => {
   const router = useInternalRouter();
   const location = useLocation();
   const reportData = location.state?.reportData?.data;
+
+  const [sliderValue, setSliderValue] = useState(reportData?.loanAmount);
   const MAX_LENGTH = 100;
   const userInputData = useRecoilValue(formData);
   console.log(userInputData);
+
+  function valuetext(value: number) {
+    return `${value}`;
+  }
 
   const feeData: ListItem[] = [
     { label: "보증보험료", amount: reportData?.guaranteeInsuranceFee },
     { label: "인지세", amount: reportData?.stampDuty },
   ];
+
+  const handleSliderChange = (event: Event, value: number | number[]) => {
+    setSliderValue(value as number);
+  };
 
   const handleExtraCostListToggle = () => {
     setShowMoreExtraCost(!showMoreExtraCost);
@@ -113,10 +127,28 @@ const ReportPage = () => {
             <Spacing size={70} />
             <Text
               className={cx("txt-title")}
-              text={`내가 ${formatNumberWithUnits(reportData?.loanAmount / 10000)} 대출시/n약 ${formatNumber(reportData?.monthlyInterestCost)}원의 이자를 내요!`}
-              highlight={formatNumberWithUnits(reportData?.loanAmount / 10000)}
+              text={`내가 ${formatNumberWithUnits(sliderValue / 10000)} 대출시/n약 ${formatNumber(
+                (reportData?.monthlyInterestCost / reportData?.loanAmount) * sliderValue,
+              )}원의 이자를 내요!`}
+              highlight={formatNumberWithUnits(sliderValue / 10000)}
             />
-            <div>프로그레스 바 자리</div>
+            <Spacing size={40} />
+            <div>
+              <Box sx={{ width: 330 }}>
+                <ProgressBar
+                  aria-label="Temperature"
+                  defaultValue={reportData?.loanAmount}
+                  getAriaValueText={valuetext}
+                  valueLabelDisplay="auto"
+                  valueLabelFormat={(value) => `전세대출 ${formatNumberWithUnits(value / 10000)}`}
+                  step={Math.floor(reportData?.loanAmount / 5)}
+                  marks
+                  min={0}
+                  max={reportData?.loanAmount}
+                  onChange={handleSliderChange}
+                />
+              </Box>
+            </div>
           </div>
           {/* Section03 */}
           <div className={cx("box")}>
