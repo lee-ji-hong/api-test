@@ -11,19 +11,28 @@ import { Comment, CommunityDetail, LikeResponse } from "@/models";
 
 const cx = classNames.bind(styles);
 
-const CommentList: React.FC<CommunityDetail> = (props) => {
+interface CommentListProps {
+  communityDetail: CommunityDetail;
+  onCommentDeleteSuccess: () => void;
+}
+
+const CommentList: React.FC<CommentListProps> = (props) => {
   return (
     <div className={cx("containerComment")}>
-      {props.comments && props.comments.map((comment) => <CommentListItem key={comment.id} comment={comment} />)}
+      {props.communityDetail.comments &&
+        props.communityDetail.comments.map((comment) => (
+          <CommentListItem key={comment.id} comment={comment} onCommentDeleteSuccess={props.onCommentDeleteSuccess} />
+        ))}
     </div>
   );
 };
 
 interface CommentItemProps {
   comment: Comment;
+  onCommentDeleteSuccess: () => void;
 }
 
-const CommentListItem: React.FC<CommentItemProps> = ({ comment }) => {
+const CommentListItem: React.FC<CommentItemProps> = ({ comment, onCommentDeleteSuccess }) => {
   const [isCommentLiked, setIsCommentLiked] = useState(comment.like);
   const [commentLikeCount, setCommentLikeCount] = useState(comment.likes);
 
@@ -65,6 +74,8 @@ const CommentListItem: React.FC<CommentItemProps> = ({ comment }) => {
         timeAgo={comment.timeAgo}
         avatarUrl={comment.avatarUrl}
         updateDeleteAuthority={comment.updateDeleteAuthority}
+        comment={comment}
+        onCommentDeleteSuccess={() => onCommentDeleteSuccess()}
       />
       <Spacing size={8} />
       <div style={{ marginLeft: "40px" }}>

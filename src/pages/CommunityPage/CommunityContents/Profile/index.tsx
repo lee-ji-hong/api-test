@@ -4,20 +4,24 @@ import classNames from "classnames/bind";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import BottomModal from "@/components/modal/BottomModal";
+import { useState } from "react";
+import CenterModal from "@/components/modal/CenterModal";
+import Axios from "@/api/axios";
+import { Comment, LikeResponse } from "@/models";
 
 const cx = classNames.bind(styles);
-
 interface ProfileProps {
   avatarUrl: string;
   author: string;
   timeAgo: string;
   updateDeleteAuthority?: string;
-  onClose?: () => void;
-  onEdit?: () => void;
-  onDelete?: () => void;
+  comment?: Comment;
+  onCommentDeleteSuccess?: () => void;
 }
 
 const Profile: React.FC<ProfileProps> = (props) => {
+  const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
+  const [isCenterModalOpen, setIsCenterModalOpen] = useState(false);
   const isAuthor = props.updateDeleteAuthority === "ALL";
 
   // URL 유효성 검증 함수
@@ -50,12 +54,47 @@ const Profile: React.FC<ProfileProps> = (props) => {
       </div>
 
       {isAuthor && (
-        <button onClick={() => alert("dd")}>
+        <button
+          onClick={() => {
+            setIsBottomModalOpen(!isBottomModalOpen);
+          }}>
           <Image className={cx("btnMore")} imageInfo={IMAGES?.MoreButton} />
         </button>
       )}
 
-      {true && <BottomModal onClose={props.onClose!} onEdit={props.onEdit!} onDelete={props.onDelete!} />}
+      {isBottomModalOpen && (
+        <BottomModal
+          onClose={() => setIsBottomModalOpen(false)}
+          onEdit={() => {}}
+          onDelete={() => {
+            setIsBottomModalOpen(false);
+            setIsCenterModalOpen(true);
+          }}
+        />
+      )}
+
+      {isCenterModalOpen && (
+        <CenterModal
+          message={`댓글을 삭제할까요?\n댓글을 삭제하면 모든 데이터가 삭제되고\n다시 볼 수 없어요.`}
+          subMessage="댓글을 삭제하면 모든 데이터가 삭제되고 다시 볼 수 없어요."
+          confirmLabel="확인"
+          cancelLabel="취소"
+          onCancel={() => setIsCenterModalOpen(false)}
+          onConfirm={async () => {
+            try {
+              const res: LikeResponse = await Axios.delete(`/api/v1/comment/${props.comment?.id}`, true);
+              if (res.code === 200) {
+                console.log("댓글 삭제 성공");
+                props.onCommentDeleteSuccess && props.onCommentDeleteSuccess();
+              } else {
+                console.error("댓글 삭제 실패");
+              }
+            } catch (error) {
+              console.error("댓글 삭제 실패", error);
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

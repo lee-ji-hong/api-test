@@ -18,6 +18,7 @@ $modal-border-radius: 16px;
   justify-content: center;
   align-items: center; // 세로축 가운데 정렬
   min-height: 100vh; // 부모 컨테이너가 화면 전체 높이 차지
+  z-index: 1000; // z-index를 높게 설정하여 다른 컨텐츠 위에 표시
 
   .modal-content {
     background-color: $modal-background-color;

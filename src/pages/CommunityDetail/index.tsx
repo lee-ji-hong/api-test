@@ -128,7 +128,7 @@ const CommunityDetailPage = () => {
         <Spacing size={9} />
         <Spacing size={12} />
 
-        {post && <WriteBody {...post} />}
+        {post && <WriteBody communityDetail={post} handleCommentUpdate={handleCommentUpdate} />}
 
         {/* 좋아요, 댓글 */}
         <WriteFooter postId={postId} author={post?.author} onCommentAdded={handleCommentUpdate} />
@@ -192,26 +192,36 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ isAuthor, isModal, setIsModal
   );
 };
 
-const WriteBody: React.FC<CommunityDetail> = (props) => {
-  const [isLiked, setIsLiked] = useState(props.like);
-  const [likeCount, setLikeCount] = useState(props.likes);
+interface WriteBodyProps {
+  communityDetail: CommunityDetail;
+  handleCommentUpdate: () => void;
+}
+
+const WriteBody: React.FC<WriteBodyProps> = (props) => {
+  const communityDetail = props.communityDetail;
+  const [isLiked, setIsLiked] = useState(communityDetail.like);
+  const [likeCount, setLikeCount] = useState(communityDetail.likes);
 
   return (
     <div className={cx("container-body")}>
-      <Profile author={props.author} timeAgo={props.timeAgo} avatarUrl={props.avatarUrl} />
+      <Profile
+        author={communityDetail.author}
+        timeAgo={communityDetail.timeAgo}
+        avatarUrl={communityDetail.avatarUrl}
+      />
       <Spacing size={12} />
-      <Typography className={cx("txt-title")}>{props.title}</Typography>
+      <Typography className={cx("txt-title")}>{communityDetail.title}</Typography>
 
       <Spacing size={8} />
-      <Typography className={cx("txt-content")}>{props.content}</Typography>
+      <Typography className={cx("txt-content")}>{communityDetail.content}</Typography>
 
       {/* 대출 정보 */}
       <Spacing size={16} />
-      {props.loanAdviceSummaryReport && <LoanCard {...props.loanAdviceSummaryReport} />}
+      {communityDetail.loanAdviceSummaryReport && <LoanCard {...communityDetail.loanAdviceSummaryReport} />}
 
       <Spacing size={16} />
       {/* 이미지 */}
-      {props.imageUrl && <img src={props.imageUrl} alt="post" className={cx("imgPost")} />}
+      {communityDetail.imageUrl && <img src={communityDetail.imageUrl} alt="post" className={cx("imgPost")} />}
 
       <div className={cx("containerHeartComment")}>
         {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
@@ -221,7 +231,7 @@ const WriteBody: React.FC<CommunityDetail> = (props) => {
             switch (isLiked) {
               case true:
                 try {
-                  const res: LikeResponse = await CommunityService.requestUnlike(props.id);
+                  const res: LikeResponse = await CommunityService.requestUnlike(communityDetail.id);
                   if (res.code === 200) {
                     setIsLiked(!isLiked);
                     setLikeCount(likeCount - 1);
@@ -234,7 +244,7 @@ const WriteBody: React.FC<CommunityDetail> = (props) => {
                 break;
               default:
                 try {
-                  const res: LikeResponse = await CommunityService.requestLike(props.id);
+                  const res: LikeResponse = await CommunityService.requestLike(communityDetail.id);
                   if (res.code === 200) {
                     setIsLiked(!isLiked);
                     setLikeCount(likeCount + 1);
@@ -253,11 +263,16 @@ const WriteBody: React.FC<CommunityDetail> = (props) => {
         <SpacingWidth size={15} />
         {/*  */}
 
-        <Comment commentCnt={props.commentCount} onClick={() => {}} />
+        <Comment commentCnt={communityDetail.commentCount} onClick={() => {}} />
       </div>
 
       {/* 댓글 리스트 */}
-      <CommentList {...props} />
+      <CommentList
+        {...props}
+        onCommentDeleteSuccess={() => {
+          props.handleCommentUpdate();
+        }}
+      />
     </div>
   );
 };
