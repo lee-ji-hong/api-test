@@ -24,7 +24,13 @@ const CenterModal: React.FC<CenterModalProps> = (props) => {
           ))}
         </p>
         <div className={styles["modal-buttons"]}>
-          <button className={styles["cancel-button"]} onClick={props.onCancel}>
+          <button
+            className={styles["cancel-button"]}
+            onClick={(event) => {
+              console.log(event);
+              event.stopPropagation(); // 클릭 이벤트 전파 중지
+              props.onCancel();
+            }}>
             {props.cancelLabel}
           </button>
           <button className={styles["confirm-button"]} onClick={props.onConfirm}>

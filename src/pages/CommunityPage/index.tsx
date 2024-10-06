@@ -10,13 +10,16 @@ import FloatingButton from "./FloatingButton";
 import { useNavigate } from "react-router-dom";
 import Axios from "@/api/axios";
 import { CommunityListResponse } from "@/api/model/CommunityResponse";
-import { CommunityDetail } from "@/models";
+import { CommunityDetail, LikeResponse } from "@/models";
+import CenterModal from "@/components/modal/CenterModal";
+import { reqLogin } from "@/api/kakao-api";
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
   const [contentItems, setContentItems] = useState<CommunityListResponse | null>(null);
   const [hasMore, setHasMore] = useState(true); // 더 이상 추가로 로드하지 않음
   const [page, setPage] = useState(0); // 페이지 번호 상태
+  const [isShowLoginModal, setIsShowLoginModal] = useState(false);
 
   const navigator = useNavigate();
 
@@ -127,11 +130,31 @@ const CommunityPage = () => {
       {InfiniteScrollComponent()}
 
       <FloatingButton
-        onClick={() => {
-          console.log("플로팅 버튼 클릭");
-          // navigator("/community/write", );
-          navigator("/community/write", { state: { communityDetail: createCommunityDetail() }, replace: true });
+        onClick={async () => {
+          try {
+            const response = await Axios.get<LikeResponse>(`/login/oauth2/kakao/health-check`, true);
+            console.log("코드?", response.code);
+            navigator("/community/write", { state: { communityDetail: createCommunityDetail() }, replace: true });
+          } catch (error) {
+            console.log("이게 왜나와");
+            setIsShowLoginModal(true);
+          }
         }}></FloatingButton>
+
+      {isShowLoginModal && (
+        <CenterModal
+          message={`로그인이 필요합니다.\n로그인 페이지로 이동하시겠습니까?`}
+          subMessage=""
+          confirmLabel="확인"
+          cancelLabel="취소"
+          onCancel={() => {
+            setIsShowLoginModal(false);
+          }}
+          onConfirm={() => {
+            reqLogin();
+          }}
+        />
+      )}
     </div>
   );
 };

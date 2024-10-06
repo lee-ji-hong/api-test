@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 import { Post } from "@/api/model/CommunityResponse";
 import { useState } from "react";
 import CommunityService from "@/api/service/CommunityService";
+import Axios from "@/api/axios";
+import CenterModal from "@/components/modal/CenterModal";
+import { reqLogin } from "@/api/kakao-api";
+import { LikeResponse } from "@/models";
 
 const cx = classNames.bind(styles);
 
@@ -17,11 +21,23 @@ const Contents: React.FC<Post> = (props) => {
   const navigator = useNavigate();
   const [isLiked, setIsLiked] = useState(props.like);
   const [likeCount, setLikeCount] = useState(props.likes);
+  const [isShowLoginModal, setIsShowLoginModal] = useState(false);
   return (
-    <div className={cx("container")}>
+    <div
+      onClick={async () => {
+        try {
+          const response = await Axios.get<LikeResponse>(`/login/oauth2/kakao/health-check`, true);
+          console.log("코드?", response.code);
+          navigator("/community/detail", { state: { postId: props.id } });
+        } catch (error) {
+          console.log("이게 왜나와");
+          setIsShowLoginModal(true);
+        }
+      }}
+      className={cx("container")}>
       {/* 글제목 및 내용 */}
       <div className={cx("textContainer")}>
-        <div onClick={() => navigator("/community/detail", { state: { postId: props.id } })}>
+        <div>
           <Typography className={cx("txt-title")}>{props.title}</Typography>
           <Typography className={cx("txtContent")}>{props.content}</Typography>
         </div>
@@ -82,6 +98,21 @@ const Contents: React.FC<Post> = (props) => {
           }}
         />
       </div>
+
+      {isShowLoginModal && (
+        <CenterModal
+          message={`로그인이 필요합니다.\n로그인 페이지로 이동하시겠습니까?`}
+          subMessage=""
+          confirmLabel="확인"
+          cancelLabel="취소"
+          onCancel={() => {
+            setIsShowLoginModal(false);
+          }}
+          onConfirm={() => {
+            reqLogin();
+          }}
+        />
+      )}
     </div>
   );
 };
