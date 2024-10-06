@@ -16,7 +16,7 @@ class Axios {
   static getInstance() {
     if (!this.instance) {
       this.instance = axios.create({
-        baseURL: import.meta.env.VITE_BASE_URL,
+        baseURL: import.meta.env.VITE_APP_BASE_URL,
         headers: {
           "Content-Type": "application/json",
         },
@@ -27,7 +27,7 @@ class Axios {
       this.instance.interceptors.request.use(
         (config) => {
           // 요청 시 로그 출력
-          console.log(`[Request] ${config.method?.toUpperCase()} ${import.meta.env.VITE_BASE_URL}${config.url}`, {
+          console.log(`[Request] ${config.method?.toUpperCase()} ${import.meta.env.VITE_APP_BASE_URL}${config.url}`, {
             headers: config.headers,
             data: config.data,
           });
@@ -43,7 +43,7 @@ class Axios {
       this.instance.interceptors.response.use(
         (response) => {
           // 응답 시 로그 출력
-          console.log(`[Response] ${response.status} ${import.meta.env.VITE_BASE_URL}${response.config.url}`, {
+          console.log(`[Response] ${response.status} ${import.meta.env.VITE_APP_BASE_URL}${response.config.url}`, {
             headers: response.headers,
             data: response.data,
           });
