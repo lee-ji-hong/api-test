@@ -15,7 +15,12 @@ const Heart: React.FC<HeartProps> = (props) => {
   const cx = classNames.bind(styles);
 
   return (
-    <div className={cx("container")} onClick={props.onClick}>
+    <div
+      className={cx("container")}
+      onClick={(event) => {
+        event.stopPropagation();
+        props.onClick();
+      }}>
       {props.isActive ? (
         <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIconActive} />
       ) : (
