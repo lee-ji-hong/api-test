@@ -42,13 +42,14 @@ const RecentReportBody: React.FC<RecentReportBodyProps> = ({ from, communityDeta
 
   return (
     <div>
-      {loanAdviceList.map((loanAdvice: LoanAdviceSummaryReport) => {
-        return (
-          <div key={loanAdvice.loanAdviceResultId} onClick={() => selectLoanAdvice(loanAdvice)}>
-            {<LoanCard {...loanAdvice}></LoanCard>} <Spacing size={16} />
-          </div>
-        );
-      })}
+      {loanAdviceList &&
+        loanAdviceList.map((loanAdvice: LoanAdviceSummaryReport) => {
+          return (
+            <div key={loanAdvice.loanAdviceResultId} onClick={() => selectLoanAdvice(loanAdvice)}>
+              {<LoanCard {...loanAdvice}></LoanCard>} <Spacing size={16} />
+            </div>
+          );
+        })}
     </div>
   );
 };
