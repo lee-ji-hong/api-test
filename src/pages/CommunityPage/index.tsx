@@ -16,12 +16,14 @@ import RoundButton from "@/components/shared/RoundButton";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import { reqLogin } from "@/api/remotes";
 const cx = classNames.bind(styles);
+
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
   const [contentItems, setContentItems] = useState<CommunityListResponse | null>(null);
   const [hasMore, setHasMore] = useState(true); // 더 이상 추가로 로드하지 않음
   const [page, setPage] = useState(0); // 페이지 번호 상태
   const [isShowLoginModal, setIsShowLoginModal] = useState(false);
+  let tokenVaildation = false;
 
   const navigator = useNavigate();
 
@@ -46,6 +48,15 @@ const CommunityPage = () => {
     };
   }
 
+  async function requestCheckTokenValidation() {
+    try {
+      await Axios.get<LikeResponse>(`/login/oauth2/kakao/health-check`, true);
+      tokenVaildation = true;
+    } catch (error) {
+      tokenVaildation = false;
+    }
+  }
+
   const InfiniteScrollComponent = () => {
     useEffect(() => {
       setContentItems(null);
@@ -55,9 +66,11 @@ const CommunityPage = () => {
 
     // 데이터를 처음 불러오는 함수
     const loadInitialData = async () => {
+      await requestCheckTokenValidation();
       try {
         const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
-        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=0&size=5`, false);
+        console.log("tokenVaildation", tokenVaildation);
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=0&size=5`, tokenVaildation);
         setContentItems(res); // 초기 데이터를 설정
         setHasMore(res.data.length > 0); // 데이터가 더 있는지 확인
       } catch (error) {
@@ -71,9 +84,11 @@ const CommunityPage = () => {
 
     // 더 많은 데이터를 불러오는 함수
     const fetchMoreData = async () => {
+      await requestCheckTokenValidation();
       try {
         const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
-        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=${page + 1}&size=5`, false);
+        console.log("tokenVaildation", tokenVaildation);
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=${page + 1}&size=5`, tokenVaildation);
         if (res.data.length > 0) {
           setContentItems((prevItems) => ({
             ...prevItems,
@@ -97,7 +112,9 @@ const CommunityPage = () => {
         loader={<h4>Loading...</h4>} // 로딩 상태, 필요 없으면 제거 가능
         endMessage={<p>모두 불러왔습니다.</p>} // 끝났을 때 메시지
       >
-        {contentItems?.data.map((data, index) => <CommunityContents key={index} {...data} />)}
+        {contentItems?.data.map((data, index) => (
+          <CommunityContents key={index} {...data} />
+        ))}
       </InfiniteScroll>
     );
   };
@@ -131,11 +148,9 @@ const CommunityPage = () => {
       <FloatingButton
         onClick={async () => {
           try {
-            const response = await Axios.get<LikeResponse>(`/login/oauth2/kakao/health-check`, true);
-            console.log("코드?", response.code);
+            await Axios.get<LikeResponse>(`/login/oauth2/kakao/health-check`, true);
             navigator("/community/write", { state: { communityDetail: createCommunityDetail() }, replace: true });
           } catch (error) {
-            console.log("이게 왜나와");
             setIsShowLoginModal(true);
           }
         }}></FloatingButton>
