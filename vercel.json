@@ -5,6 +5,11 @@
       "destination": "http://52.78.180.147:8080/api/:path*"
     },
     {
+      "source": "/oauth2/:path*",
+      "destination": "http://52.78.180.147:8080/oauth2/:path*"
+    },
+
+    {
       "source": "/(.*)",
       "destination": "/"
     }
