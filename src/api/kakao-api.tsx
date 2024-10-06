@@ -1,5 +1,7 @@
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+
 const reqLogin = () => {
-  window.location.href = `/oauth2/authorization/kakao`;
+  window.location.href = `${baseUrl}/oauth2/authorization/kakao`;
 };
 
 export { reqLogin };
