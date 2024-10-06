@@ -43,7 +43,7 @@ export const getUnitForField = (fieldName: string, fieldValue: FieldValues) => {
     case "spouseAnnualIncome":
       return `${formatNumberWithUnits(Number(fieldValue))}`;
     case "age":
-      return `${fieldValue}살`;
+      return `${fieldValue}세`;
     case "maritalStatus":
       return `${MaritalStatusLabels[fieldValue as MaritalStatus]}`;
     case "childStatus":

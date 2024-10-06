@@ -14,6 +14,8 @@ import List from "@/components/shared/List";
 import { useSendLoanAdviceReport } from "@/hooks/queries/useSendLoanAdviceReport";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { getUnitForField } from "@/utils/loanAdviceValues";
+import { validateFormData } from "@/utils/validateFormData";
+
 import { sendLoanAdviceReportRequest } from "@/models";
 import { formData } from "@/recoil/atoms";
 
@@ -33,15 +35,18 @@ export const LoanInfoEntryPage = () => {
     control,
     handleSubmit,
     formState: { isSubmitting },
+    setFocus,
     getValues,
   } = useForm({
     defaultValues: recoilFormData,
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async () => {
-    setLoading(true);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
+    if (!validateFormData(data, setFocus)) return;
 
+    setLoading(true);
     const updatedFormData = {
       ...recoilFormData,
       rentalDeposit: (recoilFormData.rentalDeposit ?? 0) * 10000,
@@ -92,7 +97,7 @@ export const LoanInfoEntryPage = () => {
         <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
           <List className={cx("list-wrap")}>
             <>
-              {INPUTS?.map((item) => {
+              {INPUTS?.map((item, ...rest) => {
                 const Component = item.component;
                 const value = getValues(item.name as keyof sendLoanAdviceReportRequest);
                 const value2 = getUnitForField(item.name, value !== undefined ? value : "");
@@ -120,9 +125,10 @@ export const LoanInfoEntryPage = () => {
                         modalTitle={item.modalTitle}
                         modalSubTitle={item.modalSubTitle}
                         options={item.options}
-                        buttonText={item.modalButton}
+                        buttonText={item?.modalButton}
                         min={item.limit?.min}
                         max={item.limit?.max}
+                        {...rest}
                       />
                     )}
                   </React.Fragment>

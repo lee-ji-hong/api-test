@@ -15,9 +15,9 @@ interface BottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const BottomSheet = forwardRef<HTMLInputElement, BottomSheetProps>(
-  ({ modalTitle, buttonText, onClose, children }) => {
+  ({ modalTitle, buttonText, onClose, children }, ref) => {
     return (
-      <div className={cx("back-drop")}>
+      <div ref={ref} className={cx("back-drop")}>
         <div className={cx("container")} aria-label="alert-modal">
           <Text className={cx("txt-title")} text={modalTitle} />
           {children}
