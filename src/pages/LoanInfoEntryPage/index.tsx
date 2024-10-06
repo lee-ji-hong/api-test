@@ -28,7 +28,6 @@ export const LoanInfoEntryPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
-  const [currentInputIndex, setCurrentInputIndex] = useState(1);
   const [loading, setLoading] = useState(false);
   const { loanAdviceReport } = useSendLoanAdviceReport();
   const {
@@ -43,8 +42,7 @@ export const LoanInfoEntryPage = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
-    if (!validateFormData(data, setFocus)) return;
+    if (!validateFormData(data, setFocus, handleRowClick)) return;
 
     setLoading(true);
     const updatedFormData = {
@@ -71,16 +69,18 @@ export const LoanInfoEntryPage = () => {
     setSelectedItem(null);
   };
 
-  const handleInputComplete = (name: string) => {
+  const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
     setRecoilFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-
-    if (currentInputIndex < INPUTS.length - 1) {
-      setCurrentInputIndex(currentInputIndex + 1);
-    }
+    console.log(id);
+    // if (!value) {
+    //   handleRowClick(id); // 현재 아이템 모달 열기
+    // } else if (id + 1 < INPUTS.length) {
+    //   handleRowClick(id + 1); // 다음 아이템 모달 열기
+    // }
   };
 
   if (loading) return <FullScreenMessage type="loading" />;
@@ -120,7 +120,7 @@ export const LoanInfoEntryPage = () => {
                         control={control}
                         onClose={() => {
                           handleModalClose();
-                          handleInputComplete(item.name);
+                          handleInputComplete(item.name, item.id);
                         }}
                         modalTitle={item.modalTitle}
                         modalSubTitle={item.modalSubTitle}
@@ -137,15 +137,7 @@ export const LoanInfoEntryPage = () => {
             </>
           </List>
           <Spacing size={90} />
-          <Button
-            className={cx("button-wrap")}
-            title="리포트 확인하기"
-            type="submit"
-            disabled={
-              isSubmitting
-              // || currentInputIndex < INPUTS.length - 1
-            }
-          />
+          <Button className={cx("button-wrap")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
         </form>
       </div>
       <DevTool control={control} />
