@@ -27,10 +27,6 @@ export default defineConfig({
         target: "http://52.78.35.9:8080/",
         changeOrigin: true,
       },
-      "/oauth2": {
-        target: "http://52.78.35.9:8080/",
-        changeOrigin: true,
-      },
     },
   },
 });
