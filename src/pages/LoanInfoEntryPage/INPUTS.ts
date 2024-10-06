@@ -2,8 +2,6 @@ import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
 import InputController from "@/components/sections/LoanInfoEntry/InputController";
 import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEmployeeController";
 import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
-// import maritalStatusController from "@/components/sections/LoanInfoEntry/maritalStatusController";
-// import rentHousingTypeController from "@/components/sections/LoanInfoEntry/rentHousingTypeController";
 import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
 
 export const INPUTS = [
@@ -73,7 +71,6 @@ export const INPUTS = [
       { label: "결혼 예정", value: "ENGAGED" },
     ],
     component: isSMEEmployeeController,
-    // component: maritalStatusController,
   },
   {
     id: 6,
@@ -162,7 +159,6 @@ export const INPUTS = [
       { label: "단독/다가구", value: "FAMILY_HOUSE" },
     ],
     component: isSMEEmployeeController,
-    // component: rentHousingTypeController,
   },
   {
     id: 13,
