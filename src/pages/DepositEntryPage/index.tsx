@@ -101,7 +101,7 @@ const DepositEntryPage = () => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           error={isInvalidValue ? true : false}
-          value={inputValue === 0 ? "" : formatNumber(inputValue)}
+          value={inputValue === 0 ? "" : `${formatNumber(inputValue)}만원`}
           onChange={handleInputChange}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*", readOnly: true }}
           className={cx({ shake: isInvalidValue })}
