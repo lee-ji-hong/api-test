@@ -1,22 +1,15 @@
-import { Typography } from "@mui/material";
+import Axios from "@/api/axios";
+import Spacing from "@/components/shared/Spacing";
 import classNames from "classnames/bind";
 import styles from "./CommunityDetail.module.scss";
-import Image from "@/components/shared/Image";
-import { IMAGES } from "@/constants/images";
-import SpacingWidth from "@/components/shared/SpacingWidth";
 import { useLocation, useNavigate } from "react-router-dom";
-import Profile from "../CommunityPage/CommunityContents/Profile";
-import Spacing from "@/components/shared/Spacing";
-import LoanCard from "../CommunityCommonComponent/LoanCard";
-import Heart from "../CommunityCommonComponent/Heart/index";
-import Comment from "../CommunityCommonComponent/Comment";
-import React, { useEffect, useState } from "react";
-import Axios from "@/api/axios";
-import CommunityService from "@/api/service/CommunityService";
+import { useEffect, useState } from "react";
 import { useGetCommunityDetail } from "@/hooks/queries/useGetCommunityDetail";
-import FullScreenMessage from "@/components/sections/FullScreenMessage";
-import CommentList from "./Comment";
 import { CommunityDetail, CommunityDetailResponse, LikeResponse } from "@/models";
+import FullScreenMessage from "@/components/sections/FullScreenMessage";
+import DetailFooter from "./DetailFooter";
+import DetailHeader from "./DetailHeader";
+import DetailBody from "./DetailBody";
 import BottomModal from "@/components/modal/BottomModal";
 import CenterModal from "@/components/modal/CenterModal";
 
@@ -119,7 +112,7 @@ const CommunityDetailPage = () => {
   return (
     <div className={cx("container")}>
       <Spacing size={9} />
-      <WriteHeader
+      <DetailHeader
         isAuthor={communityDetail?.updateDeleteAuthority === "ALL"}
         isModal={isModalOpen}
         setIsModal={setIsModalOpen}
@@ -128,11 +121,12 @@ const CommunityDetailPage = () => {
         <Spacing size={9} />
         <Spacing size={12} />
 
-        {post && <WriteBody communityDetail={post} handleCommentUpdate={handleCommentUpdate} />}
+        {post && <DetailBody communityDetail={post} handleCommentUpdate={handleCommentUpdate} />}
 
         {/* 좋아요, 댓글 */}
-        <WriteFooter postId={postId} author={post?.author} onCommentAdded={handleCommentUpdate} />
+        <DetailFooter postId={postId} author={post?.author} onCommentAdded={handleCommentUpdate} />
 
+        <Spacing size={24} />
         {isModalOpen && (
           <BottomModal onClose={handleCloseModal} onEdit={() => handleEdit(communityDetail)} onDelete={handleDelete} />
         )}
@@ -158,157 +152,6 @@ const CommunityDetailPage = () => {
             onConfirm={handleCommentModalConfirm}
           />
         )}
-      </div>
-    </div>
-  );
-};
-
-interface WriteHeaderProps {
-  isAuthor: boolean; // 모달 상태
-  isModal: boolean; // 모달 상태
-  setIsModal: (value: boolean) => void; // 모달 상태를 설정하는 함수
-}
-
-const WriteHeader: React.FC<WriteHeaderProps> = ({ isAuthor, isModal, setIsModal }) => {
-  const navigate = useNavigate();
-
-  // 모달 상태를 on/off 토글하는 함수
-  const toggleModal = () => {
-    setIsModal(!isModal); // 현재 모달 상태의 반대값으로 설정
-  };
-
-  return (
-    <div className={cx("container-write-header")}>
-      <button onClick={() => navigate("/community")}>
-        <Image className={cx("btn-write-back")} imageInfo={IMAGES?.BackButton} />
-      </button>
-
-      {isAuthor && (
-        <button onClick={toggleModal}>
-          <Image className={cx("btn-write-back")} imageInfo={IMAGES?.MoreButton} />
-        </button>
-      )}
-    </div>
-  );
-};
-
-interface WriteBodyProps {
-  communityDetail: CommunityDetail;
-  handleCommentUpdate: () => void;
-}
-
-const WriteBody: React.FC<WriteBodyProps> = (props) => {
-  const communityDetail = props.communityDetail;
-  const [isLiked, setIsLiked] = useState(communityDetail.like);
-  const [likeCount, setLikeCount] = useState(communityDetail.likes);
-
-  return (
-    <div className={cx("container-body")}>
-      <Profile
-        author={communityDetail.author}
-        timeAgo={communityDetail.timeAgo}
-        avatarUrl={communityDetail.avatarUrl}
-      />
-      <Spacing size={12} />
-      <Typography className={cx("txt-title")}>{communityDetail.title}</Typography>
-
-      <Spacing size={8} />
-      <Typography className={cx("txt-content")}>{communityDetail.content}</Typography>
-
-      {/* 대출 정보 */}
-      <Spacing size={16} />
-      {communityDetail.loanAdviceSummaryReport && <LoanCard {...communityDetail.loanAdviceSummaryReport} />}
-
-      <Spacing size={16} />
-      {/* 이미지 */}
-      {communityDetail.imageUrl && <img src={communityDetail.imageUrl} alt="post" className={cx("imgPost")} />}
-
-      <div className={cx("containerHeartComment")}>
-        {/* <Image className={cx("img-like")} imageInfo={IMAGES?.HeartIcon} /> */}
-        <Heart
-          commentCnt={likeCount}
-          onClick={async () => {
-            switch (isLiked) {
-              case true:
-                try {
-                  const res: LikeResponse = await CommunityService.requestUnlike(communityDetail.id);
-                  if (res.code === 200) {
-                    setIsLiked(!isLiked);
-                    setLikeCount(likeCount - 1);
-                  } else {
-                    console.log("Failed to like post:", res);
-                  }
-                } catch (error) {
-                  console.error("Failed to like post:", error);
-                }
-                break;
-              default:
-                try {
-                  const res: LikeResponse = await CommunityService.requestLike(communityDetail.id);
-                  if (res.code === 200) {
-                    setIsLiked(!isLiked);
-                    setLikeCount(likeCount + 1);
-                  } else {
-                    console.log("Failed to like post:", res);
-                  }
-                } catch (error) {
-                  console.error("Failed to like post:", error);
-                }
-                break;
-            }
-          }}
-          isActive={isLiked}
-        />
-
-        <SpacingWidth size={15} />
-        {/*  */}
-
-        <Comment commentCnt={communityDetail.commentCount} onClick={() => {}} />
-      </div>
-
-      {/* 댓글 리스트 */}
-      <CommentList
-        {...props}
-        onCommentDeleteSuccess={() => {
-          props.handleCommentUpdate();
-        }}
-      />
-    </div>
-  );
-};
-
-interface WriteFooterProps {
-  postId: number;
-  author: string | undefined;
-  onCommentAdded: () => void;
-}
-
-const WriteFooter: React.FC<WriteFooterProps> = ({ postId, author, onCommentAdded }) => {
-  const [commentContent, setCommentContent] = useState(""); // 댓글 내용을 저장할 상태
-
-  const requestWriteComment = async () => {
-    try {
-      const res = await Axios.post(`/api/v1/comment/${postId}`, { postId: postId, content: commentContent }, true);
-      console.log("댓글 작성 성공", res);
-      onCommentAdded(); // 댓글 작성 후 부모 컴포넌트에게 알림
-      setCommentContent(""); // 댓글 작성 후 입력창 초기화
-    } catch (error) {
-      console.error("댓글 작성 실패", error);
-    }
-  };
-  return (
-    <div className={cx("containerFooter")}>
-      <div className={cx("containerInputbox")}>
-        <input
-          type="text"
-          placeholder={`${author}님의 생각을 댓글로 남겨주세요.`}
-          className={cx("inputComment")}
-          value={commentContent}
-          onChange={(e) => setCommentContent(e.target.value)}
-        />
-      </div>
-      <div onClick={requestWriteComment}>
-        <Typography className={cx("txtComment")}>등록</Typography>
       </div>
     </div>
   );

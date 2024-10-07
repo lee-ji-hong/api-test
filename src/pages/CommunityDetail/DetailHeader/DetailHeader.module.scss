@@ -1,0 +1,26 @@
+.container-write-header {
+  display: flex;
+  height: 44px;
+  background-color: white;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+
+  .btn-write-back {
+    width: 26px;
+    height: 26px;
+    color: black;
+  }
+  .btn-write-complete {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+
+    &.active {
+      color: black;
+    }
+    &.inactive {
+      color: #dadae1;
+    }
+  }
+}

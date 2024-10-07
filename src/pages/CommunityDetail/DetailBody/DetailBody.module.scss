@@ -1,0 +1,97 @@
+.container-body {
+  background-color: white;
+  flex: 10;
+  // background-color: rgb(242, 255, 127);
+  display: block;
+  width: 100%;
+
+  .containerComment {
+    margin-top: 10px;
+    .txtComment {
+      font-size: 16px;
+      font-weight: 400;
+      color: #333347;
+      line-height: 24px;
+      padding: 13px;
+    }
+  }
+
+  .txt-title {
+    width: 100%;
+    height: 72px;
+    font-size: 24px;
+    color: black;
+    font-weight: 600;
+    line-height: 36px;
+  }
+  .txt-content {
+    width: 100%;
+    font-size: 16px;
+    color: black;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .input-area {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    outline: none;
+    line-height: 28px;
+
+    background-color: white;
+
+    &.gray {
+      color: #dadae1;
+    }
+
+    &.black {
+      color: black;
+    }
+  }
+  .txt-limit-number {
+    position: absolute;
+    text-align: right;
+    bottom: 100px;
+    right: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #dadae1;
+  }
+
+  .containerHeartComment {
+    // background-color: rgb(170, 196, 188);
+    width: 100%;
+    height: 48px;
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+
+    .container-img-footer {
+      display: flex;
+      align-items: center;
+    }
+
+    .img-picture {
+      width: 20px;
+      height: 20px;
+    }
+    .img-doc {
+      width: 20px;
+      height: 20px;
+      margin-right: 20px;
+    }
+    .img-keyboard {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .imgPost {
+    width: 100%;
+    height: auto;
+
+    border-radius: 10px;
+  }
+}
