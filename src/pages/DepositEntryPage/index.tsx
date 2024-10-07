@@ -81,9 +81,6 @@ const DepositEntryPage = () => {
     simpleRentalProduct({ rentalDeposit: adjustedValue });
   };
 
-  const height = window.innerHeight * 0.4;
-  console.log(height);
-
   return (
     <>
       <Header
