@@ -18,7 +18,7 @@ interface UserInfoProps<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
   modalTitle?: string;
-  buttonText?: string;
+  buttonText: string;
   onClose: () => void;
 }
 
