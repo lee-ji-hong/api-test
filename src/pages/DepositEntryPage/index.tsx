@@ -28,9 +28,9 @@ const DepositEntryPage = () => {
 
   useEffect(() => {
     if (isInputFocused) {
-      setBottomOffset(295); // 모달이 나타날 때
+      setBottomOffset(window.innerHeight * 0.4 + 15);
     } else {
-      setBottomOffset(60); // 기본 상태
+      setBottomOffset(70);
     }
   }, [isInputFocused]);
   console.log(recoilFormData);
@@ -81,6 +81,9 @@ const DepositEntryPage = () => {
     simpleRentalProduct({ rentalDeposit: adjustedValue });
   };
 
+  const height = window.innerHeight * 0.4;
+  console.log(height);
+
   return (
     <>
       <Header
@@ -115,18 +118,31 @@ const DepositEntryPage = () => {
           className={cx("txt-sub", { "text-alert": isInvalidValue })}
           text={inputValue === 0 ? "" : isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
         />
-        <Spacing size={38} />
+        <Spacing size={15} />
         <BadgeList list={MONEY} onClick={handleChangeValue} />
-        <Button
-          className={cx("button-wrap")}
-          subClassName={cx("button-container")}
-          disabled={!inputValue || isInvalidValue}
-          onClick={() => handleNavigate(inputValue)}
-          bottom={bottomOffset}
-          title="전월세 대출 상품 확인하기"
-        />
 
-        {isInputFocused && <KeyboardModal className={cx("keyboard-container")} onKeyPress={handleKeyPress} />}
+        {!isInputFocused ? (
+          <Button
+            className={cx("button-wrap")}
+            subClassName={cx("button-container")}
+            disabled={!inputValue || isInvalidValue}
+            onClick={() => handleNavigate(inputValue)}
+            bottom={bottomOffset}
+            title="전월세 대출 상품 확인하기"
+          />
+        ) : (
+          <div>
+            <Button
+              className={cx("button-wrap-focus")}
+              subClassName={cx("button-container")}
+              disabled={!inputValue || isInvalidValue}
+              onClick={() => handleNavigate(inputValue)}
+              bottom={bottomOffset}
+              title="전월세 대출 상품 확인하기"
+            />
+            <KeyboardModal className={cx("keyboard-container")} onKeyPress={handleKeyPress} />
+          </div>
+        )}
       </div>
     </>
   );
