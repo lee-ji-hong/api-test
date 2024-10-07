@@ -16,7 +16,7 @@ class Axios {
   static getInstance() {
     if (!this.instance) {
       this.instance = axios.create({
-        baseURL: import.meta.env.VITE_APP_BASE_URL,
+        baseURL: "",
         headers: {
           "Content-Type": "application/json",
         },
