@@ -10,7 +10,7 @@ interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
   modalTitle?: string;
-  buttonText?: string;
+  buttonText: string;
   min?: Limit;
   max?: Limit;
   onClose: () => void;

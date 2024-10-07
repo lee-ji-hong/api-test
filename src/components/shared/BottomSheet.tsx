@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 interface BottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
   modalTitle?: string;
-  buttonText?: string;
+  buttonText: string;
   children: React.ReactNode;
   onClose: () => void;
 }

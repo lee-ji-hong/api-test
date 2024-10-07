@@ -48,13 +48,13 @@ export const validateFormData = (
     handleRowClick(8);
     return false;
   }
-  if (!isSMEEmployee) {
+  if (isSMEEmployee === undefined) {
     alert("중소기업재직여부를 입력해주세요.");
     setFocus("isSMEEmployee");
     handleRowClick(9);
     return false;
   }
-  if (!isNetAssetOver345M) {
+  if (isNetAssetOver345M === undefined) {
     alert("순자산3.45억초과여부를 입력해주세요.");
     setFocus("isNetAssetOver345M");
     handleRowClick(10);

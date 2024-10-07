@@ -56,7 +56,10 @@ const ReportPage = () => {
   ];
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
-    setSliderValue(value as number);
+    console.log(event);
+    if (event) {
+      setSliderValue(value as number);
+    }
   };
 
   const handleExtraCostListToggle = () => {
