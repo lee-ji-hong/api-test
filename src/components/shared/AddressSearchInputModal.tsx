@@ -8,7 +8,7 @@ import { useSendAddressSearch } from "@/hooks/queries/useSendAddressSearch";
 import { formData } from "@/recoil/atoms";
 import { AddressInfo, sendLoanAdviceReportRequest } from "@/models";
 import classNames from "classnames/bind";
-import styles from "./InputModal.module.scss";
+import styles from "./AddressSearchInputModal.module.scss";
 const cx = classNames.bind(styles);
 
 interface AddressProps extends InputHTMLAttributes<HTMLInputElement> {
