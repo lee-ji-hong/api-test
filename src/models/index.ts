@@ -42,6 +42,11 @@ export interface sendaddressSearchRequest {
   keyword: string;
 }
 
+export interface sendHousingInfoRequest {
+  districtCode: string;
+  jibun: string;
+  dongName: string;
+}
 export interface BaseLoanProduct {
   loanProductName: string; // 대출 상품 이름
   loanProductCode: string; // 대출 상품 코드
@@ -109,6 +114,28 @@ export interface LoanAdviceReport {
   recommendedProducts: RecommendedProduct[]; // 추천 상품 리스트
   availableBanks: string[]; // 이용 가능한 은행 리스트
   rentalLoanGuide: string; // 전세 대출 안내 사항
+}
+
+export interface HousingInfoResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: HousingInfo;
+}
+
+export interface HousingInfo {
+  apiResultMessage: string;
+  housingInfoList: HousingInfoItem[];
+  apiResultCode: string;
+}
+
+export interface HousingInfoItem {
+  rentHousingTypeName: string;
+  exclusiveArea: number;
+  exclusiveAreaPy: number;
+  averageDeposit: number;
+  averageMonthlyRent: number;
+  transactionCount: number;
 }
 
 export interface AddressResponse {

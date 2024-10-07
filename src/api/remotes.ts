@@ -2,14 +2,16 @@ import Axios from "@/api/axios";
 
 import {
   RentalProductResponse,
-  LoanAdviceReport,
-  SpecificLoanAdvice,
   AddressResponse,
   CommunityDetailResponse,
+  HousingInfoResponse,
+  LoanAdviceReport,
+  SpecificLoanAdvice,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
   sendSpecificLoanAdviceRequest,
   sendaddressSearchRequest,
+  sendHousingInfoRequest,
 } from "@/models";
 
 /*************
@@ -40,6 +42,11 @@ export function sendSpecificLoanAdvice(requestBody: sendSpecificLoanAdviceReques
 // 주소 검색
 export function sendaddressSearch(requestBody: sendaddressSearchRequest) {
   return Axios.post<AddressResponse>("/api/v1/addressSearch", requestBody, false).then((response) => response.data);
+}
+
+// 주택 거래정보 조회
+export function sendHousingInfo(requestBody: sendHousingInfoRequest) {
+  return Axios.post<HousingInfoResponse>("/api/v1/housingInfo", requestBody, false).then((response) => response.data);
 }
 
 /*************
