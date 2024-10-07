@@ -64,6 +64,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
             maxLength={30}
             value={inputValue}
             onChange={handleInputChange}
+            placeholder="주소를 입력해주세요"
             {...props}
           />
           <Spacing size={15} />
