@@ -12,7 +12,7 @@ const AppLayout = () => {
           <div className={cx("main")}>
             <Outlet />
           </div>
-          <nav className={cx("tabBar")}>
+          <nav className={cx("tabBar", { "tabBar-z-index": pathname === "/deposit-entry" })}>
             <MobileTabBar />
           </nav>
         </>
