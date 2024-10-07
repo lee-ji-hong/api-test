@@ -133,22 +133,24 @@ const ReportPage = () => {
               highlight={formatNumberWithUnits(sliderValue / 10000)}
             />
             <Spacing size={40} />
-            <div>
-              <Box sx={{ width: 330 }}>
-                <ProgressBar
-                  aria-label="Temperature"
-                  defaultValue={reportData?.loanAmount}
-                  getAriaValueText={valuetext}
-                  valueLabelDisplay="auto"
-                  valueLabelFormat={(value) => `전세대출 ${formatNumberWithUnits(value / 10000)}`}
-                  step={Math.floor(reportData?.loanAmount / 5)}
-                  marks
-                  min={0}
-                  max={reportData?.loanAmount}
-                  onChange={handleSliderChange}
-                />
-              </Box>
-            </div>
+            {reportData?.loanAmount && (
+              <div>
+                <Box sx={{ width: 330 }}>
+                  <ProgressBar
+                    aria-label="Temperature"
+                    defaultValue={reportData?.loanAmount ?? 0}
+                    getAriaValueText={valuetext}
+                    valueLabelDisplay="auto"
+                    valueLabelFormat={(value) => `전세대출 ${formatNumberWithUnits(value / 10000)}`}
+                    step={Math.floor(reportData?.loanAmount / 5)}
+                    marks
+                    min={0}
+                    max={reportData?.loanAmount}
+                    onChange={handleSliderChange}
+                  />
+                </Box>
+              </div>
+            )}
           </div>
           {/* Section03 */}
           <div className={cx("box")}>
