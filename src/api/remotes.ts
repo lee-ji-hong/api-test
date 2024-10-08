@@ -15,6 +15,13 @@ import {
 } from "@/models";
 
 /*************
+ * User API
+ ************/
+export function sendLogout() {
+  return Axios.post<void>("/api/v1/user/logout", null, true);
+}
+
+/*************
  * LoanAdvice API
  ************/
 

@@ -6,7 +6,7 @@ import List from "@/components/shared/List";
 
 import { SETTINGS_MENU } from "@/constants/SettingsMenu";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
-
+import { useSendLogout } from "@/hooks/queries/useSendLogout";
 import styles from "./settings.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
@@ -14,6 +14,7 @@ const cx = classNames.bind(styles);
 export default function SettingPage() {
   const [isCenterModalOpen, setCenterModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
+  const { Logout } = useSendLogout();
   const router = useInternalRouter();
 
   const handleClick = (item: (typeof SETTINGS_MENU)[number]) => {
@@ -31,6 +32,11 @@ export default function SettingPage() {
     setCenterModalOpen(false);
   };
 
+  const handleLogout = () => {
+    setCenterModalOpen(false);
+    Logout();
+  };
+
   const handleConfirm = () => {
     setCenterModalOpen(false);
     alert("준비중입니다.😢");
@@ -43,6 +49,7 @@ export default function SettingPage() {
       <List className={cx("list-container")}>
         {SETTINGS_MENU.map((item) => (
           <List.Row
+            key={item.name}
             className={cx("list-content")}
             subClassName={cx("list-txt", { "alert-item": item.name === "회원탈퇴" })}
             onClick={() => handleClick(item)}
@@ -59,7 +66,7 @@ export default function SettingPage() {
           confirmLabel="예"
           cancelLabel="아니요"
           onCancel={handleCancel}
-          onConfirm={handleConfirm}
+          onConfirm={modalType === "로그아웃" ? handleLogout : handleConfirm}
         />
       )}
     </>
