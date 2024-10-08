@@ -64,6 +64,8 @@ const DepositEntryPage = () => {
   const handleKeyPress = (key: string) => {
     if (key === "⌫") {
       setInputValue((prevValue) => Math.floor(prevValue / 10));
+    } else if (key === "00") {
+      setInputValue((prevValue) => Math.min(prevValue * 100, 210000));
     } else {
       const numKey = parseInt(key, 10);
       if (!isNaN(numKey)) {

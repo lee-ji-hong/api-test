@@ -39,6 +39,8 @@ export const InputController = <ControlType extends FieldValues>({
           const handleKeyPress = (key: string) => {
             if (key === "⌫") {
               field.onChange(Math.floor(field.value / 10));
+            } else if (key === "00") {
+              field.onChange(Math.min(field.value * 100, 210000));
             } else {
               const numKey = parseInt(key, 10);
               if (!isNaN(numKey)) {
