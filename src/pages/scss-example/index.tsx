@@ -14,6 +14,7 @@ export default function ScssExample() {
       <br />
       <div>
         <h1>[ reset ]</h1>
+        <p>폰트는 pretendard입니다.</p>
         <p className={cx("reset")}>폰트는 pretendard입니다.</p>
       </div>
       <br />
