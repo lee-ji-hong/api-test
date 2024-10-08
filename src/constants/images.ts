@@ -1,5 +1,6 @@
 import Back_btn from "@/assets/images/back.svg";
 import Cancel_btn from "@/assets/images/cancel_btn.svg";
+import Cancel_grey from "@/assets/images/cancel_grey.svg";
 import CommunityHeartIcon from "@/assets/images/community/ico_heart.png";
 import CommunityHeartActiveIcon from "@/assets/images/community/ico_heart_active.png";
 import CommunityCommentIcon from "@/assets/images/community/ico_comment.png";
@@ -53,6 +54,10 @@ export const IMAGES = {
   },
   Cancel_btn: {
     src: Cancel_btn,
+    alt: "취소",
+  },
+  Cancel_grey: {
+    src: Cancel_grey,
     alt: "취소",
   },
   TabBarCalculatorIcon: {

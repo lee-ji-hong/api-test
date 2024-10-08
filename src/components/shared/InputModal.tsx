@@ -3,7 +3,10 @@ import { forwardRef, InputHTMLAttributes, useState, useEffect } from "react";
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
+import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
+
+import { IMAGES } from "@/constants/images";
 
 import { modalformatNumber, formatNumberWithUnits } from "@/utils/formatters";
 
@@ -11,20 +14,32 @@ import classNames from "classnames/bind";
 import styles from "./InputModal.module.scss";
 const cx = classNames.bind(styles);
 
-interface InputModalProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputModalProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   warningMessage: string;
   modalTitle?: string;
   buttonText?: string;
   error?: boolean;
   value: number;
   onClose: () => void;
+  onChange: (value: number) => void;
   handleKeyPress: (key: string) => void;
   handleBadgeClick: (label: string) => void;
 }
 
 export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
   (
-    { warningMessage, modalTitle, buttonText, error, value, onClose, handleKeyPress, handleBadgeClick, ...props },
+    {
+      warningMessage,
+      modalTitle,
+      buttonText,
+      error,
+      value,
+      onClose,
+      onChange,
+      handleKeyPress,
+      handleBadgeClick,
+      ...props
+    },
     ref,
   ) => {
     const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -71,6 +86,11 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
                 readOnly={true}
                 {...props}
               />
+              {value ? (
+                <Image className={cx("reset")} imageInfo={IMAGES?.Cancel_grey} onClick={() => onChange(0)} />
+              ) : (
+                <></>
+              )}
               <Text className={cx("unit")} text="만원" />
             </div>
             <Text

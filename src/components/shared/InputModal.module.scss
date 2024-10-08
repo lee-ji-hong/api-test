@@ -77,13 +77,18 @@
     }
   }
 
+  .reset {
+    margin-left: 4px;
+    width: 24px;
+    cursor: pointer;
+  }
   .unit {
-    margin-left: 10px; // 간격을 조절하고 싶을 경우
-
+    margin-left: 4px; // 간격을 조절하고 싶을 경우
     font-size: 20px;
     font-weight: 500;
     line-height: 28px;
     text-align: right;
+    min-width: 35px;
     width: 42px;
     color: $grey800;
   }
