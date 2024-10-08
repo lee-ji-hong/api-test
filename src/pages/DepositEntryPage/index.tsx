@@ -46,7 +46,6 @@ const DepositEntryPage = () => {
       window.removeEventListener("resize", calculateKeyboardHeight);
     };
   }, [isInputFocused]);
-  console.log("엥");
   const isInvalidValue = inputValue > 0 && (inputValue <= 100 || inputValue > 200000);
   const warningMessage =
     inputValue === 0
