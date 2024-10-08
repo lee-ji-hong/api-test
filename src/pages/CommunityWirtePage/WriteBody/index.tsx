@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./CommunityWriteBody.module.scss";
+import styles from "./WriteBody.module.scss";
 import Spacing from "@/components/shared/Spacing";
 import React, { useRef, useEffect } from "react";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";

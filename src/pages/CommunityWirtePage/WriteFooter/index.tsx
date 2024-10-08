@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./CommunityWriteFooter.module.scss";
+import styles from "./WriteFooter.module.scss";
 import { useRef } from "react";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
@@ -55,11 +55,10 @@ const WriteFooter: React.FC<WriteFooterProps> = ({
   };
 
   return (
-    <div className={cx("container-write-footer")}>
-      <div className={cx("container-img-footer")}>
-        {/* <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} /> */}
+    <div className={cx("containerWriteFooter")}>
+      <div className={cx("containerImgFooter")}>
         <div onClick={() => handleImagePick(imagePickerRef)}>
-          <Image className={cx("img-picture")} imageInfo={IMAGES?.PictureIcon} />
+          <Image className={cx("imgPicture")} imageInfo={IMAGES?.PictureIcon} />
         </div>
         <input
           type="file"
@@ -81,11 +80,11 @@ const WriteFooter: React.FC<WriteFooterProps> = ({
               state: { from: "write", communityDetail: updatedCommunityDetail },
             });
           }}>
-          <Image className={cx("img-doc")} imageInfo={IMAGES?.DocumentIcon} />
+          <Image className={cx("imgDoc")} imageInfo={IMAGES?.DocumentIcon} />
         </div>
       </div>
 
-      <Image className={cx("img-keyboard")} imageInfo={IMAGES?.KeyboardIcon} />
+      <Image className={cx("imgKeyboard")} imageInfo={IMAGES?.KeyboardIcon} />
     </div>
   );
 };

@@ -91,15 +91,16 @@ const CommunityWirtePage = () => {
       </div>
 
       <Divider />
-      <div className={cx("containerFooter")}></div>
-      <WriteFooter
-        setSelectedImage={setSelectedImage}
-        setImagePreview={setImagePreview}
-        inputValue={inputValue}
-        textAreaValue={textareaValue}
-        contentDetail={communityDetail}
-        setContentDetail={setCommunityDetail}
-      />
+      <div className={cx("containerFooter")}>
+        <WriteFooter
+          setSelectedImage={setSelectedImage}
+          setImagePreview={setImagePreview}
+          inputValue={inputValue}
+          textAreaValue={textareaValue}
+          contentDetail={communityDetail}
+          setContentDetail={setCommunityDetail}
+        />
+      </div>
     </div>
   );
 };

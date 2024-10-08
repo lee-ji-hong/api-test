@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./CommunityWriteHeader.module.scss";
+import styles from "./WriteHeader.module.scss";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ const WriteHeader: React.FC<WriteHeaderProps> = ({ inputValue, textareaValue, co
   const isButtonActive = inputValue.trim() !== "" && textareaValue.trim() !== "";
 
   return (
-    <div className={cx("container-write-header")}>
+    <div className={cx("containerWriteHeader")}>
       <button onClick={() => navigate("/community", { replace: true })}>
         <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>
