@@ -4,14 +4,16 @@
   font-family: "SF Pro Text";
   font-style: normal;
   font-weight: 400;
-  src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Regular.ttf");
+  src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-Regular.ttf"),
+    local("Apple SD Gothic Neo"), local("Nanum Gothic");
 }
 
 @font-face {
   font-family: "SF Pro Text";
   font-style: normal;
   font-weight: 600;
-  src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-SemiBold.ttf");
+  src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProText-SemiBold.ttf"),
+    local("Apple SD Gothic Neo"), local("Nanum Gothic");
 }
 
 $font-main:
