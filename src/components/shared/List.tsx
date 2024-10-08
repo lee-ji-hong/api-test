@@ -17,6 +17,7 @@ const List = ({ className, children }: PropsWithChildren<Props>) => {
 
 interface ListRowProps {
   className?: string;
+  subClassName?: string;
   iconName?: string;
   topText: string;
   bottomText?: string;
@@ -25,13 +26,13 @@ interface ListRowProps {
   onClick?: () => void;
 }
 
-const Row = ({ className, iconName, topText, bottomText, right, withArrow, onClick }: ListRowProps) => {
+const Row = ({ subClassName, className, iconName, topText, bottomText, right, withArrow, onClick }: ListRowProps) => {
   return (
     <li onClick={onClick} className={cx("row", className)}>
       <div className={cx("row-content")}>
         {iconName != null ? <Icon name={iconName} size={24} className={cx("icon")} /> : null}
         <div className={cx("row-text")}>
-          <Text className={cx("txt-title")} text={topText} />
+          <Text className={cx(["txt-title", subClassName])} text={topText} />
           {bottomText != null ? <Text className={cx("txt-title")} text={bottomText} /> : null}
         </div>
       </div>

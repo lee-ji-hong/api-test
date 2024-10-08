@@ -9,7 +9,7 @@ export function useInternalRouter() {
       goBack() {
         navigate(-1);
       },
-      push(path: RoutePath, state?: Record<string, unknown>) {
+      push(path: RoutePath | string, state?: Record<string, unknown>) {
         navigate(path, { state });
       },
       replace(path: RoutePath) {

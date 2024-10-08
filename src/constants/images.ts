@@ -17,6 +17,7 @@ import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
 import Onboarding_4 from "@/assets/images/onboarding_4.png";
 import Report_1 from "@/assets/images/report_1.png";
+import Right_arrow from "@/assets/images/right_btn.svg";
 import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
@@ -108,6 +109,10 @@ export const IMAGES = {
   Report_1: {
     src: Report_1,
     alt: "리포트 사용 이미지1",
+  },
+  Right_arrow: {
+    src: Right_arrow,
+    alt: "화살표",
   },
 
   // 대출기관 아이콘 모음

@@ -7,3 +7,29 @@
   right: 0px;
   top: 12px;
 }
+.list-container {
+  .list-content {
+    padding: 11px;
+    box-shadow: none;
+    cursor: pointer;
+
+    .list-txt {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 28px;
+      text-align: left;
+      color: $grey800;
+    }
+    .alert-item {
+      color: $red500;
+    }
+  }
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+  color: $grey800;
+}
