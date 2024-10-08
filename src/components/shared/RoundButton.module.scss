@@ -1,0 +1,28 @@
+.roundButton {
+  -webkit-tap-highlight-color: transparent; // 모바일에서 클릭 하이라이트 제거
+  display: inline-flex; /* 텍스트 길이에 맞춰 버튼 길이 자동 조정 */
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px; /* 텍스트와 버튼 테두리 간 여백 */
+  border-radius: 100px;
+  background-color: white;
+  color: #333347;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  .text {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22.5px;
+    letter-spacing: -0.5px;
+    color: #333347;
+  }
+  .text.active {
+    color: white;
+  }
+}
+
+.roundButton.active {
+  background-color: #333347; /* 활성화 상태일 때 색상 변경 */
+}

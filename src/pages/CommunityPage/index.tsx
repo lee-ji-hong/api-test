@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./CommunityPage.module.scss";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import Spacing from "@/components/shared/Spacing";
 import { useEffect, useState } from "react";
@@ -13,6 +13,8 @@ import { CommunityListResponse } from "@/api/model/CommunityResponse";
 import { CommunityDetail, LikeResponse } from "@/models";
 import CenterModal from "@/components/modal/CenterModal";
 import { reqLogin } from "@/api/kakao-api";
+import RoundButton from "@/components/shared/RoundButton";
+import SpacingWidth from "@/components/shared/SpacingWidth";
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
@@ -60,11 +62,10 @@ const CommunityPage = () => {
         setHasMore(res.data.length > 0); // 데이터가 더 있는지 확인
       } catch (error) {
         console.error("커뮤니티 데이터를 불러오는데 실패했습니다.", error);
-        alert("로그");
 
         // 임시 로그인 처리
-        const kakaoAuthUrl = `http://52.78.180.147:8080/oauth2/authorization/kakao`;
-        window.location.href = kakaoAuthUrl;
+        // const kakaoAuthUrl = `http://52.78.180.147:8080/oauth2/authorization/kakao`;
+        // window.location.href = kakaoAuthUrl;
       }
     };
 
@@ -109,16 +110,14 @@ const CommunityPage = () => {
         <RoundButton
           text="최신순"
           onClick={async () => {
-            console.log("최신순 클릭");
             setIsLatest(true);
           }}
           isActive={isLatest}
         />
-        <Spacing size={4} />
+        <SpacingWidth size={4} />
         <RoundButton
           text="인기순"
           onClick={async () => {
-            console.log("인기순 클릭");
             setIsLatest(false);
           }}
           isActive={!isLatest}
@@ -156,37 +155,6 @@ const CommunityPage = () => {
         />
       )}
     </div>
-  );
-};
-
-interface RoundButtonProps {
-  text: string;
-  onClick: () => void;
-  isActive: boolean;
-}
-
-const RoundButton = (props: RoundButtonProps) => {
-  return (
-    <Button
-      variant="contained"
-      onClick={props.onClick}
-      sx={{
-        fontSize: "15px",
-        letterSpacing: "-0.5px",
-        width: "66px",
-        height: "35px",
-        borderRadius: "100px",
-        color: props.isActive ? "white" : "#333347", // 텍스트 색상을 강제 적용
-        padding: "6px 14px",
-        backgroundColor: props.isActive ? "#333347 !important" : "transparent !important", // 배경을 투명하게
-        border: "none",
-        boxShadow: "none",
-        ":hover": {
-          backgroundColor: "white",
-        },
-      }}>
-      {props.text}
-    </Button>
   );
 };
 
