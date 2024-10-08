@@ -10,7 +10,6 @@ export const useSendSimpleRentalProduct = () => {
   const { mutate: simpleRentalProduct } = useMutation<SimpleRentalProduct[], Error, SendSimpleRentalProductRequest>({
     mutationFn: sendSimpleRentalProduct,
     onSuccess: (data) => {
-      console.log(data);
       router.push(`/deposit-result`, { rentalProductData: data });
     },
     onError: (error) => {

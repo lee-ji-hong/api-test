@@ -24,8 +24,6 @@ export const DepositResultPage = () => {
   const router = useInternalRouter();
   const { rentalProductData } = location.state;
 
-  console.log(rentalProductData);
-
   useEffect(() => {
     if (!rentalDeposit || rentalDeposit === 0) {
       navigate("/deposit-entry");

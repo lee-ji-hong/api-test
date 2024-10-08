@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes } from "react";
+import { forwardRef, InputHTMLAttributes, useState, useEffect } from "react";
 
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import Spacing from "@/components/shared/Spacing";
@@ -27,10 +27,37 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
     { warningMessage, modalTitle, buttonText, error, value, onClose, handleKeyPress, handleBadgeClick, ...props },
     ref,
   ) => {
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const [modalHeight, setModalHeight] = useState(0);
+
+    useEffect(() => {
+      const calculateKeyboardHeight = () => {
+        const height = (window.innerHeight * 0.4 - 207) / 7;
+        setKeyboardHeight(height);
+        if (window.innerHeight >= 768) {
+          setModalHeight(window.innerHeight * 0.5);
+        } else {
+          setModalHeight(window.innerHeight * 0.4 + 60);
+        }
+      };
+      calculateKeyboardHeight();
+
+      // 창 크기가 변경될 때마다 높이 재계산
+      window.addEventListener("resize", calculateKeyboardHeight);
+
+      return () => {
+        window.removeEventListener("resize", calculateKeyboardHeight);
+      };
+    }, []);
+
     return (
       <>
         <div className={cx("back-drop")} onClick={onClose}>
-          <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
+          <div
+            className={cx("container")}
+            style={{ bottom: `${modalHeight}px` }}
+            aria-label="alert-modal"
+            onClick={(e) => e.stopPropagation()}>
             <Spacing size={30} />
             <Text className={cx("txt-title")} text={modalTitle} />
             <Spacing size={30} />
@@ -54,7 +81,12 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             <Button className={cx("close-button")} title={buttonText} onClick={onClose} disabled={error} />
           </div>
           <div onClick={(e) => e.stopPropagation()}>
-            <KeyboardModal onKeyPress={handleKeyPress} isBadge={true} handleBadgeClick={handleBadgeClick} />
+            <KeyboardModal
+              onKeyPress={handleKeyPress}
+              isBadge={true}
+              handleBadgeClick={handleBadgeClick}
+              keyboardHeight={keyboardHeight}
+            />
           </div>
         </div>
       </>

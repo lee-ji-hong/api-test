@@ -21,19 +21,31 @@ const cx = classNames.bind(styles);
 const DepositEntryPage = () => {
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [inputValue, setInputValue] = useState<number>(0);
   const [bottomOffset, setBottomOffset] = useState(0);
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
   const router = useInternalRouter();
 
   useEffect(() => {
-    if (isInputFocused) {
-      setBottomOffset(window.innerHeight * 0.4 + 15);
-    } else {
-      setBottomOffset(70);
-    }
+    const calculateKeyboardHeight = () => {
+      const height = (window.innerHeight * 0.4 - 207) / 7;
+      setKeyboardHeight(height);
+
+      if (!isInputFocused) {
+        setBottomOffset(70);
+        console.log(recoilFormData);
+      } else {
+        setBottomOffset(window.innerHeight * 0.4 + 15);
+      }
+    };
+
+    window.addEventListener("resize", calculateKeyboardHeight);
+    calculateKeyboardHeight();
+    return () => {
+      window.removeEventListener("resize", calculateKeyboardHeight);
+    };
   }, [isInputFocused]);
-  console.log(recoilFormData);
 
   const isInvalidValue = inputValue > 0 && (inputValue <= 100 || inputValue > 200000);
   const warningMessage =
@@ -139,7 +151,11 @@ const DepositEntryPage = () => {
               bottom={bottomOffset}
               title="전월세 대출 상품 확인하기"
             />
-            <KeyboardModal className={cx("keyboard-container")} onKeyPress={handleKeyPress} />
+            <KeyboardModal
+              className={cx("keyboard-container")}
+              onKeyPress={handleKeyPress}
+              keyboardHeight={keyboardHeight}
+            />
           </div>
         )}
       </div>
