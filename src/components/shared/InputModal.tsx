@@ -67,7 +67,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
 
     return (
       <>
-        <div className={cx("back-drop")} onClick={onClose}>
+        <div className={cx("back-drop")} onClick={() => (error ? alert("에러 메세지를 확인해주세요🫨") : onClose())}>
           <div
             className={cx("container")}
             style={{ bottom: `${modalHeight}px` }}
