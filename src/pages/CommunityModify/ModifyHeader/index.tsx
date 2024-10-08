@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./CommunityModifyHeader.module.scss";
+import styles from "./ModifyHeader.module.scss";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, 
   const isButtonActive = inputValue.trim() !== "" && textareaValue.trim() !== "";
 
   return (
-    <div className={cx("container-write-header")}>
+    <div className={cx("containerWriteHeader")}>
       <button onClick={onBackPressed}>
         <Image className={cx("btnWriteBack")} imageInfo={IMAGES?.BackButton} />
       </button>

@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./CommunityModifyBody.module.scss";
+import styles from "./ModifyBody.module.scss";
 import Spacing from "@/components/shared/Spacing";
 import React, { useRef, useEffect } from "react";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
@@ -154,7 +154,7 @@ const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, ma
       ref={textareaRef}
       onChange={handleInputChange}
       value={textareaValue}
-      className={cx("inputContent", {
+      className={cx("inputArea", {
         gray: !textareaValue,
         black: textareaValue,
       })}

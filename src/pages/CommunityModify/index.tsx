@@ -101,15 +101,16 @@ const CommunityModifyPage = () => {
       </div>
 
       <Divider />
-      <div className={cx("containerFooter")}></div>
-      <ModifyFooter
-        setSelectedImage={setSelectedImage}
-        setImagePreview={setImagePreview}
-        inputValue={inputValue}
-        textAreaValue={textareaValue}
-        contentDetail={communityDetail}
-        setContentDetail={setCommunityDetail}
-      />
+      <div className={cx("containerFooter")}>
+        <ModifyFooter
+          setSelectedImage={setSelectedImage}
+          setImagePreview={setImagePreview}
+          inputValue={inputValue}
+          textAreaValue={textareaValue}
+          contentDetail={communityDetail}
+          setContentDetail={setCommunityDetail}
+        />
+      </div>
 
       {showExitModal && (
         <CenterModal
