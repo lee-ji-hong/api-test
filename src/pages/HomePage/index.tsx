@@ -1,5 +1,5 @@
 import { CSSTransition } from "react-transition-group";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
 import Header from "@/components/sections/Header";
@@ -16,6 +16,7 @@ const cx = classNames.bind(styles);
 const HomePage = () => {
   const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
+  const nodeRef = useRef(null);
 
   const handleCancelClick = () => {
     setShowPage(false);
@@ -30,6 +31,7 @@ const HomePage = () => {
       <CSSTransition
         in={showPage}
         timeout={500}
+        nodeRef={nodeRef}
         classNames={{
           enter: cx("page-enter"),
           enterActive: cx("page-enter-active"),
@@ -37,7 +39,7 @@ const HomePage = () => {
           exitActive: cx("page-exit-active"),
         }}
         unmountOnExit>
-        <div data-testid="home-page">
+        <div ref={nodeRef} data-testid="home-page">
           <Section01 className={cx("section")} title="당신을 위한/n최적의 전세 대출을/n찾아드릴게요">
             <Spacing size={18} />
             <Text className={cx("txt-box")} text="최신 정보를 바탕으로/n맞춤형 대출 솔루션을 제공받으세요" />
