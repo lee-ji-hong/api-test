@@ -35,7 +35,7 @@ const BottomModal: React.FC<BottomModalProps> = ({ onClose, onEdit, onDelete }) 
     setIsClosing(true); // 닫기 애니메이션 시작
     setTimeout(() => {
       onClose(); // 300ms 후에 모달을 닫음 (애니메이션 시간이 지난 후)
-    }, 300); // 애니메이션 시간이 300ms이므로 타이머를 맞춤
+    }, 10); // 애니메이션 시간이 300ms이므로 타이머를 맞춤
   };
 
   // 드래그 시작
@@ -88,13 +88,12 @@ const BottomModal: React.FC<BottomModalProps> = ({ onClose, onEdit, onDelete }) 
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
         onWheel={preventScrollPropagation} // 스크롤 이벤트 차단
-        onTouchStart={preventScrollPropagation} // 터치 이벤트 차단
-      >
+        // onTouchStart={preventScrollPropagation} // 터치 이벤트 차단
+        onTouchStart={handleDragStart}
+        onMouseDown={handleDragStart}>
         {/* 드래그 가능한 handle-bar, 클릭 시 모달 닫기 */}
         <div
           className={styles["handle-bar"]}
-          onTouchStart={handleDragStart}
-          onMouseDown={handleDragStart}
           onClick={handleClose} // 핸들바 클릭 시 모달 닫기
         ></div>{" "}
         <button className={styles["edit-button"]} onClick={onEdit}>

@@ -6,7 +6,7 @@ $delete-button-color: #fc4a4a;
 $button-font-size: 16px;
 $button-height: 48px;
 $modal-border-radius: 16px;
-$slide-animation-duration: 300ms;
+$slide-animation-duration: 10ms;
 
 .modal-overlay {
   position: fixed;
@@ -36,11 +36,13 @@ $slide-animation-duration: 300ms;
   // 모달 열기
   &.opening {
     transform: translateY(0); // 화면 위로 올라옴
+    opacity: 1; // 나타날 때 투명도를 1로
   }
 
   // 모달 닫기
   &.closing {
     transform: translateY(100%); // 화면 아래로 내려감
+    opacity: 0; // 닫힐 때 투명도를 0으로
   }
 }
 
@@ -55,6 +57,7 @@ $slide-animation-duration: 300ms;
 
 .edit-button,
 .delete-button {
+  -webkit-tap-highlight-color: transparent; // 모바일에서 클릭 하이라이트 제거
   display: block;
   width: 100%;
   height: $button-height;
@@ -66,6 +69,7 @@ $slide-animation-duration: 300ms;
 }
 
 .edit-button {
+  -webkit-tap-highlight-color: transparent; // 모바일에서 클릭 하이라이트 제거
   background-color: transparent;
   color: $edit-button-color;
   font-size: 16px;
@@ -74,6 +78,7 @@ $slide-animation-duration: 300ms;
 }
 
 .delete-button {
+  -webkit-tap-highlight-color: transparent; // 모바일에서 클릭 하이라이트 제거
   background-color: transparent;
   color: $delete-button-color;
   font-size: 16px;
