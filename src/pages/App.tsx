@@ -17,7 +17,7 @@ const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const DepositResultPage = lazy(() => import("./DepositResultPage"));
 const ApiPage = lazy(() => import("./ApiPage"));
-const ScssExample = lazy(() => import("./scss-example"));
+const SettingPage = lazy(() => import("./SettingPage"));
 const LoginSuccessPage = lazy(() => import("./LoginPage/LoginResultPage"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
 const LoanInfoEntryPage = lazy(() => import("./LoanInfoEntryPage"));
@@ -44,7 +44,7 @@ function App() {
                 <Route path="deposit-entry" element={<DepositEntryPage />} />
                 <Route path="deposit-result" element={<DepositResultPage />} />
                 <Route path="test" element={<ApiPage />} />
-                <Route path="scss-example" element={<ScssExample />} />
+                <Route path="settings" element={<SettingPage />} />
                 <Route path="login-result" element={<LoginSuccessPage />} />
                 <Route path="community" element={<CommunityPage />} />
                 <Route path="community/write" element={<CommunityWirtePage />} />

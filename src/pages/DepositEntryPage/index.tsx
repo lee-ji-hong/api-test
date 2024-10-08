@@ -101,7 +101,7 @@ const DepositEntryPage = () => {
     <>
       <Header
         className={cx("cancel")}
-        onRightClick={() => alert("준비중입니다")}
+        onRightClick={() => router.push("/settings")}
         onLeftClick={() => router.push("/")}
         right="Setting_btn"
         left="Logo"
