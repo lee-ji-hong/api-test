@@ -34,8 +34,11 @@ const DepositEntryPage = () => {
 
       if (!isInputFocused) {
         setBottomOffset(70);
-        console.log(recoilFormData);
       } else {
+        console.log(recoilFormData);
+        if (window.innerWidth < 380) {
+          setBottomOffset(window.innerHeight * 0.4 - 5);
+        }
         setBottomOffset(window.innerHeight * 0.4 + 15);
       }
     };
