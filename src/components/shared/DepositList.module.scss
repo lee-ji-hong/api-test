@@ -16,19 +16,27 @@
   .img-loaninfo {
     // width: 41.4px;
     height: 18px;
-    // margin-top: 13px;
   }
 
   .container-loaninfo {
     border-radius: 10px;
-    height: 98px;
+    padding: 20px;
+  }
+
+  .container-loaninfo-top {
     display: flex;
     justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
+  }
+
+  .container-loaninfo-bottom {
+    background-color: #fff4f4;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 9px;
   }
 
   .white {
+    background-color: white;
     box-shadow: 0px 1px 20px 0px #00000012;
   }
   .grey {
@@ -64,6 +72,10 @@
     color: $grey700;
     text-align: right;
   }
+
+  .alert {
+    color: $red500 !important;
+  }
 }
 
 .item {
@@ -90,4 +102,14 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.modal-list {
+  // font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.8px;
+  text-align: left;
+  color: $grey500;
 }
