@@ -11,7 +11,7 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 
 class Axios {
   private static instance: AxiosInstance | null = null;
-  private static readonly BASE_URL = ""; // 기본 URL을 상수로 설정
+  private static readonly BASE_URL = import.meta.env.VITE_APP_BASE_URL; // 기본 URL을 상수로 설정
   private static readonly CONTENT_TYPE_JSON = "application/json";
   private static readonly CONTENT_TYPE_MULTIPART = "multipart/form-data";
   // private static readonly RETRY_HEADER = "_retry";
