@@ -29,3 +29,8 @@ export const loadingState = atom<boolean>({
   key: "loadingState",
   default: false,
 });
+
+export const loginState = atom<boolean>({
+  key: "loginState",
+  default: false,
+});

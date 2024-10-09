@@ -1,8 +1,11 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { getCookie } from "./authUtils";
-import { reqLogin } from "./remotes";
 
-export const setupInterceptors = (axiosInstance: AxiosInstance, setLoading: (loading: boolean) => void): void => {
+export const setupInterceptors = (
+  axiosInstance: AxiosInstance,
+  setLoading: (loading: boolean) => void,
+  setLogin: (isLoginNeed: boolean) => void,
+) => {
   axiosInstance.interceptors.request.use(
     (config) => {
       setLoading(true);
@@ -44,12 +47,15 @@ export const setupInterceptors = (axiosInstance: AxiosInstance, setLoading: (loa
             return axiosInstance(originalRequest);
           } catch (refreshError) {
             console.error("Refresh token renewal failed:", refreshError);
-            reqLogin();
+            console.error("Refresh token is not available.");
+            setLogin(true);
+
             return Promise.reject(refreshError);
           } finally {
           }
         } else {
-          reqLogin();
+          console.error("Refresh token is not available.");
+          setLogin(true);
         }
       }
       return Promise.reject(error);
