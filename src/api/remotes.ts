@@ -5,7 +5,7 @@ import {
   AddressResponse,
   CommunityDetailResponse,
   HousingInfoResponse,
-  LoanAdviceReport,
+  LoanAdviceReportResponse,
   SpecificLoanAdvice,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
@@ -34,7 +34,7 @@ export function sendSimpleRentalProduct(requestBody: SendSimpleRentalProductRequ
 
 //전세대출상품 추천 보고서 산출
 export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
-  return Axios.post<LoanAdviceReport>("/api/v1/loanAdvice", requestBody, true);
+  return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, true);
 }
 
 // 특정 전세대출상품 추천 보고서 산출
