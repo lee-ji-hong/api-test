@@ -22,6 +22,8 @@ const LoginSuccessPage = lazy(() => import("./LoginPage/LoginResultPage"));
 const CommunityPage = lazy(() => import("./CommunityPage"));
 const LoanInfoEntryPage = lazy(() => import("./LoanInfoEntryPage"));
 const ReportPage = lazy(() => import("./ReportPage"));
+const TermsOfServicePage = lazy(() => import("./TermsOfServicePage"));
+// const PrivacyPolicyPage = lazy(() => import("./PrivacyPolicyPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,6 +54,8 @@ function App() {
                 <Route path="community/detail/modify-comment" element={<CommunityModifyCommentPage />} />
                 <Route path="community/modify" element={<CommunityModifyPage />} />
                 <Route path="loan-info-entry" element={<LoanInfoEntryPage />} />
+                <Route path="terms-of-service" element={<TermsOfServicePage />} />
+                {/* <Route path="privacy-policy" element={<PrivacyPolicyPage />} /> */}
 
                 <Route path="community/recent-report" element={<CommunityRecentReportPage />} />
                 <Route path="report" element={<ReportPage />} />
