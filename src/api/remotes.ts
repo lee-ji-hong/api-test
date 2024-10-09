@@ -50,3 +50,8 @@ export function sendaddressSearch(requestBody: sendaddressSearchRequest) {
 export function getCommunityDetail({ postId }: { postId: number }) {
   return Axios.get<CommunityDetailResponse>(`/api/v1/post/${postId}`, true).then((response) => response.data);
 }
+
+export const reqLogin = () => {
+  const kakaoAuthUrl = `http://52.78.35.9:8080/oauth2/authorization/kakao`;
+  window.location.href = kakaoAuthUrl;
+};

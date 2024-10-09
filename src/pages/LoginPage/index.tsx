@@ -1,4 +1,4 @@
-import { reqLogin } from "@/api/kakao-api";
+import { reqLogin } from "@/api/remotes";
 
 const LoginPage = () => {
   return (

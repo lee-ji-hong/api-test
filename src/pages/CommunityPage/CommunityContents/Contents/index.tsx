@@ -12,8 +12,8 @@ import { useState } from "react";
 import CommunityService from "@/api/service/CommunityService";
 import Axios from "@/api/axios";
 import CenterModal from "@/components/modal/CenterModal";
-import { reqLogin } from "@/api/kakao-api";
 import { LikeResponse } from "@/models";
+import { reqLogin } from "@/api/remotes";
 
 const cx = classNames.bind(styles);
 

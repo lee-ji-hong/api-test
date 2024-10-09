@@ -12,9 +12,9 @@ import Axios from "@/api/axios";
 import { CommunityListResponse } from "@/api/model/CommunityResponse";
 import { CommunityDetail, LikeResponse } from "@/models";
 import CenterModal from "@/components/modal/CenterModal";
-import { reqLogin } from "@/api/kakao-api";
 import RoundButton from "@/components/shared/RoundButton";
 import SpacingWidth from "@/components/shared/SpacingWidth";
+import { reqLogin } from "@/api/remotes";
 const cx = classNames.bind(styles);
 const CommunityPage = () => {
   const [isLatest, setIsLatest] = useState(true);
