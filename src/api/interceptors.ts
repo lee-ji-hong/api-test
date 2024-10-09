@@ -29,6 +29,7 @@ export const setupInterceptors = (axiosInstance: AxiosInstance, setLoading: (loa
       return response;
     },
     async (error: AxiosError) => {
+      setLoading(false);
       const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
@@ -46,7 +47,6 @@ export const setupInterceptors = (axiosInstance: AxiosInstance, setLoading: (loa
             reqLogin();
             return Promise.reject(refreshError);
           } finally {
-            setLoading(false);
           }
         } else {
           reqLogin();
