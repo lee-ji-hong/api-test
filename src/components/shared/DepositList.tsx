@@ -1,10 +1,10 @@
 import { Collapse } from "@mui/material";
 import Image from "@/components/shared/Image";
-import { IMAGES } from "@/constants/images";
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
 
 import { formatNumberWithUnits } from "@/utils/formatters";
+import { getBankImage } from "@/utils/getBankImage";
 import { DepositLists } from "@/models";
 import classNames from "classnames/bind";
 import styles from "./DepositList.module.scss";
@@ -35,7 +35,9 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
           {list?.slice(0, 3).map((item, index) => (
             <div key={index} className={cx(["container-loaninfo", color])}>
               <div className={cx("container-txt-loaninfo")}>
-                <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
+                <div>
+                  <Image className={cx("img-loaninfo")} imageInfo={getBankImage(item.loanProductCode)} />
+                </div>
                 <Spacing size={4} />
                 <Text className={cx("txt-loaninfo")} text={item.loanProductName} />
               </div>
@@ -49,7 +51,9 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
             {list?.slice(3).map((item, index) => (
               <div key={index} className={cx(["container-loaninfo", color])}>
                 <div className={cx("container-txt-loaninfo")}>
-                  <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
+                  <div>
+                    <Image className={cx("img-loaninfo")} imageInfo={getBankImage(item.loanProductCode)} />
+                  </div>
                   <Spacing size={4} />
                   <Text className={cx("txt-loaninfo")} text={item.loanProductName} />
                 </div>
@@ -67,7 +71,9 @@ export const DepositList = ({ list, className, color, isShow = false, toggle = f
           {list?.map((item, index) => (
             <div key={index} className={cx(["container-loaninfo", color])}>
               <div className={cx("container-txt-loaninfo")}>
-                <Image className={cx("img-loaninfo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
+                <div>
+                  <Image className={cx("img-loaninfo")} imageInfo={getBankImage(item.loanProductCode)} />
+                </div>
                 <Spacing size={4} />
                 <Text className={cx("txt-loaninfo")} text={item.loanProductName} />
               </div>
