@@ -22,10 +22,10 @@ import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
-import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf_full.png";
-import LoanHFIcon from "@/assets/images/community/ico_loan_hf_full.png";
-import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi_full.png";
-import LoanHUGIcon from "@/assets/images/community/ico_loan_hug_full.png";
+import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf_full.svg";
+import LoanHFIcon from "@/assets/images/community/ico_loan_hf_full.svg";
+import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi_full.svg";
+import LoanHUGIcon from "@/assets/images/community/ico_loan_hug_full.svg";
 import HANA_small from "@/assets/images/logo_mini/HANA_small.svg";
 import SHINHAN_small from "@/assets/images/logo_mini/SHINHAN_small.svg";
 import KB_small from "@/assets/images/logo_mini/KB_small.svg";
@@ -120,7 +120,6 @@ export const IMAGES = {
     src: LoanNHUFIcon,
     alt: "NHUF",
   },
-
   LoanBankHFIcon: {
     src: LoanHFIcon,
     alt: "HF",
