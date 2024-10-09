@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import styles from "./DepositEntryPage.module.scss";
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
+// import DepositList from "@/components/shared/DepositList";
 import BadgeList from "@/components/shared/BadgeList";
 import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";
@@ -12,10 +13,14 @@ import Text from "@/components/shared/Text";
 import { useSendSimpleRentalProduct } from "@/hooks/queries/useSendSimpleRentalProduct";
 import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
+// import { MOCK } from "@/pages/DepositResultPage/mock";
+// import { useAuth } from "@/hooks/useAuth";
 import { sendLoanAdviceReportRequest } from "@/models";
+
 import { formData } from "@/recoil/atoms";
 import { MONEY } from "@/constants/money";
 import classNames from "classnames/bind";
+
 const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
@@ -26,6 +31,7 @@ const DepositEntryPage = () => {
   const [bottomOffset, setBottomOffset] = useState(0);
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
   const router = useInternalRouter();
+  // const { auth } = useAuth();
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -164,6 +170,8 @@ const DepositEntryPage = () => {
             />
           </div>
         )}
+
+        {/* {auth && <DepositList list={MOCK} isAlert={true} color="white" />} */}
       </div>
     </>
   );
