@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import { RecoilRoot } from "recoil";
 
@@ -40,6 +41,17 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <GlobalPortal.Provider>
           <Suspense fallback={<FullScreenMessage type="loading" />}>
+            <Helmet>
+              <title>뱅칼 | 전월세대출조회</title>
+              <meta name="description" content="당신을 위한 최적의 전세 대출을 찾아드릴게요 - 전세대출, 신혼, 청년" />
+              <meta name="keywords" content="내집플랜,전세대출,신혼,청년,대출" />
+              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+              <meta property="og:title" content="Readme Monster" />
+              <meta property="og:type" content="website" />
+              <meta property="og:image" content="/metaThum.png" />
+              <meta property="og:article:author" content="내집플랜" />
+              <meta property="og:url" content="https://myzipplan.com/" />
+            </Helmet>
             <Routes>
               <Route path="/" element={<AppLayout />}>
                 <Route index element={<HomePage />} />
