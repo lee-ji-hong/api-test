@@ -52,6 +52,15 @@
     margin-bottom: -20px;
   }
 
+  .box-list-container {
+    @include flexbox(between, center);
+  }
+  .reset {
+    margin-left: 4px;
+    width: 24px;
+    cursor: pointer;
+  }
+
   .list-item {
     padding: 15px 0px;
 
@@ -73,7 +82,7 @@
     .list-txt-bottom {
       p {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 400;
         line-height: 18.2px;
         letter-spacing: -0.8px;
         text-align: left;
@@ -88,6 +97,11 @@
       background-color: $grey200;
       padding: 20px;
       border-radius: 12px;
+
+      &:hover {
+        background-color: $grey400;
+        cursor: pointer;
+      }
       .box-txt-top {
         font-size: 16px;
         font-weight: 600;

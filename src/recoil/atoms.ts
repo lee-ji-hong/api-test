@@ -17,7 +17,7 @@ export const formData = atom<sendLoanAdviceReportRequest>({
     houseOwnershipType: undefined,
     isNetAssetOver345M: undefined,
     rentHousingType: undefined,
-    exclusiveArea: 85.0,
+    exclusiveArea: undefined,
     buildingName: "",
     districtCode: "",
     dongName: "",

@@ -3,10 +3,14 @@ import { useRecoilState } from "recoil";
 
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
+import Image from "@/components/shared/Image";
 
 import { useSendAddressSearch } from "@/hooks/queries/useSendAddressSearch";
-import { formData } from "@/recoil/atoms";
+import { useSendHousingInfo } from "@/hooks/queries/useSendHousingInfo";
+
 import { AddressInfo, sendLoanAdviceReportRequest } from "@/models";
+import { IMAGES } from "@/constants/images";
+import { formData } from "@/recoil/atoms";
 import classNames from "classnames/bind";
 import styles from "./AddressSearchInputModal.module.scss";
 const cx = classNames.bind(styles);
@@ -24,6 +28,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
     const [roadAddress, setRoadAddress] = useState("");
     const [inputValue, setInputValue] = useState("");
     const { searchAddress, addressList } = useSendAddressSearch();
+    const { husingInfo, infoItem } = useSendHousingInfo();
 
     useEffect(() => {
       const delayDebounceFn = setTimeout(() => {
@@ -35,15 +40,28 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
       return () => clearTimeout(delayDebounceFn);
     }, [inputValue, searchAddress]);
 
-    // console.log(recoilFormData);
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       setInputValue(value);
       onChange(e);
     };
 
+    const handleExclusiveAreaSelect = (ExclusiveArea: number) => {
+      setRecoilFormData((prevState) => ({
+        ...prevState,
+        exclusiveArea: ExclusiveArea,
+      }));
+
+      onClose();
+    };
+
     const handleAddressSelect = (address: AddressInfo) => {
+      const data = {
+        districtCode: address.districtCode,
+        jibun: address.jibun,
+        dongName: address.dongName,
+      };
+
       onChange(address?.jibunAddress);
       setJibunAddress(address?.jibunAddress);
       setRoadAddress(address?.roadAddress);
@@ -54,16 +72,17 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
         dongName: address?.dongName,
         jibun: address?.jibun,
       }));
-      // onClose();
+
+      husingInfo(data);
     };
-    console.log(recoilFormData.jibun);
+    console.log(infoItem);
 
     return (
       <div className={cx("back-drop")} onClick={onClose}>
         <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
           <Text className={cx("txt-title")} text={modalTitle} />
           <Spacing size={30} />
-          {recoilFormData.jibun === undefined ? (
+          {recoilFormData.jibun === "" || recoilFormData.jibun === undefined ? (
             <>
               <input
                 className={cx("input")}
@@ -91,21 +110,23 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
             </>
           ) : (
             <>
-              <div className={cx("list-item")}>
-                <Text className={cx("list-txt-top")} text={jibunAddress} highlight={jibunAddress} />
-                <Text className={cx("list-txt-bottom")} text={roadAddress} />
+              <div className={cx("box-list-container")}>
+                <div className={cx("list-item")}>
+                  <Text className={cx("list-txt-top")} text={jibunAddress} highlight={jibunAddress} />
+                  <Text className={cx("list-txt-bottom")} text={roadAddress} />
+                </div>
+                <Image className={cx("reset")} imageInfo={IMAGES?.Cancel_grey} onClick={() => onChange("")} />
               </div>
               <Spacing size={20} />
               <div className={cx("box-container")}>
                 {[
-                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
-                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
-                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
-                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
+                  { label: "18평 (전용59㎡)미만", value: 59.0 },
+                  { label: "18평~25평 (전용59㎡ ~ 전용84㎡)", value: 85.0 },
+                  { label: "25평 (전용84㎡) 초과", value: 85.0 },
                 ].map((item, index) => (
-                  <div key={index} className={cx("box")}>
+                  <div key={index} className={cx("box")} onClick={() => handleExclusiveAreaSelect(item.value)}>
                     <Text className={cx("box-txt-top")} text={item.label} />
-                    <Text className={cx("box-txt-bottom")} text={item.label} />
+                    {/* <Text className={cx("box-txt-bottom")} text={item.label} /> */}
                   </div>
                 ))}
               </div>
