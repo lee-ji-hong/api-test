@@ -58,7 +58,11 @@ const DepositEntryPage = () => {
         : "보증금은 20억원을 초과할 수 없습니다.";
 
   const handleFocus = () => setIsInputFocused(true);
-  const handleBlur = () => setIsInputFocused(false);
+  const handleBlur = () => {
+    setTimeout(() => {
+      setIsInputFocused(false);
+    }, 100);
+  };
 
   const handleChangeValue = (label: string) => {
     const item = MONEY.find((item) => item.label === label)!;
