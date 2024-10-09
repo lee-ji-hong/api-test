@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import React, { useState } from "react";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { INPUTS } from "./INPUTS";
 
@@ -140,7 +140,7 @@ export const LoanInfoEntryPage = () => {
           <Button className={cx("button-wrap")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
         </form>
       </div>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </>
   );
 };
