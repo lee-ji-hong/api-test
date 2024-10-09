@@ -53,7 +53,7 @@ class Axios {
    * GET 요청
    * @param url
    * @param withToken
-   * @returns
+   * @returns Promise<T>
    */
   static async get<T>(url: string, withToken = false): Promise<T> {
     const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
@@ -67,7 +67,7 @@ class Axios {
    * @param url
    * @param data
    * @param withToken
-   * @returns
+   * @returns Promise<T>
    */
   static async post<T>(url: string, data: unknown, withToken = false): Promise<T> {
     const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
@@ -80,7 +80,7 @@ class Axios {
    * POST 요청 (multipart/form-data)
    * @param url
    * @param formData
-   * @returns
+   * @returns Promise<CustomAxiosRequestConfig>
    */
   static async postMultipart(url: string, formData: FormData): Promise<CustomAxiosRequestConfig> {
     const config: AxiosRequestConfig = {
@@ -97,7 +97,7 @@ class Axios {
    * @param url
    * @param data
    * @param withToken
-   * @returns
+   * @returns Promise<T>
    */
   static async put<T>(url: string, data: unknown, withToken = false): Promise<T> {
     const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
@@ -110,7 +110,7 @@ class Axios {
    * PUT 요청 (multipart/form-data)
    * @param url
    * @param formData
-   * @returns
+   * @returns Promise<CustomAxiosRequestConfig>
    */
   static async putMultipart(url: string, formData: FormData): Promise<CustomAxiosRequestConfig> {
     const config: AxiosRequestConfig = {
@@ -126,7 +126,7 @@ class Axios {
    * DELETE 요청
    * @param url
    * @param withToken
-   * @returns
+   * @returns Promise<T>
    */
   static async delete<T>(url: string, withToken = false): Promise<T> {
     const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
