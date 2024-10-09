@@ -24,3 +24,8 @@ export const formData = atom<sendLoanAdviceReportRequest>({
     jibun: undefined,
   },
 });
+
+export const loadingState = atom<boolean>({
+  key: "loadingState",
+  default: false,
+});

@@ -15,8 +15,13 @@ class Axios {
   private static readonly CONTENT_TYPE_JSON = "application/json";
   private static readonly CONTENT_TYPE_MULTIPART = "multipart/form-data";
   // private static readonly RETRY_HEADER = "_retry";
+  private static setLoading: ((loading: boolean) => void) | null = null;
 
   private constructor() {} // 인스턴스 생성 방지
+
+  static setLoadingFunction(setLoading: (loading: boolean) => void) {
+    this.setLoading = setLoading;
+  }
 
   static getInstance(): AxiosInstance {
     if (!this.instance) {
@@ -26,7 +31,7 @@ class Axios {
         withCredentials: true,
       });
 
-      setupInterceptors(this.instance);
+      setupInterceptors(this.instance, this.setLoading as (loading: boolean) => void);
     }
     return this.instance;
   }
