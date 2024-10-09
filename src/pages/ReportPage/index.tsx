@@ -138,7 +138,7 @@ const ReportPage = () => {
             <Spacing size={40} />
             {reportData?.loanAmount && (
               <div>
-                <Box sx={{ width: 333, maxWidth: 900 }}>
+                <Box sx={{ width: 330, maxWidth: 900 }}>
                   <ProgressBar
                     aria-label="Temperature"
                     defaultValue={reportData?.loanAmount ?? 0}
@@ -298,9 +298,10 @@ const ReportPage = () => {
               ))}
             </div>
           </div>
+          <Spacing size={50} />
           {/* Section11 */}
-          <div className={cx("box")}>
-            <Spacing size={70} />
+          <div className={cx("warnning-box")}>
+            <Spacing size={20} />
             <Text className={cx("txt-warning")} text="주의사항" />
             <Spacing size={10} />
             <ul>
@@ -313,7 +314,7 @@ const ReportPage = () => {
           </div>
 
           {/* 버튼 */}
-          <Spacing size={100} />
+          <Spacing size={67} />
           <Button className={cx("button-wrap")} onClick={handleGoBack} title="리포트 다시 산출하기" />
           <Spacing size={14} />
         </div>

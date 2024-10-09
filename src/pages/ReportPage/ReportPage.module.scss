@@ -73,6 +73,13 @@
   @include column-flexbox(between, start);
 }
 
+.warnning-box {
+  @include column-flexbox(start, start);
+  background-color: #fafaff;
+  padding: 0 20px;
+  margin: 0 -20px;
+}
+
 .reason-box {
   border-radius: 10px;
   min-height: 98px;
