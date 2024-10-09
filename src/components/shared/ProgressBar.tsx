@@ -29,8 +29,10 @@ const ProgressBar = styled(Slider)(({ theme }) => ({
     top: 60,
     backgroundColor: "unset",
     color: "#66667A",
+    display: "block",
+    transform: "translateY(-100%) scale(1)", //tooltip 보이게 처리
     "&::before": {
-      display: "none",
+      display: "block",
     },
     "& *": {
       background: "transparent",

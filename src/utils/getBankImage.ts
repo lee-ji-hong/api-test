@@ -7,7 +7,7 @@ type ImageInfo = {
 
 export function getBankImage(loanProductCode: string): ImageInfo {
   const bankCode = loanProductCode.split("-")[0]; // 'HF-01'에서 'HF' 추출
-  console.log(bankCode);
+
   switch (bankCode) {
     case "HF":
       return IMAGES?.LoanBankHFIcon;
