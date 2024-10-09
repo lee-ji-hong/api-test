@@ -73,7 +73,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
               // 우선 최대 3개만 노출되도록 구현 추후 페이징 처리 수정 예정
               addressList?.slice(0, 5).map((item, index) => (
                 <div className={cx("list-item")} key={index} onClick={() => handleAddressSelect(item)}>
-                  <Text className={cx("list-txt-top")} text={item.jibunAddress} />
+                  <Text className={cx("list-txt-top")} text={item.jibunAddress} highlight={inputValue} />
                   <Text className={cx("list-txt-bottom")} text={item.roadAddress} />
                 </div>
               ))
