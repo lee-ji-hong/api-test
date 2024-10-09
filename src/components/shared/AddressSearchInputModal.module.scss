@@ -55,6 +55,11 @@
   .list-item {
     padding: 15px 0px;
 
+    &:hover {
+      background-color: $grey200;
+      cursor: pointer;
+    }
+
     .list-txt-top {
       p {
         font-size: 16px;
@@ -76,6 +81,32 @@
       }
     }
   }
+  .box-container {
+    display: grid;
+    gap: 10px;
+    .box {
+      background-color: $grey200;
+      padding: 20px;
+      border-radius: 12px;
+      .box-txt-top {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20.8px;
+        letter-spacing: -0.8px;
+        text-align: left;
+        color: $grey800;
+      }
+      .box-txt-bottom {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18.2px;
+        letter-spacing: -0.8px;
+        text-align: left;
+        color: $grey500;
+      }
+    }
+  }
+
   .no-result {
     p {
       font-size: 14px;

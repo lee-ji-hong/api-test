@@ -20,6 +20,8 @@ interface AddressProps extends InputHTMLAttributes<HTMLInputElement> {
 export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps>(
   ({ modalTitle, onClose, onChange, ...props }, ref) => {
     const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+    const [jibunAddress, setJibunAddress] = useState("");
+    const [roadAddress, setRoadAddress] = useState("");
     const [inputValue, setInputValue] = useState("");
     const { searchAddress, addressList } = useSendAddressSearch();
 
@@ -33,7 +35,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
       return () => clearTimeout(delayDebounceFn);
     }, [inputValue, searchAddress]);
 
-    console.log(recoilFormData);
+    // console.log(recoilFormData);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -43,6 +45,8 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
 
     const handleAddressSelect = (address: AddressInfo) => {
       onChange(address?.jibunAddress);
+      setJibunAddress(address?.jibunAddress);
+      setRoadAddress(address?.roadAddress);
       setRecoilFormData((prevState) => ({
         ...prevState,
         buildingName: address?.buildingName,
@@ -50,37 +54,63 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
         dongName: address?.dongName,
         jibun: address?.jibun,
       }));
-      onClose();
+      // onClose();
     };
+    console.log(recoilFormData.jibun);
 
     return (
       <div className={cx("back-drop")} onClick={onClose}>
         <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
           <Text className={cx("txt-title")} text={modalTitle} />
           <Spacing size={30} />
-          <input
-            className={cx("input")}
-            ref={ref}
-            maxLength={30}
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="주소를 입력해주세요"
-            {...props}
-          />
-          <Spacing size={15} />
-          <div className={cx("list-container")}>
-            {addressList && addressList?.length > 0 ? (
-              // 우선 최대 3개만 노출되도록 구현 추후 페이징 처리 수정 예정
-              addressList?.slice(0, 5).map((item, index) => (
-                <div className={cx("list-item")} key={index} onClick={() => handleAddressSelect(item)}>
-                  <Text className={cx("list-txt-top")} text={item.jibunAddress} highlight={inputValue} />
-                  <Text className={cx("list-txt-bottom")} text={item.roadAddress} />
-                </div>
-              ))
-            ) : (
-              <Text className={cx("no-result")} text="찾으시는 주소가 없습니다." />
-            )}
-          </div>
+          {recoilFormData.jibun === undefined ? (
+            <>
+              <input
+                className={cx("input")}
+                ref={ref}
+                maxLength={30}
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder="주소를 입력해주세요"
+                {...props}
+              />
+              <Spacing size={15} />
+              <div className={cx("list-container")}>
+                {addressList && addressList?.length > 0 ? (
+                  // 우선 최대 3개만 노출되도록 구현 추후 페이징 처리 수정 예정
+                  addressList?.slice(0, 5).map((item, index) => (
+                    <div className={cx("list-item")} key={index} onClick={() => handleAddressSelect(item)}>
+                      <Text className={cx("list-txt-top")} text={item.jibunAddress} highlight={inputValue} />
+                      <Text className={cx("list-txt-bottom")} text={item.roadAddress} />
+                    </div>
+                  ))
+                ) : (
+                  <Text className={cx("no-result")} text="찾으시는 주소가 없습니다." />
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={cx("list-item")}>
+                <Text className={cx("list-txt-top")} text={jibunAddress} highlight={jibunAddress} />
+                <Text className={cx("list-txt-bottom")} text={roadAddress} />
+              </div>
+              <Spacing size={20} />
+              <div className={cx("box-container")}>
+                {[
+                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
+                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
+                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
+                  { label: "24평 (전용59.95㎡)", value: "24평 (전용59.95㎡)" },
+                ].map((item, index) => (
+                  <div key={index} className={cx("box")}>
+                    <Text className={cx("box-txt-top")} text={item.label} />
+                    <Text className={cx("box-txt-bottom")} text={item.label} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
