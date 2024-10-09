@@ -19,6 +19,7 @@ import Text from "@/components/shared/Text";
 
 import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
+import { getBankImage } from "@/utils/getBankImage";
 import { IMAGES } from "@/constants/images";
 import { formData } from "@/recoil/atoms";
 import { orderStep, warning } from "./data";
@@ -35,8 +36,8 @@ interface ListItem {
 const ReportPage = () => {
   const [showMoreExtraCost, setShowMoreExtraCost] = useState(false);
   const [showMoreDepositList, setShowMoreDepositList] = useState(false);
-  const [showPage, setShowPage] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
   const location = useLocation();
   const reportData = location.state?.reportData?.data;
@@ -100,11 +101,15 @@ const ReportPage = () => {
           <Section01 className={cx("section")}>
             <Spacing size={65} />
             <div className={cx("section-wrap")}>
-              <Image className={cx("img-logo")} imageInfo={IMAGES?.LoanBankDummyIcon} />
-              <Text
-                className={cx("txt-top")}
-                text={`${reportData.loanProductName || "HUG 청년전용/n버팀목전세자금 대출"}`}
-              />
+              <div className={cx("section-top-content")}>
+                <div>
+                  <Image className={cx("img-logo")} imageInfo={getBankImage(reportData.loanProductCode)} />
+                </div>
+                <Text
+                  className={cx("txt-top")}
+                  text={`${reportData.loanProductName || "HUG 청년전용/n버팀목전세자금 대출"}`}
+                />
+              </div>
               <Spacing size={10} />
               {["#20대인기상품", "#초저금리", "#최대한도"].map((item, index) => (
                 <Badge2 key={index} title={item} />
@@ -138,7 +143,7 @@ const ReportPage = () => {
             <Spacing size={40} />
             {reportData?.loanAmount && (
               <div>
-                <Box sx={{ width: 330 }}>
+                <Box sx={{ width: 333, maxWidth: 900 }}>
                   <ProgressBar
                     aria-label="Temperature"
                     defaultValue={reportData?.loanAmount ?? 0}

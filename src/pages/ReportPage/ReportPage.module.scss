@@ -36,6 +36,11 @@
 
 .section-wrap {
   margin: 0 20px;
+
+  .section-top-content {
+    @include column-flexbox(center, start);
+    text-align: left;
+  }
 }
 
 .section-bottom {
@@ -114,8 +119,8 @@
   }
 }
 .img-logo {
-  width: 74.4px;
-  height: 30px;
+  height: 24px;
+  margin-bottom: 6px;
 }
 
 .txt-title {
