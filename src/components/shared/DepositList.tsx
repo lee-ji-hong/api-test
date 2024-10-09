@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Collapse } from "@mui/material";
 import SelectBottomSheet from "@/components/shared/SelectBottomSheet";
 import Spacing from "@/components/shared/Spacing";

@@ -9,8 +9,6 @@ export const useSendLoanAdviceReport = () => {
   const { mutate: loanAdviceReport } = useMutation<LoanAdviceReportResponse, Error, sendLoanAdviceReportRequest>({
     mutationFn: sendLoanAdviceReport,
     onSuccess: (data) => {
-      console.log(data);
-
       if (data.status === "NO_CONTENT") {
         router.push(`/no-report`, { reportData: data });
       } else {
