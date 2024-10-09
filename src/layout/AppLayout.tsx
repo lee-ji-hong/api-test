@@ -4,17 +4,17 @@ import styles from "./AppLayout.module.scss";
 import classNames from "classnames/bind";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { loadingState } from "@/recoil/atoms";
-import { useEffect } from "react";
 import Axios from "@/api/axios";
+import { useLayoutEffect } from "react";
 const cx = classNames.bind(styles);
 const AppLayout = () => {
   const { pathname } = useLocation();
   const isLoading = useRecoilValue(loadingState);
   const setLoading = useSetRecoilState(loadingState);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     Axios.setLoadingFunction(setLoading);
-  }, []);
+  });
 
   return (
     <>

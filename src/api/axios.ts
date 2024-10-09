@@ -20,7 +20,9 @@ class Axios {
   private constructor() {} // 인스턴스 생성 방지
 
   static setLoadingFunction(setLoading: (loading: boolean) => void) {
-    this.setLoading = setLoading;
+    if (!this.setLoading) {
+      this.setLoading = setLoading;
+    }
   }
 
   static getInstance(): AxiosInstance {
