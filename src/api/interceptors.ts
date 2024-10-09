@@ -2,9 +2,10 @@ import { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { getCookie } from "./authUtils";
 import { reqLogin } from "./remotes";
 
-export const setupInterceptors = (axiosInstance: AxiosInstance): void => {
+export const setupInterceptors = (axiosInstance: AxiosInstance, setLoading: (loading: boolean) => void): void => {
   axiosInstance.interceptors.request.use(
     (config) => {
+      setLoading(true);
       console.log(`[Request] ${config.method?.toUpperCase()} ${config.url}`, {
         headers: config.headers,
         data: config.data,
@@ -13,12 +14,14 @@ export const setupInterceptors = (axiosInstance: AxiosInstance): void => {
     },
     (error) => {
       console.error("Request error:", error);
+      setLoading(false);
       return Promise.reject(error);
     },
   );
 
   axiosInstance.interceptors.response.use(
     (response) => {
+      setLoading(false);
       console.log(`[Response] ${response.status} ${response.config.url}`, {
         headers: response.headers,
         data: response.data,
@@ -33,6 +36,7 @@ export const setupInterceptors = (axiosInstance: AxiosInstance): void => {
 
         if (refreshToken) {
           try {
+            setLoading(true);
             originalRequest.headers = { ...originalRequest.headers, RefreshToken: refreshToken };
             const { data } = await axiosInstance.post("/auth/refresh", originalRequest);
             originalRequest.headers = { ...originalRequest.headers, AccessToken: data.accessToken };
@@ -41,6 +45,8 @@ export const setupInterceptors = (axiosInstance: AxiosInstance): void => {
             console.error("Refresh token renewal failed:", refreshError);
             reqLogin();
             return Promise.reject(refreshError);
+          } finally {
+            setLoading(false);
           }
         } else {
           reqLogin();
