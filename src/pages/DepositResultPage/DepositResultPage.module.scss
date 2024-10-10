@@ -18,6 +18,12 @@
       color: $grey700;
     }
   }
+  .skeleton-button {
+    position: fixed;
+    bottom: 20px;
+    border-radius: 16px;
+    background-color: $blue500;
+  }
 
   .button-wrap {
     position: fixed;

@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 
 import DepositEntryPageLoading from "@/pages/DepositEntryPage/DepositEntryPageLoading";
+import DepositResultPageLoading from "@/pages/DepositResultPage/DepositResultPageLoading";
 import Lottie from "@/components/shared/Lottie";
 
 import classNames from "classnames/bind";
@@ -36,6 +37,8 @@ function Loading() {
     <>
       {pathname === "/deposit-entry" ? (
         <DepositEntryPageLoading />
+      ) : pathname === "/deposit-result" ? (
+        <DepositResultPageLoading />
       ) : (
         <div className={cx("container")}>
           <Lottie src="https://static.toss.im/lotties/loading/circle-loading.json" />
