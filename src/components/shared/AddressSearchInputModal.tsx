@@ -9,6 +9,7 @@ import { useSendAddressSearch } from "@/hooks/queries/useSendAddressSearch";
 import { useSendHousingInfo } from "@/hooks/queries/useSendHousingInfo";
 
 import { AddressInfo, sendLoanAdviceReportRequest } from "@/models";
+import { MOCK } from "@/constants/housingInfoList";
 import { IMAGES } from "@/constants/images";
 import { formData } from "@/recoil/atoms";
 import classNames from "classnames/bind";
@@ -51,7 +52,6 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
         ...prevState,
         exclusiveArea: ExclusiveArea,
       }));
-
       onClose();
     };
 
@@ -72,10 +72,8 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
         dongName: address?.dongName,
         jibun: address?.jibun,
       }));
-
       husingInfo(data);
     };
-    console.log(infoItem);
 
     return (
       <div className={cx("back-drop")} onClick={onClose}>
@@ -119,16 +117,25 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
               </div>
               <Spacing size={20} />
               <div className={cx("box-container")}>
-                {[
-                  { label: "18평 (전용59㎡)미만", value: 59.0 },
-                  { label: "18평~25평 (전용59㎡ ~ 전용84㎡)", value: 85.0 },
-                  { label: "25평 (전용84㎡) 초과", value: 85.0 },
-                ].map((item, index) => (
-                  <div key={index} className={cx("box")} onClick={() => handleExclusiveAreaSelect(item.value)}>
-                    <Text className={cx("box-txt-top")} text={item.label} />
-                    {/* <Text className={cx("box-txt-bottom")} text={item.label} /> */}
-                  </div>
-                ))}
+                {infoItem?.apiResultCode === "Y" && infoItem?.housingInfoList
+                  ? infoItem.housingInfoList.map((item, index) => {
+                      const areaText = `${item.exclusiveAreaPy}평 (전용${item.exclusiveArea.toFixed(2)}㎡)미만`;
+                      return (
+                        <div
+                          key={index}
+                          className={cx("box")}
+                          onClick={() => handleExclusiveAreaSelect(item.exclusiveArea)}>
+                          <Text className={cx("box-txt-top")} text={areaText} />
+                        </div>
+                      );
+                    })
+                  : MOCK.map((item, index) => {
+                      return (
+                        <div key={index} className={cx("box")} onClick={() => handleExclusiveAreaSelect(item.value)}>
+                          <Text className={cx("box-txt-top")} text={item.label} />
+                        </div>
+                      );
+                    })}
               </div>
             </>
           )}

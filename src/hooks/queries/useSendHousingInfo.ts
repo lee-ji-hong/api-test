@@ -9,7 +9,6 @@ export const useSendHousingInfo = () => {
   const { mutate: husingInfo } = useMutation<HousingInfo, Error, sendHousingInfoRequest>({
     mutationFn: sendHousingInfo,
     onSuccess: (response) => {
-      console.log(response);
       setInfoItem(response);
     },
     onError: (error) => {
