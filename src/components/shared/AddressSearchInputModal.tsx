@@ -47,6 +47,11 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
       onChange(e);
     };
 
+    const handleCancel = () => {
+      setJibunAddress("");
+      onChange("");
+    };
+
     const handleExclusiveAreaSelect = (ExclusiveArea: number) => {
       setRecoilFormData((prevState) => ({
         ...prevState,
@@ -80,7 +85,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
         <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
           <Text className={cx("txt-title")} text={modalTitle} />
           <Spacing size={30} />
-          {recoilFormData.jibun === "" || recoilFormData.jibun === undefined ? (
+          {recoilFormData.jibun === "" || recoilFormData.jibun === undefined || jibunAddress === "" ? (
             <>
               <input
                 className={cx("input")}
@@ -113,7 +118,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
                   <Text className={cx("list-txt-top")} text={jibunAddress} highlight={jibunAddress} />
                   <Text className={cx("list-txt-bottom")} text={roadAddress} />
                 </div>
-                <Image className={cx("reset")} imageInfo={IMAGES?.Cancel_grey} onClick={() => onChange("")} />
+                <Image className={cx("reset")} imageInfo={IMAGES?.Cancel_grey} onClick={handleCancel} />
               </div>
               <Spacing size={20} />
               <div className={cx("box-container")}>
