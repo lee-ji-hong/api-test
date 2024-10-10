@@ -57,7 +57,8 @@ export const getUnitForField = (fieldName: string, fieldValue: FieldValues) => {
     case "rentHousingType":
       return `${HouseTypeLabels[fieldValue as HouseType]}`;
     case "jibun":
-      return fieldValue;
+      const stringValue = String(fieldValue);
+      return stringValue.length > 10 ? `... ${stringValue.slice(-10)}` : stringValue;
     default:
       return "선택하기";
   }
