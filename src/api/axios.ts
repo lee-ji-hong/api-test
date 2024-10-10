@@ -16,12 +16,19 @@ class Axios {
   private static readonly CONTENT_TYPE_MULTIPART = "multipart/form-data";
   // private static readonly RETRY_HEADER = "_retry";
   private static setLoading: ((loading: boolean) => void) | null = null;
+  private static setLogin: ((loading: boolean) => void) | null = null;
 
   private constructor() {} // 인스턴스 생성 방지
 
   static setLoadingFunction(setLoading: (loading: boolean) => void) {
     if (!this.setLoading) {
       this.setLoading = setLoading;
+    }
+  }
+
+  static setLoginFunction(setLogin: (isLoginNeed: boolean) => void) {
+    if (!this.setLogin) {
+      this.setLogin = setLogin;
     }
   }
 
@@ -33,7 +40,11 @@ class Axios {
         withCredentials: true,
       });
 
-      setupInterceptors(this.instance, this.setLoading as (loading: boolean) => void);
+      setupInterceptors(
+        this.instance,
+        this.setLoading as (loading: boolean) => void,
+        this.setLogin as (isLoginNeed: boolean) => void,
+      );
     }
     return this.instance;
   }

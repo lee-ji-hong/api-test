@@ -66,6 +66,6 @@ export function getCommunityDetail({ postId }: { postId: number }) {
 }
 
 export const reqLogin = () => {
-  const kakaoAuthUrl = `http://52.78.35.9:8080/oauth2/authorization/kakao`;
-  window.location.href = kakaoAuthUrl;
+  const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+  window.location.href = `${baseUrl}/oauth2/authorization/kakao`;
 };
