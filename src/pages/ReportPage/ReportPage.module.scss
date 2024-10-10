@@ -243,3 +243,18 @@
   background-color: white;
   box-shadow: 0px -7px 30px 2px rgb(255, 255, 255);
 }
+
+.skeleton-list {
+  @include flexbox();
+  gap: 4px;
+}
+.skeleton-item {
+  border-radius: 100px !important;
+}
+
+.skeleton-button {
+  position: fixed;
+  bottom: 20px;
+  border-radius: 16px !important;
+  background-color: $blue500 !important;
+}
