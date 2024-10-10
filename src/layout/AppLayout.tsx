@@ -21,11 +21,11 @@ const AppLayout = () => {
   return (
     <>
       <Helmet>
-        <title>뱅칼 | 전월세대출조회</title>
+        <title>내집플랜 | 전월세대출조회</title>
         <meta name="description" content="당신을 위한 최적의 전세 대출을 찾아드릴게요 - 전세대출, 신혼, 청년" />
         <meta name="keywords" content="내집플랜,전세대출,신혼,청년,대출" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content="Readme Monster" />
+        <meta property="og:title" content="내집플랜" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://myzipplan.com/metaThum.png" />
         <meta property="og:article:author" content="내집플랜" />
