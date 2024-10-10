@@ -26,6 +26,12 @@ const NoReportPage = lazy(() => import("./NoReportPage"));
 const TermsOfServicePage = lazy(() => import("./TermsOfServicePage"));
 const PrivacyPolicyPage = lazy(() => import("./PrivacyPolicyPage"));
 
+// 로딩 테스트용 페이지
+const ReportPageLoading = lazy(() => import("./ReportPage/ReportPageLoading"));
+const DepositEntryPageLoading = lazy(() => import("./DepositEntryPage/DepositEntryPageLoading"));
+const DepositResultPageLoading = lazy(() => import("./DepositResultPage/DepositResultPageLoading"));
+const LoanInfoEntryPageLoading = lazy(() => import("./LoanInfoEntryPage/LoanInfoEntryPageLoading"));
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -61,6 +67,12 @@ function App() {
                 <Route path="report" element={<ReportPage />} />
                 <Route path="no-report" element={<NoReportPage />} />
                 <Route path="login-success" element={<LoginSuccessPage />} />
+
+                {/* 로딩 화면 테스트용 */}
+                <Route path="loading/report" element={<ReportPageLoading />} />
+                <Route path="loading/deposit-entry" element={<DepositEntryPageLoading />} />
+                <Route path="loading/deposit-result" element={<DepositResultPageLoading />} />
+                <Route path="loading/loan-info-entry" element={<LoanInfoEntryPageLoading />} />
               </Route>
             </Routes>
           </Suspense>
