@@ -1,5 +1,23 @@
 .container {
   text-align: center;
+
+  .skeleton-container {
+    @include flexbox();
+    .skeleton-list {
+      @include flexbox();
+      gap: 4px;
+    }
+    .skeleton-item {
+      border-radius: 100px;
+    }
+  }
+  .skeleton-button {
+    position: fixed;
+    bottom: 70px;
+    border-radius: 16px;
+    background-color: $blue500;
+  }
+
   .txt-title {
     font-size: 38px;
     font-weight: 700;

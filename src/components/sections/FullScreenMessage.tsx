@@ -1,4 +1,8 @@
+import { useLocation } from "react-router-dom";
+
+import DepositEntryPageLoading from "@/pages/DepositEntryPage/DepositEntryPageLoading";
 import Lottie from "@/components/shared/Lottie";
+
 import classNames from "classnames/bind";
 import styles from "./FullScreenMessage.module.scss";
 const cx = classNames.bind(styles);
@@ -9,7 +13,7 @@ interface FullScreenMessageProps {
 
 function FullScreenMessage({ type }: FullScreenMessageProps) {
   return (
-    <div className={cx("container")}>
+    <>
       {type === "loading" ? (
         <Loading />
       ) : (
@@ -18,7 +22,7 @@ function FullScreenMessage({ type }: FullScreenMessageProps) {
           에러가 발생했어요 잠시 후 다시 시도해주세요.
         </>
       )}
-    </div>
+    </>
   );
 }
 
@@ -27,7 +31,18 @@ function Error() {
 }
 
 function Loading() {
-  return <Lottie src="https://static.toss.im/lotties/loading/circle-loading.json" />;
+  const { pathname } = useLocation();
+  return (
+    <>
+      {pathname === "/deposit-entry" ? (
+        <DepositEntryPageLoading />
+      ) : (
+        <div className={cx("container")}>
+          <Lottie src="https://static.toss.im/lotties/loading/circle-loading.json" />
+        </div>
+      )}
+    </>
+  );
 }
 
 export default FullScreenMessage;
