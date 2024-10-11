@@ -65,7 +65,7 @@ const ModifyHeader: React.FC<ModifyHeaderProps> = ({ inputValue, textareaValue, 
 
             try {
               await Axios.putMultipart(`/api/v1/post/${postId}`, formData);
-              navigate(-1);
+              navigate("/community/detail", { state: { postId } });
             } catch (error) {
               alert(`글 작성에 실패했습니다. ${error}`);
             }
