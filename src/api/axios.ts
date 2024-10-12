@@ -49,7 +49,7 @@ class Axios {
     return this.instance;
   }
 
-  private static getHeaders(withToken: boolean): RawAxiosRequestHeaders {
+  private static getHeaders(withToken: boolean, additionalHeaders?: RawAxiosRequestHeaders): RawAxiosRequestHeaders {
     const headers: RawAxiosRequestHeaders = {
       "Content-Type": this.CONTENT_TYPE_JSON,
     };
@@ -57,6 +57,12 @@ class Axios {
       const token = getCookie("accessToken");
       if (token) headers.AccessToken = token;
     }
+
+    // 추가적인 헤더들을 덮어씌우기
+    if (additionalHeaders) {
+      Object.assign(headers, additionalHeaders);
+    }
+
     return headers;
   }
 
@@ -64,10 +70,11 @@ class Axios {
    * GET 요청
    * @param url
    * @param withToken
+   * @param additionalHeaders
    * @returns Promise<T>
    */
-  static async get<T>(url: string, withToken = false): Promise<T> {
-    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
+  static async get<T>(url: string, withToken = false, additionalHeaders?: RawAxiosRequestHeaders): Promise<T> {
+    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken, additionalHeaders) };
     return this.getInstance()
       .get<T>(url, config)
       .then((response) => response.data);
@@ -78,10 +85,16 @@ class Axios {
    * @param url
    * @param data
    * @param withToken
+   * @param additionalHeaders
    * @returns Promise<T>
    */
-  static async post<T>(url: string, data: unknown, withToken = false): Promise<T> {
-    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
+  static async post<T>(
+    url: string,
+    data: unknown,
+    withToken = false,
+    additionalHeaders?: RawAxiosRequestHeaders,
+  ): Promise<T> {
+    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken, additionalHeaders) };
     return this.getInstance()
       .post<T>(url, data, config)
       .then((response) => response.data);
@@ -91,12 +104,17 @@ class Axios {
    * POST 요청 (multipart/form-data)
    * @param url
    * @param formData
+   * @param additionalHeaders
    * @returns Promise<CustomAxiosRequestConfig>
    */
-  static async postMultipart(url: string, formData: FormData): Promise<CustomAxiosRequestConfig> {
+  static async postMultipart(
+    url: string,
+    formData: FormData,
+    additionalHeaders?: RawAxiosRequestHeaders,
+  ): Promise<CustomAxiosRequestConfig> {
     const config: AxiosRequestConfig = {
       headers: {
-        ...this.getHeaders(true),
+        ...this.getHeaders(true, additionalHeaders),
         "Content-Type": this.CONTENT_TYPE_MULTIPART,
       },
     };
@@ -108,10 +126,16 @@ class Axios {
    * @param url
    * @param data
    * @param withToken
+   * @param additionalHeaders
    * @returns Promise<T>
    */
-  static async put<T>(url: string, data: unknown, withToken = false): Promise<T> {
-    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
+  static async put<T>(
+    url: string,
+    data: unknown,
+    withToken = false,
+    additionalHeaders?: RawAxiosRequestHeaders,
+  ): Promise<T> {
+    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken, additionalHeaders) };
     return this.getInstance()
       .put<T>(url, data, config)
       .then((response) => response.data);
@@ -121,12 +145,17 @@ class Axios {
    * PUT 요청 (multipart/form-data)
    * @param url
    * @param formData
+   * @param additionalHeaders
    * @returns Promise<CustomAxiosRequestConfig>
    */
-  static async putMultipart(url: string, formData: FormData): Promise<CustomAxiosRequestConfig> {
+  static async putMultipart(
+    url: string,
+    formData: FormData,
+    additionalHeaders?: RawAxiosRequestHeaders,
+  ): Promise<CustomAxiosRequestConfig> {
     const config: AxiosRequestConfig = {
       headers: {
-        ...this.getHeaders(true),
+        ...this.getHeaders(true, additionalHeaders),
         "Content-Type": this.CONTENT_TYPE_MULTIPART,
       },
     };
@@ -137,10 +166,11 @@ class Axios {
    * DELETE 요청
    * @param url
    * @param withToken
+   * @param additionalHeaders
    * @returns Promise<T>
    */
-  static async delete<T>(url: string, withToken = false): Promise<T> {
-    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken) };
+  static async delete<T>(url: string, withToken = false, additionalHeaders?: RawAxiosRequestHeaders): Promise<T> {
+    const config: AxiosRequestConfig = { headers: this.getHeaders(withToken, additionalHeaders) };
     return this.getInstance()
       .delete<T>(url, config)
       .then((response) => response.data);
