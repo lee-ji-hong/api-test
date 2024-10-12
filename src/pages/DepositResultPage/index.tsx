@@ -32,7 +32,7 @@ export const DepositResultPage = () => {
 
   return (
     <>
-      <Header className={cx("cancel")} onLeftClick={() => router.goBack()} left="Back_btn" />
+      <Header className={cx("cancel")} onLeftClick={() => router.push("/deposit-entry")} left="Back_btn" />
       <Spacing size={53} />
       <div className={cx("container")}>
         <Spacing size={16} />
