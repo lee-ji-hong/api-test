@@ -46,3 +46,28 @@
   font-size: 24px;
   z-index: 1000;
 }
+
+.button-container {
+  background-color: $yellow500;
+  color: $grey900;
+  margin: 0;
+}
+
+.img-wrap {
+  .img {
+    width: 267px;
+  }
+}
+// .button-container::before {
+//   content: "";
+//   background-image: url("@/assets/images/kakao_icon.svg");
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   width: 24px;
+//   height: 24px;
+//   position: absolute;
+//   left: 20%;
+// }
+// .button-container span {
+//   margin-left: 30px; /* 텍스트와 아이콘 사이의 간격 */
+// }

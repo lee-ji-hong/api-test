@@ -12,15 +12,16 @@ interface SelectBottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
   modalSubTitle?: string;
   onClose: () => void;
   children: React.ReactNode;
+  titleAlign?: "left" | "center" | "right";
 }
 
 export const SelectBottomSheet = forwardRef<HTMLUListElement, SelectBottomSheetProps>(
-  ({ modalTitle, modalSubTitle, children, onClose }, ref) => {
+  ({ modalTitle, modalSubTitle, children, onClose, titleAlign = "left" }, ref) => {
     return (
       <div className={cx("back-drop")} onClick={onClose}>
         <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
           <Spacing size={30} />
-          <Text className={cx("txt-title")} text={modalTitle} />
+          <Text className={cx("txt-title")} style={{ textAlign: titleAlign }} text={modalTitle} />
           {modalSubTitle && (
             <>
               <Spacing size={8} />

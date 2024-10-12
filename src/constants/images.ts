@@ -32,6 +32,7 @@ import KB_small from "@/assets/images/logo_mini/KB_small.svg";
 import WOORI_small from "@/assets/images/logo_mini/WOORI_small.svg";
 import NH_small from "@/assets/images/logo_mini/NH_small.svg";
 import KAKAO_small from "@/assets/images/logo_mini/KAKAO_small.svg";
+import KAKAO_icon from "@/assets/images/kakao_icon.svg";
 import TOSS_small from "@/assets/images/logo_mini/TOSS_small.svg";
 import IM_small from "@/assets/images/logo_mini/IM_small.svg";
 import BNK_small from "@/assets/images/logo_mini/BNK_small.svg";
@@ -154,6 +155,10 @@ export const IMAGES = {
   },
   Logo: {
     src: Logo,
+    alt: "로고",
+  },
+  KAKAO_icon: {
+    src: KAKAO_icon,
     alt: "로고",
   },
 

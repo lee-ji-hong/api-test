@@ -1,17 +1,23 @@
 import { Outlet, useLocation } from "react-router-dom";
-import MobileTabBar from "@/components/shared/MobileTabBar";
 import { Helmet } from "react-helmet-async";
+import { useLayoutEffect } from "react";
+import { useRecoilState } from "recoil";
+import Axios from "@/api/axios";
+
+import SelectBottomSheet from "@/components/shared/SelectBottomSheet";
+import MobileTabBar from "@/components/shared/MobileTabBar";
+import Button from "@/components/shared/Button";
+import Image from "@/components/shared/Image";
+
+import { loadingState, loginState } from "@/recoil/atoms";
+import { IMAGES } from "@/constants/images";
+import { useAuth } from "@/hooks/useAuth";
+import { reqLogin } from "@/api/remotes";
 
 import styles from "./AppLayout.module.scss";
 import classNames from "classnames/bind";
-import { useRecoilState } from "recoil";
-import { loadingState, loginState } from "@/recoil/atoms";
-import Axios from "@/api/axios";
-import { useLayoutEffect } from "react";
-import { useAuth } from "@/hooks/useAuth";
-import CenterModal from "@/components/modal/CenterModal";
-import { reqLogin } from "@/api/remotes";
 const cx = classNames.bind(styles);
+
 const AppLayout = () => {
   const { pathname } = useLocation();
   const [isLoading, setLoading] = useRecoilState(loadingState);
@@ -38,19 +44,24 @@ const AppLayout = () => {
       </Helmet>
       {isLoading && <div className={cx("loading")}>로딩 중...</div>} {/* 로딩 컴포넌트 */}
       {isLoginNeed && (
-        <CenterModal
-          message={`로그인이 필요합니다.\n로그인 페이지로 이동하시겠습니까?`}
-          subMessage=""
-          confirmLabel="확인"
-          cancelLabel="취소"
-          onCancel={() => {
-            setIsLoginNeed(false);
-          }}
-          onConfirm={() => {
-            setIsLoginNeed(false);
-            reqLogin();
-          }}
-        />
+        <SelectBottomSheet
+          modalTitle={`내집플랜에 로그인하고/n더 다양한 서비스를 확인해보세요!`}
+          titleAlign="center"
+          onClose={() => setIsLoginNeed(false)}>
+          <>
+            <div className={cx("img-wrap")}>
+              <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_1} />
+            </div>
+            <Button
+              subClassName={cx("button-container")}
+              onClick={() => {
+                setIsLoginNeed(false);
+                reqLogin();
+              }}
+              title="카카오로 3초만에 로그인"
+            />
+          </>
+        </SelectBottomSheet>
       )}
       {pathname === "/deposit-entry" || pathname === "/community" ? (
         <>
