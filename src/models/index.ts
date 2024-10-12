@@ -54,6 +54,13 @@ export interface BaseLoanProduct {
   expectedLoanRate: number; // 예상 대출 금리
 }
 
+export interface TransferUserResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: null;
+}
+
 export interface RentalProductResponse {
   code: number;
   status: string;

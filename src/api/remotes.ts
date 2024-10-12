@@ -6,6 +6,7 @@ import {
   CommunityDetailResponse,
   HousingInfoResponse,
   LoanAdviceReportResponse,
+  TransferUserResponse,
   SpecificLoanAdvice,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
@@ -22,6 +23,17 @@ export function sendLogout() {
   return Axios.post<void>("/api/v1/user/logout", null, true);
 }
 
+export function sendTransferUser(requestBody: string) {
+  return Axios.post<TransferUserResponse>(
+    "/api/v1/user/transfer",
+    requestBody,
+    true,
+    //   {
+    //   tempUserId: `temp_${getOrCreateUuid()}`,
+    // }
+  );
+}
+
 /*************
  * LoanAdvice API
  ************/
@@ -35,9 +47,7 @@ export function sendSimpleRentalProduct(requestBody: SendSimpleRentalProductRequ
 
 //전세대출상품 추천 보고서 산출
 export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
-  return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, true, {
-    tempUserId: `temp_${getOrCreateUuid()}`,
-  });
+  return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, true);
 }
 
 // 특정 전세대출상품 추천 보고서 산출
