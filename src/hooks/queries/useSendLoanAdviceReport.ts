@@ -1,20 +1,26 @@
 import { useMutation } from "@tanstack/react-query";
-import { useInternalRouter } from "@/hooks/useInternalRouter";
+import { useRecoilState } from "recoil";
 import { sendLoanAdviceReportWithTempUser, sendLoanAdviceReport } from "@/api/remotes";
 import { LoanAdviceReportResponse, sendLoanAdviceReportRequest } from "@/models";
+import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { LOGIN_REDIRECT } from "@/constants/loginLanding";
 import { setLoginRedirectPath } from "@/utils/localStorage";
+import { loginState } from "@/recoil/atoms";
+import { useAuth } from "@/hooks/useAuth";
 
 export const useSendLoanAdviceReport = () => {
+  const [, setIsLoginNeed] = useRecoilState(loginState);
   let uuid = localStorage.getItem("tempUserId");
   const router = useInternalRouter();
+  const { auth } = useAuth();
 
   const { mutate: loanAdviceReport } = useMutation<LoanAdviceReportResponse, Error, sendLoanAdviceReportRequest>({
     mutationFn: (requestBody) => {
       if (!uuid) {
         return sendLoanAdviceReportWithTempUser(requestBody);
       } else {
-        return sendLoanAdviceReport(requestBody);
+        auth ? sendLoanAdviceReport(requestBody) : setIsLoginNeed(true);
+        return Promise.reject(new Error("로그인이 필요합니다."));
       }
     },
     onSuccess: (data) => {
@@ -27,7 +33,8 @@ export const useSendLoanAdviceReport = () => {
     retry: 0,
     onError: (error) => {
       console.error(" 생성 실패:", error);
-      // router.push(`/deposit-result`);
+      console.log(error);
+      // const statusCode = error?.response?.status;
       setLoginRedirectPath(LOGIN_REDIRECT.get("REPORT_RESULT"));
     },
   });
