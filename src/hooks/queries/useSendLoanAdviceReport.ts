@@ -19,8 +19,12 @@ export const useSendLoanAdviceReport = () => {
       if (!uuid) {
         return sendLoanAdviceReportWithTempUser(requestBody);
       } else {
-        auth ? sendLoanAdviceReport(requestBody) : setIsLoginNeed(true);
-        return Promise.reject(new Error("로그인이 필요합니다."));
+        if (auth) {
+          return sendLoanAdviceReport(requestBody);
+        } else {
+          setIsLoginNeed(true);
+          return Promise.reject(new Error("로그인이 필요합니다."));
+        }
       }
     },
     onSuccess: (data) => {
