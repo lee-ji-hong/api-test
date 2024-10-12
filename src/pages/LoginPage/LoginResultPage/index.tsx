@@ -1,9 +1,13 @@
-import { createCommunityDetail } from "@/constants/communityDetailDummy";
-import { getCommunityIdAfterLogin, getLoginRedirectPath } from "@/utils/localStorage";
 import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
+import { createCommunityDetail } from "@/constants/communityDetailDummy";
+import { getCommunityIdAfterLogin, getLoginRedirectPath } from "@/utils/localStorage";
+import { formData } from "@/recoil/atoms";
+
 const LoginSuccessPage = () => {
+  const [, setRecoilFormData] = useRecoilState(formData);
   const navigate = useNavigate();
   // const token = getTokens();
 
@@ -11,10 +15,15 @@ const LoginSuccessPage = () => {
     const objToken = getTokens();
     if (objToken.accessToken && objToken.refreshToken) {
       alert("로그인 성공!");
-      alert(`해당 경로로 이동합니다.: ${getLoginRedirectPath()}`);
+      // alert(`해당 경로로 이동합니다.: ${getLoginRedirectPath()}`);
 
       setCookie("accessToken", objToken.accessToken);
       setCookie("refreshToken", objToken.refreshToken);
+
+      const savedFormData = localStorage.getItem("formData");
+      if (savedFormData) {
+        setRecoilFormData(JSON.parse(savedFormData));
+      }
 
       switch (getLoginRedirectPath()) {
         case "/community/detail":
@@ -22,6 +31,9 @@ const LoginSuccessPage = () => {
           break;
         case "/community/write":
           navigate("/community/write", { state: { communityDetail: createCommunityDetail() } });
+          break;
+        case "/loan-info-entry":
+          navigate("/loan-info-entry");
           break;
         default:
           navigate(getLoginRedirectPath());

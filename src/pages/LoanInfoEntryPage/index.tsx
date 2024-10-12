@@ -53,7 +53,7 @@ export const LoanInfoEntryPage = () => {
       annualIncome: (recoilFormData.annualIncome ?? 0) * 10000,
       spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
     };
-
+    localStorage.setItem("formData", JSON.stringify(recoilFormData));
     loanAdviceReport(updatedFormData as sendLoanAdviceReportRequest);
     await new Promise((r) => setTimeout(r, 5000));
     setLoading(false);
@@ -87,7 +87,7 @@ export const LoanInfoEntryPage = () => {
 
   return (
     <>
-      <Header className={cx("cancel")} onLeftClick={() => router.goBack()} left="Back_btn" />
+      <Header className={cx("cancel")} onLeftClick={() => router.push("/deposit-result")} left="Back_btn" />
       <Spacing size={53} />
       <div className={cx("container")}>
         <Spacing size={16} />
