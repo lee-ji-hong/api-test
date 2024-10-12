@@ -13,6 +13,7 @@ import {
   sendaddressSearchRequest,
   sendHousingInfoRequest,
 } from "@/models";
+import { getOrCreateUuid } from "@/utils/localStorage";
 
 /*************
  * User API
@@ -34,7 +35,9 @@ export function sendSimpleRentalProduct(requestBody: SendSimpleRentalProductRequ
 
 //전세대출상품 추천 보고서 산출
 export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
-  return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, true);
+  return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, true, {
+    tempUserId: `temp_${getOrCreateUuid()}`,
+  });
 }
 
 // 특정 전세대출상품 추천 보고서 산출
