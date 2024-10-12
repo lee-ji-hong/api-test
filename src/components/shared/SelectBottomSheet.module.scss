@@ -23,6 +23,7 @@
   }
 
   .txt-title {
+    @include column-flexbox();
     p {
       color: $grey800;
       font-size: 18px;

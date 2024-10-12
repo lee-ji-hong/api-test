@@ -68,16 +68,16 @@ const LoanInfoItem = ({
             <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit / 10000)}`}</span>
           </div>
         </div>
-        {isAlert && (
+        {isAlert && Array.isArray(item?.notEligibleReasons) && (
           <div className={cx("container-loaninfo-bottom")} onClick={handleRowClick}>
-            <Text className={cx("txt-loaninfo", "alert")} text={`${item?.notEligibleReasons[0]}`} />
+            <Text className={cx("txt-loaninfo", "alert")} text={`${item.notEligibleReasons[0]}`} />
           </div>
         )}
       </div>
       {modalOpen && (
         <SelectBottomSheet
-          modalTitle={`${item.loanProductName}에 대한 대출 불가 사유는 아래와 같습니다.`}
-          // modalSubTitle={modalSubTitle}
+          modalTitle={`${item.loanProductName}에 대한/n대출 불가 사유는 아래와 같습니다.`}
+          // alignItems="right"
           onClose={handleModalClose}>
           {item?.notEligibleReasons?.map((ment) => (
             <li
