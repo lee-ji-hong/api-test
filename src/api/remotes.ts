@@ -5,6 +5,7 @@ import {
   AddressResponse,
   CommunityDetailResponse,
   HousingInfoResponse,
+  getLoanAdviceResponse,
   LoanAdviceReportResponse,
   TransferUserResponse,
   SpecificLoanAdvice,
@@ -43,6 +44,11 @@ export function sendSimpleRentalProduct(requestBody: SendSimpleRentalProductRequ
   return Axios.post<RentalProductResponse>("/api/v1/loanAdvice/simple", requestBody, false).then(
     (response) => response.data,
   );
+}
+
+// 최근 대출추천 보고서 목록 조회
+export function getLoanAdvice() {
+  return Axios.get<getLoanAdviceResponse>("/api/v1/loanAdvice ", true).then((response) => response.data);
 }
 
 //전세대출상품 추천 보고서 산출 - 최초 유입 유저

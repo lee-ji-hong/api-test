@@ -70,7 +70,7 @@ const LoanInfoItem = ({
         </div>
         {isAlert && (
           <div className={cx("container-loaninfo-bottom")} onClick={handleRowClick}>
-            <Text className={cx("txt-loaninfo", "alert")} text={`${item.notEligibleReasons[0]}`} />
+            <Text className={cx("txt-loaninfo", "alert")} text={`${item?.notEligibleReasons[0]}`} />
           </div>
         )}
       </div>
@@ -79,7 +79,7 @@ const LoanInfoItem = ({
           modalTitle={`${item.loanProductName}에 대한 대출 불가 사유는 아래와 같습니다.`}
           // modalSubTitle={modalSubTitle}
           onClose={handleModalClose}>
-          {item?.notEligibleReasons.map((ment) => (
+          {item?.notEligibleReasons?.map((ment) => (
             <li
               key={ment}
               className={cx("modal-list")}

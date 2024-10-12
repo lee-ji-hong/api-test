@@ -8,6 +8,7 @@ import { useRecoilState } from "recoil";
 import { loadingState, loginState } from "@/recoil/atoms";
 import Axios from "@/api/axios";
 import { useLayoutEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import CenterModal from "@/components/modal/CenterModal";
 import { reqLogin } from "@/api/remotes";
 const cx = classNames.bind(styles);
@@ -15,6 +16,7 @@ const AppLayout = () => {
   const { pathname } = useLocation();
   const [isLoading, setLoading] = useRecoilState(loadingState);
   const [isLoginNeed, setIsLoginNeed] = useRecoilState(loginState);
+  const { auth } = useAuth();
 
   useLayoutEffect(() => {
     Axios.setLoadingFunction(setLoading);
@@ -55,7 +57,7 @@ const AppLayout = () => {
           <div className={cx("main")}>
             <Outlet />
           </div>
-          <nav className={cx("tabBar", { "tabBar-z-index": pathname === "/deposit-entry" })}>
+          <nav className={cx("tabBar", { "tabBar-z-index": pathname === "/deposit-entry" && !auth })}>
             <MobileTabBar />
           </nav>
         </>

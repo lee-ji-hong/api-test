@@ -227,7 +227,12 @@ export interface LikeResponse {
   message: string;
   data: string;
 }
-
+export interface getLoanAdviceResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: DepositLists[];
+}
 export interface LoanAdviceReportResponse {
   code: number;
   status: string;
@@ -239,6 +244,7 @@ export interface DepositLists {
   expectedLoanRate: number; // 숫자형 대출 금리
   loanProductCode: string; // 문자열 대출 상품 코드
   loanProductName: string; // 문자열 대출 상품 이름
-  notEligibleReasons: string[]; // 문자열 배열 - 대출 불가 사유
+  loanAdviceResultId?: number;
+  notEligibleReasons?: string[]; // 문자열 배열 - 대출 불가 사유
   possibleLoanLimit: number; // 숫자형 대출 한도
 }

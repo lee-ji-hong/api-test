@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import styles from "./DepositEntryPage.module.scss";
 import KeyboardModal from "@/components/shared/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
-// import DepositList from "@/components/shared/DepositList";
+import DepositList from "@/components/shared/DepositList";
 import BadgeList from "@/components/shared/BadgeList";
 import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";
@@ -11,10 +11,12 @@ import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
 import { useSendSimpleRentalProduct } from "@/hooks/queries/useSendSimpleRentalProduct";
+import { useGetLoanAdvice } from "@/hooks/queries/useGetLoanAdvice";
+
 import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 // import { MOCK } from "@/pages/DepositResultPage/mock";
-// import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { sendLoanAdviceReportRequest } from "@/models";
 
 import { formData } from "@/recoil/atoms";
@@ -29,9 +31,10 @@ const DepositEntryPage = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [inputValue, setInputValue] = useState<number>(0);
   const [bottomOffset, setBottomOffset] = useState(0);
+  const { loanAdviceInfo } = useGetLoanAdvice();
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
   const router = useInternalRouter();
-  // const { auth } = useAuth();
+  const { auth } = useAuth();
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -145,14 +148,23 @@ const DepositEntryPage = () => {
         <BadgeList list={MONEY} onClick={handleChangeValue} />
 
         {!isInputFocused ? (
-          <Button
-            className={cx("button-wrap")}
-            subClassName={cx("button-container")}
-            disabled={!inputValue || isInvalidValue}
-            onClick={() => handleNavigate(inputValue)}
-            bottom={bottomOffset}
-            title="전월세 대출 상품 확인하기"
-          />
+          <>
+            <Button
+              className={cx("button-wrap", { "auth-button-wrap": auth })}
+              subClassName={cx("button-container")}
+              disabled={!inputValue || isInvalidValue}
+              onClick={() => handleNavigate(inputValue)}
+              bottom={bottomOffset}
+              title="전월세 대출 상품 확인하기"
+            />
+            <Spacing size={57} />
+            {auth && (
+              <div>
+                <Text className={cx("txt-report")} text="최근 보고서" />
+                <DepositList list={loanAdviceInfo} isAlert={false} color="white" />
+              </div>
+            )}
+          </>
         ) : (
           <div>
             <Button
@@ -170,8 +182,6 @@ const DepositEntryPage = () => {
             />
           </div>
         )}
-
-        {/* {auth && <DepositList list={MOCK} isAlert={true} color="white" />} */}
       </div>
     </>
   );

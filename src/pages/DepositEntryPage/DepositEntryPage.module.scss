@@ -33,6 +33,19 @@
     text-align: center;
     color: $grey600;
   }
+
+  .txt-report {
+    p {
+      font-family: SF Pro Text;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: -1px;
+      text-align: left;
+      color: $grey700;
+    }
+  }
+
   .fixed-button {
     position: fixed;
     bottom: 50px;
@@ -84,6 +97,12 @@
     transition: bottom 0.4s ease;
     background-color: white;
     box-shadow: 0px -7px 30px 2px rgb(255, 255, 255);
+  }
+
+  .auth-button-wrap {
+    position: inherit !important;
+    margin-top: 60px;
+    padding: 0 !important;
   }
 
   .button-wrap-focus {
