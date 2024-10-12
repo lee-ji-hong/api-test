@@ -54,8 +54,8 @@ export const LoanInfoEntryPage = () => {
       spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
     };
 
-    await new Promise((r) => setTimeout(r, 5000));
     loanAdviceReport(updatedFormData as sendLoanAdviceReportRequest);
+    await new Promise((r) => setTimeout(r, 5000));
     setLoading(false);
   };
 

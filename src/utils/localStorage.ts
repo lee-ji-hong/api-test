@@ -11,3 +11,20 @@ export function getOrCreateUuid(): string {
 
   return uuid;
 }
+
+export function setCommunityIdAfterLogin(id: number) {
+  localStorage.setItem("communityDetailId", id.toString());
+}
+
+export function getCommunityIdAfterLogin(): number | undefined {
+  const id = localStorage.getItem("communityDetailId");
+  return id ? parseInt(id) : undefined;
+}
+
+export function setLoginRedirectPath(path: string | undefined) {
+  localStorage.setItem("loginRedirectPath", path || "/");
+}
+
+export function getLoginRedirectPath(): string {
+  return localStorage.getItem("loginRedirectPath") || "/";
+}
