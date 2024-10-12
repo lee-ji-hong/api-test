@@ -34,6 +34,7 @@ class Axios {
 
   static getInstance(): AxiosInstance {
     if (!this.instance) {
+      console.log(this.BASE_URL);
       this.instance = axios.create({
         baseURL: this.BASE_URL,
         headers: { "Content-Type": this.CONTENT_TYPE_JSON },
