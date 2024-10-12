@@ -12,6 +12,8 @@ import { useState } from "react";
 import CommunityService from "@/api/service/CommunityService";
 import Axios from "@/api/axios";
 import { LikeResponse } from "@/models";
+import { setCommunityIdAfterLogin, setLoginRedirectPath } from "@/utils/localStorage";
+import { LOGIN_REDIRECT } from "@/constants/loginLanding";
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +29,8 @@ const Contents: React.FC<Post> = (props) => {
           console.log("코드?", response.code);
           navigator("/community/detail", { state: { postId: props.id } });
         } catch (error) {
+          setLoginRedirectPath(LOGIN_REDIRECT.get("COMMUNITY_DETAIL"));
+          setCommunityIdAfterLogin(props.id);
           console.error("Failed to get health check:", error);
         }
       }}

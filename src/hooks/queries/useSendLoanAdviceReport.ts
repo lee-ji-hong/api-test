@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { sendLoanAdviceReport } from "@/api/remotes";
 import { LoanAdviceReportResponse, sendLoanAdviceReportRequest } from "@/models";
+import { LOGIN_REDIRECT } from "@/constants/loginLanding";
+import { setLoginRedirectPath } from "@/utils/localStorage";
 
 export const useSendLoanAdviceReport = () => {
   const router = useInternalRouter();
@@ -17,6 +19,7 @@ export const useSendLoanAdviceReport = () => {
     },
     onError: (error) => {
       console.error(" 생성 실패:", error);
+      setLoginRedirectPath(LOGIN_REDIRECT.get("REPORT_RESULT"));
     },
   });
 
