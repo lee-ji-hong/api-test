@@ -22,7 +22,7 @@ export const DepositResultPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const router = useInternalRouter();
-  const { rentalProductData } = location.state;
+  const { rentalProductData } = location.state || {};
 
   useEffect(() => {
     if (!rentalDeposit || rentalDeposit === 0) {
