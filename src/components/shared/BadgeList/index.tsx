@@ -13,9 +13,10 @@ interface BadgeProps {
   className?: string;
   list: BadgeItem[];
   onClick?: (value: string) => void;
+  theme?: "primary" | "dark" | "grey" | "white";
 }
 
-const BadgeList = ({ list, className, onClick }: BadgeProps) => {
+const BadgeList = ({ list, className, theme = "primary", onClick }: BadgeProps) => {
   const handleClick = (value: string) => {
     if (onClick) {
       onClick(value);
@@ -24,7 +25,7 @@ const BadgeList = ({ list, className, onClick }: BadgeProps) => {
   return (
     <div className={cx(["container", className])}>
       {list.map((item, index) => (
-        <Badge key={index} title={item?.label} onClick={() => handleClick(item?.label)} />
+        <Badge key={index} title={item?.label} onClick={() => handleClick(item?.label)} theme={theme} />
       ))}
     </div>
   );

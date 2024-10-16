@@ -1,6 +1,6 @@
 import { forwardRef, InputHTMLAttributes, useState, useEffect } from "react";
 
-import KeyboardModal from "@/components/shared/KeyboardModal";
+import KeyboardModal from "@/components/modal/KeyboardModal";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Image from "@/components/shared/Image";

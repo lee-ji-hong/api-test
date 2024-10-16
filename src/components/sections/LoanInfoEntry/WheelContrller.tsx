@@ -1,5 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import BottomSheet from "@/components/shared/BottomSheet";
+import BottomSheet from "@/components/modal/BottomSheet";
 import WheelAgePicker from "@/components/shared/WheelAgePicker";
 
 interface Props<ControlType extends FieldValues> {

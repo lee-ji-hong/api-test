@@ -1,5 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import AddressSearchInputModal from "@/components/shared/AddressSearchInputModal";
+import AddressSearchInputModal from "@/components/modal/AddressSearchInputModal";
 
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;

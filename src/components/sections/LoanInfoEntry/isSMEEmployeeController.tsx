@@ -1,8 +1,8 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import SelectBottomSheet from "@/components/shared/SelectBottomSheet";
+import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 
 import classNames from "classnames/bind";
-import styles from "@/components/shared/SelectBottomSheet.module.scss";
+import styles from "@/components/modal/SelectBottomSheet/SelectBottomSheet.module.scss";
 const cx = classNames.bind(styles);
 
 interface Props<ControlType extends FieldValues> {

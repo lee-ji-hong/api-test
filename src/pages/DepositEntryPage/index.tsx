@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import styles from "./DepositEntryPage.module.scss";
-import KeyboardModal from "@/components/shared/KeyboardModal";
+import KeyboardModal from "@/components/modal/KeyboardModal";
 import DepositInput from "@/components/shared/DepositInput";
 import DepositList from "@/components/shared/DepositList";
 import BadgeList from "@/components/shared/BadgeList";

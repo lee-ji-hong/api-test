@@ -4,7 +4,7 @@ import { useLayoutEffect } from "react";
 import { useRecoilState } from "recoil";
 import Axios from "@/api/axios";
 
-import SelectBottomSheet from "@/components/shared/SelectBottomSheet";
+import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import MobileTabBar from "@/components/shared/MobileTabBar";
 import Button from "@/components/shared/Button";
 import Image from "@/components/shared/Image";

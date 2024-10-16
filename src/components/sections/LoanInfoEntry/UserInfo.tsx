@@ -3,7 +3,7 @@ import { grey, blue } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
 import { useRecoilState } from "recoil";
 
-import BottomSheet from "@/components/shared/BottomSheet";
+import BottomSheet from "@/components/modal/BottomSheet";
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
 import { formData } from "@/recoil/atoms";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Collapse } from "@mui/material";
-import SelectBottomSheet from "@/components/shared/SelectBottomSheet";
+import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Spacing from "@/components/shared/Spacing";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";

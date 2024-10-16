@@ -1,5 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import InputModal from "@/components/shared/InputModal";
+import InputModal from "@/components/modal/InputModal";
 import { MONEY } from "@/constants/money";
 
 interface Limit {

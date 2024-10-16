@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Badge from "./Badge";
+import Badge from ".";
 
 const meta: Meta<typeof Badge> = {
   title: "shared/Badge",
@@ -9,6 +9,6 @@ const meta: Meta<typeof Badge> = {
 export default meta;
 
 export const Basic: StoryObj<typeof Badge> = {
-  args: { title: "+100만" },
+  args: { title: "+100만", theme: "primary" },
   render: (args) => <Badge {...args}></Badge>,
 };

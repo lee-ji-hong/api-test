@@ -11,7 +11,7 @@ import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
 import Header from "@/components/sections/Header";
 import Button from "@/components/shared/Button";
-import Badge2 from "@/components/shared/Badge2";
+import Badge2 from "@/components/shared/Badge/Badge2";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 
