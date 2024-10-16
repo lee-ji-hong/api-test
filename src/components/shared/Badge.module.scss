@@ -14,21 +14,34 @@
   &.primary {
     background-color: $grey300;
     color: $grey700;
+
+    &:hover {
+      background-color: $grey400;
+    }
   }
 
   &.dark {
     background-color: $grey800;
     color: $white;
+    &:hover {
+      background-color: $grey700;
+    }
   }
 
   &.grey {
     background: none;
     color: $grey500;
     border: 1px solid $blue100;
+    &:hover {
+      background-color: $grey100;
+    }
   }
 
   &.white {
     background-color: $white;
     color: $grey700;
+    &:hover {
+      background-color: $grey200;
+    }
   }
 }

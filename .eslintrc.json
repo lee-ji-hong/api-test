@@ -6,17 +6,9 @@
     "plugin:prettier/recommended",
     "plugin:storybook/recommended"
   ],
-  "ignorePatterns": [
-    "dist",
-    ".eslintrc.json",
-    "lintstagedrc.cjs",
-    "commitlint.config.js"
-  ],
+  "ignorePatterns": ["dist", ".eslintrc.json", "lintstagedrc.cjs", "commitlint.config.js"],
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "react-refresh",
-    "prettier"
-  ],
+  "plugins": ["react-refresh", "prettier"],
   "rules": {
     "react-refresh/only-export-components": [
       "warn",
