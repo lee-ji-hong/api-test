@@ -1,6 +1,4 @@
 .container {
-  background-color: $grey300;
-  color: $grey700;
   width: 72px;
   height: 32px;
   border-radius: 100px;
@@ -11,4 +9,26 @@
   letter-spacing: -0.5px;
   text-align: center;
   cursor: pointer;
+  border: none;
+
+  &.primary {
+    background-color: $grey300;
+    color: $grey700;
+  }
+
+  &.dark {
+    background-color: $grey800;
+    color: $white;
+  }
+
+  &.grey {
+    background: none;
+    color: $grey500;
+    border: 1px solid $blue100;
+  }
+
+  &.white {
+    background-color: $white;
+    color: $grey700;
+  }
 }

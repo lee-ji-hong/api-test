@@ -98,11 +98,11 @@ const ReportPage = () => {
             <div className={cx("section-wrap")}>
               <div className={cx("section-top-content")}>
                 <div>
-                  <Image className={cx("img-logo")} imageInfo={getBankImage(reportData.loanProductCode)} />
+                  <Image className={cx("img-logo")} imageInfo={getBankImage(reportData?.loanProductCode)} />
                 </div>
                 <Text
                   className={cx("txt-top")}
-                  text={`${reportData.loanProductName || "HUG 청년전용/n버팀목전세자금 대출"}`}
+                  text={`${reportData?.loanProductName || "HUG 청년전용/n버팀목전세자금 대출"}`}
                 />
               </div>
               <Spacing size={10} />

@@ -6,6 +6,9 @@ type ImageInfo = {
 };
 
 export function getBankImage(loanProductCode: string): ImageInfo {
+  if (!loanProductCode) {
+    return IMAGES.LoanBankDummyIcon;
+  }
   const bankCode = loanProductCode.split("-")[0]; // 'HF-01'에서 'HF' 추출
 
   switch (bankCode) {
