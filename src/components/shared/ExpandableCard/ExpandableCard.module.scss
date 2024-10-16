@@ -5,6 +5,11 @@
   padding: 15px 20px;
   box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.07);
 
+  .show-more-btn {
+    background: none;
+    border: none;
+  }
+
   .txt-sub {
     p {
       color: $grey500;
