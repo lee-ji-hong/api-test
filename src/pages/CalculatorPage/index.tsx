@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";
 import Badge from "@/components/shared/Badge";
 
-import styles from "./CalculatorPage.module.scss";
-import classNames from "classnames/bind";
 import LTVCalculator from "./LTVCalculator";
 import DTICalculator from "./DTICalculator";
 import DSRCalculator from "./DSRCalculator";
 import RepaymentCalculator from "./RepaymentCalculator";
+
+import styles from "./CalculatorPage.module.scss";
+import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 export default function CalculatorPage() {
@@ -29,6 +30,7 @@ export default function CalculatorPage() {
           />
         ))}
       </div>
+      <Spacing size={20} />
       <div>{selectedCalculator === "LTV" && <LTVCalculator />}</div>
       <div>{selectedCalculator === "DTI" && <DTICalculator />}</div>
       <div>{selectedCalculator === "DSR" && <DSRCalculator />}</div>
