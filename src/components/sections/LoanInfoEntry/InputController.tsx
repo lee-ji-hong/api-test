@@ -32,7 +32,6 @@ export const InputController = <ControlType extends FieldValues>({
         control={control}
         render={({ field }) => {
           const isInvalidValue = field.value <= (min?.value ?? -1) || field.value > (max?.value ?? Infinity);
-
           const warningMessage = field.value <= (min?.value ?? -1) ? (min?.ment ?? "") : (max?.ment ?? "");
 
           // 키보드 입력 이벤트

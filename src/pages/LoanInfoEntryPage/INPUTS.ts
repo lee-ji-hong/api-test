@@ -14,7 +14,7 @@ export const INPUTS = [
     modalButton: "다음",
     limit: {
       min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
-      max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+      max: { value: 200000, ment: "20억원 이하로 입력이 가능합니다." },
     },
     component: InputController,
   },

@@ -1,0 +1,84 @@
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid $blue500;
+
+  .input {
+    @include text-style(2, 500, $grey800);
+    padding-bottom: 1rem;
+    width: 100%;
+    text-align: left;
+    border: none;
+
+    @include responsive("M") {
+      font-size: 1.8rem;
+    }
+
+    &::placeholder {
+      color: $grey400;
+    }
+  }
+
+  .reset {
+    margin-left: 4px;
+    width: 24px;
+    cursor: pointer;
+  }
+  .unit {
+    margin-left: 4px; // 간격을 조절하고 싶을 경우
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    text-align: right;
+    min-width: 35px;
+    width: 42px;
+    color: $grey800;
+  }
+}
+
+.input-alert {
+  border-bottom: 2px solid $red500 !important;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.txt-sub {
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: left;
+    color: $grey600;
+  }
+}
+
+.text-alert {
+  p {
+    color: $red500;
+    animation: shake 0.3s ease-in-out;
+  }
+}
