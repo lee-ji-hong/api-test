@@ -4,7 +4,7 @@ export const NAVIGATION_BAR_MENU = {
   home: {
     title: "대출계산기",
     tabTitle: "대출계산기",
-    path: "/",
+    path: "/calculator",
     icon: IMAGES.TabBarCalculatorIcon,
   },
   search: {

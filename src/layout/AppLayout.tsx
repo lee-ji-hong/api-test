@@ -63,7 +63,7 @@ const AppLayout = () => {
           </>
         </SelectBottomSheet>
       )}
-      {pathname === "/deposit-entry" || pathname === "/community" ? (
+      {pathname === "/deposit-entry" || pathname === "/community" || pathname === "/calculator" ? (
         <>
           <div className={cx("main")}>
             <Outlet />
