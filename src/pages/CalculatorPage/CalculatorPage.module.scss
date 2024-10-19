@@ -1,3 +1,9 @@
 .header {
   @include flexbox(start, center);
 }
+
+.badge {
+  width: auto !important;
+  height: auto !important;
+  padding: 6px 14px;
+}
