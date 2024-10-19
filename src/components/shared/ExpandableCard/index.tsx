@@ -6,10 +6,11 @@ import styles from "./ExpandableCard.module.scss";
 const cx = classNames.bind(styles);
 
 interface TextProps {
+  title?: string;
   content: string;
 }
 
-const ExpandableCard = ({ content }: TextProps) => {
+const ExpandableCard = ({ title, content }: TextProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const MAX_LENGTH = 100;
 
@@ -24,6 +25,7 @@ const ExpandableCard = ({ content }: TextProps) => {
 
   return (
     <div className={cx("reason-box")}>
+      <Text className={cx("txt-title")} text={title} />
       <Text
         className={cx("txt-sub")}
         text={
