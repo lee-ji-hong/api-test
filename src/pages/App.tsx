@@ -25,6 +25,7 @@ const ReportPage = lazy(() => import("./ReportPage"));
 const NoReportPage = lazy(() => import("./NoReportPage"));
 const TermsOfServicePage = lazy(() => import("./TermsOfServicePage"));
 const PrivacyPolicyPage = lazy(() => import("./PrivacyPolicyPage"));
+const CalculatorPage = lazy(() => import("./CalculatorPage"));
 
 // 로딩 테스트용 페이지
 const ReportPageLoading = lazy(() => import("./ReportPage/ReportPageLoading"));
@@ -67,6 +68,7 @@ function App() {
                 <Route path="report" element={<ReportPage />} />
                 <Route path="no-report" element={<NoReportPage />} />
                 <Route path="login-success" element={<LoginSuccessPage />} />
+                <Route path="calculator" element={<CalculatorPage />} />
 
                 {/* 로딩 화면 테스트용 */}
                 <Route path="loading/report" element={<ReportPageLoading />} />
