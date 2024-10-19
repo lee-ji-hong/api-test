@@ -4,14 +4,15 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 
+import ExpandableCard from "@/components/shared/ExpandableCard";
 import DepositList from "@/components/shared/DepositList";
 import ProgressBar from "@/components/shared/ProgressBar";
 import ReportList from "@/components/shared/ReportList";
-import Spacing from "@/components/shared/Spacing";
+import Badge2 from "@/components/shared/Badge/Badge2";
 import Section01 from "@/components/shared/Section01";
+import Spacing from "@/components/shared/Spacing";
 import Header from "@/components/sections/Header";
 import Button from "@/components/shared/Button";
-import Badge2 from "@/components/shared/Badge/Badge2";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 
@@ -33,14 +34,12 @@ interface ListItem {
 const ReportPage = () => {
   const [showMoreExtraCost, setShowMoreExtraCost] = useState(false);
   const [showMoreDepositList, setShowMoreDepositList] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
   const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
   const location = useLocation();
   const reportData = location.state?.reportData?.data;
 
   const [sliderValue, setSliderValue] = useState(reportData?.loanAmount);
-  const MAX_LENGTH = 100;
 
   function valuetext(value: number) {
     return `${value}`;
@@ -70,13 +69,6 @@ const ReportPage = () => {
     setShowPage(false);
     router.goBack();
   };
-
-  const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const recommendationReason = reportData?.recommendationReason || "이 대출을 추천한 이유";
-  const shouldShowMore = recommendationReason.length > MAX_LENGTH;
 
   return (
     <>
@@ -182,6 +174,7 @@ const ReportPage = () => {
             <Spacing size={8} />
             <Image className={cx("img")} imageInfo={IMAGES?.Report_1} />
           </div>
+
           {/* Section05 */}
           <div className={cx("box")}>
             <Spacing size={70} />
@@ -191,25 +184,7 @@ const ReportPage = () => {
               highlight="#20대 인기상품 #초저금리 #최대한도"
             />
             <Spacing size={16} />
-            <div className={cx("reason-box")}>
-              <Text
-                className={cx("txt-sub")}
-                text={
-                  isExpanded || !shouldShowMore
-                    ? recommendationReason
-                    : `${recommendationReason.substring(0, MAX_LENGTH)}...`
-                }
-              />
-              {shouldShowMore && (
-                <button className={cx("show-more-btn")} onClick={toggleExpanded}>
-                  <Text
-                    className={cx("txt-sub")}
-                    text={isExpanded ? "간략히" : "더보기"}
-                    highlight={isExpanded ? "간략히" : "더보기"}
-                  />
-                </button>
-              )}
-            </div>
+            <ExpandableCard content={reportData?.recommendationReason} />
           </div>
           {/* Section06 */}
           <div className={cx("box")}>
