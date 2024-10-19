@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import KeyboardModal from ".";
 
 const meta: Meta<typeof KeyboardModal> = {
-  title: "shared/KeyboardModal",
+  title: "Modal/KeyboardModal",
   component: KeyboardModal,
 };
 

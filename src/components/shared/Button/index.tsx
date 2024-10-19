@@ -15,21 +15,23 @@ interface ButtonProps {
   disabled?: boolean;
   title?: string;
   bottom?: number;
+  theme?: "primary" | "light";
 }
 
 const Button = ({
   className,
+  bottom = 0,
+  type = "button",
+  theme = "primary",
   subClassName,
   title,
   onClick,
   disabled,
-  bottom = 0,
-  type = "button",
   usePortal = false,
 }: ButtonProps) => {
   const buttonContent = (
     <div className={cx([className])} style={{ bottom: `${bottom}px` }}>
-      <button className={cx(["container", subClassName])} onClick={onClick} disabled={disabled} type={type}>
+      <button className={cx(["container", theme, subClassName])} onClick={onClick} disabled={disabled} type={type}>
         {title}
       </button>
     </div>
@@ -37,4 +39,5 @@ const Button = ({
 
   return usePortal ? <GlobalPortal.Consumer>{buttonContent}</GlobalPortal.Consumer> : buttonContent;
 };
+
 export default Button;

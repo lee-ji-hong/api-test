@@ -8,8 +8,6 @@
 }
 
 .container {
-  background-color: $blue500;
-  color: $white;
   border: none;
   width: 100%;
   height: 56px;
@@ -28,9 +26,24 @@
   text-align: center;
   cursor: pointer;
 
-  &:disabled {
-    // opacity: 0.3;
-    background-color: $blue300;
-    cursor: not-allowed;
+  &.primary {
+    background-color: $blue500;
+    color: $white;
+
+    &:disabled {
+      // opacity: 0.3;
+      background-color: $blue300;
+      cursor: not-allowed;
+    }
   }
+
+  &.light {
+    background-color: $blue100;
+    color: $grey800;
+  }
+}
+
+.dual-button-container {
+  @include flexbox();
+  gap: 10px;
 }
