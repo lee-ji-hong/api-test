@@ -248,3 +248,10 @@ export interface DepositLists {
   notEligibleReasons?: string[]; // 문자열 배열 - 대출 불가 사유
   possibleLoanLimit: number; // 숫자형 대출 한도
 }
+
+export interface sendLtvCalcRequest {
+  loanPurpose: string;
+  collateralValue: number;
+  regionType: string;
+  houseOwnershipType: string;
+}

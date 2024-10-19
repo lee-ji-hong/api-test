@@ -44,4 +44,12 @@
       background-color: $grey200;
     }
   }
+
+  &.blue {
+    background-color: $blue100;
+    color: $blue500;
+    &:hover {
+      background-color: $blue200;
+    }
+  }
 }

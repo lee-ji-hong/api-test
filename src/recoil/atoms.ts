@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { sendLoanAdviceReportRequest } from "@/models";
+import { sendLoanAdviceReportRequest, sendLtvCalcRequest } from "@/models";
 
 export const formData = atom<sendLoanAdviceReportRequest>({
   key: "formState",
@@ -33,4 +33,14 @@ export const loadingState = atom<boolean>({
 export const loginState = atom<boolean>({
   key: "loginState",
   default: false,
+});
+
+export const ltvCalcState = atom<sendLtvCalcRequest>({
+  key: "ltvCalcState",
+  default: {
+    loanPurpose: "",
+    collateralValue: 0,
+    regionType: "",
+    houseOwnershipType: "",
+  },
 });
