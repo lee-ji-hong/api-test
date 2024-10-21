@@ -27,6 +27,7 @@ import LoanHFIcon from "@/assets/images/community/ico_loan_hf_full.svg";
 import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi_full.svg";
 import LoanHUGIcon from "@/assets/images/community/ico_loan_hug_full.svg";
 import HANA_small from "@/assets/images/logo_mini/HANA_small.svg";
+import Heart from "@/assets/images/heart.svg";
 import SHINHAN_small from "@/assets/images/logo_mini/SHINHAN_small.svg";
 import KB_small from "@/assets/images/logo_mini/KB_small.svg";
 import WOORI_small from "@/assets/images/logo_mini/WOORI_small.svg";
@@ -73,6 +74,10 @@ export const IMAGES = {
   TabBarBoardIcon: {
     SVGComponent: TabBarBoardIcon,
     alt: "게시판 아이콘",
+  },
+  LoadingHeart: {
+    src: Heart,
+    alt: "하트",
   },
   HeartIcon: {
     src: CommunityHeartIcon,

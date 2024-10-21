@@ -4,8 +4,9 @@ import DepositEntryPageLoading from "@/pages/DepositEntryPage/DepositEntryPageLo
 import DepositResultPageLoading from "@/pages/DepositResultPage/DepositResultPageLoading";
 import LoanInfoEntryPageLoading from "@/pages/LoanInfoEntryPage/LoanInfoEntryPageLoading";
 import ReportPageLoading from "@/pages/ReportPage/ReportPageLoading";
+import Image from "@/components/shared/Image";
 
-import Lottie from "@/components/shared/Lottie";
+import { IMAGES } from "@/constants/images";
 
 import classNames from "classnames/bind";
 import styles from "./FullScreenMessage.module.scss";
@@ -31,7 +32,11 @@ function FullScreenMessage({ type }: FullScreenMessageProps) {
 }
 
 function Error() {
-  return <Lottie src="https://static.toss.im/tds/icon/png/4x/icn-warning-color.png" />;
+  return (
+    <div className={cx("container")}>
+      <Image className={cx("ico-heart")} imageInfo={IMAGES?.LoadingHeart} />
+    </div>
+  );
 }
 
 function Loading() {
@@ -48,7 +53,7 @@ function Loading() {
         <ReportPageLoading />
       ) : (
         <div className={cx("container")}>
-          <Lottie src="https://static.toss.im/lotties/loading/circle-loading.json" />
+          <Image className={cx("ico-heart")} imageInfo={IMAGES?.LoadingHeart} />
         </div>
       )}
     </>
