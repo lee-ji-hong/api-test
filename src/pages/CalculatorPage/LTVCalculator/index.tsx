@@ -3,10 +3,10 @@ import { useRecoilState } from "recoil";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
-import ExpandableCard from "@/components/shared/ExpandableCard";
 import Section02 from "@/components/shared/Section02";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
+import Text from "@/components/shared/Text";
 
 import { useSendLtvCalc } from "@/hooks/queries/useSendLtvCalc";
 import { validateFormData } from "./validateFormData";
@@ -77,13 +77,19 @@ const LTVCalculator = () => {
       setIsKeyboardModalOpen(false);
     }, 100);
   };
-
+  const content =
+    "LTV는 'Loan to Value'의 약자로, 대출금액과 부동산 가치의 비율을 나타냅니다. LTV는 대출 심사 시 중요한 지표로, 대출자가 얼마나 많은 자금을 담보로 제공하는지대출금액과 부동산 가치의 비율을 나타냅니다.";
   return (
     <div>
-      <ExpandableCard
-        title="LTV란?"
-        content="LTV는 'Loan to Value'의 약자로, 대출금액과 부동산 가치의 비율을 나타냅니다. LTV는 대출 심사 시 중요한 지표로, 대출자가 얼마나 많은 자금을 담보로 제공하는지대출금액과 부동산 가치의 비율을 나타냅니다."
-      />
+      <div className={cx("reason-box")}>
+        <Text className={cx("txt-title")} text="LTV란?" />
+        <div>
+          <span className={cx("txt-sub")}>{content.substring(0, 100)}...</span>
+          <button onClick={() => alert("dd")}>
+            <Text className={cx("txt-sub")} text={"\u00A0\u00A0\u00A0\u00A0더보기"} highlight="더보기" />
+          </button>
+        </div>
+      </div>
       <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
         <>
           {INPUTS.map((item, ...rest) => {

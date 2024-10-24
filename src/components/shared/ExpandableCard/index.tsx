@@ -26,21 +26,20 @@ const ExpandableCard = ({ title, content }: TextProps) => {
   return (
     <div className={cx("reason-box")}>
       <Text className={cx("txt-title")} text={title} />
-      <Text
-        className={cx("txt-sub")}
-        text={
-          isExpanded || !shouldShowMore ? recommendationReason : `${recommendationReason.substring(0, MAX_LENGTH)}...`
-        }
-      />
-      {shouldShowMore && (
-        <button className={cx("show-more-btn")} onClick={toggleExpanded}>
-          <Text
-            className={cx("txt-sub")}
-            text={isExpanded ? "간략히" : "더보기"}
-            highlight={isExpanded ? "간략히" : "더보기"}
-          />
-        </button>
-      )}
+      <div>
+        <span className={cx("txt-sub")}>
+          {isExpanded || !shouldShowMore ? recommendationReason : `${recommendationReason.substring(0, MAX_LENGTH)}...`}
+        </span>
+        {shouldShowMore && (
+          <button className={cx("show-more-btn")} onClick={toggleExpanded}>
+            <Text
+              className={cx("txt-sub")}
+              text={isExpanded ? "\u00A0\u00A0\u00A0간략히" : "\u00A0\u00A0\u00A0더보기"}
+              highlight={isExpanded ? "\u00A0\u00A0\u00A0간략히" : "\u00A0\u00A0\u00A0더보기"}
+            />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
