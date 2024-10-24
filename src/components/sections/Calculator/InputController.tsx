@@ -1,6 +1,9 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
+
 import { GlobalPortal } from "@/components/shared/GlobalPortal";
 import KeyboardModal from "@/components/modal/KeyboardModal";
+import Spacing from "@/components/shared/Spacing";
+import Badge from "@/components/shared/Badge";
 import Input from "@/components/shared/Input";
 
 import styles from "@/pages/CalculatorPage/CalculatorPage.module.scss";
@@ -18,6 +21,7 @@ interface Props<ControlType extends FieldValues> {
   keyboardHeight: number;
   onFocus?: () => void;
   onBlur?: () => void;
+  options?: { label: string; value: boolean | string | number }[];
   min?: Limit;
   max?: Limit;
 }
@@ -26,6 +30,7 @@ const InputController = <ControlType extends FieldValues>({
   formFieldName,
   keyboardHeight,
   control,
+  options,
   min,
   max,
   onFocus,
@@ -44,7 +49,7 @@ const InputController = <ControlType extends FieldValues>({
           if (key === "⌫") {
             field.onChange(Math.floor(field.value / 10));
           } else if (key === "00") {
-            field.onChange(Math.min(field.value * 100, 210000));
+            field.onChange(Math.min(field.value * 100, 99999999));
           } else {
             const numKey = parseInt(key, 10);
             if (!isNaN(numKey)) {
@@ -54,6 +59,22 @@ const InputController = <ControlType extends FieldValues>({
             }
           }
         };
+
+        // 금액 뱃지 이벤트
+        const handleBadgeClick = (label: string) => {
+          const item = options?.find((item) => item.label === label);
+          if (item && typeof item.value === "number") {
+            const currentValue = field.value || 0;
+            const newValue = currentValue + item.value;
+            field.onChange(Math.min(newValue, 99999999));
+          }
+        };
+
+        const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, label: string) => {
+          e.preventDefault();
+          handleBadgeClick(label);
+        };
+
         return (
           <div className={cx("input-container")}>
             <Input
@@ -66,6 +87,17 @@ const InputController = <ControlType extends FieldValues>({
               ref={field.ref}
               // {...field}
             />
+            <Spacing size={12} />
+            <div className={cx("badge-container")}>
+              {options?.map(({ label, value }) => (
+                <Badge
+                  className={cx("button")}
+                  key={value.toString()}
+                  title={label}
+                  onClick={(e) => handleClick(e, label)}
+                />
+              ))}
+            </div>
             {keyboardHeight > 0 && (
               <GlobalPortal.Consumer>
                 <KeyboardModal

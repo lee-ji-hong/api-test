@@ -90,3 +90,17 @@
 .button {
   flex: 1;
 }
+
+.badge-container {
+  @include flexbox();
+  flex-wrap: wrap;
+  gap: 9px;
+
+  .button {
+    flex: 1;
+    min-width: 104px;
+    height: auto !important;
+    padding: 6px 14px;
+    border-radius: 7px;
+  }
+}

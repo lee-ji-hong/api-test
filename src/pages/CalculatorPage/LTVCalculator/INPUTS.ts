@@ -47,9 +47,14 @@ export const INPUTS = [
     name: "collateralValue",
     value: "",
     limit: {
-      min: { value: -1, ment: "보증금은 100만원 이상이어야 합니다." },
-      max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+      min: { value: -1, ment: "금액을 입력해주세요" },
+      max: { value: 10000000, ment: "1,000억원 이하로 입력이 가능합니다." },
     },
+    options: [
+      { label: "+1000만", value: 1000 },
+      { label: "+1억", value: 10000 },
+      { label: "+10억", value: 100000 },
+    ],
     component: InputController,
   },
 ];

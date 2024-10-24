@@ -66,8 +66,7 @@ const LTVCalculator = () => {
   useEffect(() => {
     const element = inputRefs.current["collateralValue"];
     if (element && bottomOffset !== 0) {
-      const topPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      console.log(bottomOffset);
+      const topPosition = element.getBoundingClientRect().top + window.pageYOffset + 50;
       window.scrollTo({
         top: topPosition - bottomOffset,
         behavior: "smooth",

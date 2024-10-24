@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
-  options?: { label: string; value: boolean | string }[];
+  options?: { label: string; value: boolean | string | number }[];
 }
 
 const SelectController = <ControlType extends FieldValues>({ formFieldName, control, options }: Props<ControlType>) => {
@@ -18,7 +18,7 @@ const SelectController = <ControlType extends FieldValues>({ formFieldName, cont
       name={formFieldName}
       control={control}
       render={({ field }) => {
-        const handleSelect = (value: boolean | string) => {
+        const handleSelect = (value: boolean | string | number) => {
           field.onChange(value);
         };
 
