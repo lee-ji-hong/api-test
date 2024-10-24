@@ -11,25 +11,23 @@ export const validateFormData = (data: FieldValues, setFocus: UseFormSetFocus<Fi
   const { loanPurpose, collateralValue, regionType, houseOwnershipType } = data;
 
   if (!loanPurpose) {
-    alert("보증금을 입력해주세요.");
+    alert("대출 목적을 입력해주세요.");
     setFocus("loanPurpose");
     return false;
   }
-  if (!collateralValue) {
+  if (!houseOwnershipType) {
     alert("주택 소유 유형을 입력해주세요.");
-    setFocus("collateralValue");
+    setFocus("houseOwnershipType");
     return false;
   }
-
   if (!regionType) {
     alert("담보대출 주택 대상 지역를 입력해주세요.");
     setFocus("regionType");
     return false;
   }
-
-  if (!houseOwnershipType) {
+  if (!collateralValue) {
     alert("담보가치를 입력해주세요.");
-    setFocus("houseOwnershipType");
+    setFocus("collateralValue");
     return false;
   }
 
