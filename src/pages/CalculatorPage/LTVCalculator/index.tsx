@@ -31,6 +31,7 @@ const LTVCalculator = () => {
     handleSubmit,
     formState: { isSubmitting },
     setFocus,
+    reset,
   } = useForm({
     defaultValues: ltvCalc,
     values: ltvCalc,
@@ -79,6 +80,10 @@ const LTVCalculator = () => {
       setIsKeyboardModalOpen(false);
     }, 100);
   };
+
+  const handleReset = () => {
+    reset();
+  };
   const content =
     "LTV는 'Loan to Value'의 약자로, 대출금액과 부동산 가치의 비율을 나타냅니다. LTV는 대출 심사 시 중요한 지표로, 대출자가 얼마나 많은 자금을 담보로 제공하는지대출금액과 부동산 가치의 비율을 나타냅니다.";
   return (
@@ -113,7 +118,17 @@ const LTVCalculator = () => {
             );
           })}
           <Spacing size={50} />
-          <Button className={cx("button-wraps")} title="계산하기" type="submit" disabled={isSubmitting} />
+          <div className={cx("button-wrap")}>
+            <Button
+              className={cx("button")}
+              title="초기화"
+              type="button"
+              disabled={isSubmitting}
+              theme="light"
+              onClick={handleReset}
+            />
+            <Button className={cx("button")} title="계산하기" type="submit" disabled={isSubmitting} />
+          </div>
 
           {isKeyboardModalOpen && <Spacing size={bottomOffset} />}
         </>

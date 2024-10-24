@@ -80,3 +80,13 @@
   letter-spacing: -1px;
   text-align: left;
 }
+
+.button-wrap {
+  @include flexbox();
+  width: 100%;
+  gap: 9px;
+}
+
+.button {
+  flex: 1;
+}
