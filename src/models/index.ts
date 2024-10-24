@@ -167,6 +167,10 @@ export interface AddressInfo {
   jibun: string; // 지번
 }
 
+/*************
+ * Community
+ ************/
+
 export interface CommunityDetailResponse {
   code: number;
   status: string;
@@ -249,9 +253,26 @@ export interface DepositLists {
   possibleLoanLimit: number; // 숫자형 대출 한도
 }
 
+/*************
+ * Calculator
+ ************/
+
 export interface sendLtvCalcRequest {
   loanPurpose: string;
   collateralValue: number;
   regionType: string;
   houseOwnershipType: string;
+}
+
+export interface LtvCalcResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: LtvCalculationResult;
+}
+
+export interface LtvCalculationResult {
+  ltvRatio: number;
+  collateralValue: number;
+  possibleLoanAmount: number;
 }

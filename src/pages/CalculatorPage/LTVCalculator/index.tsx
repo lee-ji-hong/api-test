@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 import ExpandableCard from "@/components/shared/ExpandableCard";
-import KeyboardModal from "@/components/modal/KeyboardModal";
 import Section02 from "@/components/shared/Section02";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 
+import { useSendLtvCalc } from "@/hooks/queries/useSendLtvCalc";
 import { validateFormData } from "./validateFormData";
 import { sendLtvCalcRequest } from "@/models";
 import { ltvCalcState } from "@/recoil/atoms";
@@ -21,6 +21,9 @@ const cx = classNames.bind(styles);
 const LTVCalculator = () => {
   const [ltvCalc] = useRecoilState<sendLtvCalcRequest>(ltvCalcState);
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [bottomOffset, setBottomOffset] = useState(0);
+  const { LtvCalcInfo } = useSendLtvCalc();
   const {
     control,
     handleSubmit,
@@ -32,16 +35,45 @@ const LTVCalculator = () => {
     mode: "onChange",
   });
 
+  useEffect(() => {
+    const calculateKeyboardHeight = () => {
+      const height = (window.innerHeight * 0.4 - 207) / 7;
+      setKeyboardHeight(height);
+
+      if (!isKeyboardModalOpen) {
+        setBottomOffset(0);
+        setKeyboardHeight(0);
+      } else {
+        if (window.innerWidth < 380) {
+          setBottomOffset(window.innerHeight * 0.4 - 5);
+        }
+        setBottomOffset(window.innerHeight * 0.4 + 15);
+      }
+    };
+
+    window.addEventListener("resize", calculateKeyboardHeight);
+    calculateKeyboardHeight();
+    return () => {
+      window.removeEventListener("resize", calculateKeyboardHeight);
+    };
+  }, [isKeyboardModalOpen]);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus)) return;
+    const updatedFormData = {
+      ...data,
+      collateralValue: (data.collateralValue ?? 0) * 10000,
+    };
+    LtvCalcInfo(updatedFormData as sendLtvCalcRequest);
   };
 
-  const handleKeyPress = (key: string) => {
-    console.log(`Key pressed: ${key}`);
+  const onFocus = () => {
+    setIsKeyboardModalOpen(true);
   };
 
   const onClose = () => {
     setTimeout(() => {
+      console.log("dddd");
       setIsKeyboardModalOpen(false);
     }, 100);
   };
@@ -56,13 +88,6 @@ const LTVCalculator = () => {
         <>
           {INPUTS.map((item, ...rest) => {
             const Component = item.component;
-            const handleFocus = () => {
-              if (item.label === "담보가치") {
-                setIsKeyboardModalOpen(true);
-              } else {
-                setIsKeyboardModalOpen(false);
-              }
-            };
             return (
               <Section02 key={item.id} title={item.label}>
                 <Component
@@ -71,19 +96,18 @@ const LTVCalculator = () => {
                   options={item.options}
                   min={item.limit?.min}
                   max={item.limit?.max}
-                  onFocus={handleFocus}
+                  onFocus={onFocus}
+                  onBlur={onClose}
+                  keyboardHeight={keyboardHeight}
                   {...rest}
                 />
               </Section02>
             );
           })}
           <Spacing size={50} />
-          <div className={cx({ fixed: isKeyboardModalOpen })} onClick={() => onClose()}>
-            <Button className={cx("button-wraps")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
-            {isKeyboardModalOpen && (
-              <KeyboardModal className={cx("keyboard-container")} onKeyPress={handleKeyPress} keyboardHeight={20} />
-            )}
-          </div>
+          <Button className={cx("button-wraps")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
+
+          {isKeyboardModalOpen && <Spacing size={bottomOffset} />}
         </>
       </form>
       <Spacing size={70} />
