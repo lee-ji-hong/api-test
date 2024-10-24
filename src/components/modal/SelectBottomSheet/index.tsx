@@ -1,5 +1,6 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { useState, useEffect, forwardRef, InputHTMLAttributes } from "react";
 
+import { GlobalPortal } from "@/components/shared/GlobalPortal";
 import Spacing from "@/components/shared/Spacing";
 import Text from "@/components/shared/Text";
 
@@ -17,24 +18,41 @@ interface SelectBottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const SelectBottomSheet = forwardRef<HTMLUListElement, SelectBottomSheetProps>(
   ({ modalTitle, modalSubTitle, children, onClose, titleAlign = "flex-start" }, ref) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+      setIsVisible(true);
+    }, []);
+
+    const handleClose = () => {
+      setIsVisible(false);
+      setTimeout(onClose, 400);
+    };
+
     return (
-      <div className={cx("back-drop")} onClick={onClose}>
-        <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
-          <Spacing size={30} />
-          <Text className={cx("txt-title")} style={{ alignItems: titleAlign }} text={modalTitle} />
-          {modalSubTitle && (
-            <>
-              <Spacing size={8} />
-              <Text className={cx("txt-sub-title")} text={modalSubTitle} />
-            </>
-          )}
-          <Spacing size={30} />
-          <ul className={cx("options")} ref={ref}>
-            {children}
-          </ul>
-          <Spacing size={20} />
+      <GlobalPortal.Consumer>
+        <div className={cx("back-drop")} onClick={handleClose}>
+          <div
+            className={cx("container", { show: isVisible })}
+            aria-label="alert-modal"
+            onClick={(e) => e.stopPropagation()}>
+            <div className={cx("bar")}></div>
+            <Spacing size={35} />
+            <Text className={cx("txt-title")} style={{ alignItems: titleAlign }} text={modalTitle} />
+            {modalSubTitle && (
+              <>
+                <Spacing size={8} />
+                <Text className={cx("txt-sub-title")} text={modalSubTitle} />
+              </>
+            )}
+            <Spacing size={30} />
+            <ul className={cx("options")} ref={ref}>
+              {children}
+            </ul>
+            <Spacing size={10} />
+          </div>
         </div>
-      </div>
+      </GlobalPortal.Consumer>
     );
   },
 );

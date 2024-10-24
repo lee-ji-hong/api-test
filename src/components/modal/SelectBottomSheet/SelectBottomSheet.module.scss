@@ -12,14 +12,30 @@
 
   .container {
     position: fixed;
-    bottom: 0px;
-    width: 90%;
+    bottom: -100%;
+    width: 95%;
     margin: 10px;
     background-color: white;
     padding: 20px;
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: bottom 0.4s ease-in-out; /* 부드러운 애니메이션 */
+  }
+
+  .container.show {
+    bottom: 0; /* 모달이 화면 위로 슬라이드 */
+  }
+
+  .bar {
+    background-color: $grey300;
+    width: 50px;
+    height: 5px;
+    position: absolute;
+    top: 10px;
+    left: 45%;
+    right: 45%;
+    border-radius: 100px;
   }
 
   .txt-title {

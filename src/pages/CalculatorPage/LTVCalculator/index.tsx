@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
+import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
@@ -20,6 +21,7 @@ const cx = classNames.bind(styles);
 
 const LTVCalculator = () => {
   const [ltvCalc] = useRecoilState<sendLtvCalcRequest>(ltvCalcState);
+  const [toggle, setToggle] = useState(false);
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
@@ -85,7 +87,7 @@ const LTVCalculator = () => {
         <Text className={cx("txt-title")} text="LTV란?" />
         <div>
           <span className={cx("txt-sub")}>{content.substring(0, 100)}...</span>
-          <button onClick={() => alert("dd")}>
+          <button onClick={() => setToggle(!toggle)}>
             <Text className={cx("txt-sub")} text={"\u00A0\u00A0\u00A0\u00A0더보기"} highlight="더보기" />
           </button>
         </div>
@@ -111,13 +113,17 @@ const LTVCalculator = () => {
             );
           })}
           <Spacing size={50} />
-          <Button className={cx("button-wraps")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
+          <Button className={cx("button-wraps")} title="계산하기" type="submit" disabled={isSubmitting} />
 
           {isKeyboardModalOpen && <Spacing size={bottomOffset} />}
         </>
       </form>
       <Spacing size={70} />
-
+      {toggle && (
+        <SelectBottomSheet modalTitle="LTV란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
+          <span className={cx("txt-sub")}> {content} </span>
+        </SelectBottomSheet>
+      )}
       <DevTool control={control} />
     </div>
   );
