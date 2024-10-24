@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useState, useEffect, useRef } from "react";
 import { DevTool } from "@hookform/devtools";
+import { useRecoilState } from "recoil";
 
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
@@ -26,6 +26,8 @@ const LTVCalculator = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
   const { LtvCalcInfo } = useSendLtvCalc();
+
+  const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const {
     control,
     handleSubmit,
@@ -61,6 +63,18 @@ const LTVCalculator = () => {
     };
   }, [isKeyboardModalOpen]);
 
+  useEffect(() => {
+    const element = inputRefs.current["collateralValue"];
+    if (element && bottomOffset !== 0) {
+      const topPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      console.log(bottomOffset);
+      window.scrollTo({
+        top: topPosition - bottomOffset,
+        behavior: "smooth",
+      });
+    }
+  }, [isKeyboardModalOpen, bottomOffset]);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus)) return;
     const updatedFormData = {
@@ -70,13 +84,8 @@ const LTVCalculator = () => {
     LtvCalcInfo(updatedFormData as sendLtvCalcRequest);
   };
 
-  const onFocus = () => {
-    setIsKeyboardModalOpen(true);
-  };
-
   const onClose = () => {
     setTimeout(() => {
-      console.log("dddd");
       setIsKeyboardModalOpen(false);
     }, 100);
   };
@@ -102,19 +111,21 @@ const LTVCalculator = () => {
           {INPUTS.map((item, ...rest) => {
             const Component = item.component;
             return (
-              <Section02 key={item.id} title={item.label}>
-                <Component
-                  formFieldName={item.name as keyof sendLtvCalcRequest}
-                  control={control}
-                  options={item.options}
-                  min={item.limit?.min}
-                  max={item.limit?.max}
-                  onFocus={onFocus}
-                  onBlur={onClose}
-                  keyboardHeight={keyboardHeight}
-                  {...rest}
-                />
-              </Section02>
+              <div ref={(el) => (inputRefs.current[item.name] = el)} key={item.id}>
+                <Section02 title={item.label}>
+                  <Component
+                    formFieldName={item.name as keyof sendLtvCalcRequest}
+                    control={control}
+                    options={item.options}
+                    min={item.limit?.min}
+                    max={item.limit?.max}
+                    onFocus={() => setIsKeyboardModalOpen(true)}
+                    onBlur={onClose}
+                    keyboardHeight={keyboardHeight}
+                    {...rest}
+                  />
+                </Section02>
+              </div>
             );
           })}
           <Spacing size={50} />
@@ -129,11 +140,9 @@ const LTVCalculator = () => {
             />
             <Button className={cx("button")} title="계산하기" type="submit" disabled={isSubmitting} />
           </div>
-
-          {isKeyboardModalOpen && <Spacing size={bottomOffset} />}
         </>
       </form>
-      <Spacing size={70} />
+      {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="LTV란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
           <span className={cx("txt-sub")}> {content} </span>

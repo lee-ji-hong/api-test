@@ -21,7 +21,6 @@ const KeyboardModal = ({
   keyboardHeight,
 }: KeyboardModalProps) => {
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0", "⌫"];
-  console.log(keyboardHeight);
 
   return (
     <div className={cx(["keyboard-modal", className])} onMouseDown={(e) => e.preventDefault()}>
