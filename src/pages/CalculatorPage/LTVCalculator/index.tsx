@@ -150,6 +150,7 @@ const LTVCalculator = () => {
           <span className={cx("txt-sub")}> {content} </span>
         </SelectBottomSheet>
       )}
+      <div className={cx("hr")}></div>
       {infoItem && (
         <ResultInfo contents={contents}>
           <div className={cx("box-txt-container")}>
