@@ -1,0 +1,28 @@
+.container {
+  .text {
+    p {
+      color: $grey800;
+
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20.8px;
+      letter-spacing: -0.8px;
+      text-align: left;
+    }
+  }
+
+  .text-sub {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: -0.800000011920929px;
+    text-align: left !important;
+    color: $grey500;
+  }
+
+  .box {
+    background-color: $grey100;
+    padding: 20px 30px;
+    border-radius: 16px;
+  }
+}

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { DevTool } from "@hookform/devtools";
 import { useRecoilState } from "recoil";
 
+import ResultInfo from "@/components/sections/Calculator/ResultInfo";
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
 import Spacing from "@/components/shared/Spacing";
@@ -13,6 +14,7 @@ import { useSendLtvCalc } from "@/hooks/queries/useSendLtvCalc";
 import { validateFormData } from "./validateFormData";
 import { sendLtvCalcRequest } from "@/models";
 import { ltvCalcState } from "@/recoil/atoms";
+import { contents } from "./contents";
 import { INPUTS } from "./INPUTS";
 
 import styles from "../CalculatorPage.module.scss";
@@ -20,12 +22,12 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const LTVCalculator = () => {
-  const [ltvCalc] = useRecoilState<sendLtvCalcRequest>(ltvCalcState);
+  const [ltvCalc, setLtvCalc] = useRecoilState<sendLtvCalcRequest>(ltvCalcState);
   const [toggle, setToggle] = useState(false);
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
-  const { LtvCalcInfo } = useSendLtvCalc();
+  const { LtvCalcInfo, infoItem } = useSendLtvCalc();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const {
@@ -76,6 +78,7 @@ const LTVCalculator = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus)) return;
+    setLtvCalc(data as sendLtvCalcRequest);
     const updatedFormData = {
       ...data,
       collateralValue: (data.collateralValue ?? 0) * 10000,
@@ -146,6 +149,31 @@ const LTVCalculator = () => {
         <SelectBottomSheet modalTitle="LTV란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
           <span className={cx("txt-sub")}> {content} </span>
         </SelectBottomSheet>
+      )}
+      {infoItem && (
+        <ResultInfo contents={contents}>
+          <div className={cx("box-txt-container")}>
+            <Text className={cx("box-txt-left")} text="대출 목적" />
+            <Text className={cx("box-txt-right")} text={ltvCalc.loanPurpose} />
+          </div>
+          <div className={cx("box-txt-container")}>
+            <Text className={cx("box-txt-left")} text="보유주택 수" />
+            <Text className={cx("box-txt-right")} text={ltvCalc.houseOwnershipType} />
+          </div>
+          <div className={cx("box-txt-container")}>
+            <Text className={cx("box-txt-left")} text="지역" />
+            <Text className={cx("box-txt-right")} text={ltvCalc.regionType} />
+          </div>
+          <hr />
+          <div className={cx("box-txt-container")}>
+            <Text className={cx("box-txt-left")} text="LTV" />
+            <Text className={cx("box-txt-right")} text={infoItem?.ltvRatio} />
+          </div>
+          <div className={cx("box-txt-container")}>
+            <Text className={cx("box-txt-left")} text="예상대출가능금액" />
+            <Text className={cx("box-txt-right")} text={infoItem?.possibleLoanAmount} />
+          </div>
+        </ResultInfo>
       )}
       <DevTool control={control} />
     </div>
