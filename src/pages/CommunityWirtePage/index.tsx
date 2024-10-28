@@ -7,6 +7,7 @@ import WriteHeader from "./WriteHeader";
 import WriteBody from "./WriteBody";
 import WriteFooter from "./WriteFooter";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
+import { useRef } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -69,8 +70,14 @@ const CommunityWirtePage = () => {
     setCommunityDetail(updatedCommunityDetail);
   };
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
   return (
-    <div className={cx("container")}>
+    <div
+      className={cx("container")}
+      onClick={() => {
+        textareaRef.current?.focus();
+      }}>
       <div className={cx("containerHeader")}>
         <WriteHeader inputValue={inputValue} textareaValue={textareaValue} communityDetail={communityDetail} />
       </div>
@@ -87,6 +94,7 @@ const CommunityWirtePage = () => {
           setLoanAdviceReport={setLoanAdviceReport}
           clearLoanAdviceReport={clearLoanAdviceReport}
           contentDetail={communityDetail}
+          textareaRef={textareaRef}
         />
       </div>
 
