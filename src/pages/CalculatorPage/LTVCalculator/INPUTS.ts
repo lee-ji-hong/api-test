@@ -1,5 +1,6 @@
 import SelectController from "@/components/sections/Calculator/SelectController";
 import InputController from "@/components/sections/Calculator/InputController";
+import { loanPurposeOptions, houseOwnershipTypeOptions, regionTypeOptions } from "./ltvOptions";
 
 export const INPUTS = [
   {
@@ -7,10 +8,7 @@ export const INPUTS = [
     label: "대출 목적",
     name: "loanPurpose",
     value: "",
-    options: [
-      { label: "주택구입자금", value: "HOME_PURCHASE" },
-      { label: "생활안정자금", value: "LIVING_STABILITY" },
-    ],
+    options: loanPurposeOptions,
     component: SelectController,
   },
   {
@@ -18,15 +16,7 @@ export const INPUTS = [
     label: "주택 소유 유형",
     name: "houseOwnershipType",
     value: "",
-    options: [
-      { label: "생애최초", value: "LIFETIME_FIRST" },
-      { label: "서민실수요자", value: "ORDINARY_DEMAND" },
-      { label: "무주택", value: "NO_HOUSE" },
-      { label: "1주택 처분", value: "SINGLE_HOUSE_DISPOSAL" },
-      { label: "1주택 이상", value: "MORE_THAN_ONE_HOUSE" },
-      { label: "1주택", value: "SINGLE_HOUSE" },
-      { label: " 2주택 이상", value: "MORE_THAN_TWO_HOUSE" },
-    ],
+    options: houseOwnershipTypeOptions,
     component: SelectController,
   },
   {
@@ -34,11 +24,7 @@ export const INPUTS = [
     label: "담보대출 주택 대상 지역",
     name: "regionType",
     value: "",
-    options: [
-      { label: "규제지역", value: "REGULATED_AREA" },
-      { label: "규제지역 외 수도권", value: "NON_REGULATED_CAPITAL_AREA" },
-      { label: "기타", value: "OTHER_AREAS" },
-    ],
+    options: regionTypeOptions,
     component: SelectController,
   },
   {

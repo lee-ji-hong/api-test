@@ -26,5 +26,21 @@
     background-color: $grey100;
     padding: 20px 30px;
     border-radius: 16px;
+
+    .box-txt-container {
+      @include flexbox(between, center);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 18.2px;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
+      .box-txt-left {
+        color: $grey500;
+      }
+
+      .box-txt-right {
+        color: $grey800;
+      }
+    }
   }
 }

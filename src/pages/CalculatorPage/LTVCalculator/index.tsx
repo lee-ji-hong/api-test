@@ -14,7 +14,8 @@ import { useSendLtvCalc } from "@/hooks/queries/useSendLtvCalc";
 import { validateFormData } from "./validateFormData";
 import { sendLtvCalcRequest } from "@/models";
 import { ltvCalcState } from "@/recoil/atoms";
-import { contents } from "./contents";
+import { getLabelFromOptions } from "@/utils/getLabelFromOptions";
+import { resultState, loanPurposeOptions, houseOwnershipTypeOptions, regionTypeOptions } from "./ltvOptions";
 import { INPUTS } from "./INPUTS";
 
 import styles from "../CalculatorPage.module.scss";
@@ -22,11 +23,12 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const LTVCalculator = () => {
-  const [ltvCalc, setLtvCalc] = useRecoilState<sendLtvCalcRequest>(ltvCalcState);
+  const [ltvCalc] = useRecoilState<sendLtvCalcRequest>(ltvCalcState);
   const [toggle, setToggle] = useState(false);
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
+  const [contents, setContents] = useState(resultState);
   const { LtvCalcInfo, infoItem } = useSendLtvCalc();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -78,7 +80,16 @@ const LTVCalculator = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus)) return;
-    setLtvCalc(data as sendLtvCalcRequest);
+    setContents((prev) => ({
+      ...prev,
+      details: {
+        ...prev.details,
+        collateralValue: data.collateralValue,
+        loanPurpose: getLabelFromOptions(data.loanPurpose, loanPurposeOptions) as string,
+        houseOwnershipType: getLabelFromOptions(data.houseOwnershipType, houseOwnershipTypeOptions) as string,
+        regionType: getLabelFromOptions(data.regionType, regionTypeOptions) as string,
+      },
+    }));
     const updatedFormData = {
       ...data,
       collateralValue: (data.collateralValue ?? 0) * 10000,
@@ -144,38 +155,29 @@ const LTVCalculator = () => {
           </div>
         </>
       </form>
+
+      {infoItem && (
+        <>
+          <div className={cx("hr")}></div>
+          <ResultInfo contents={contents}>
+            <div className={cx("box-txt-container")}>
+              <Text className={cx("box-txt-left")} text="LTV" />
+              <Text className={cx("box-txt-right")} text={infoItem?.ltvRatio} />
+            </div>
+            <div className={cx("box-txt-container")}>
+              <Text className={cx("box-txt-left")} text="예상대출가능금액" />
+              <Text className={cx("box-txt-right")} text={infoItem?.possibleLoanAmount} />
+            </div>
+          </ResultInfo>
+        </>
+      )}
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="LTV란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
           <span className={cx("txt-sub")}> {content} </span>
         </SelectBottomSheet>
       )}
-      <div className={cx("hr")}></div>
-      {infoItem && (
-        <ResultInfo contents={contents}>
-          <div className={cx("box-txt-container")}>
-            <Text className={cx("box-txt-left")} text="대출 목적" />
-            <Text className={cx("box-txt-right")} text={ltvCalc.loanPurpose} />
-          </div>
-          <div className={cx("box-txt-container")}>
-            <Text className={cx("box-txt-left")} text="보유주택 수" />
-            <Text className={cx("box-txt-right")} text={ltvCalc.houseOwnershipType} />
-          </div>
-          <div className={cx("box-txt-container")}>
-            <Text className={cx("box-txt-left")} text="지역" />
-            <Text className={cx("box-txt-right")} text={ltvCalc.regionType} />
-          </div>
-          <hr />
-          <div className={cx("box-txt-container")}>
-            <Text className={cx("box-txt-left")} text="LTV" />
-            <Text className={cx("box-txt-right")} text={infoItem?.ltvRatio} />
-          </div>
-          <div className={cx("box-txt-container")}>
-            <Text className={cx("box-txt-left")} text="예상대출가능금액" />
-            <Text className={cx("box-txt-right")} text={infoItem?.possibleLoanAmount} />
-          </div>
-        </ResultInfo>
-      )}
+
       <DevTool control={control} />
     </div>
   );
