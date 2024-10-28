@@ -27,6 +27,7 @@ const CommunityModifyPage = () => {
   const [showExitModal, setShowExitModal] = useState(false); // 모달 표시 여부
   const navigator = useNavigate();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [isFirstClick, setIsFirstClick] = useState(true);
 
   // 수정 상태 감지
   useEffect(() => {
@@ -81,6 +82,11 @@ const CommunityModifyPage = () => {
       className={cx("container")}
       onClick={() => {
         textareaRef.current?.focus();
+        // 첫 클릭 또는 특정 조건일 때만 커서를 텍스트 끝으로 보냄
+        if (isFirstClick && textareaRef.current) {
+          textareaRef.current.selectionStart = textareaRef.current.value.length;
+          setIsFirstClick(false); // 첫 클릭 이후에는 커서 이동을 하지 않음
+        }
       }}>
       <div className={cx("containerHeader")}>
         <ModifyHeader
