@@ -8,6 +8,7 @@ import ModifyFooter from "./ModifyFooter";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 import CenterModal from "@/components/modal/CenterModal";
+import { useRef } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,7 @@ const CommunityModifyPage = () => {
   const [isModified, setIsModified] = useState(false); // 수정 여부를 추적할 상태
   const [showExitModal, setShowExitModal] = useState(false); // 모달 표시 여부
   const navigator = useNavigate();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // 수정 상태 감지
   useEffect(() => {
@@ -75,7 +77,11 @@ const CommunityModifyPage = () => {
   };
 
   return (
-    <div className={cx("container")}>
+    <div
+      className={cx("container")}
+      onClick={() => {
+        textareaRef.current?.focus();
+      }}>
       <div className={cx("containerHeader")}>
         <ModifyHeader
           inputValue={inputValue}
@@ -97,6 +103,7 @@ const CommunityModifyPage = () => {
           setLoanAdviceReport={setLoanAdviceReport}
           clearLoanAdviceReport={clearLoanAdviceReport}
           communityDetail={communityDetail}
+          textareaRef={textareaRef}
         />
       </div>
 

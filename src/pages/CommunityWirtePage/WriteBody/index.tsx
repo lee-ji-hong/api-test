@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./WriteBody.module.scss";
 import Spacing from "@/components/shared/Spacing";
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 import LoanCard from "@/pages/CommunityCommonComponent/LoanCard";
 
@@ -19,12 +19,14 @@ interface WriteBodyProps {
   changeImage: (imgUrl: string, imgFile: File | null) => void;
   clearLoanAdviceReport: () => void;
   setLoanAdviceReport: (value: LoanAdviceSummaryReport | null) => void;
+  textareaRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 interface TextAreaProps {
   textareaValue: string;
   setTextareaValue: (value: string) => void;
   maxLines: number;
+  textareaRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 const WriteBody: React.FC<WriteBodyProps> = ({
@@ -36,11 +38,18 @@ const WriteBody: React.FC<WriteBodyProps> = ({
   setInputValue,
   setTextareaValue,
   contentDetail,
+  textareaRef,
 }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // 이벤트 버블링 중단, 부모 클릭 이벤트로 전파되지 않음
+  };
   return (
     <div className={cx("containerWriteBody")}>
       <input
         onChange={(e) => setInputValue(e.target.value)}
+        onClick={(e) => {
+          handleClick(e);
+        }}
         className={cx("inputTitle", {
           gray: !inputValue,
           black: inputValue,
@@ -52,7 +61,12 @@ const WriteBody: React.FC<WriteBodyProps> = ({
 
       {/* 텍스트 영역과 이미지 미리보기를 Flex로 관리 */}
       <div className={cx("contentArea")}>
-        <TextArea textareaValue={textareaValue} setTextareaValue={setTextareaValue} maxLines={15} />
+        <TextArea
+          textareaValue={textareaValue}
+          setTextareaValue={setTextareaValue}
+          maxLines={15}
+          textareaRef={textareaRef}
+        />
 
         <div className={cx("imagePreviewContainer")}>
           {contentDetail.loanAdviceSummaryReport && (
@@ -84,9 +98,7 @@ const WriteBody: React.FC<WriteBodyProps> = ({
   );
 };
 
-const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, maxLines }) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
+const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, maxLines, textareaRef }) => {
   // 입력된 줄 수 계산
   const getLineCount = (value: string) => {
     return value.split("\n").length;
@@ -104,7 +116,7 @@ const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, ma
 
   // 텍스트가 입력될 때마다 textarea의 높이를 자동으로 조정
   const autoResize = () => {
-    if (textareaRef.current) {
+    if (textareaRef?.current) {
       textareaRef.current.style.height = "auto"; // 높이를 초기화
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // 내용에 맞춰 높이 조정
     }

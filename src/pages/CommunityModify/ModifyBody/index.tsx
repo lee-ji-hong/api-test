@@ -19,12 +19,14 @@ interface WriteBodyProps {
   loanAdviceReport: LoanAdviceSummaryReport;
   setLoanAdviceReport: (value: LoanAdviceSummaryReport | null) => void;
   communityDetail: CommunityDetail;
+  textareaRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 interface TextAreaProps {
   textareaValue: string;
   setTextareaValue: (value: string) => void;
   maxLines: number;
+  textareaRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 const WriteBody: React.FC<WriteBodyProps> = ({
@@ -36,6 +38,7 @@ const WriteBody: React.FC<WriteBodyProps> = ({
   loanAdviceReport,
   clearLoanAdviceReport,
   communityDetail,
+  textareaRef,
 }) => {
   return (
     <div className={cx("containerWriteBody")}>
@@ -43,7 +46,12 @@ const WriteBody: React.FC<WriteBodyProps> = ({
       <Spacing size={4} />
       {/* 텍스트 영역과 이미지 미리보기 */}
       <div className={cx("contentArea")}>
-        <TextArea textareaValue={textareaValue} setTextareaValue={setTextareaValue} maxLines={15} />
+        <TextArea
+          textareaValue={textareaValue}
+          setTextareaValue={setTextareaValue}
+          maxLines={15}
+          textareaRef={textareaRef}
+        />
 
         <div className={cx("imagePreviewContainer")}>
           {communityDetail.loanAdviceSummaryReport && (
@@ -105,9 +113,14 @@ const TitleArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, m
     autoResize();
   }, [textareaValue]);
 
+  const handleClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
+    e.stopPropagation(); // 이벤트 버블링 중단, 부모 클릭 이벤트로 전파되지 않음
+  };
+
   return (
     <textarea
       ref={textareaRef}
+      onClick={handleClick}
       onChange={handleInputChange}
       value={textareaValue}
       className={cx("inputTitle", {
@@ -119,9 +132,7 @@ const TitleArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, m
   );
 };
 
-const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, maxLines }) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
+const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, maxLines, textareaRef }) => {
   // 입력된 줄 수 계산
   const getLineCount = (value: string) => {
     return value.split("\n").length;
@@ -139,7 +150,7 @@ const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, ma
 
   // 텍스트가 입력될 때마다 textarea의 높이를 자동으로 조정
   const autoResize = () => {
-    if (textareaRef.current) {
+    if (textareaRef?.current) {
       textareaRef.current.style.height = "auto"; // 높이를 초기화
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // 내용에 맞춰 높이 조정
     }
