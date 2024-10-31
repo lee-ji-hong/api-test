@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { sendLoanAdviceReportRequest, sendLtvCalcRequest } from "@/models";
+import { sendLoanAdviceReportRequest, sendLtvCalcRequest, sendDtiCalcRequest } from "@/models";
 
 export const formData = atom<sendLoanAdviceReportRequest>({
   key: "formState",
@@ -42,5 +42,17 @@ export const ltvCalcState = atom<sendLtvCalcRequest>({
     collateralValue: 0,
     regionType: "",
     houseOwnershipType: "",
+  },
+});
+
+export const dtiCalcState = atom<sendDtiCalcRequest>({
+  key: "dtiCalcState",
+  default: {
+    annualIncome: 0,
+    loanAmount: 0,
+    interestRate: 0,
+    loanTerm: 0,
+    repaymentType: "",
+    yearlyLoanInterestRepayment: 0,
   },
 });

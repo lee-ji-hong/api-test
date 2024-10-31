@@ -276,3 +276,28 @@ export interface LtvCalculationResult {
   collateralValue: number;
   possibleLoanAmount: number;
 }
+
+export interface sendDtiCalcRequest {
+  annualIncome: number;
+  loanAmount: number;
+  interestRate: number;
+  loanTerm: number;
+  repaymentType: string;
+  yearlyLoanInterestRepayment: number;
+}
+
+export interface DtiCalcResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: DtiCalculationResult;
+}
+
+export interface DtiCalculationResult {
+  dtiRatio: number;
+  annualIncome: number;
+  annualRepaymentAmount: number;
+  annualRepaymentPrincipal: number;
+  annualRepaymentInterest: number;
+  yearlyLoanInterestRepayment: number;
+}

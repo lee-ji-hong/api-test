@@ -9,12 +9,7 @@ interface Contents {
   title: string;
   ment: string;
   description: string;
-  details: {
-    loanPurpose: string;
-    houseOwnershipType: string;
-    regionType: string;
-    collateralValue: number;
-  };
+  details: Record<string, string | number>;
 }
 
 const ResultInfo = ({

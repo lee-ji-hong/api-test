@@ -27,7 +27,7 @@ interface Props<ControlType extends FieldValues> {
   unit?: string;
 }
 
-const InputController = <ControlType extends FieldValues>({
+const PeriodController = <ControlType extends FieldValues>({
   formFieldName,
   keyboardHeight,
   control,
@@ -78,43 +78,45 @@ const InputController = <ControlType extends FieldValues>({
         };
 
         return (
-          <div className={cx("input-container")}>
-            <Input
-              error={isInvalidValue ? true : false}
-              value={field.value}
-              onChange={field.onChange}
-              warningMessage={warningMessage}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              unit={unit}
-              ref={field.ref}
-              // {...field}
-            />
-            <Spacing size={12} />
-            <div className={cx("badge-container")}>
-              {options?.map(({ label, value }) => (
-                <Badge
-                  className={cx("button")}
-                  key={value.toString()}
-                  title={label}
-                  onClick={(e) => handleClick(e, label)}
-                />
-              ))}
+          <>
+            <div className={cx("input-container")}>
+              <Input
+                error={isInvalidValue ? true : false}
+                value={field.value}
+                onChange={field.onChange}
+                warningMessage={warningMessage}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                unit={unit}
+                ref={field.ref}
+                // {...field}
+              />
+              <Spacing size={12} />
+              <div className={cx("badge-container")}>
+                {options?.map(({ label, value }) => (
+                  <Badge
+                    className={cx("button")}
+                    key={value.toString()}
+                    title={label}
+                    onClick={(e) => handleClick(e, label)}
+                  />
+                ))}
+              </div>
+              {keyboardHeight > 0 && (
+                <GlobalPortal.Consumer>
+                  <KeyboardModal
+                    className={cx("keyboard-container")}
+                    onKeyPress={handleKeyPress}
+                    keyboardHeight={keyboardHeight}
+                  />
+                </GlobalPortal.Consumer>
+              )}
             </div>
-            {keyboardHeight > 0 && (
-              <GlobalPortal.Consumer>
-                <KeyboardModal
-                  className={cx("keyboard-container")}
-                  onKeyPress={handleKeyPress}
-                  keyboardHeight={keyboardHeight}
-                />
-              </GlobalPortal.Consumer>
-            )}
-          </div>
+          </>
         );
       }}
     />
   );
 };
 
-export default InputController;
+export default PeriodController;

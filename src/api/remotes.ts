@@ -9,6 +9,7 @@ import {
   LoanAdviceReportResponse,
   TransferUserResponse,
   LtvCalcResponse,
+  DtiCalcResponse,
   SpecificLoanAdvice,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
@@ -16,6 +17,7 @@ import {
   sendaddressSearchRequest,
   sendHousingInfoRequest,
   sendLtvCalcRequest,
+  sendDtiCalcRequest,
 } from "@/models";
 import { getOrCreateUuid } from "@/utils/localStorage";
 
@@ -105,4 +107,9 @@ export const reqLogin = () => {
 // LTV 계산기
 export function sendLtvCalc(requestBody: sendLtvCalcRequest) {
   return Axios.post<LtvCalcResponse>("/api/v1/ltvCalc", requestBody, false).then((response) => response.data);
+}
+
+// DTI 계산기
+export function sendDtiCalc(requestBody: sendDtiCalcRequest) {
+  return Axios.post<DtiCalcResponse>("/api/v1/dtiCalc", requestBody, false).then((response) => response.data);
 }
