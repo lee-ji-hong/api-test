@@ -24,6 +24,7 @@ const cx = classNames.bind(styles);
 
 const DTICalculator = () => {
   const [DtiCalc] = useRecoilState<sendDtiCalcRequest>(dtiCalcState);
+  const [focusedInput, setFocusedInput] = useState("");
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -47,8 +48,10 @@ const DTICalculator = () => {
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
-      const height = (window.innerHeight * 0.4 - 207) / 7;
-      setKeyboardHeight(height);
+      if (focusedInput) {
+        const height = (window.innerHeight * 0.4 - 207) / 7;
+        setKeyboardHeight(height);
+      }
 
       if (!isKeyboardModalOpen) {
         setBottomOffset(0);
@@ -69,9 +72,17 @@ const DTICalculator = () => {
   }, [isKeyboardModalOpen]);
 
   useEffect(() => {
-    const element = inputRefs.current["annualIncome"];
+    const element = inputRefs.current[focusedInput];
     if (element && bottomOffset !== 0) {
-      const topPosition = element.getBoundingClientRect().top + window.pageYOffset + 50;
+      let topPosition = 0;
+      if (focusedInput === "interestRate") {
+        topPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      } else if (focusedInput === "loanTerm") {
+        topPosition = element.getBoundingClientRect().top + window.pageYOffset + 70;
+      } else {
+        topPosition = element.getBoundingClientRect().top + window.pageYOffset + 50;
+      }
+
       window.scrollTo({
         top: topPosition - bottomOffset,
         behavior: "smooth",
@@ -92,18 +103,17 @@ const DTICalculator = () => {
     const updatedFormData = {
       ...data,
       annualIncome: (data.annualIncome ?? 0) * 10000,
-      loanAmount: (data.annualIncome ?? 0) * 10000,
-      interestRate: (data.annualIncome ?? 0) * 10000,
-      loanTerm: (data.annualIncome ?? 0) * 10000,
-      yearlyLoanInterestRepayment: (data.annualIncome ?? 0) * 10000,
+      loanAmount: (data.loanAmount ?? 0) * 10000,
+      interestRate: (data.interestRate ?? 0) * 10000,
+      loanTerm: (data.loanTerm ?? 0) * 10000,
+      yearlyLoanInterestRepayment: (data.yearlyLoanInterestRepayment ?? 0) * 10000,
     };
     DtiCalcInfo(updatedFormData as sendDtiCalcRequest);
   };
 
   const onClose = () => {
-    setTimeout(() => {
-      setIsKeyboardModalOpen(false);
-    }, 100);
+    setIsKeyboardModalOpen(false);
+    setFocusedInput("");
   };
 
   const handleReset = () => {
@@ -145,9 +155,12 @@ const DTICalculator = () => {
                     max={item.limit?.max}
                     unit={item?.unit}
                     formattedAmount={item?.formattedAmount}
-                    onFocus={() => setIsKeyboardModalOpen(true)}
+                    onFocus={() => {
+                      setIsKeyboardModalOpen(true);
+                      setFocusedInput(item.name);
+                    }}
                     onBlur={onClose}
-                    keyboardHeight={keyboardHeight}
+                    keyboardHeight={focusedInput === item.name ? keyboardHeight : 0}
                     {...rest}
                   />
                 </Section02>
