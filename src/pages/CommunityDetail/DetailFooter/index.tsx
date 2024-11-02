@@ -9,11 +9,10 @@ const cx = classNames.bind(styles);
 
 interface WriteFooterProps {
   postId: number;
-  author: string | undefined;
   onCommentAdded: () => void;
 }
 
-const DetailFooter: React.FC<WriteFooterProps> = ({ postId, author, onCommentAdded }) => {
+const DetailFooter: React.FC<WriteFooterProps> = ({ postId, onCommentAdded }) => {
   const [commentContent, setCommentContent] = useState(""); // 댓글 내용을 저장할 상태
 
   const requestWriteComment = async () => {
