@@ -35,7 +35,7 @@ const DetailFooter: React.FC<WriteFooterProps> = ({ postId, author, onCommentAdd
         <div className={cx("containerInputbox")}>
           <input
             type="text"
-            placeholder={`${author}님의 생각을 댓글로 남겨주세요.`}
+            placeholder={`생각을 댓글로 남겨주세요.`}
             className={cx("inputComment")}
             value={commentContent}
             onChange={(e) => setCommentContent(e.target.value)}
