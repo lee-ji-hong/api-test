@@ -9,7 +9,6 @@ export const useSendAddressSearch = () => {
   const { mutate: searchAddress } = useMutation<Address, Error, sendaddressSearchRequest>({
     mutationFn: sendaddressSearch,
     onSuccess: (response) => {
-      console.log(response);
       setAddressList(response.addressInfoList);
     },
     onError: (error) => {
