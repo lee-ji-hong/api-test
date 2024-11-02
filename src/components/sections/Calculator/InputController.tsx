@@ -5,6 +5,7 @@ import KeyboardModal from "@/components/modal/KeyboardModal";
 import Spacing from "@/components/shared/Spacing";
 import Badge from "@/components/shared/Badge";
 import Input from "@/components/shared/Input";
+import { OptionItem, OptionsType } from "@/models";
 
 import styles from "@/pages/CalculatorPage/CalculatorPage.module.scss";
 import classNames from "classnames/bind";
@@ -21,7 +22,7 @@ interface Props<ControlType extends FieldValues> {
   keyboardHeight: number;
   onFocus?: () => void;
   onBlur?: () => void;
-  options?: { label: string; value: boolean | string | number }[];
+  options?: OptionItem[] | OptionsType;
   min?: Limit;
   max?: Limit;
   unit?: string;
@@ -38,6 +39,9 @@ const InputController = <ControlType extends FieldValues>({
   onFocus,
   onBlur,
 }: Props<ControlType>) => {
+  const isOptionItemArray = (options: OptionItem[] | OptionsType | undefined): options is OptionItem[] => {
+    return Array.isArray(options);
+  };
   return (
     <Controller
       name={formFieldName}
@@ -64,11 +68,13 @@ const InputController = <ControlType extends FieldValues>({
 
         // 금액 뱃지 이벤트
         const handleBadgeClick = (label: string) => {
-          const item = options?.find((item) => item.label === label);
-          if (item && typeof item.value === "number") {
-            const currentValue = field.value || 0;
-            const newValue = currentValue + item.value;
-            field.onChange(Math.min(newValue, 99999999));
+          if (isOptionItemArray(options)) {
+            const item = options?.find((item) => item.label === label);
+            if (item && typeof item.value === "number") {
+              const currentValue = field.value || 0;
+              const newValue = currentValue + item.value;
+              field.onChange(Math.min(newValue, 99999999));
+            }
           }
         };
 
@@ -92,14 +98,15 @@ const InputController = <ControlType extends FieldValues>({
             />
             <Spacing size={12} />
             <div className={cx("badge-container")}>
-              {options?.map(({ label, value }) => (
-                <Badge
-                  className={cx("button")}
-                  key={value.toString()}
-                  title={label}
-                  onClick={(e) => handleClick(e, label)}
-                />
-              ))}
+              {isOptionItemArray(options) &&
+                options?.map(({ label, value }) => (
+                  <Badge
+                    className={cx("button")}
+                    key={value.toString()}
+                    title={label}
+                    onClick={(e) => handleClick(e, label)}
+                  />
+                ))}
             </div>
             {keyboardHeight > 0 && (
               <GlobalPortal.Consumer>

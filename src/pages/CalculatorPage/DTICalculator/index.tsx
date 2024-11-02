@@ -1,6 +1,6 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState, useEffect, useRef } from "react";
-// import { DevTool } from "@hookform/devtools";
+import { OptionItem, OptionsType } from "@/models";
 import { useRecoilState } from "recoil";
 
 import ResultInfo from "@/components/sections/Calculator/ResultInfo";
@@ -13,7 +13,7 @@ import Text from "@/components/shared/Text";
 import { useSendDtiCalc } from "@/hooks/queries/useSendDtiCalc";
 import { validateFormData } from "./validateFormData";
 import { sendDtiCalcRequest } from "@/models";
-import { dtiCalcState } from "@/recoil/atoms";
+import { dtiCalcState, periodState } from "@/recoil/atoms";
 import { getLabelFromOptions } from "@/utils/getLabelFromOptions";
 import { resultState, repaymentOptions } from "./options";
 import { INPUTS } from "./INPUTS";
@@ -24,11 +24,12 @@ const cx = classNames.bind(styles);
 
 const DTICalculator = () => {
   const [DtiCalc] = useRecoilState<sendDtiCalcRequest>(dtiCalcState);
-  const [toggle, setToggle] = useState(false);
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
+  const [, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [bottomOffset, setBottomOffset] = useState(0);
   const [contents, setContents] = useState(resultState);
+  const [bottomOffset, setBottomOffset] = useState(0);
+  const [toggle, setToggle] = useState(false);
   const { DtiCalcInfo, infoItem } = useSendDtiCalc();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -108,6 +109,11 @@ const DTICalculator = () => {
   const handleReset = () => {
     reset();
   };
+
+  const handleBadgeSelect = (item: string) => {
+    setSelectedBadge(item);
+  };
+
   const content =
     "DTI는 주택담보대출의 연간 원리금의 상환액과 기타 부채에 대해 연간 상환한 이자의 합을 연소득으로 나눈 비율을 말합니다. 담보대출을 받을 경우, 채무자의 소득 중 얼마나 대출 상환에 할애되는지를 나타냅니다. DTI가 높을수록 소득 대비 부채 부담이 큰 상태로, 금융기관은 DTI를 기준으로 대출 한도를 결정하여 채무자의 상환 능력을 평가합니다. ";
   return (
@@ -125,16 +131,20 @@ const DTICalculator = () => {
         <>
           {INPUTS.map((item, ...rest) => {
             const Component = item.component;
+            const isOptionsType = (options: OptionItem[] | OptionsType | undefined): options is OptionsType => {
+              return options !== undefined && "year" in options && "month" in options;
+            };
             return (
               <div ref={(el) => (inputRefs.current[item.name] = el)} key={item.id}>
-                <Section02 title={item.label} isPeriodBadge={item?.isPeriod}>
+                <Section02 title={item.label} isPeriodBadge={item?.isPeriod} onClick={handleBadgeSelect}>
                   <Component
                     formFieldName={item.name as keyof sendDtiCalcRequest}
                     control={control}
-                    options={item.options}
+                    options={isOptionsType(item.options) ? item.options : (item.options as OptionItem[])}
                     min={item.limit?.min}
                     max={item.limit?.max}
                     unit={item?.unit}
+                    formattedAmount={item?.formattedAmount}
                     onFocus={() => setIsKeyboardModalOpen(true)}
                     onBlur={onClose}
                     keyboardHeight={keyboardHeight}

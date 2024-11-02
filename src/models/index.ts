@@ -257,6 +257,16 @@ export interface DepositLists {
  * Calculator
  ************/
 
+export interface OptionItem {
+  label: string;
+  value: string | number | boolean;
+}
+
+export interface OptionsType {
+  year: OptionItem[];
+  month: OptionItem[];
+}
+
 export interface sendLtvCalcRequest {
   loanPurpose: string;
   collateralValue: number;

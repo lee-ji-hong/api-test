@@ -12,11 +12,12 @@ interface InputFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "o
   value: number;
   onChange: (value: number) => void;
   warningMessage: string;
+  formattedAmount?: boolean;
   unit?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ error, value, unit = "만원", onChange, warningMessage, ...props }, ref) => {
+  ({ error, value, unit = "만원", onChange, warningMessage, formattedAmount = true, ...props }, ref) => {
     return (
       <>
         <div className={cx("input-container", { "input-alert": error })}>
@@ -38,7 +39,7 @@ const Input = forwardRef<HTMLInputElement, InputFieldProps>(
         </div>
         <Text
           className={cx("txt-sub", { "text-alert": error })}
-          text={value === 0 ? "" : error ? warningMessage : formatNumberWithUnits(value)}
+          text={value === 0 ? "" : error ? warningMessage : formattedAmount ? formatNumberWithUnits(value) : ""}
         />
       </>
     );

@@ -1,5 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-
+import { OptionItem, OptionsType } from "@/models";
 import Badge from "@/components/shared/Badge";
 
 import styles from "@/pages/CalculatorPage/CalculatorPage.module.scss";
@@ -9,10 +9,13 @@ const cx = classNames.bind(styles);
 interface Props<ControlType extends FieldValues> {
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
-  options?: { label: string; value: boolean | string | number }[];
+  options?: OptionItem[] | OptionsType;
 }
 
 const SelectController = <ControlType extends FieldValues>({ formFieldName, control, options }: Props<ControlType>) => {
+  const isOptionItemArray = (options: OptionItem[] | OptionsType | undefined): options is OptionItem[] => {
+    return Array.isArray(options);
+  };
   return (
     <Controller
       name={formFieldName}
@@ -24,15 +27,16 @@ const SelectController = <ControlType extends FieldValues>({ formFieldName, cont
 
         return (
           <div className={cx("button-container")}>
-            {options?.map(({ label, value }) => (
-              <Badge
-                className={cx("button")}
-                key={value.toString()}
-                title={label}
-                onClick={() => handleSelect(value)}
-                theme={field.value === value ? "blue" : "primary"}
-              />
-            ))}
+            {isOptionItemArray(options) &&
+              options?.map(({ label, value }) => (
+                <Badge
+                  className={cx("button")}
+                  key={value.toString()}
+                  title={label}
+                  onClick={() => handleSelect(value)}
+                  theme={field.value === value ? "blue" : "primary"}
+                />
+              ))}
           </div>
         );
       }}

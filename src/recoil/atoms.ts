@@ -56,3 +56,8 @@ export const dtiCalcState = atom<sendDtiCalcRequest>({
     yearlyLoanInterestRepayment: 0,
   },
 });
+
+export const periodState = atom<string>({
+  key: "periodState",
+  default: "년",
+});
