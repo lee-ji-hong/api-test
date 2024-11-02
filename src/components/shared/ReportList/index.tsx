@@ -1,5 +1,6 @@
 import { Collapse } from "@mui/material";
 
+import { formatNumber } from "@/utils/formatters";
 import Text from "@/components/shared/Text";
 import classNames from "classnames/bind";
 import styles from "./ReportList.module.scss";
@@ -30,14 +31,14 @@ const ReportList = ({ list, className, show }: ListProps) => {
       {list.slice(0, 3).map((item, index) => (
         <div className={cx("list-item")} key={index}>
           <Text className={cx("list-txt-left")} text={item.label} />
-          <Text className={cx("list-txt-right")} text={`${item.amount} 원` ?? "없음"} />
+          <Text className={cx("list-txt-right")} text={`${formatNumber(item.amount)} 원` ?? "없음"} />
         </div>
       ))}
       <CollapseList in={show}>
         {list.slice(3).map((item, index) => (
           <div className={cx("list-item")} key={index}>
             <Text className={cx("list-txt-left")} text={item.label} />
-            <Text className={cx("list-txt-right")} text={`${item.amount} 원` ?? "없음"} />
+            <Text className={cx("list-txt-right")} text={`${formatNumber(item.amount)} 원` ?? "없음"} />
           </div>
         ))}
       </CollapseList>
