@@ -1,6 +1,7 @@
 // controller 만들어서 컴포넌트 나눌 예정
 import { CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
+import { useWindowSize } from "usehooks-ts";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 
@@ -37,9 +38,11 @@ const ReportPage = () => {
   const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
   const location = useLocation();
+  const { width } = useWindowSize();
   const reportData = location.state?.reportData?.data;
-
   const [sliderValue, setSliderValue] = useState(reportData?.loanAmount);
+  const isTabletSize = width < 748;
+  const isMobileSize = width < 500;
 
   function valuetext(value: number) {
     return `${value}`;
@@ -51,7 +54,6 @@ const ReportPage = () => {
   ];
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
-    console.log(event);
     if (event) {
       setSliderValue(value as number);
     }
@@ -130,7 +132,7 @@ const ReportPage = () => {
             <Spacing size={40} />
             {reportData?.loanAmount && (
               <div>
-                <Box sx={{ width: 330, maxWidth: 900 }}>
+                <Box sx={{ width: isMobileSize ? width - 70 : isTabletSize ? width - 50 : width - 200, maxWidth: 900 }}>
                   <ProgressBar
                     aria-label="Temperature"
                     defaultValue={reportData?.loanAmount ?? 0}
