@@ -93,6 +93,11 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
                 maxLength={30}
                 value={inputValue}
                 onChange={handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
                 placeholder="주소를 입력해주세요"
                 {...props}
               />
