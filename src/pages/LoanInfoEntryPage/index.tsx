@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 // import { DevTool } from "@hookform/devtools";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { INPUTS } from "./INPUTS";
@@ -36,10 +36,22 @@ export const LoanInfoEntryPage = () => {
     formState: { isSubmitting },
     setFocus,
     getValues,
+    watch,
   } = useForm({
     defaultValues: recoilFormData,
     mode: "onChange",
   });
+
+  const maritalStatus = watch("maritalStatus");
+  const filteredInputs = useMemo(() => {
+    return INPUTS.filter((input) => {
+      // maritalStatus가 SINGLE이면 배우자 연소득 필드 제외
+      if (input.name === "spouseAnnualIncome") {
+        return maritalStatus && maritalStatus !== "SINGLE";
+      }
+      return true;
+    });
+  }, [maritalStatus]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus, handleRowClick)) return;
@@ -97,7 +109,7 @@ export const LoanInfoEntryPage = () => {
         <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
           <List className={cx("list-wrap")}>
             <>
-              {INPUTS?.map((item, ...rest) => {
+              {filteredInputs?.map((item, ...rest) => {
                 const Component = item.component;
                 const value = getValues(item.name as keyof sendLoanAdviceReportRequest);
                 const value2 = getUnitForField(item.name, value !== undefined ? value : "");
