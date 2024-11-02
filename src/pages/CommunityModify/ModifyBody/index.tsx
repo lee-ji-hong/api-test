@@ -162,6 +162,7 @@ const TextArea: React.FC<TextAreaProps> = ({ textareaValue, setTextareaValue, ma
 
   return (
     <textarea
+      style={{ wordBreak: "break-all", whiteSpace: "pre-wrap" }}
       ref={textareaRef}
       onChange={handleInputChange}
       value={textareaValue}
