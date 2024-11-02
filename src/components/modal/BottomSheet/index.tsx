@@ -1,5 +1,5 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
-
+import { GlobalPortal } from "@/components/shared/GlobalPortal";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
@@ -17,14 +17,16 @@ interface BottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
 export const BottomSheet = forwardRef<HTMLInputElement, BottomSheetProps>(
   ({ modalTitle, buttonText, onClose, children }, ref) => {
     return (
-      <div ref={ref} className={cx("back-drop")} onClick={onClose}>
-        <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
-          <div className={cx("bar")}></div>
-          <Text className={cx("txt-title")} text={modalTitle} />
-          {children}
-          <Button className={cx("close-button")} title={buttonText} onClick={onClose} />
+      <GlobalPortal.Consumer>
+        <div ref={ref} className={cx("back-drop")} onClick={onClose}>
+          <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
+            <div className={cx("bar")}></div>
+            <Text className={cx("txt-title")} text={modalTitle} />
+            {children}
+            <Button className={cx("close-button")} title={buttonText} onClick={onClose} />
+          </div>
         </div>
-      </div>
+      </GlobalPortal.Consumer>
     );
   },
 );
