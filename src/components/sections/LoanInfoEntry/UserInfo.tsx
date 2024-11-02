@@ -1,17 +1,16 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { grey, blue } from "@mui/material/colors";
-import Checkbox from "@mui/material/Checkbox";
 import { useRecoilState } from "recoil";
 
 import BottomSheet from "@/components/modal/BottomSheet";
 import Spacing from "@/components/shared/Spacing";
+import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 import { formData } from "@/recoil/atoms";
+import { IMAGES } from "@/constants/images";
 import { ChildStatus, sendLoanAdviceReportRequest } from "@/models";
 
 import classNames from "classnames/bind";
 import styles from "./UserInfo.module.scss";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const cx = classNames.bind(styles);
 
 interface UserInfoProps<ControlType extends FieldValues> {
@@ -43,7 +42,6 @@ export const UserInfo = <ControlType extends FieldValues>({
       ...prevState,
       hasNewborn: !prevState.hasNewborn, // 신생아 포함 여부 토글
     }));
-    console.log(recoilFormData);
   };
   return (
     <>
@@ -63,20 +61,11 @@ export const UserInfo = <ControlType extends FieldValues>({
                 </li>
               ))}
             </ul>
-            <div className={cx("checkbox-container")}>
-              <Checkbox
-                {...label}
-                defaultChecked={recoilFormData.hasNewborn}
-                size="large"
-                onChange={handleCheckboxChange}
-                sx={{
-                  color: grey[300],
-                  "&.Mui-checked": {
-                    color: blue[700],
-                  },
-                }}
-              />
-              <Text text="신생아 포함 여부" />
+            <div className={cx("checkbox-container")} onClick={handleCheckboxChange}>
+              <Image className={cx("img", `check-${recoilFormData.hasNewborn}`)} imageInfo={IMAGES?.Checkbox_btn} />
+              <div>
+                <Text text="신생아 포함 여부" />
+              </div>
             </div>
           </BottomSheet>
         )}

@@ -30,11 +30,35 @@
 
 .checkbox-container {
   @include flexbox();
+  gap: 8px;
   margin-top: 20px;
+  margin-bottom: 30px;
   font-size: 16px;
   font-weight: 600;
   line-height: 20.8px;
   letter-spacing: -0.8px;
   text-align: left;
   color: $grey800;
+  cursor: pointer;
+}
+
+.img {
+  padding: 8.65px 6.62px;
+  border-radius: 8px;
+  width: 24px;
+  transition: background-color 0.2s ease;
+}
+
+.check-true {
+  background-color: $blue500;
+  &:hover {
+    background-color: $blue300;
+  }
+}
+
+.check-false {
+  background-color: $grey400;
+  &:hover {
+    background-color: $grey300;
+  }
 }

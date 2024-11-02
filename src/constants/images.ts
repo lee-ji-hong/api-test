@@ -1,5 +1,6 @@
 import Back_btn from "@/assets/images/back.svg";
 import Cancel_btn from "@/assets/images/cancel_btn.svg";
+import Checkbox_btn from "@/assets/images/checkbox.svg";
 import Cancel_grey from "@/assets/images/cancel_grey.svg";
 import CommunityHeartIcon from "@/assets/images/community/ico_heart.png";
 import CommunityHeartActiveIcon from "@/assets/images/community/ico_heart_active.png";
@@ -62,6 +63,10 @@ export const IMAGES = {
   Cancel_grey: {
     src: Cancel_grey,
     alt: "취소",
+  },
+  Checkbox_btn: {
+    src: Checkbox_btn,
+    alt: "체크박스",
   },
   TabBarCalculatorIcon: {
     SVGComponent: TabBarCalculatorIcon,
