@@ -81,24 +81,26 @@ const CommunityPage = () => {
 
   return (
     <div className={cx("container")}>
-      <Typography className={cx("txt-title")}>커뮤니티</Typography>
-      <Spacing size={16} />
-      <div className={cx("button-space")}>
-        <RoundButton
-          text="최신순"
-          onClick={async () => {
-            setIsLatest(true);
-          }}
-          isActive={isLatest}
-        />
-        <SpacingWidth size={4} />
-        <RoundButton
-          text="인기순"
-          onClick={async () => {
-            setIsLatest(false);
-          }}
-          isActive={!isLatest}
-        />
+      <div className={cx("sticky-header")}>
+        <Typography className={cx("txt-title")}>커뮤니티</Typography>
+        <Spacing size={16} />
+        <div className={cx("button-space")}>
+          <RoundButton
+            text="최신순"
+            onClick={async () => {
+              setIsLatest(true);
+            }}
+            isActive={isLatest}
+          />
+          <SpacingWidth size={4} />
+          <RoundButton
+            text="인기순"
+            onClick={async () => {
+              setIsLatest(false);
+            }}
+            isActive={!isLatest}
+          />
+        </div>
       </div>
 
       <Spacing size={34} />

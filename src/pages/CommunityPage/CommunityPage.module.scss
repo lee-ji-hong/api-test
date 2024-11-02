@@ -1,7 +1,6 @@
 .container {
   text-align: left;
   .txt-title {
-    // background-color: antiquewhite;
     font-size: 19px;
     font-weight: 700;
     letter-spacing: -1.2px;
@@ -9,6 +8,16 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
+
+  .sticky-header {
+    position: sticky;
+    top: 0; /* 화면 상단에 고정 */
+    background-color: white; /* 스크롤 시 겹치지 않도록 백그라운드 설정 */
+    z-index: 1000; /* 고정된 헤더가 다른 요소보다 위에 위치 */
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
   .button-space {
     display: flex;
     // background-color: antiquewhite;

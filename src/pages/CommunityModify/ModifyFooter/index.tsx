@@ -6,6 +6,8 @@ import { IMAGES } from "@/constants/images";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import { useNavigate } from "react-router-dom";
 import { CommunityDetail } from "@/models";
+import { Divider } from "@mui/material";
+import Spacing from "@/components/shared/Spacing";
 
 const cx = classNames.bind(styles);
 
@@ -56,6 +58,8 @@ const ModifyFooter: React.FC<WriteFooterProps> = ({
 
   return (
     <div className={cx("containerWriteFooter")}>
+      <Divider sx={{ borderBottomWidth: "1px" }} />
+      <Spacing size={16} />
       <div className={cx("containerImgFooter")}>
         <div onClick={() => handleImagePick(imagePickerRef)}>
           <Image className={cx("imgPicture")} imageInfo={IMAGES?.PictureIcon} />
