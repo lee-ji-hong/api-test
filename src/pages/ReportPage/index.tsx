@@ -139,7 +139,8 @@ const ReportPage = () => {
                     getAriaValueText={valuetext}
                     valueLabelDisplay="auto"
                     valueLabelFormat={(value) => `전세대출 ${formatNumberWithUnits(value / 10000)}`}
-                    step={Math.floor(reportData?.loanAmount / 5)}
+                    // step={Math.floor(reportData?.loanAmount / 5)}
+                    step={1000000}
                     marks
                     min={0}
                     max={reportData?.loanAmount}
