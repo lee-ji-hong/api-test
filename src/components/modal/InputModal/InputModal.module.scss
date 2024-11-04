@@ -23,10 +23,18 @@
   position: fixed;
   bottom: 350px;
 
+  opacity: 0;
+  transition:
+    opacity 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
   @media (min-width: 768px) {
     position: fixed;
     bottom: 350px;
   }
+}
+
+.container.show {
+  opacity: 1;
 }
 
 .txt-title {

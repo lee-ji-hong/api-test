@@ -40,6 +40,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
   ) => {
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const [modalHeight, setModalHeight] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
       const calculateKeyboardHeight = () => {
@@ -59,13 +60,22 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
       };
     }, []);
 
+    useEffect(() => {
+      setIsVisible(true);
+    }, []);
+
+    const handleClose = (isBackdropClick: boolean) => {
+      setIsVisible(false);
+      setTimeout(() => onClose(isBackdropClick), 400);
+    };
+
     return (
       <>
         <div
           className={cx("back-drop")}
-          onClick={() => (error ? alert("에러 메세지를 확인해주세요🫨") : onClose(true))}>
+          onClick={() => (error ? alert("에러 메세지를 확인해주세요🫨") : handleClose(true))}>
           <div
-            className={cx("container")}
+            className={cx("container", { show: isVisible })}
             style={{ bottom: `${modalHeight}px` }}
             aria-label="alert-modal"
             onClick={(e) => e.stopPropagation()}>
@@ -81,7 +91,12 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
               {...props}
             />
             <Spacing size={30} />
-            <Button className={cx("close-button")} title={buttonText} onClick={() => onClose(false)} disabled={error} />
+            <Button
+              className={cx("close-button")}
+              title={buttonText}
+              onClick={() => handleClose(false)}
+              disabled={error}
+            />
           </div>
           <div onClick={(e) => e.stopPropagation()}>
             <KeyboardModal
