@@ -88,12 +88,14 @@ export const LoanInfoEntryPage = () => {
       ...prevState,
       [name]: value,
     }));
-    for (let i = id; i < INPUTS.length; i++) {
-      const nextInputName = INPUTS[i].name;
+
+    const filteredInputs =
+      maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
+    for (let i = id - 1; i < filteredInputs.length; i++) {
+      const nextInputName = filteredInputs[i].name;
       const nextValue = getValues(nextInputName as keyof sendLoanAdviceReportRequest);
-      console.log(nextInputName);
       if (!nextValue) {
-        handleRowClick(INPUTS[i].id);
+        handleRowClick(filteredInputs[i].id);
         return;
       }
     }
