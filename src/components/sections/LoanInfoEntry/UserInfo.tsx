@@ -1,4 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 
 import BottomSheet from "@/components/modal/BottomSheet";
@@ -36,12 +37,17 @@ export const UserInfo = <ControlType extends FieldValues>({
   buttonText,
 }: UserInfoProps<ControlType>) => {
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+  const [childStatus, setChildStatus] = useState("");
 
   const handleCheckboxChange = () => {
-    setRecoilFormData((prevState) => ({
-      ...prevState,
-      hasNewborn: !prevState.hasNewborn, // 신생아 포함 여부 토글
-    }));
+    if (childStatus === "NO_CHILD") {
+      alert("자녀를 선택해주세요");
+    } else {
+      setRecoilFormData((prevState) => ({
+        ...prevState,
+        hasNewborn: !prevState.hasNewborn,
+      }));
+    }
   };
   return (
     <>
@@ -56,7 +62,16 @@ export const UserInfo = <ControlType extends FieldValues>({
                 <li
                   key={status}
                   className={cx("option-button", { selected: field.value === status })}
-                  onClick={() => field.onChange(status)}>
+                  onClick={() => {
+                    field.onChange(status);
+                    setChildStatus(status);
+                    if (status === "NO_CHILD") {
+                      setRecoilFormData((prevState) => ({
+                        ...prevState,
+                        hasNewborn: false,
+                      }));
+                    }
+                  }}>
                   {statusLabels[status]}
                 </li>
               ))}
