@@ -28,10 +28,12 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
     const [jibunAddress, setJibunAddress] = useState("");
     const [roadAddress, setRoadAddress] = useState("");
     const [inputValue, setInputValue] = useState("");
+    const [isVisible, setIsVisible] = useState(false);
     const { searchAddress, addressList } = useSendAddressSearch();
     const { husingInfo, infoItem } = useSendHousingInfo();
 
     useEffect(() => {
+      setIsVisible(true);
       const delayDebounceFn = setTimeout(() => {
         if (inputValue) {
           searchAddress({ keyword: inputValue });
@@ -57,7 +59,8 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
         ...prevState,
         exclusiveArea: ExclusiveArea,
       }));
-      onClose(false);
+      setIsVisible(false);
+      setTimeout(() => onClose(false), 400);
     };
 
     const handleAddressSelect = (address: AddressInfo) => {
@@ -81,8 +84,16 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
     };
 
     return (
-      <div className={cx("back-drop")} onClick={() => onClose(true)}>
-        <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={cx("back-drop")}
+        onClick={() => {
+          setIsVisible(false);
+          setTimeout(() => onClose(true), 400);
+        }}>
+        <div
+          className={cx("container", { show: isVisible })}
+          aria-label="alert-modal"
+          onClick={(e) => e.stopPropagation()}>
           <Text className={cx("txt-title")} text={modalTitle} />
           <Spacing size={30} />
           {recoilFormData.jibun === "" || recoilFormData.jibun === undefined || jibunAddress === "" ? (
