@@ -15,7 +15,7 @@
 
 .row {
   @include flexbox(between, center);
-  padding: 20px;
+  padding: 20px 15px 20px 20px;
   border-radius: 12px;
   box-shadow: 0px 1px 20px 0px #00000012;
 }

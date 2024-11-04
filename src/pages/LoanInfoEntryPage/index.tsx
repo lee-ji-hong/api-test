@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 // import { DevTool } from "@hookform/devtools";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { INPUTS } from "./INPUTS";
@@ -42,6 +42,12 @@ export const LoanInfoEntryPage = () => {
     defaultValues: recoilFormData,
     mode: "onChange",
   });
+
+  useEffect(() => {
+    if (INPUTS.length > 0) {
+      handleInputComplete(INPUTS[0].name, INPUTS[0].id);
+    }
+  }, []);
 
   const maritalStatus = watch("maritalStatus");
   const filteredInputs = useMemo(() => {
@@ -110,7 +116,7 @@ export const LoanInfoEntryPage = () => {
       <div className={cx("container")}>
         <Spacing size={16} />
         <Text className={cx("txt-title")} text="당신에게 맞는 대출은?" />
-        <Spacing size={20} />
+        <Spacing size={4} />
 
         <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
           <List className={cx("list-wrap")}>
