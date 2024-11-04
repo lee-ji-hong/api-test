@@ -35,7 +35,7 @@ const PERSPECTIVE_STYLE: Record<Perspective, CSSProperties> = {
 const Wheel: React.FC<Props> = memo(
   ({
     formatValue,
-    initialIndex = 0,
+    initialIndex = 9,
     options = [],
     loop = false,
     onChange,
@@ -64,6 +64,7 @@ const Wheel: React.FC<Props> = memo(
       created: (s) => {
         size.current = s.size;
         setRadius(s.size / 2); // 슬라이더가 생성되면 반지름 설정
+        onChange(options[initialIndex]!); // 초기값에 맞게 onChange 이벤트 발생
       },
       updated: (s) => {
         size.current = s.size;
