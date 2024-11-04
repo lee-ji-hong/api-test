@@ -44,8 +44,13 @@ export const LoanInfoEntryPage = () => {
   });
 
   useEffect(() => {
-    if (INPUTS.length > 0) {
-      handleInputComplete(INPUTS[0].name, INPUTS[0].id);
+    for (let i = 0; i < INPUTS.length; i++) {
+      const InputName = INPUTS[i].name;
+      const nextValue = getValues(InputName as keyof sendLoanAdviceReportRequest);
+      if (!nextValue) {
+        handleRowClick(INPUTS[i].id);
+        return;
+      }
     }
   }, []);
 
@@ -98,10 +103,10 @@ export const LoanInfoEntryPage = () => {
     const filteredInputs =
       maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
     for (let i = id - 1; i < filteredInputs.length; i++) {
-      const nextInputName = filteredInputs[i].name;
+      const nextInputName = filteredInputs[i + 1].name;
       const nextValue = getValues(nextInputName as keyof sendLoanAdviceReportRequest);
       if (!nextValue) {
-        handleRowClick(filteredInputs[i].id);
+        handleRowClick(filteredInputs[i + 1].id);
         return;
       }
     }
