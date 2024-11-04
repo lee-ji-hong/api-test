@@ -28,6 +28,7 @@ export const LoanInfoEntryPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+
   const [loading, setLoading] = useState(false);
   const { loanAdviceReport } = useSendLoanAdviceReport();
   const {
@@ -45,7 +46,6 @@ export const LoanInfoEntryPage = () => {
   const maritalStatus = watch("maritalStatus");
   const filteredInputs = useMemo(() => {
     return INPUTS.filter((input) => {
-      // maritalStatus가 SINGLE이면 배우자 연소득 필드 제외
       if (input.name === "spouseAnnualIncome") {
         return maritalStatus && maritalStatus !== "SINGLE";
       }
@@ -83,16 +83,20 @@ export const LoanInfoEntryPage = () => {
 
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
+
     setRecoilFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log(id);
-    // if (!value) {
-    //   handleRowClick(id); // 현재 아이템 모달 열기
-    // } else if (id + 1 < INPUTS.length) {
-    //   handleRowClick(id + 1); // 다음 아이템 모달 열기
-    // }
+    for (let i = id; i < INPUTS.length; i++) {
+      const nextInputName = INPUTS[i].name;
+      const nextValue = getValues(nextInputName as keyof sendLoanAdviceReportRequest);
+      console.log(nextInputName);
+      if (!nextValue) {
+        handleRowClick(INPUTS[i].id);
+        return;
+      }
+    }
   };
 
   if (loading) return <FullScreenMessage type="loading" />;
@@ -130,9 +134,11 @@ export const LoanInfoEntryPage = () => {
                       <Component
                         formFieldName={item.name as keyof sendLoanAdviceReportRequest}
                         control={control}
-                        onClose={() => {
+                        onClose={(isBackdropClick = false) => {
                           handleModalClose();
-                          handleInputComplete(item.name, item.id);
+                          if (!isBackdropClick) {
+                            handleInputComplete(item.name, item.id);
+                          }
                         }}
                         modalTitle={item.modalTitle}
                         modalSubTitle={item.modalSubTitle}

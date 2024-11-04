@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 interface SelectBottomSheetProps extends InputHTMLAttributes<HTMLInputElement> {
   modalTitle?: string;
   modalSubTitle?: string;
-  onClose: () => void;
+  onClose: (isBackdropClick?: boolean) => void;
   children: React.ReactNode;
   titleAlign?: "flex-start" | "flex-end" | "center";
 }
@@ -24,14 +24,13 @@ export const SelectBottomSheet = forwardRef<HTMLUListElement, SelectBottomSheetP
       setIsVisible(true);
     }, []);
 
-    const handleClose = () => {
+    const handleClose = (isBackdropClick?: boolean) => {
       setIsVisible(false);
-      setTimeout(onClose, 400);
+      setTimeout(() => onClose(isBackdropClick), 400);
     };
-
     return (
       <GlobalPortal.Consumer>
-        <div className={cx("back-drop")} onClick={handleClose}>
+        <div className={cx("back-drop")} onClick={() => handleClose(true)}>
           <div
             className={cx("container", { show: isVisible })}
             aria-label="alert-modal"

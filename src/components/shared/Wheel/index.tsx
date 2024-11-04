@@ -47,7 +47,7 @@ const Wheel: React.FC<Props> = memo(
     const size = useRef(0);
     const [radius, setRadius] = useState(120); // 기본 radius 값을 설정
 
-    const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    const [sliderRef] = useKeenSlider<HTMLDivElement>({
       slides: {
         number: options.length,
         origin: loop ? "center" : "auto",
@@ -79,8 +79,6 @@ const Wheel: React.FC<Props> = memo(
         onChange(options[rel]!);
       },
     });
-
-    console.log(slider);
 
     const getSlideValues = () => {
       if (!sliderState) return [];

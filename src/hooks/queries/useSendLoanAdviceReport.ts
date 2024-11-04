@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 export const useSendLoanAdviceReport = () => {
   const [, setIsLoginNeed] = useRecoilState(loginState);
-  let uuid = localStorage.getItem("tempUserId");
+  const uuid = localStorage.getItem("tempUserId");
   const router = useInternalRouter();
   const { auth } = useAuth();
 

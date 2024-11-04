@@ -16,7 +16,7 @@ interface InputModalProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "o
   buttonText?: string;
   error?: boolean;
   value: number;
-  onClose: () => void;
+  onClose: (isBackdropClick?: boolean) => void;
   onChange: (value: number) => void;
   handleKeyPress: (key: string) => void;
   handleBadgeClick: (label: string) => void;
@@ -61,7 +61,9 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
 
     return (
       <>
-        <div className={cx("back-drop")} onClick={() => (error ? alert("에러 메세지를 확인해주세요🫨") : onClose())}>
+        <div
+          className={cx("back-drop")}
+          onClick={() => (error ? alert("에러 메세지를 확인해주세요🫨") : onClose(true))}>
           <div
             className={cx("container")}
             style={{ bottom: `${modalHeight}px` }}
@@ -79,7 +81,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
               {...props}
             />
             <Spacing size={30} />
-            <Button className={cx("close-button")} title={buttonText} onClick={onClose} disabled={error} />
+            <Button className={cx("close-button")} title={buttonText} onClick={() => onClose(false)} disabled={error} />
           </div>
           <div onClick={(e) => e.stopPropagation()}>
             <KeyboardModal

@@ -19,7 +19,7 @@ const cx = classNames.bind(styles);
 interface AddressProps extends InputHTMLAttributes<HTMLInputElement> {
   modalTitle?: string;
   onChange: (event: ChangeEvent<HTMLInputElement> | string) => void;
-  onClose: () => void;
+  onClose: (isBackdropClick?: boolean) => void;
 }
 
 export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps>(
@@ -57,7 +57,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
         ...prevState,
         exclusiveArea: ExclusiveArea,
       }));
-      onClose();
+      onClose(false);
     };
 
     const handleAddressSelect = (address: AddressInfo) => {
@@ -81,7 +81,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
     };
 
     return (
-      <div className={cx("back-drop")} onClick={onClose}>
+      <div className={cx("back-drop")} onClick={() => onClose(true)}>
         <div className={cx("container")} aria-label="alert-modal" onClick={(e) => e.stopPropagation()}>
           <Text className={cx("txt-title")} text={modalTitle} />
           <Spacing size={30} />
