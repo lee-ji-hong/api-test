@@ -11,22 +11,39 @@
   z-index: 1000;
 
   .container {
-    width: 100%;
+    position: fixed;
+    bottom: -100%;
+    width: 95%;
+    height: 90%;
+    max-height: 752px;
+    max-width: 900px;
     margin: 10px;
     background-color: white;
     padding: 20px;
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-    opacity: 0;
-    transition:
-      opacity 0.2s ease-in-out,
-      transform 0.2s ease-in-out;
+    transition: bottom 0.4s ease-in-out;
   }
 
   .container.show {
-    opacity: 1;
+    bottom: 0;
+  }
+
+  .list-container {
+    height: 83%;
+    overflow-y: scroll;
+  }
+
+  .bar {
+    background-color: $grey300;
+    width: 50px;
+    height: 5px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 100px;
   }
 
   .txt-title {
@@ -130,7 +147,13 @@
     }
   }
 
+  .loading-container {
+    @include flexbox();
+  }
+
   .no-result {
+    height: 100%;
+    @include flexbox();
     p {
       font-size: 14px;
       font-weight: 600;
