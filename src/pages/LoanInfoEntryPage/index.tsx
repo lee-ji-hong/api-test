@@ -41,6 +41,7 @@ export const LoanInfoEntryPage = () => {
   } = useForm({
     defaultValues: recoilFormData,
     mode: "onChange",
+    criteriaMode: "all",
   });
 
   useEffect(() => {
@@ -63,6 +64,13 @@ export const LoanInfoEntryPage = () => {
       return true;
     });
   }, [maritalStatus]);
+
+  const allFieldsFilled = useMemo(() => {
+    return filteredInputs.every((input) => {
+      const value = getValues(input.name as keyof sendLoanAdviceReportRequest);
+      return value !== undefined && value !== "";
+    });
+  }, [filteredInputs, recoilFormData]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus, handleRowClick)) return;
@@ -102,10 +110,12 @@ export const LoanInfoEntryPage = () => {
 
     const filteredInputs =
       maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
+
     for (let i = id - 1; i < filteredInputs.length; i++) {
-      const nextInputName = filteredInputs[i + 1].name;
+      const nextInputName = filteredInputs[i + 1]?.name;
       const nextValue = getValues(nextInputName as keyof sendLoanAdviceReportRequest);
-      if (!nextValue) {
+
+      if (nextValue === undefined) {
         handleRowClick(filteredInputs[i + 1].id);
         return;
       }
@@ -167,8 +177,13 @@ export const LoanInfoEntryPage = () => {
               })}
             </>
           </List>
-          <Spacing size={90} />
-          <Button className={cx("button-wrap")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
+          <Spacing size={109} />
+          <Button
+            className={cx("button-wrap")}
+            title="리포트 확인하기"
+            type="submit"
+            disabled={isSubmitting || !allFieldsFilled}
+          />
         </form>
       </div>
       {/* <DevTool control={control} /> */}
