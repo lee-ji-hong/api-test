@@ -31,6 +31,7 @@ const CommunityWirtePage = () => {
     loanAdviceSummaryReport: null, // null로 초기화
     like: false, // 기본값 false
     updateDeleteAuthority: "", // 빈 문자열
+    loginUserName: "", // 빈 문자열
   };
   const [communityDetail, setCommunityDetail] = useState<CommunityDetail>(
     recvCommunityDetail.communityDetail ?? defaultCommunityDetail,
