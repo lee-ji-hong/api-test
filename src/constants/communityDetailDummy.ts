@@ -18,5 +18,6 @@ export function createCommunityDetail(): CommunityDetail {
     loanAdviceSummaryReport: null, // 초기값은 null
     like: false, // 초기값은 좋아요 미선택
     updateDeleteAuthority: "", // 수정 및 삭제 권한은 빈 문자열
+    loginUserName: "", // 로그인한 사용자 이름은 빈 문자열
   };
 }
