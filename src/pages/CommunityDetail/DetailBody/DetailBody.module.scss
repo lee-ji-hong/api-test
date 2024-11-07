@@ -18,6 +18,14 @@
 
   .txt-title {
     width: 100%;
+    max-height: 72px; /* 2줄의 높이를 제한 (36px * 2줄 = 72px) */
+    color: black;
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+    word-break: break-word; /* 긴 단어를 줄바꿈 */
+    white-space: normal; /* 여러 줄 허용 */
+    scrollbar-width: none;
+
+    width: 100%;
     height: 72px;
     font-size: 24px;
     color: black;

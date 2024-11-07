@@ -194,6 +194,7 @@ export interface CommunityDetail {
   loanAdviceSummaryReport: LoanAdviceSummaryReport | null;
   like: boolean;
   updateDeleteAuthority: string;
+  loginUserName: string;
 }
 
 export interface CommentResponse {

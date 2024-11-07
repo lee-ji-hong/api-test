@@ -124,7 +124,11 @@ const CommunityDetailPage = () => {
         {post && <DetailBody communityDetail={post} handleCommentUpdate={handleCommentUpdate} />}
 
         {/* 좋아요, 댓글 */}
-        <DetailFooter postId={postId} onCommentAdded={handleCommentUpdate} />
+        <DetailFooter
+          postId={postId}
+          onCommentAdded={handleCommentUpdate}
+          loginUserName={communityDetail?.loginUserName || ""}
+        />
 
         <Spacing size={24} />
         {isModalOpen && (

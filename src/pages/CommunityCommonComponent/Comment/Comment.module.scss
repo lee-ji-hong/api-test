@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  align-items: center;
   .txt-title {
     text-align: left;
     font-weight: 600;
@@ -94,6 +95,7 @@
   .img-comment {
     width: 20px;
     height: 20px;
+    margin-right: 3px;
   }
   .txt-comment {
     font-weight: 400;

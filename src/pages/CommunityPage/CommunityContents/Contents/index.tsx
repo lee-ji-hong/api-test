@@ -91,12 +91,7 @@ const Contents: React.FC<Post> = (props) => {
 
         <SpacingWidth size={15} />
 
-        <Comment
-          commentCnt={props.commentCount}
-          onClick={() => {
-            alert("comment");
-          }}
-        />
+        <Comment commentCnt={props.commentCount} onClick={() => {}} />
       </div>
     </div>
   );

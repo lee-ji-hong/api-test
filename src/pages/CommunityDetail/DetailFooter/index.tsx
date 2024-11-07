@@ -12,9 +12,10 @@ const cx = classNames.bind(styles);
 interface WriteFooterProps {
   postId: number;
   onCommentAdded: () => void;
+  loginUserName: string;
 }
 
-const DetailFooter: React.FC<WriteFooterProps> = ({ postId, onCommentAdded }) => {
+const DetailFooter: React.FC<WriteFooterProps> = ({ postId, onCommentAdded, loginUserName }) => {
   const [commentContent, setCommentContent] = useState(""); // 댓글 내용을 저장할 상태
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -60,7 +61,7 @@ const DetailFooter: React.FC<WriteFooterProps> = ({ postId, onCommentAdded }) =>
         <div className={cx("containerInputbox")}>
           <textarea
             ref={textareaRef}
-            placeholder="생각을 댓글로 남겨주세요."
+            placeholder={`${loginUserName}님의 생각을 댓글로 남겨주세요.`}
             className={cx("inputComment")}
             value={commentContent}
             onChange={(e) => setCommentContent(e.target.value)}
