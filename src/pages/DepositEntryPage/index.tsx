@@ -112,13 +112,7 @@ const DepositEntryPage = () => {
 
   return (
     <>
-      <Header
-        className={cx("cancel")}
-        onRightClick={() => router.push("/settings")}
-        onLeftClick={() => router.push("/")}
-        right="Setting_btn"
-        left="Logo"
-      />
+      <Header className={cx("cancel")} onRightClick={() => router.push("/settings")} right="Setting_btn" left="Logo" />
       <Spacing size={53} />
       <div className={cx("container")}>
         <Spacing size={90} />

@@ -22,10 +22,9 @@ const HomePage = () => {
 
   useEffect(() => {
     if (auth) {
-      console.log(auth);
       router.push("/deposit-entry");
     }
-  }, []);
+  }, [auth]);
 
   const handleCancelClick = () => {
     setShowPage(false);
