@@ -19,7 +19,8 @@ const Section01 = ({
     <section className={cx(["container", className])}>
       {title != null ? (
         <>
-          <Spacing size={126} />
+          <Spacing size={44} />
+          <Spacing size={38} />
           <Text className={cx("text")} text={title} />{" "}
         </>
       ) : null}

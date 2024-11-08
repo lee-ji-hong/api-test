@@ -1,5 +1,5 @@
 import { CSSTransition } from "react-transition-group";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
 import Header from "@/components/sections/Header";
@@ -8,6 +8,7 @@ import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 import Box from "@/components/shared/Box";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
+import { useAuth } from "@/hooks/useAuth";
 import { IMAGES } from "@/constants/images";
 import classNames from "classnames/bind";
 import styles from "./HomePage.module.scss";
@@ -17,6 +18,14 @@ const HomePage = () => {
   const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
   const nodeRef = useRef(null);
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    if (auth) {
+      console.log(auth);
+      router.push("/deposit-entry");
+    }
+  }, []);
 
   const handleCancelClick = () => {
     setShowPage(false);
@@ -47,28 +56,42 @@ const HomePage = () => {
             <Image className={cx("top-img")} imageInfo={IMAGES?.Onboarding_1} />
           </Section01>
           <Box>
-            <Text
-              className={cx("txt-title")}
-              text="간단한 정보 입력으로/n맞춤형 전세 대출을 추천드려요"
-              highlight="맞춤형 전세 대출"
-            />
-            <Text className={cx("txt-sub")} text="설정한 전세 대출 금액에 따라/n최적의 조건을 추천드릴 수 있어요" />
+            <div>
+              <Text
+                className={cx("txt-title")}
+                text="간단한 정보 입력으로/n맞춤형 전세 대출을 추천드려요"
+                highlight="맞춤형 전세 대출"
+              />
+              <Spacing size={8} />
+              <Text className={cx("txt-sub")} text="설정한 전세 대출 금액에 따라/n최적의 조건을 추천드릴 수 있어요" />
+            </div>
+
             <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_2} />
           </Box>
           <Spacing size={34} />
           <Box>
-            <Text className={cx("txt-title")} text="부스비용 및 기회비용까지/n리포트로 제공드려요" highlight="리포트" />
-            <Text className={cx("txt-sub")} text="숨겨진 비용까지 철저히 분석하여/n현명한 결정을 할 수 있어요" />
+            <div>
+              <Text
+                className={cx("txt-title")}
+                text="부수비용 및 기회비용까지/n리포트로 제공드려요"
+                highlight="리포트"
+              />
+              <Spacing size={8} />
+              <Text className={cx("txt-sub")} text="숨겨진 비용까지 철저히 분석하여/n현명한 결정을 할 수 있어요" />
+            </div>
             <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_3} />
           </Box>
           <Spacing size={34} />
           <Box>
-            <Text
-              className={cx("txt-title")}
-              text="선택한 대출 상품에 대해/n무료 상담까지 가능해요"
-              highlight="무료 상담"
-            />
-            <Text className={cx("txt-sub")} text="궁금한 점,/n다 물어보고 대출을 선택하세요" />
+            <div>
+              <Text
+                className={cx("txt-title")}
+                text="선택한 대출 상품에 대해/n무료 상담까지 가능해요"
+                highlight="무료 상담"
+              />
+              <Spacing size={8} />
+              <Text className={cx("txt-sub")} text="궁금한 점,/n다 물어보고 대출을 선택하세요" />
+            </div>
             <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_4} />
           </Box>
           <Spacing size={60} />
