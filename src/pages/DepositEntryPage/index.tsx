@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useWindowSize } from "usehooks-ts";
 import { useRecoilState } from "recoil";
 
 import { GlobalPortal } from "@/components/shared/GlobalPortal";
@@ -24,38 +25,33 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
-  const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+  const [, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [inputValue, setInputValue] = useState<number>(0);
   const [bottomOffset, setBottomOffset] = useState(0);
   const { loanAdviceInfo } = useGetLoanAdvice();
+  const { height } = useWindowSize();
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
   const router = useInternalRouter();
   const { auth } = useAuth();
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
-      const height = (window.innerHeight * 0.4 - 207) / 7;
-      setKeyboardHeight(height);
+      const calculatedHeight = (height * 0.4 - 207) / 7;
+      setKeyboardHeight(calculatedHeight);
 
       if (!isInputFocused) {
         setBottomOffset(70);
       } else {
-        console.log(recoilFormData);
-        if (window.innerWidth < 380) {
-          setBottomOffset(window.innerHeight * 0.4 - 5);
-        }
-        setBottomOffset(window.innerHeight * 0.4 + 15);
+        const newBottomOffset = height < 668 ? height * 0.4 + 15 : height * 0.4 + 45;
+        setBottomOffset(newBottomOffset);
       }
     };
 
-    window.addEventListener("resize", calculateKeyboardHeight);
     calculateKeyboardHeight();
-    return () => {
-      window.removeEventListener("resize", calculateKeyboardHeight);
-    };
-  }, [isInputFocused]);
+  }, [height, isInputFocused]);
+
   const isInvalidValue = inputValue > 0 && (inputValue <= 100 || inputValue > 200000);
   const warningMessage =
     inputValue === 0
