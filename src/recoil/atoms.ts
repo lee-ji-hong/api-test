@@ -1,5 +1,10 @@
 import { atom } from "recoil";
-import { sendLoanAdviceReportRequest, sendLtvCalcRequest, sendDtiCalcRequest } from "@/models";
+import {
+  sendLoanAdviceReportRequest,
+  sendLtvCalcRequest,
+  sendDtiCalcRequest,
+  sendRepaymentCalcRequest,
+} from "@/models";
 
 export const formData = atom<sendLoanAdviceReportRequest>({
   key: "formState",
@@ -54,6 +59,18 @@ export const dtiCalcState = atom<sendDtiCalcRequest>({
     loanTerm: 0,
     repaymentType: "",
     yearlyLoanInterestRepayment: 0,
+  },
+});
+
+export const repaymentCalcState = atom<sendRepaymentCalcRequest>({
+  key: "repaymentCalcState",
+  default: {
+    principal: 0,
+    interestRatePercentage: 0,
+    term: 0,
+    gracePeriod: 0,
+    repaymentType: "",
+    maturityPaymentAmount: 0,
   },
 });
 

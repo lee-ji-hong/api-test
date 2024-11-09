@@ -18,6 +18,8 @@ import {
   sendHousingInfoRequest,
   sendLtvCalcRequest,
   sendDtiCalcRequest,
+  sendRepaymentCalcRequest,
+  RepaymentCalcResponse,
 } from "@/models";
 import { getOrCreateUuid } from "@/utils/localStorage";
 
@@ -114,4 +116,11 @@ export function sendLtvCalc(requestBody: sendLtvCalcRequest) {
 // DTI 계산기
 export function sendDtiCalc(requestBody: sendDtiCalcRequest) {
   return Axios.post<DtiCalcResponse>("/api/v1/dtiCalc", requestBody, false).then((response) => response.data);
+}
+
+// 원리금 계산기
+export function sendRepaymentCalc(requestBody: sendRepaymentCalcRequest) {
+  return Axios.post<RepaymentCalcResponse>("/api/v1/repaymentCalc", requestBody, false).then(
+    (response) => response.data,
+  );
 }

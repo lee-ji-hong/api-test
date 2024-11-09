@@ -12,6 +12,7 @@ import CommunityDetail from "./CommunityDetail";
 import CommunityModifyPage from "./CommunityModify";
 import CommunityRecentReportPage from "./CommunityRecentReport";
 import CommunityModifyCommentPage from "./CommunityModifyComment";
+import RepaymentCalcDetail from "./CalculatorPage/RepaymentCalculator/RepaymentDetail";
 
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
@@ -69,6 +70,7 @@ function App() {
                 <Route path="no-report" element={<NoReportPage />} />
                 <Route path="login-success" element={<LoginSuccessPage />} />
                 <Route path="calculator" element={<CalculatorPage />} />
+                <Route path="calculator/repaymentDetails" element={<RepaymentCalcDetail />} />
 
                 {/* 로딩 화면 테스트용 */}
                 <Route path="loading/report" element={<ReportPageLoading />} />

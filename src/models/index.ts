@@ -296,12 +296,27 @@ export interface sendDtiCalcRequest {
   repaymentType: string;
   yearlyLoanInterestRepayment: number;
 }
+export interface sendRepaymentCalcRequest {
+  principal: number;
+  interestRatePercentage: number;
+  term: number;
+  gracePeriod: number;
+  repaymentType: string;
+  maturityPaymentAmount: number;
+}
 
 export interface DtiCalcResponse {
   code: number;
   status: string;
   message: string;
   data: DtiCalculationResult;
+}
+
+export interface RepaymentCalcResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: RepaymentCalculationResult;
 }
 
 export interface DtiCalculationResult {
@@ -311,4 +326,19 @@ export interface DtiCalculationResult {
   annualRepaymentPrincipal: number;
   annualRepaymentInterest: number;
   yearlyLoanInterestRepayment: number;
+}
+
+export interface RepaymentCalculationResult {
+  repaymentSchedules: RepaymentCalculationResultDetail[];
+  totalPrincipal: number;
+  totalInterest: number;
+  totalInstallments: number;
+}
+
+export interface RepaymentCalculationResultDetail {
+  installmentNumber: number;
+  totalPayment: number;
+  principalPayment: number;
+  interestPayment: number;
+  remainingPrincipal: number;
 }
