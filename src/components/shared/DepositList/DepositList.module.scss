@@ -22,7 +22,7 @@
     border-radius: 10px;
     padding: 20px;
 
-    &:hover {
+    &.hover-enabled:hover {
       cursor: pointer;
     }
   }

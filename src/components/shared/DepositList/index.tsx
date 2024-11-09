@@ -78,7 +78,7 @@ const LoanInfoItem = ({
   return (
     <>
       <div
-        className={cx(["container-loaninfo", color])}
+        className={cx(["container-loaninfo", color, { "hover-enabled": isFetch }])}
         onClick={() => isFetch && handleAdviceReport(item.loanAdviceResultId ?? 0)}>
         <div className={cx(["container-loaninfo-top"])}>
           <div className={cx("container-txt-loaninfo")}>
