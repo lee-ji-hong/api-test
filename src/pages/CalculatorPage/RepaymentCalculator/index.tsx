@@ -3,16 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import { OptionItem, OptionsType, sendRepaymentCalcRequest } from "@/models";
 import { useRecoilState } from "recoil";
 
-import ResultInfo from "@/components/sections/Calculator/ResultInfo";
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
-import { useSendDtiCalc } from "@/hooks/queries/useSendDtiCalc";
 import { validateFormData } from "./validateFormData";
-import { sendDtiCalcRequest } from "@/models";
 import { periodState, repaymentCalcState } from "@/recoil/atoms";
 import { getLabelFromOptions } from "@/utils/getLabelFromOptions";
 import { resultState, repaymentOptions } from "./options";
@@ -20,6 +17,7 @@ import { INPUTS } from "./INPUTS";
 
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
+import { useSendRepaymentCalc } from "@/hooks/queries/useSendRepaymentCalc";
 const cx = classNames.bind(styles);
 
 const RepaymentCalculator = () => {
@@ -31,7 +29,7 @@ const RepaymentCalculator = () => {
   const [contents, setContents] = useState(resultState);
   const [bottomOffset, setBottomOffset] = useState(0);
   const [toggle, setToggle] = useState(false);
-  const { DtiCalcInfo, infoItem } = useSendDtiCalc();
+  const { RepaymentCalcInfo, infoItem } = useSendRepaymentCalc();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const {
@@ -100,15 +98,17 @@ const RepaymentCalculator = () => {
         repaymentType: getLabelFromOptions(data.repaymentType, repaymentOptions) as string,
       },
     }));
+
     const updatedFormData = {
       ...data,
-      annualIncome: (data.annualIncome ?? 0) * 10000,
-      loanAmount: (data.loanAmount ?? 0) * 10000,
-      interestRate: (data.interestRate ?? 0) * 10000,
-      loanTerm: (data.loanTerm ?? 0) * 10000,
-      yearlyLoanInterestRepayment: (data.yearlyLoanInterestRepayment ?? 0) * 10000,
+      principal: (data.principal ?? 0) * 10000,
+      interestRatePercentage: data.interestRatePercentage ?? 0,
+      term: data.term ?? 0,
+      gracePeriod: data.gracePeriod ?? 0,
+      repaymentType: data.repaymentType ?? "",
+      maturityPaymentAmount: (data.principal ?? 0) * 10000,
     };
-    DtiCalcInfo(updatedFormData as sendDtiCalcRequest);
+    RepaymentCalcInfo(updatedFormData as sendRepaymentCalcRequest);
   };
 
   const onClose = () => {
@@ -180,7 +180,7 @@ const RepaymentCalculator = () => {
           </div>
         </>
       </form>
-
+      {/* 
       {infoItem && (
         <>
           <div className={cx("hr")}></div>
@@ -195,7 +195,7 @@ const RepaymentCalculator = () => {
             </div>
           </ResultInfo>
         </>
-      )}
+      )} */}
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="대출 원리금 계산기란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
