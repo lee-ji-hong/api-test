@@ -7,7 +7,6 @@ import {
   HousingInfoResponse,
   getLoanAdviceResponse,
   LoanAdviceReportResponse,
-  SpecificLoanAdviceReportResponse,
   TransferUserResponse,
   LtvCalcResponse,
   DtiCalcResponse,
@@ -59,9 +58,7 @@ export function getLoanAdvice() {
 }
 // 특정 대출추천 보고서 조회
 export function getSpecificLoanAdvice(param: number) {
-  return Axios.get<SpecificLoanAdviceReportResponse>(`/api/v1/loanAdvice/${param}`, true).then(
-    (response) => response.data,
-  );
+  return Axios.get<LoanAdviceReportResponse>(`/api/v1/loanAdvice/${param}`, true);
 }
 
 //전세대출상품 추천 보고서 산출 - 최초 유입 유저

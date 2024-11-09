@@ -55,7 +55,6 @@ const LoanInfoItem = ({
 
   useEffect(() => {
     if (specificLoanAdvice) {
-      console.log(specificLoanAdvice);
       router.push(`/report`, { reportData: specificLoanAdvice });
     }
     if (error) {

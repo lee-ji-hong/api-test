@@ -251,13 +251,6 @@ export interface LoanAdviceReportResponse {
   message: string;
   data: LoanAdviceReport[];
 }
-
-export interface SpecificLoanAdviceReportResponse {
-  code: number;
-  status: string;
-  message: string;
-  data: LoanAdviceReport;
-}
 export interface DepositLists {
   expectedLoanRate: number; // 숫자형 대출 금리
   loanProductCode: string; // 문자열 대출 상품 코드

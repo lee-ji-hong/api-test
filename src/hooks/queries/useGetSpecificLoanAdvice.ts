@@ -1,6 +1,6 @@
 import { getSpecificLoanAdvice } from "@/api/remotes";
 import { useQuery } from "@tanstack/react-query";
-import { LoanAdviceReport } from "@/models";
+import { LoanAdviceReportResponse } from "@/models";
 import { useAuth } from "@/hooks/useAuth";
 import { AxiosError } from "axios";
 
@@ -11,7 +11,7 @@ export const useGetSpecificLoanAdvice = (param: number) => {
     data: specificLoanAdvice,
     isLoading: isGetLoanAdviceLoading,
     error,
-  } = useQuery<LoanAdviceReport, AxiosError>({
+  } = useQuery<LoanAdviceReportResponse, AxiosError>({
     queryKey: ["SpecificLoanAdviceInfo", param],
     queryFn: async () => {
       return await getSpecificLoanAdvice(param);
