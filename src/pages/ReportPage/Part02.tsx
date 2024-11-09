@@ -39,7 +39,7 @@ const Part02 = ({ reportData }: Part02Props) => {
       <Text
         className={cx("txt-title")}
         text={`내가 ${formatNumberWithUnits(sliderValue / 10000)} 대출시/n약 ${formatNumber(
-          (reportData?.monthlyInterestCost / reportData?.loanAmount) * sliderValue,
+          Math.floor((reportData?.monthlyInterestCost / reportData?.loanAmount) * sliderValue),
         )}원의 이자를 내요!`}
         highlight={formatNumberWithUnits(sliderValue / 10000)}
       />
