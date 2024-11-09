@@ -19,7 +19,6 @@ import {
   sendLtvCalcRequest,
   sendDtiCalcRequest,
   sendRepaymentCalcRequest,
-  RepaymentCalculationResult,
   RepaymentCalcResponse,
 } from "@/models";
 import { getOrCreateUuid } from "@/utils/localStorage";

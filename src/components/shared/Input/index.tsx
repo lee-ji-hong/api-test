@@ -6,7 +6,6 @@ import { IMAGES } from "@/constants/images";
 import { modalformatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import styles from "./Input.module.scss";
 const cx = classNames.bind(styles);
-
 interface InputFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   error?: boolean;
   value: number;

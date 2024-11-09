@@ -65,11 +65,12 @@ export const dtiCalcState = atom<sendDtiCalcRequest>({
 export const repaymentCalcState = atom<sendRepaymentCalcRequest>({
   key: "repaymentCalcState",
   default: {
-    loanAmount: 0,
-    mortgageInterestRate: 0,
-    totalLoanTerm: 0,
-    graceTerm: 0,
+    principal: 0,
+    interestRatePercentage: 0,
+    term: 0,
+    gracePeriod: 0,
     repaymentType: "",
+    maturityPaymentAmount: 0,
   },
 });
 

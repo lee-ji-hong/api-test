@@ -329,10 +329,16 @@ export interface DtiCalculationResult {
 }
 
 export interface RepaymentCalculationResult {
-  repaymentType: string;
-  principal: number;
-  term: number;
-  gracePeriod: number;
-  interestRatePercentage: number;
-  maturityPaymentAmount: number;
+  repaymentSchedules: RepaymentCalculationResultDetail[];
+  totalPrincipal: number;
+  totalInterest: number;
+  totalInstallments: number;
+}
+
+export interface RepaymentCalculationResultDetail {
+  installmentNumber: number;
+  totalPayment: number;
+  principalPayment: number;
+  interestPayment: number;
+  remainingPrincipal: number;
 }

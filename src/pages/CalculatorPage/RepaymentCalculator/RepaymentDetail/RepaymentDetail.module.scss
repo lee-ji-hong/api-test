@@ -1,0 +1,137 @@
+.container {
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30.8px;
+    letter-spacing: -0.8px;
+    color: #333347;
+
+    .highlight {
+      color: #4169e1;
+    }
+  }
+  .titleDescription {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: -0.8px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #86869a;
+  }
+
+  .tableContainer {
+    background-color: #fbfbfb;
+    border-radius: 12px;
+
+    .tableTitle {
+      padding: 20px 20px;
+      display: flex;
+      .title1 {
+        flex: 1;
+        font-family: Pretendard;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18.2px;
+        letter-spacing: -0.800000011920929px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #86869a;
+      }
+      .title2 {
+        flex: 3;
+        font-family: Pretendard;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18.2px;
+        letter-spacing: -0.800000011920929px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #86869a;
+      }
+    }
+
+    .tableRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding: 20px 20px;
+
+      .tableIndexColumn {
+        width: 100%;
+        flex: 1;
+        .indexNo {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 18.2px;
+          letter-spacing: -0.8px;
+          text-align: left;
+          text-underline-position: from-font;
+          text-decoration-skip-ink: none;
+          color: #86869a;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      .tableMonthColumn {
+        width: 100%;
+        flex: 3;
+
+        .textTotal {
+          font-family: Pretendard;
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 18.2px;
+          letter-spacing: -0.800000011920929px;
+          text-align: left;
+          text-underline-position: from-font;
+          text-decoration-skip-ink: none;
+
+          color: #333347;
+        }
+        .text {
+          font-family: Pretendard;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 18.2px;
+          letter-spacing: -0.800000011920929px;
+          text-align: left;
+          text-underline-position: from-font;
+          text-decoration-skip-ink: none;
+          color: #86869a;
+        }
+      }
+      .tableRestPriceColumn {
+        flex: 3;
+        width: 100%;
+        .textTotal {
+          font-family: Pretendard;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 18.2px;
+          letter-spacing: -0.800000011920929px;
+          text-align: left;
+          text-underline-position: from-font;
+          text-decoration-skip-ink: none;
+          color: #333347;
+        }
+        .text {
+          font-family: Pretendard;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 18.2px;
+          letter-spacing: -0.800000011920929px;
+          text-align: left;
+          text-underline-position: from-font;
+          text-decoration-skip-ink: none;
+          color: #86869a;
+        }
+      }
+    }
+  }
+}
