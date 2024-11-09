@@ -11,7 +11,7 @@ export const useSendSpecificLoanAdvice = () => {
       return await sendSpecificLoanAdvice(requestBody);
     },
     onSuccess: (data) => {
-      router.push(`/report`, { reportData: data });
+      router.push(`/report`, { reportData: data, isRecent: true });
     },
     retry: 0,
     onError: (error) => {

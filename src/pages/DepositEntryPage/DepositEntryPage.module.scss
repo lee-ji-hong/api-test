@@ -114,6 +114,9 @@
   .button-wrap {
     position: fixed;
     left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1013px;
     width: 100%;
     padding: 0 20px;
     transition: bottom 0.4s ease;
@@ -125,11 +128,15 @@
     position: inherit !important;
     margin-top: 60px;
     padding: 0 !important;
+    left: 0;
+    transform: translateX(0);
   }
 
   .button-wrap-focus {
     position: fixed;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1013px;
     width: 100%;
     padding: 0 20px;
     transition: bottom 0.4s ease;

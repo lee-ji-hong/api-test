@@ -1,28 +1,28 @@
 import { formatNumberWithUnits } from "@/utils/formatters";
 import { MaritalStatus, ChildStatus, HouseType, HouseOwnershipType } from "@/models";
 
-const MaritalStatusLabels: Record<MaritalStatus, string> = {
+export const MaritalStatusLabels: Record<MaritalStatus, string> = {
   SINGLE: "미혼",
   NEWLY_MARRIED: "신혼",
   MARRIED: "기혼",
   ENGAGED: "결혼 예정",
 };
 
-const HouseTypeLabels: Record<HouseType, string> = {
+export const HouseTypeLabels: Record<HouseType, string> = {
   APARTMENT: "아파트",
   OFFICETEL: "오피스텔",
   HOUSEHOLD_HOUSE: "연립다세대",
   FAMILY_HOUSE: "단독/다가구",
 };
 
-const ChildStatusLabels: Record<ChildStatus, string> = {
+export const ChildStatusLabels: Record<ChildStatus, string> = {
   NO_CHILD: "무자녀",
   ONE_CHILD: "1자녀",
   TWO_CHILD: "2자녀",
   THREE_OR_MORE_CHILDREN: "3자녀 이상",
 };
 
-const HouseOwnershipTypeLabel: Record<HouseOwnershipType, string> = {
+export const HouseOwnershipTypeLabel: Record<HouseOwnershipType, string> = {
   NO_HOUSE: "무주택",
   SINGLE_HOUSE: "1주택",
   MULTI_HOUSE: "다주택",
@@ -34,6 +34,7 @@ export const getUnitForField = (fieldName: string, fieldValue: FieldValues) => {
   if (fieldValue === undefined) {
     return "선택하기"; // 기본 처리
   }
+  const stringValue = String(fieldValue);
 
   switch (fieldName) {
     case "rentalDeposit":
@@ -57,7 +58,6 @@ export const getUnitForField = (fieldName: string, fieldValue: FieldValues) => {
     case "rentHousingType":
       return `${HouseTypeLabels[fieldValue as HouseType]}`;
     case "jibun":
-      const stringValue = String(fieldValue);
       return stringValue.length > 10 ? `... ${stringValue.slice(-10)}` : stringValue;
     default:
       return "선택하기";

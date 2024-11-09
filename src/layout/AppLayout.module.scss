@@ -8,6 +8,7 @@
 
   @include responsive("T") {
     max-width: calc(100% - 16.8rem);
+
     // padding-bottom: 8rem;
   }
   @include responsive("M") {
@@ -58,16 +59,3 @@
     width: 267px;
   }
 }
-// .button-container::before {
-//   content: "";
-//   background-image: url("@/assets/images/kakao_icon.svg");
-//   background-size: contain;
-//   background-repeat: no-repeat;
-//   width: 24px;
-//   height: 24px;
-//   position: absolute;
-//   left: 20%;
-// }
-// .button-container span {
-//   margin-left: 30px; /* 텍스트와 아이콘 사이의 간격 */
-// }

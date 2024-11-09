@@ -31,7 +31,7 @@ export const useSendLoanAdviceReport = () => {
       if (data.status === "NO_CONTENT") {
         router.push(`/no-report`, { reportData: data });
       } else {
-        router.push(`/report`, { reportData: data });
+        router.push(`/report`, { reportData: data, isRecent: false });
       }
     },
     retry: 0,

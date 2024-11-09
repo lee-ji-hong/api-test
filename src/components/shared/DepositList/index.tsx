@@ -55,7 +55,7 @@ const LoanInfoItem = ({
 
   useEffect(() => {
     if (specificLoanAdvice) {
-      router.push(`/report`, { reportData: specificLoanAdvice });
+      router.push(`/report`, { reportData: specificLoanAdvice, isRecent: true });
     }
     if (error) {
       console.error("조회 실패:", error);

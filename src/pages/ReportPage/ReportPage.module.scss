@@ -227,9 +227,31 @@
   letter-spacing: -1px;
 }
 
+.button-wrap-divide {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1013px;
+  width: 100%;
+  padding: 0 20px;
+  background-color: white;
+  box-shadow: 0px -7px 30px 2px rgb(255, 255, 255);
+
+  @include flexbox();
+  width: 100%;
+  gap: 9px;
+
+  .button {
+    flex: 1;
+  }
+}
+
 .button-wrap {
   position: fixed;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1013px;
   width: 100%;
   padding: 0 20px;
   background-color: white;
@@ -249,4 +271,32 @@
   bottom: 20px;
   border-radius: 16px !important;
   background-color: $blue500 !important;
+}
+
+.result-box {
+  .box-txt-container {
+    @include flexbox(between, center);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    letter-spacing: -0.8px;
+    margin-bottom: 16px;
+    .box-txt-left {
+      flex: 1;
+      p {
+        color: $grey500;
+        text-align: left;
+        font-weight: 600;
+      }
+    }
+
+    .box-txt-right {
+      flex: 1;
+      p {
+        color: $grey800;
+        text-align: left;
+        font-weight: 500;
+      }
+    }
+  }
 }

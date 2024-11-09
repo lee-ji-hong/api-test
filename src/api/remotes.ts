@@ -11,6 +11,7 @@ import {
   LtvCalcResponse,
   DtiCalcResponse,
   SpecificLoanAdviceResponse,
+  SpecificUserInputInfoResponse,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
   sendSpecificLoanAdviceRequest,
@@ -76,6 +77,17 @@ export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
 // 특정 전세대출상품 추천 보고서 산출
 export function sendSpecificLoanAdvice(requestBody: sendSpecificLoanAdviceRequest) {
   return Axios.post<SpecificLoanAdviceResponse>("/api/v1/loanAdvice/specific", requestBody, true);
+}
+
+/*************
+UserInputInfo API
+ ************/
+
+// 특정 유저투입정보 조회
+export function getSpecificUserInputInfo(userInfoInputId: number) {
+  return Axios.get<SpecificUserInputInfoResponse>(`/api/v1/userInputInfo/${userInfoInputId}`, true).then(
+    (response) => response.data,
+  );
 }
 
 /*************

@@ -1,8 +1,10 @@
 .button-wrap {
   position: fixed;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   padding: 0 20px;
+
   // backdrop-filter: blur(2px); /* 배경에만 블러 효과 적용 */
   // -webkit-backdrop-filter: blur(2px); /* Safari 호환성 */
 }
@@ -10,12 +12,14 @@
 .container {
   border: none;
   width: 100%;
+  // max-width: 940px;
   height: 56px;
   padding: 10px;
   margin: 0 0 20px 0;
   gap: 10px;
   border-radius: 16px;
   opacity: 0px;
+
   z-index: 1;
 
   font-family: SF Pro Text;
@@ -47,6 +51,12 @@
   &.light {
     background-color: $blue100;
     color: $grey800;
+
+    &:hover {
+      transition: opacity 0.3s ease;
+      opacity: 30%;
+      cursor: pointer;
+    }
   }
 }
 

@@ -27,7 +27,9 @@
 
   .button-wrap {
     position: fixed;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1013px;
     width: 100%;
     padding: 0 20px;
     background-color: white;
