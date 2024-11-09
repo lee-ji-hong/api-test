@@ -296,6 +296,13 @@ export interface sendDtiCalcRequest {
   repaymentType: string;
   yearlyLoanInterestRepayment: number;
 }
+export interface sendRepaymentCalcRequest {
+  loanAmount: number;
+  mortgageInterestRate: number;
+  totalLoanTerm: number;
+  graceTerm: number;
+  repaymentType: string;
+}
 
 export interface DtiCalcResponse {
   code: number;

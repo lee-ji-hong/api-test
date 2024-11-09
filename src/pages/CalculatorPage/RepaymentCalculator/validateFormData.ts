@@ -8,36 +8,31 @@ import { FieldValues, UseFormSetFocus } from "react-hook-form";
  */
 
 export const validateFormData = (data: FieldValues, setFocus: UseFormSetFocus<FieldValues>): boolean => {
-  const { annualIncome, loanAmount, interestRate, loanTerm, repaymentType, yearlyLoanInterestRepayment } = data;
+  const { loanAmount, mortgageInterestRate, totalLoanTerm, graceTerm, repaymentType } = data;
 
-  if (!annualIncome) {
-    alert("연소득을 입력해주세요.");
-    setFocus("annualIncome");
-    return false;
-  }
   if (!loanAmount) {
-    alert("주택 담보 대출 금액을 입력해주세요.");
+    alert("대출금액을 입력해주세요.");
     setFocus("loanAmount");
     return false;
   }
-  if (!interestRate) {
-    alert("이자율를 입력해주세요.");
-    setFocus("interestRate");
+  if (!mortgageInterestRate) {
+    alert("주택 담보 대출 금리을 입력해주세요.");
+    setFocus("mortgageInterestRate");
     return false;
   }
-  if (!loanTerm) {
-    alert("주택 담보 대출 기간를 입력해주세요.");
-    setFocus("loanTerm");
+  if (!totalLoanTerm) {
+    alert("총 대출 기간을 입력해주세요.");
+    setFocus("totalLoanTerm");
+    return false;
+  }
+  if (!graceTerm) {
+    alert("대출 거치 기간를 입력해주세요.");
+    setFocus("graceTerm");
     return false;
   }
   if (!repaymentType) {
-    alert("주택 담보 대출 상환방법를 입력해주세요.");
+    alert("대출 상환방법를 입력해주세요.");
     setFocus("repaymentType");
-    return false;
-  }
-  if (!yearlyLoanInterestRepayment) {
-    alert("보유대출 연이자 상환액를 입력해주세요.");
-    setFocus("yearlyLoanInterestRepayment");
     return false;
   }
 

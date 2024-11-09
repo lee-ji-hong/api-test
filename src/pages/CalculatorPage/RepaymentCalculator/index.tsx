@@ -1,6 +1,6 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState, useEffect, useRef } from "react";
-import { OptionItem, OptionsType } from "@/models";
+import { OptionItem, OptionsType, sendRepaymentCalcRequest } from "@/models";
 import { useRecoilState } from "recoil";
 
 import ResultInfo from "@/components/sections/Calculator/ResultInfo";
@@ -13,7 +13,7 @@ import Text from "@/components/shared/Text";
 import { useSendDtiCalc } from "@/hooks/queries/useSendDtiCalc";
 import { validateFormData } from "./validateFormData";
 import { sendDtiCalcRequest } from "@/models";
-import { dtiCalcState, periodState } from "@/recoil/atoms";
+import { periodState, repaymentCalcState } from "@/recoil/atoms";
 import { getLabelFromOptions } from "@/utils/getLabelFromOptions";
 import { resultState, repaymentOptions } from "./options";
 import { INPUTS } from "./INPUTS";
@@ -23,7 +23,7 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const RepaymentCalculator = () => {
-  const [DtiCalc] = useRecoilState<sendDtiCalcRequest>(dtiCalcState);
+  const [ReapymentCalc] = useRecoilState<sendRepaymentCalcRequest>(repaymentCalcState);
   const [focusedInput, setFocusedInput] = useState("");
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [, setSelectedBadge] = useRecoilState(periodState);
@@ -41,8 +41,8 @@ const RepaymentCalculator = () => {
     setFocus,
     reset,
   } = useForm({
-    defaultValues: DtiCalc,
-    values: DtiCalc,
+    defaultValues: ReapymentCalc,
+    values: ReapymentCalc,
     mode: "onChange",
   });
 
@@ -147,7 +147,7 @@ const RepaymentCalculator = () => {
               <div ref={(el) => (inputRefs.current[item.name] = el)} key={item.id}>
                 <Section02 title={item.label} isPeriodBadge={item?.isPeriod} onClick={handleBadgeSelect}>
                   <Component
-                    formFieldName={item.name as keyof sendDtiCalcRequest}
+                    formFieldName={item.name as keyof sendRepaymentCalcRequest}
                     control={control}
                     options={isOptionsType(item.options) ? item.options : (item.options as OptionItem[])}
                     min={item.limit?.min}

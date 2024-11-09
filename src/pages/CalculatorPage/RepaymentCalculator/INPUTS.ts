@@ -8,7 +8,7 @@ export const INPUTS = [
   {
     id: 1,
     label: "대출금액",
-    name: "annualIncome",
+    name: "loanAmount",
     value: "",
     limit: {
       min: { value: -1, ment: "금액을 입력해주세요" },
@@ -23,8 +23,8 @@ export const INPUTS = [
   },
   {
     id: 2,
-    label: "주택 담보 대출 금액",
-    name: "interestRate",
+    label: "주택 담보 대출 금리",
+    name: "mortgageInterestRate",
     value: "",
     unit: "%",
     formattedAmount: false,
@@ -62,7 +62,7 @@ export const INPUTS = [
   {
     id: 4,
     label: "대출 거치 기간",
-    name: "loanHoldPeriod",
+    name: "graceTerm",
     value: "",
     isPeriod: true,
     formattedAmount: false,
