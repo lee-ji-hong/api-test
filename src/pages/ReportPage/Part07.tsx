@@ -21,19 +21,24 @@ const Part07 = ({ reportData }: Part07Props) => {
   const handleDepositListToggle = () => {
     setShowMoreDepositList(!showMoreDepositList);
   };
+
+  const notEligibleProduct = reportData?.recommendedProducts.filter(
+    (item) => item?.notEligibleReasons && item?.notEligibleReasons[0] !== "",
+  );
+
   return (
     <div className={cx("box")}>
       <Spacing size={70} />
       <Text className={cx("txt-title")} text="대출 불가 상품들의 사유를 확인해보세요!" />
       <Spacing size={8} />
       <DepositList
-        list={reportData?.recommendedProducts || MOCK}
-        isShow={reportData?.recommendedProducts.length > 3}
+        list={notEligibleProduct || MOCK}
+        isShow={notEligibleProduct.length > 3}
         toggle={showMoreDepositList}
         isAlert={true}
         color="white"
       />
-      {reportData?.recommendedProducts.length > 3 && (
+      {notEligibleProduct.length > 3 && (
         <button className={cx("list-button")} onClick={handleDepositListToggle}>
           {showMoreDepositList ? "다른 상품 더 보기 ∧" : "다른 상품 더 보기 ∨"}
         </button>

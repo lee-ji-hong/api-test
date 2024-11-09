@@ -16,6 +16,10 @@ import classNames from "classnames/bind";
 import styles from "./NoReportPage.module.scss";
 const cx = classNames.bind(styles);
 
+interface ReportProduct {
+  notEligibleReasons?: string[];
+}
+
 const NoReportPage = () => {
   const [showPage, setShowPage] = useState(true);
   const router = useInternalRouter();
@@ -26,6 +30,14 @@ const NoReportPage = () => {
     setShowPage(false);
     router.goBack();
   };
+
+  const notEligibleProduct = reportData?.recommendedProducts.filter(
+    (item: ReportProduct) => item?.notEligibleReasons && item?.notEligibleReasons[0] !== "",
+  );
+
+  const notEligibleProductSample = MOCK.filter(
+    (item) => item?.notEligibleReasons && item?.notEligibleReasons[0] !== "",
+  );
 
   return (
     <>
@@ -52,7 +64,7 @@ const NoReportPage = () => {
           {/* Section07 */}
           <div className={cx("box")}>
             <Spacing size={70} />
-            <DepositList list={reportData?.recommendedProducts || MOCK} isAlert={true} color="white" />
+            <DepositList list={notEligibleProduct || notEligibleProductSample} isAlert={true} color="white" />
           </div>
 
           {/* 버튼 */}

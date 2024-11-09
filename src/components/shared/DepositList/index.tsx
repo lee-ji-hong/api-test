@@ -92,7 +92,7 @@ const LoanInfoItem = ({
             <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit / 10000)}`}</span>
           </div>
         </div>
-        {isAlert && Array.isArray(item?.notEligibleReasons) && (
+        {isAlert && Array.isArray(item?.notEligibleReasons) && item?.notEligibleReasons[0] !== "" && (
           <div className={cx("container-loaninfo-bottom")} onClick={handleRowClick}>
             <Text className={cx("txt-loaninfo", "alert")} text={`${item.notEligibleReasons[0]}`} />
           </div>
