@@ -49,7 +49,8 @@ const RepaymentCalcDetail = () => {
             mx: 2, // 양옆 마진 10px (theme.spacing 단위 기준)
           }}
         />
-        {response.repaymentSchedules.slice(0, 5).map((data) => (
+        {/* {response.repaymentSchedules.slice(0, 5).map((data) => ( */}
+        {response.repaymentSchedules.map((data) => (
           <div className={cx("tableRow")}>
             <div className={cx("tableIndexColumn")}>
               <div className={cx("indexNo")}>{data.installmentNumber}</div>
@@ -74,10 +75,12 @@ const RepaymentCalcDetail = () => {
           </div>
         ))}
         <Spacing size={20} />
-        <div className={cx("tableMoreText")}>{"월별 상환 금액 자세히 보기 >"} </div>
-        <Spacing size={20} />
+        {/* <div className={cx("tableMoreText")}>{"월별 상환 금액 자세히 보기 >"} </div> */}
+        {/* <Spacing size={20} /> */}
       </div>
       <Spacing size={50} />
+
+      {/* <BottomModal onClose={() => {}} response={response} /> */}
     </div>
   );
 };
