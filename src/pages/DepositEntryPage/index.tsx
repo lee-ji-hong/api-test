@@ -33,6 +33,7 @@ const DepositEntryPage = () => {
   const { loanAdviceInfo } = useGetLoanAdvice();
   const { height } = useWindowSize();
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
+
   const router = useInternalRouter();
   const { auth } = useAuth();
 
@@ -146,7 +147,7 @@ const DepositEntryPage = () => {
             {auth && (
               <div>
                 <Text className={cx("txt-report")} text="최근 보고서" />
-                <DepositList list={loanAdviceInfo} isAlert={false} color="white" />
+                <DepositList list={loanAdviceInfo} isAlert={false} color="white" isFetch={true} />
               </div>
             )}
           </>

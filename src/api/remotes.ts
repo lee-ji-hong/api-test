@@ -7,10 +7,11 @@ import {
   HousingInfoResponse,
   getLoanAdviceResponse,
   LoanAdviceReportResponse,
+  SpecificLoanAdviceReportResponse,
   TransferUserResponse,
   LtvCalcResponse,
   DtiCalcResponse,
-  SpecificLoanAdvice,
+  SpecificLoanAdviceResponse,
   SendSimpleRentalProductRequest,
   sendLoanAdviceReportRequest,
   sendSpecificLoanAdviceRequest,
@@ -54,7 +55,13 @@ export function sendSimpleRentalProduct(requestBody: SendSimpleRentalProductRequ
 
 // 최근 대출추천 보고서 목록 조회
 export function getLoanAdvice() {
-  return Axios.get<getLoanAdviceResponse>("/api/v1/loanAdvice ", true).then((response) => response.data);
+  return Axios.get<getLoanAdviceResponse>("/api/v1/loanAdvice", true).then((response) => response.data);
+}
+// 특정 대출추천 보고서 조회
+export function getSpecificLoanAdvice(param: number) {
+  return Axios.get<SpecificLoanAdviceReportResponse>(`/api/v1/loanAdvice/${param}`, true).then(
+    (response) => response.data,
+  );
 }
 
 //전세대출상품 추천 보고서 산출 - 최초 유입 유저
@@ -64,14 +71,14 @@ export function sendLoanAdviceReportWithTempUser(requestBody: sendLoanAdviceRepo
   });
 }
 
-//전세대출상품 추천 보고서 산출 - 최초 유입 유저
+//전세대출상품 추천 보고서 산출 - 로그인 유저
 export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
   return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, true);
 }
 
 // 특정 전세대출상품 추천 보고서 산출
 export function sendSpecificLoanAdvice(requestBody: sendSpecificLoanAdviceRequest) {
-  return Axios.post<SpecificLoanAdvice>("/api/v1/loanAdvice/specific", requestBody, true);
+  return Axios.post<SpecificLoanAdviceResponse>("/api/v1/loanAdvice/specific", requestBody, true);
 }
 
 /*************

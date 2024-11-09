@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Collapse } from "@mui/material";
+
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Spacing from "@/components/shared/Spacing";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 
+import { useGetSpecificLoanAdvice } from "@/hooks/queries/useGetSpecificLoanAdvice";
+import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { formatNumberWithUnits } from "@/utils/formatters";
 import { getBankImage } from "@/utils/getBankImage";
 import { DepositLists } from "@/models";
@@ -22,6 +25,7 @@ interface ListProps {
   isShow?: boolean;
   toggle?: boolean;
   isAlert?: boolean;
+  isFetch?: boolean;
 }
 
 const CollapseList = styled(Collapse)({
@@ -35,14 +39,33 @@ const LoanInfoItem = ({
   item,
   color,
   isAlert,
+  isFetch,
 }: {
   item: DepositLists;
   color?: ColorType;
   isAlert?: boolean;
+  isFetch?: boolean;
   onClick?: () => void;
   onClose?: () => void;
 }) => {
+  const [resultId, setResultId] = useState<number>();
   const [modalOpen, setModalOpen] = useState(false);
+  const { specificLoanAdvice, error } = useGetSpecificLoanAdvice(resultId ?? 0);
+  const router = useInternalRouter();
+
+  useEffect(() => {
+    if (specificLoanAdvice) {
+      console.log(specificLoanAdvice);
+      router.push(`/report`, { reportData: specificLoanAdvice });
+    }
+    if (error) {
+      console.error("조회 실패:", error);
+    }
+  }, [specificLoanAdvice, error]);
+
+  const handleAdviceReport = (param: number) => {
+    setResultId(param);
+  };
 
   const handleRowClick = () => {
     setModalOpen(true);
@@ -54,7 +77,9 @@ const LoanInfoItem = ({
 
   return (
     <>
-      <div className={cx(["container-loaninfo", color])}>
+      <div
+        className={cx(["container-loaninfo", color])}
+        onClick={() => isFetch && handleAdviceReport(item.loanAdviceResultId ?? 0)}>
         <div className={cx(["container-loaninfo-top"])}>
           <div className={cx("container-txt-loaninfo")}>
             <div>
@@ -95,11 +120,19 @@ const LoanInfoItem = ({
   );
 };
 
-export const DepositList = ({ list, className, color, isShow = false, isAlert = false, toggle = false }: ListProps) => {
+export const DepositList = ({
+  list,
+  className,
+  color,
+  isShow = false,
+  isAlert = false,
+  toggle = false,
+  isFetch = false,
+}: ListProps) => {
   const renderLoanInfoItems = (items: DepositLists[], start: number, end?: number) => {
     return items
       .slice(start, end || items.length)
-      .map((item, index) => <LoanInfoItem key={index} item={item} color={color} isAlert={isAlert} />);
+      .map((item, index) => <LoanInfoItem key={index} item={item} color={color} isAlert={isAlert} isFetch={isFetch} />);
   };
 
   return (

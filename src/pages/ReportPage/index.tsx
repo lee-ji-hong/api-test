@@ -198,6 +198,7 @@ const ReportPage = () => {
               list={reportData?.recommendedProducts || MOCK}
               isShow={reportData?.recommendedProducts.length > 3}
               toggle={showMoreDepositList}
+              isFetch={true}
               color="white"
             />
             {reportData?.recommendedProducts.length > 3 && (

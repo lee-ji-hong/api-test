@@ -21,6 +21,10 @@
   .container-loaninfo {
     border-radius: 10px;
     padding: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .container-loaninfo-top {

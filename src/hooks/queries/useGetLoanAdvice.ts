@@ -8,7 +8,7 @@ export const useGetLoanAdvice = () => {
   const { auth } = useAuth();
 
   const { data: loanAdviceInfo, isLoading: isGetLoanAdviceLoading } = useQuery<DepositLists[], AxiosError>({
-    queryKey: ["communityDetail"],
+    queryKey: ["loanAdviceInfo"],
     queryFn: () => getLoanAdvice(),
     retry: 0,
     enabled: !!auth,

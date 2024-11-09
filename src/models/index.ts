@@ -75,6 +75,13 @@ export interface RecommendedProduct extends BaseLoanProduct {
   notEligibleReasons: string[]; // 적격하지 않은 이유
 }
 
+export interface SpecificLoanAdviceResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: SpecificLoanAdvice[];
+}
+
 export interface SpecificLoanAdvice {
   loanAdviceResultId: number; // 대출 결과 ID
   userInputInfoId: number; // 사용자가 입력한 정보의 ID
@@ -245,6 +252,12 @@ export interface LoanAdviceReportResponse {
   data: LoanAdviceReport[];
 }
 
+export interface SpecificLoanAdviceReportResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: LoanAdviceReport;
+}
 export interface DepositLists {
   expectedLoanRate: number; // 숫자형 대출 금리
   loanProductCode: string; // 문자열 대출 상품 코드
