@@ -24,6 +24,7 @@
     line-height: 49.4px;
     letter-spacing: -1.2px;
     text-align: center;
+    color: $grey800;
   }
 
   .txt-sub {
@@ -55,6 +56,26 @@
     transition: bottom 0.3s ease;
   }
 
+  .input-container {
+    border-bottom: none;
+    .input {
+      @include text-style(2, 700, $blue500);
+      padding-bottom: 1rem;
+      width: 100%;
+      font-size: 38px;
+      line-height: 45.35px;
+      text-align: center;
+
+      &::placeholder {
+        color: $grey400;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   // 글자 떨리는 모션
   @keyframes shake {
     0% {
@@ -78,6 +99,7 @@
   }
 
   .shake {
+    color: $red500 !important;
     animation: shake 0.3s ease-in-out;
   }
 

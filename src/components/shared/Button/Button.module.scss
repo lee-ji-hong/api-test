@@ -30,9 +30,16 @@
     background-color: $blue500;
     color: $white;
 
+    &:hover {
+      background-color: $blue500;
+      transition: opacity 0.3s ease;
+      opacity: 30%;
+      cursor: pointer;
+    }
+
     &:disabled {
-      // opacity: 0.3;
-      background-color: $blue300;
+      background-color: $blue200;
+      opacity: 1;
       cursor: not-allowed;
     }
   }

@@ -1,4 +1,5 @@
 import Back_btn from "@/assets/images/back.svg";
+import Back_space from "@/assets/images/back_space.svg";
 import Cancel_btn from "@/assets/images/cancel_btn.svg";
 import Checkbox_btn from "@/assets/images/checkbox.svg";
 import Cancel_grey from "@/assets/images/cancel_grey.svg";
@@ -158,6 +159,10 @@ export const IMAGES = {
   Back_btn: {
     src: Back_btn,
     alt: "뒤로가기",
+  },
+  Back_space: {
+    src: Back_space,
+    alt: "백스페이스",
   },
   Setting_btn: {
     src: Setting_btn,

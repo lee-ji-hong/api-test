@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import styles from "./DepositEntryPage.module.scss";
+
+import { GlobalPortal } from "@/components/shared/GlobalPortal";
 import KeyboardModal from "@/components/modal/KeyboardModal";
-import DepositInput from "@/components/shared/DepositInput";
 import DepositList from "@/components/shared/DepositList";
 import BadgeList from "@/components/shared/BadgeList";
 import Header from "@/components/sections/Header";
@@ -11,18 +11,16 @@ import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
 
 import { useSendSimpleRentalProduct } from "@/hooks/queries/useSendSimpleRentalProduct";
-import { useGetLoanAdvice } from "@/hooks/queries/useGetLoanAdvice";
-
 import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
+import { useGetLoanAdvice } from "@/hooks/queries/useGetLoanAdvice";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
-// import { MOCK } from "@/pages/DepositResultPage/mock";
-import { useAuth } from "@/hooks/useAuth";
 import { sendLoanAdviceReportRequest } from "@/models";
-
+import { useAuth } from "@/hooks/useAuth";
 import { formData } from "@/recoil/atoms";
 import { MONEY } from "@/constants/money";
-import classNames from "classnames/bind";
 
+import styles from "./DepositEntryPage.module.scss";
+import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
@@ -117,28 +115,25 @@ const DepositEntryPage = () => {
       <div className={cx("container")}>
         <Spacing size={90} />
         <Text className={cx("txt-title")} text="전월세보증금은?" />
-        <DepositInput
-          id="standard-basic"
-          variant="standard"
-          placeholder="0만원"
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          error={isInvalidValue ? true : false}
-          value={inputValue === 0 ? "" : `${formatNumber(inputValue)}만원`}
-          onChange={handleInputChange}
-          inputProps={{ inputMode: "numeric", pattern: "[0-9]*", readOnly: true }}
-          className={cx({ shake: isInvalidValue })}
-          sx={{
-            "& .MuiInputBase-input": {
-              color: inputValue === 0 ? "#dadae1" : isInvalidValue ? "#fc4a4a" : "#4169e1",
-            },
-          }}
-        />
+
+        <div className={cx("input-container")}>
+          <input
+            className={cx("input", { shake: isInvalidValue })}
+            maxLength={30}
+            value={inputValue === 0 ? "" : `${formatNumber(inputValue)}만원`}
+            placeholder="0만원"
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            readOnly={true}
+          />
+        </div>
+
         <Text
           className={cx("txt-sub", { "text-alert": isInvalidValue })}
           text={inputValue === 0 ? "" : isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
         />
-        <Spacing size={15} />
+        <Spacing size={45} />
         <BadgeList list={MONEY} onClick={handleChangeValue} />
 
         {!isInputFocused ? (
@@ -169,11 +164,14 @@ const DepositEntryPage = () => {
               bottom={bottomOffset}
               title="전월세 대출 상품 확인하기"
             />
-            <KeyboardModal
-              className={cx("keyboard-container")}
-              onKeyPress={handleKeyPress}
-              keyboardHeight={keyboardHeight}
-            />
+
+            <GlobalPortal.Consumer>
+              <KeyboardModal
+                className={cx("keyboard-container")}
+                onKeyPress={handleKeyPress}
+                keyboardHeight={keyboardHeight}
+              />
+            </GlobalPortal.Consumer>
           </div>
         )}
       </div>

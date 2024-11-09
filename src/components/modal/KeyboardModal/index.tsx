@@ -1,4 +1,8 @@
 import BadgeList from "@/components/shared/BadgeList";
+import { useState, useEffect } from "react";
+
+import Image from "@/components/shared/Image";
+import { IMAGES } from "@/constants/images";
 import { MONEY } from "@/constants/money";
 
 import classNames from "classnames/bind";
@@ -21,9 +25,14 @@ const KeyboardModal = ({
   keyboardHeight,
 }: KeyboardModalProps) => {
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0", "⌫"];
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
-    <div className={cx(["keyboard-modal", className])} onMouseDown={(e) => e.preventDefault()}>
+    <div className={cx(["keyboard-modal", className, { show: isVisible }])} onMouseDown={(e) => e.preventDefault()}>
       {isBadge && <BadgeList className={cx("badge-list")} list={MONEY} onClick={handleBadgeClick} />}
       <div className={cx("keyboard-content")}>
         {keys.map((key) => (
@@ -33,7 +42,7 @@ const KeyboardModal = ({
             style={{ padding: `${keyboardHeight}px 38px` }}
             onClick={() => onKeyPress(key)}
             type="button">
-            {key}
+            {key === "⌫" ? <Image className={cx("back")} imageInfo={IMAGES?.Back_space} /> : key}
           </button>
         ))}
       </div>

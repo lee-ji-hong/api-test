@@ -16,7 +16,9 @@
     color: $grey700;
 
     &:hover {
-      background-color: $grey400;
+      // background-color: $grey400;
+      transition: opacity 0.3s ease;
+      opacity: 30%;
     }
   }
 
@@ -25,6 +27,7 @@
     color: $white;
     &:hover {
       background-color: $grey700;
+      transition: background-color 0.3s ease;
     }
   }
 
@@ -34,6 +37,7 @@
     border: 1px solid $blue100;
     &:hover {
       background-color: $grey100;
+      transition: background-color 0.3s ease;
     }
   }
 
@@ -42,6 +46,7 @@
     color: $grey700;
     &:hover {
       background-color: $grey200;
+      transition: background-color 0.3s ease;
     }
   }
 
@@ -50,6 +55,7 @@
     color: $blue500;
     &:hover {
       background-color: $blue200;
+      transition: background-color 0.3s ease;
     }
   }
 }

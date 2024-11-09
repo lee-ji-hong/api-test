@@ -8,6 +8,8 @@ const DepositInput = styled(TextField)({
   },
   "& .MuiInput-underline:hover:before": {
     border: "none",
+    borderBottom: "1px solid #ffffff",
+    cursor: "pointer",
   },
   "& .Mui-error::before": {
     borderBottom: "none",
