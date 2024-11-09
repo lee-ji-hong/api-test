@@ -46,7 +46,14 @@ const ReportPage = () => {
 
   return (
     <>
-      <Header className={cx("cancel")} onRightClick={handleGoBack} right="Cancel_btn" />
+      <Header
+        className={cx("cancel")}
+        onRightClick={() => {
+          setShowPage(false);
+          router.push("/deposit-entry");
+        }}
+        right="Cancel_btn"
+      />
       <CSSTransition
         in={showPage}
         timeout={500}
