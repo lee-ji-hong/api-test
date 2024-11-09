@@ -4,10 +4,7 @@ import classNames from "classnames/bind";
 import Spacing from "@/components/shared/Spacing";
 import { RepaymentCalculationResult } from "@/models";
 import { Divider } from "@mui/material";
-import { color, padding } from "@mui/system";
-
-// import styles from "./CalculatorPage.module.scss";
-// import classNames from "classnames/bind";
+import { formatNumberWithUnits2 } from "@/utils/formatters";
 
 const RepaymentCalcDetail = () => {
   const cx = classNames.bind(styles);
@@ -15,17 +12,21 @@ const RepaymentCalcDetail = () => {
   const response: RepaymentCalculationResult = location.state?.response; // 전달된 데이터 접근
   console.log(response);
 
+  function formatCurrency(value: number): string {
+    return value.toLocaleString("en-US");
+  }
+
   return (
     <div className={cx("container")}>
       <Spacing size={50} />
       <div className={cx("title")}>
-        총 원금 <span className={cx("highlight")}>{response.totalPrincipal}</span>
+        총 원금 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}원</span>
       </div>
       <div className={cx("title")}>
-        총 이자 <span className={cx("highlight")}>{response.totalPrincipal}</span>
+        총 이자 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}원</span>
       </div>
       <div className={cx("title")}>
-        총 상환 회차 <span className={cx("highlight")}>{response.totalInstallments}</span>
+        총 상환 회차 <span className={cx("highlight")}>{response.totalInstallments}회</span>
       </div>
       <Spacing size={12} />
       <div className={cx("titleDescription")}>
@@ -41,7 +42,6 @@ const RepaymentCalcDetail = () => {
           <div className={cx("title2")}>월상환금</div>
           <div className={cx("title2")}>대출 잔금</div>
         </div>
-
         <Divider
           sx={{
             borderBottomWidth: "1px",
@@ -49,8 +49,7 @@ const RepaymentCalcDetail = () => {
             mx: 2, // 양옆 마진 10px (theme.spacing 단위 기준)
           }}
         />
-
-        {response.repaymentSchedules.map((data) => (
+        {response.repaymentSchedules.slice(0, 5).map((data) => (
           <div className={cx("tableRow")}>
             <div className={cx("tableIndexColumn")}>
               <div className={cx("indexNo")}>{data.installmentNumber}</div>
@@ -62,19 +61,23 @@ const RepaymentCalcDetail = () => {
               </div>
             </div>
             <div className={cx("tableMonthColumn")}>
-              <div className={cx("textTotal")}>{data.totalPayment + data.interestPayment}</div>
-              <div className={cx("text")}>{data.totalPayment}</div>
-              <div className={cx("text")}>{data.interestPayment}</div>
+              <div className={cx("textTotal")}>{formatCurrency(data.totalPayment + data.interestPayment)}원</div>
+              <div className={cx("text")}>원금 {formatCurrency(data.totalPayment)}원</div>
+              <div className={cx("text")}>이자 {formatCurrency(data.interestPayment)}원</div>
             </div>
 
             <div className={cx("tableRestPriceColumn")}>
-              <div className={cx("textTotal")}>100,000,000원</div>
-              <div className={cx("text")}>{data.remainingPrincipal}</div>
-              <div className={cx("text")}>{data.principalPayment}</div>
+              <div className={cx("textTotal")}>{formatCurrency(data.remainingPrincipal + data.principalPayment)}원</div>
+              <div className={cx("text")}>원금 {formatCurrency(data.remainingPrincipal)}원</div>
+              <div className={cx("text")}>이자 {formatCurrency(data.principalPayment)}원</div>
             </div>
           </div>
         ))}
+        <Spacing size={20} />
+        <div className={cx("tableMoreText")}>{"월별 상환 금액 자세히 보기 >"} </div>
+        <Spacing size={20} />
       </div>
+      <Spacing size={50} />
     </div>
   );
 };

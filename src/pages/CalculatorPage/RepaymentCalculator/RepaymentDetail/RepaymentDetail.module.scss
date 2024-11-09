@@ -1,4 +1,5 @@
 .container {
+  z-index: 0;
   .title {
     font-size: 22px;
     font-weight: 700;
@@ -26,7 +27,7 @@
     border-radius: 12px;
 
     .tableTitle {
-      padding: 20px 20px;
+      padding: 12px 20px;
       display: flex;
       .title1 {
         flex: 1;
@@ -132,6 +133,19 @@
           color: #86869a;
         }
       }
+    }
+
+    .tableMoreText {
+      font-family: Pretendard;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 18.2px;
+      letter-spacing: -0.800000011920929px;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+
+      color: #4f4f63;
     }
   }
 }

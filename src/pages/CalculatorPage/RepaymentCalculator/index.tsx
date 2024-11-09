@@ -11,8 +11,8 @@ import Text from "@/components/shared/Text";
 
 import { validateFormData } from "./validateFormData";
 import { periodState, repaymentCalcState } from "@/recoil/atoms";
-import { getLabelFromOptions } from "@/utils/getLabelFromOptions";
-import { resultState, repaymentOptions } from "./options";
+// import { getLabelFromOptions } from "@/utils/getLabelFromOptions";
+// import { resultState, repaymentOptions } from "./options";
 import { INPUTS } from "./INPUTS";
 
 import styles from "../CalculatorPage.module.scss";
@@ -26,10 +26,10 @@ const RepaymentCalculator = () => {
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [contents, setContents] = useState(resultState);
+  // const [setContents] = useState(resultState);
   const [bottomOffset, setBottomOffset] = useState(0);
   const [toggle, setToggle] = useState(false);
-  const { RepaymentCalcInfo, infoItem } = useSendRepaymentCalc();
+  const { RepaymentCalcInfo } = useSendRepaymentCalc();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const {
@@ -90,14 +90,14 @@ const RepaymentCalculator = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus)) return;
-    setContents((prev) => ({
-      ...prev,
-      details: {
-        ...prev.details,
-        // collateralValue: data.collateralValue,
-        repaymentType: getLabelFromOptions(data.repaymentType, repaymentOptions) as string,
-      },
-    }));
+    // setContents((prev) => ({
+    //   ...prev,
+    //   details: {
+    //     ...prev.details,
+    //     // collateralValue: data.collateralValue,
+    //     repaymentType: getLabelFromOptions(data.repaymentType, repaymentOptions) as string,
+    //   },
+    // }));
 
     const updatedFormData = {
       ...data,
