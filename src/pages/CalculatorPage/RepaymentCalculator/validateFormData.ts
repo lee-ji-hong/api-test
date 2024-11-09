@@ -8,26 +8,26 @@ import { FieldValues, UseFormSetFocus } from "react-hook-form";
  */
 
 export const validateFormData = (data: FieldValues, setFocus: UseFormSetFocus<FieldValues>): boolean => {
-  const { loanAmount, mortgageInterestRate, totalLoanTerm, graceTerm, repaymentType } = data;
+  const { principal, interestRatePercentage, term, gracePeriod, repaymentType } = data;
 
-  if (!loanAmount) {
+  if (!principal) {
     alert("대출금액을 입력해주세요.");
-    setFocus("loanAmount");
+    setFocus("principal");
     return false;
   }
-  if (!mortgageInterestRate) {
+  if (!interestRatePercentage) {
     alert("주택 담보 대출 금리을 입력해주세요.");
-    setFocus("mortgageInterestRate");
+    setFocus("interestRatePercentage");
     return false;
   }
-  if (!totalLoanTerm) {
+  if (!term) {
     alert("총 대출 기간을 입력해주세요.");
-    setFocus("totalLoanTerm");
+    setFocus("term");
     return false;
   }
-  if (!graceTerm) {
+  if (!gracePeriod) {
     alert("대출 거치 기간를 입력해주세요.");
-    setFocus("graceTerm");
+    setFocus("gracePeriod");
     return false;
   }
   if (!repaymentType) {
