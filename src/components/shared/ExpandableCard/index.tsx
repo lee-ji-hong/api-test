@@ -8,11 +8,11 @@ const cx = classNames.bind(styles);
 interface TextProps {
   title?: string;
   content: string;
+  length?: number;
 }
 
-const ExpandableCard = ({ title, content }: TextProps) => {
+const ExpandableCard = ({ title, content, length = 100 }: TextProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const MAX_LENGTH = 100;
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -21,14 +21,14 @@ const ExpandableCard = ({ title, content }: TextProps) => {
   const recommendationReason =
     content ||
     "test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.test 컨텐츠입니다.";
-  const shouldShowMore = recommendationReason.length > MAX_LENGTH;
+  const shouldShowMore = recommendationReason.length > length;
 
   return (
     <div className={cx("reason-box")}>
       <Text className={cx("txt-title")} text={title} />
       <div>
         <span className={cx("txt-sub")}>
-          {isExpanded || !shouldShowMore ? recommendationReason : `${recommendationReason.substring(0, MAX_LENGTH)}...`}
+          {isExpanded || !shouldShowMore ? recommendationReason : `${recommendationReason.substring(0, length)}...`}
         </span>
         {shouldShowMore && (
           <button className={cx("show-more-btn")} onClick={toggleExpanded}>

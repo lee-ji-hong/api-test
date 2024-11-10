@@ -21,7 +21,7 @@ const Part05 = ({ reportData }: Part05Props) => {
         highlight="#20대 인기상품 #초저금리 #최대한도"
       />
       <Spacing size={16} />
-      <ExpandableCard content={reportData?.recommendationReason} />
+      <ExpandableCard content={reportData?.recommendationReason} length={155} />
     </div>
   );
 };
