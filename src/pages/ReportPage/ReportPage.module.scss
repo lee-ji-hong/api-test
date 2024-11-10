@@ -110,7 +110,7 @@
 
 .warnning-box {
   @include column-flexbox(start, start);
-  background-color: #fafaff;
+  background-color: $grey100;
   padding: 0 20px;
   margin: 0 -20px;
 }
@@ -204,11 +204,10 @@
 
 .order-wrap {
   @include flexbox(start, center);
-  gap: 10px;
-  margin: 10px 0;
+  gap: 15px;
 
   .img {
-    width: 90px;
+    width: 80px;
     height: 80px;
   }
   .txt-title {
@@ -246,6 +245,7 @@
 }
 
 .warning-list {
+  font-family: Pretendard;
   font-size: 12px;
   text-align: left;
   line-height: 20px;

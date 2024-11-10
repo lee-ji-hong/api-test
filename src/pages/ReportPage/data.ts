@@ -1,8 +1,8 @@
 export const orderStep = [
-  { id: 1, description: "뱅칼 및 은행을 통해 예상 한도 및 금리 조회" },
-  { id: 2, description: "부동산 매물 탐색/n부동산 전세계약 체결" },
-  { id: 3, description: "필요서류 준비/n전세대출 신청" },
-  { id: 4, description: "전세잔금 처리 및 입주/n확정일자, 전입신고 등 대항력 확보" },
+  { id: 1, description: "필요한 서류를 모두 구비합니다." },
+  { id: 2, description: "대출 신청서 작성 및 제출합니다./n제출한 서류로 심사가 진행됩니다." },
+  { id: 3, description: "심사 후 승인 통보를 진행합니다./n통보까지 최대 10일정도 소요됩니다." },
+  { id: 4, description: "계약 서명 후 대출금 지급됩니다." },
 ];
 
 export const warning = [

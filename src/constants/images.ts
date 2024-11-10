@@ -19,6 +19,10 @@ import Onboarding_1 from "@/assets/images/onboarding_1.png";
 import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
 import Onboarding_4 from "@/assets/images/onboarding_4.png";
+import Order_1 from "@/assets/images/order_1.png";
+import Order_2 from "@/assets/images/order_2.png";
+import Order_3 from "@/assets/images/order_3.png";
+import Order_4 from "@/assets/images/order_4.png";
 import Report_1 from "@/assets/images/report_1.png";
 import Report_2 from "@/assets/images/report_2.png";
 import Report_3 from "@/assets/images/report_3.png";
@@ -64,6 +68,22 @@ export const IMAGES = {
   Onboarding_4: {
     src: Onboarding_4,
     alt: "말풍선",
+  },
+  Order_1: {
+    src: Order_1,
+    alt: "대출순서1",
+  },
+  Order_2: {
+    src: Order_2,
+    alt: "대출순서2",
+  },
+  Order_3: {
+    src: Order_3,
+    alt: "대출순서3",
+  },
+  Order_4: {
+    src: Order_4,
+    alt: "대출순서4",
   },
   Cancel_btn: {
     src: Cancel_btn,
