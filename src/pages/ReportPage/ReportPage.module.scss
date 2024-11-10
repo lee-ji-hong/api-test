@@ -93,6 +93,10 @@
   }
 }
 
+.card-container {
+  padding: 16px 0 14px 0 !important;
+}
+
 .box {
   @include column-flexbox(between, start);
 }
@@ -280,12 +284,25 @@
 
 .list-button {
   @include flexbox();
+  gap: 6.5px;
   width: 100%;
-  color: $grey700;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -1px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .txt-title {
+    p {
+      color: #4f4f63;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -1px;
+    }
+  }
+  .arrow {
+    width: 13px;
+  }
 }
 
 .button-wrap-divide {

@@ -10,6 +10,7 @@ import CommunityLoanBankDummyIcon from "@/assets/images/community/ico_loan_bank_
 import CommunityProfileDummyIcon from "@/assets/images/community/ico_profile_dummy.png";
 import PictureIcon from "@/assets/images/community/ico_community_picture.png";
 import DocumentIcon from "@/assets/images/community/ico_community_doc.png";
+import Down from "@/assets/images/down.svg";
 import KeyboardIcon from "@/assets/images/community/ico_community_keyboard.png";
 import BackButton from "@/assets/images/community/ico_back.png";
 import MoreButton from "@/assets/images/community/ico_more.png";
@@ -27,6 +28,7 @@ import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
+import Up from "@/assets/images/up.svg";
 import Letter from "@/assets/images/letter.svg";
 import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf_full.svg";
 import LoanHFIcon from "@/assets/images/community/ico_loan_hf_full.svg";
@@ -108,6 +110,14 @@ export const IMAGES = {
   DocumentIcon: {
     src: DocumentIcon,
     alt: "문서 아이콘",
+  },
+  Down: {
+    src: Down,
+    alt: "아래 화살표",
+  },
+  Up: {
+    src: Up,
+    alt: "위 화살표",
   },
   KeyboardIcon: {
     src: KeyboardIcon,
