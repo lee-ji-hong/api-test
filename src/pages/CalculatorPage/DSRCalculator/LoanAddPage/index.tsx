@@ -9,14 +9,11 @@ import { IMAGES } from "@/constants/images";
 
 import { validateFormData } from "./validateFormData";
 import { periodState, repaymentCalcState } from "@/recoil/atoms";
-// import { getLabelFromOptions } from "@/utils/getLabelFromOptions";
-// import { resultState, repaymentOptions } from "./options";
 import { INPUTS } from "./INPUTS";
 
 import styles from "../../CalculatorPage.module.scss";
 import styles2 from "./LoanAddPage.module.scss";
 import classNames from "classnames/bind";
-import { useSendRepaymentCalc } from "@/hooks/queries/useSendRepaymentCalc";
 import Image from "@/components/shared/Image";
 import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
@@ -28,8 +25,6 @@ const LoanAddPage = () => {
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-
-  const { RepaymentCalcInfo } = useSendRepaymentCalc();
   const navigate = useNavigate();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -81,7 +76,10 @@ const LoanAddPage = () => {
       repaymentType: data.repaymentType ?? "",
       maturityPaymentAmount: (data.principal ?? 0) * 10000,
     };
-    RepaymentCalcInfo(updatedFormData as sendRepaymentCalcRequest);
+
+    navigate("/calculator", {
+      state: { calculator: "DSR", addedDSRData: updatedFormData }, // 전달할 데이터
+    });
   };
 
   const onClose = () => {

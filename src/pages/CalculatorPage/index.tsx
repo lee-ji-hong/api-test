@@ -13,10 +13,15 @@ import styles from "./CalculatorPage.module.scss";
 import classNames from "classnames/bind";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { arrDSRDatasState } from "@/recoil/atoms";
 const cx = classNames.bind(styles);
 
 export default function CalculatorPage() {
   const [selectedCalculator, setSelectedCalculator] = useState("LTV");
+  // const [arrDSRDatas, setArrDSRDatas] = useState<DSRData[]>([]);
+  const setArrDSRDatas = useSetRecoilState(arrDSRDatasState);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -27,7 +32,14 @@ export default function CalculatorPage() {
     } else {
       setSelectedCalculator("LTV"); // 기본값 설정
     }
-  }, [location.state]);
+
+    // DSRData 받아서 배열에 추가
+    const dsrData = location.state?.addedDSRData;
+    console.log("dsrData", dsrData);
+    if (dsrData) {
+      setArrDSRDatas((prev) => [...prev, dsrData]); // Recoil 상태 업데이트
+    }
+  }, [location.state, setArrDSRDatas]);
 
   return (
     <>

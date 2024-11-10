@@ -78,3 +78,20 @@ export const periodState = atom<string>({
   key: "periodState",
   default: "년",
 });
+
+export interface DSRData {
+  gracePeriod: number;
+  interestRatePercentage: number;
+  interestRateType: string;
+  isMetroArea: boolean;
+  loanType: string;
+  maturityPaymentAmount: number;
+  principal: number;
+  repaymentType: string;
+  term: number;
+}
+
+export const arrDSRDatasState = atom<DSRData[]>({
+  key: "arrDSRDatasState", // 고유 키
+  default: [], // 초기값
+});
