@@ -17,6 +17,7 @@ interface Limit {
 }
 
 interface Props<ControlType extends FieldValues> {
+  id: string;
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
   keyboardHeight: number;
@@ -29,6 +30,7 @@ interface Props<ControlType extends FieldValues> {
 }
 
 const InputController = <ControlType extends FieldValues>({
+  id,
   formFieldName,
   keyboardHeight,
   control,
@@ -86,6 +88,7 @@ const InputController = <ControlType extends FieldValues>({
         return (
           <div className={cx("input-container")}>
             <Input
+              id={id}
               error={isInvalidValue ? true : false}
               value={field.value}
               onChange={field.onChange}

@@ -148,6 +148,7 @@ const DTICalculator = () => {
               <div ref={(el) => (inputRefs.current[item.name] = el)} key={item.id}>
                 <Section02 title={item.label} isPeriodBadge={item?.isPeriod} onClick={handleBadgeSelect}>
                   <Component
+                    id={item.name}
                     formFieldName={item.name as keyof sendDtiCalcRequest}
                     control={control}
                     options={isOptionsType(item.options) ? item.options : (item.options as OptionItem[])}

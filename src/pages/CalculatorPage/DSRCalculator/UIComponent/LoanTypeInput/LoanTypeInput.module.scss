@@ -1,0 +1,39 @@
+.container {
+  .title {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20.8px;
+    letter-spacing: -0.800000011920929px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  }
+  .inputContainer {
+    width: 335px;
+    height: 52px;
+    top: 604px;
+    left: 20px;
+    gap: 0px;
+    opacity: 0px;
+    stroke-width: 12px;
+
+    .button {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-family: Pretendard;
+      font-weight: 400;
+      line-height: 18.2px;
+      letter-spacing: -0.800000011920929px;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      text-align: center;
+      color: #66667a;
+      border: 1.5px solid #ecf0fc; /* 테두리 추가 */
+      border-radius: 8px; /* 둥근 모서리 */
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* 호버 효과 */
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.headerContainer {
+  position: fixed; /* 스크롤 시 상단 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  align-items: center; /* 수직 정렬 */
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  padding: 10px 16px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cancelButton {
+  position: absolute; /* 부모의 고정된 위치 기준 */
+  right: 16px; /* 우측 여백 */
+  cursor: pointer;
+  font-size: 14px;
+}

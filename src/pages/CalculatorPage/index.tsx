@@ -11,10 +11,24 @@ import RepaymentCalculator from "./RepaymentCalculator";
 
 import styles from "./CalculatorPage.module.scss";
 import classNames from "classnames/bind";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 export default function CalculatorPage() {
   const [selectedCalculator, setSelectedCalculator] = useState("LTV");
+  const location = useLocation();
+
+  useEffect(() => {
+    // navigate로 전달된 state에서 초기값 설정
+    const calculator = location.state?.calculator;
+    if (calculator && ["LTV", "DTI", "DSR", "원리금"].includes(calculator)) {
+      setSelectedCalculator(calculator);
+    } else {
+      setSelectedCalculator("LTV"); // 기본값 설정
+    }
+  }, [location.state]);
+
   return (
     <>
       <Header className={cx("header")} title="금융계산기" />
