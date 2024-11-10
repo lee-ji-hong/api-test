@@ -29,7 +29,7 @@ const LoanAddPage = () => {
   const [, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
-  const [toggle, setToggle] = useState(false);
+  // const [toggle, setToggle] = useState(false);
   const { RepaymentCalcInfo } = useSendRepaymentCalc();
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const LoanAddPage = () => {
     handleSubmit,
     formState: { isSubmitting },
     setFocus,
-    reset,
+    // reset,
   } = useForm({
     defaultValues: ReapymentCalc,
     values: ReapymentCalc,
@@ -118,9 +118,9 @@ const LoanAddPage = () => {
     setFocusedInput("");
   };
 
-  const handleReset = () => {
-    reset();
-  };
+  // const handleReset = () => {
+  //   reset();
+  // };
 
   const handleBadgeSelect = (item: string) => {
     setSelectedBadge(item);

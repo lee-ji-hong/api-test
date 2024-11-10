@@ -19,3 +19,29 @@ export const repaymentOptions = [
   { label: "원금균등", value: "EQUAL_PRINCIPAL" },
   { label: "만기일시", value: "BULLET" },
 ];
+
+export const loanTypeOptions = [
+  { label: "주택담보대출", value: "MORTGAGE" },
+  { label: "전세대출", value: "JEONSE_LOAN" },
+  { label: "신용대출", value: "PERSONAL_LOAN" },
+  { label: "기타대출", value: "OTHER_LOAN" },
+  { label: "장기카드대출", value: "LONG_TERM_CARD_LOAN" },
+  { label: "기타담보 대출", value: "OTHER_COLLATERAL_LOAN" },
+  { label: "중도금 및 이주비", value: "INTERIM_PAYMENT_AND_MOVING" },
+  { label: "오피스텔담보대출", value: "OFFICETEL_MORTGAGE_LOAN" },
+  { label: "전세보증금담보대출", value: "JEONSE_DEPOSIT_COLLATERAL_LOAN" },
+  { label: "비주택 부동산 담보 대출", value: "NON_HOUSING_REAL_ESTATE_COLLATERAL_LOAN" },
+  { label: "예적금 담보 및 보험계약 대출", value: "DEPOSIT_AND_INSURANCE_COLLATERAL_LOAN" },
+  { label: "유가증권 담보대출", value: "SECURITIES_COLLATERAL_LOAN" },
+];
+
+export const metroAreaOptions = [
+  { label: "수도권", value: true },
+  { label: "비수도권", value: false },
+];
+
+export const interestRateTypeOptions = [
+  { label: "변동형", value: "VARIABLE" },
+  { label: "혼합형", value: "MIXED" },
+  { label: "주기형", value: "PERIODIC" },
+];

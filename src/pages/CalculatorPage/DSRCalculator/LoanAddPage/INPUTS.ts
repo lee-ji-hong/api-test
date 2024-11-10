@@ -2,12 +2,30 @@ import SelectController from "@/components/sections/Calculator/SelectController"
 import InputController from "@/components/sections/Calculator/InputController";
 import PeriodController from "@/components/sections/Calculator/PeriodController";
 
-import { repaymentOptions } from "./options";
+import { interestRateTypeOptions, loanTypeOptions, metroAreaOptions, repaymentOptions } from "./options";
 
 export const INPUTS = [
   {
     id: 1,
-    label: "대출금액",
+    label: "대출 유형",
+    name: "loanType",
+    value: "",
+    options: loanTypeOptions,
+    component: SelectController,
+  },
+
+  {
+    id: 2,
+    label: "주택 담보 대출 상환방법",
+    name: "repaymentType",
+    value: "",
+    options: repaymentOptions,
+    component: SelectController,
+  },
+
+  {
+    id: 3,
+    label: "대출 금액",
     name: "principal",
     value: "",
     limit: {
@@ -21,22 +39,27 @@ export const INPUTS = [
     ],
     component: InputController,
   },
+
   {
-    id: 2,
-    label: "주택 담보 대출 금리",
-    name: "interestRatePercentage",
+    id: 4,
+    label: "만기상환금",
+    name: "maturityPaymentAmount",
     value: "",
-    unit: "%",
-    formattedAmount: false,
     limit: {
-      min: { value: -1, ment: "이자율을 입력해주세요" },
-      max: { value: 100, ment: "100 이하로 입력이 가능합니다." },
+      min: { value: -1, ment: "금액을 입력해주세요" },
+      max: { value: 10000000, ment: "1,000억원 이하로 입력이 가능합니다." },
     },
+    options: [
+      { label: "+100만", value: 100 },
+      { label: "+1000만", value: 1000 },
+      { label: "+1억", value: 10000 },
+    ],
     component: InputController,
   },
+
   {
-    id: 3,
-    label: "총 대출 기간",
+    id: 5,
+    label: "대출기간",
     name: "term",
     value: "",
     isPeriod: true,
@@ -59,9 +82,10 @@ export const INPUTS = [
     },
     component: PeriodController,
   },
+
   {
-    id: 4,
-    label: "대출 거치 기간",
+    id: 6,
+    label: "거치기간",
     name: "gracePeriod",
     value: "",
     isPeriod: true,
@@ -84,12 +108,36 @@ export const INPUTS = [
     },
     component: PeriodController,
   },
+
   {
-    id: 5,
-    label: "대출 상환방법",
-    name: "repaymentType",
+    id: 7,
+    label: "대출 이자율",
+    name: "interestRatePercentage",
     value: "",
-    options: repaymentOptions,
+    unit: "%",
+    formattedAmount: false,
+    limit: {
+      min: { value: -1, ment: "이자율을 입력해주세요" },
+      max: { value: 100, ment: "100 이하로 입력이 가능합니다." },
+    },
+    component: InputController,
+  },
+
+  {
+    id: 8,
+    label: "대상주택 수도권여부",
+    name: "isMetroArea",
+    value: "",
+    options: metroAreaOptions,
+    component: SelectController,
+  },
+
+  {
+    id: 9,
+    label: "스트레스 DSR 2단계 적용",
+    name: "interestRateType",
+    value: "",
+    options: interestRateTypeOptions,
     component: SelectController,
   },
 ];
