@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { UserInputInfo } from "@/models";
 import { AxiosError } from "axios";
 
-export const useGetSpecificUserInputInfo = (param: number, toggle: boolean) => {
+export const useGetSpecificUserInputInfo = (param: number) => {
   const {
     data: specificUserInputInfo,
     isLoading: isGetUserInputInfoLoading,
@@ -14,7 +14,7 @@ export const useGetSpecificUserInputInfo = (param: number, toggle: boolean) => {
       return await getSpecificUserInputInfo(param);
     },
     retry: 0,
-    enabled: toggle && param !== undefined,
+    enabled: param !== undefined,
   });
 
   return { specificUserInputInfo, isGetUserInputInfoLoading, error };

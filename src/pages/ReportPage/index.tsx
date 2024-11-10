@@ -1,13 +1,16 @@
 // controller 만들어서 컴포넌트 나눌 예정
 import { CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { useState } from "react";
 
 import { useGetSpecificUserInputInfo } from "@/hooks/queries/useGetSpecificUserInputInfo";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
+import { sendLoanAdviceReportRequest } from "@/models";
 import Spacing from "@/components/shared/Spacing";
 import Header from "@/components/sections/Header";
 import Button from "@/components/shared/Button";
+import { formData } from "@/recoil/atoms";
 import Part01 from "./Part01";
 import Part02 from "./Part02";
 import Part03 from "./Part03";
@@ -25,20 +28,27 @@ import styles from "./ReportPage.module.scss";
 const cx = classNames.bind(styles);
 
 const ReportPage = () => {
+  const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
   const [showPage, setShowPage] = useState(true);
   const [toggle, setToggle] = useState(false);
   const router = useInternalRouter();
   const location = useLocation();
   const reportData = location.state?.reportData?.data;
   const isRecent = location.state?.isRecent;
-  const { specificUserInputInfo } = useGetSpecificUserInputInfo(reportData?.userInputInfoId, toggle);
+  const { specificUserInputInfo } = useGetSpecificUserInputInfo(reportData?.userInputInfoId);
   // console.log(location.state);
-  // console.log(specificUserInputInfo);
+  console.log(specificUserInputInfo);
 
   const handleGoBack = () => {
     setShowPage(false);
     router.goBack();
   };
+
+  const handleNavigate = () => {
+    setRecoilFormData(specificUserInputInfo as sendLoanAdviceReportRequest);
+    router.push("/loan-info-entry");
+  };
+  console.log(recoilFormData);
 
   const handleClose = () => {
     setToggle((prev) => !prev);
@@ -85,14 +95,14 @@ const ReportPage = () => {
                 theme="light"
                 onClick={() => setToggle(!toggle)}
               />
-              <Button className={cx("button")} title="다시 산출하기" onClick={handleGoBack} />
+              <Button className={cx("button")} title="다시 산출하기" onClick={handleNavigate} />
             </div>
           ) : (
             <Button className={cx("button-wrap")} onClick={handleGoBack} title="리포트 다시 산출하기" />
           )}
           <Spacing size={14} />
           {toggle && specificUserInputInfo !== undefined && (
-            <Part11 Info={specificUserInputInfo} handleClose={handleClose} /> // 적용조건모달
+            <Part11 Info={specificUserInputInfo} handleClose={handleClose} />
           )}
         </div>
       </CSSTransition>
