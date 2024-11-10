@@ -24,6 +24,7 @@ import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
 import TabBarBoardIcon from "@/assets/images/TabBarBoardIcon";
 import TabBarCalculatorIcon from "@/assets/images/TabBarCalculatorIcon";
+import Letter from "@/assets/images/letter.svg";
 import LoanNHUFIcon from "@/assets/images/community/ico_loan_nhuf_full.svg";
 import LoanHFIcon from "@/assets/images/community/ico_loan_hf_full.svg";
 import LoanSGIIcon from "@/assets/images/community/ico_loan_sgi_full.svg";
@@ -125,6 +126,11 @@ export const IMAGES = {
   Right_arrow: {
     src: Right_arrow,
     alt: "화살표",
+  },
+
+  Letter: {
+    src: Letter,
+    alt: "편지봉투",
   },
 
   // 대출기관 아이콘 모음

@@ -48,6 +48,7 @@ const Part01 = ({ reportData }: Part01Props) => {
             <Text className={cx("bottom-txt-sub")} text={`${reportData?.expectedLoanRate || "2.4"}%`} />
           </div>
         </div>
+        <Spacing size={35} />
       </div>
     </Section01>
   );

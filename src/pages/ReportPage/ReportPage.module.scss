@@ -69,6 +69,30 @@
   }
 }
 
+.banner-container {
+  @include flexbox(start, center);
+  background-color: rgba(236, 240, 252, 0.5);
+  gap: 15px;
+  border-radius: 10px;
+  padding: 19px 24px;
+  width: 100%;
+
+  .left-img {
+    width: 35px;
+  }
+
+  .right-txt {
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      text-align: left;
+      line-height: 21px;
+      letter-spacing: -1px;
+      color: #86869a;
+    }
+  }
+}
+
 .box {
   @include column-flexbox(between, start);
 }
