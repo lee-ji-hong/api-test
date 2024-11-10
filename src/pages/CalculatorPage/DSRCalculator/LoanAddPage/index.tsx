@@ -28,7 +28,7 @@ const LoanAddPage = () => {
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [bottomOffset, setBottomOffset] = useState(0);
+
   const { RepaymentCalcInfo } = useSendRepaymentCalc();
   const navigate = useNavigate();
 

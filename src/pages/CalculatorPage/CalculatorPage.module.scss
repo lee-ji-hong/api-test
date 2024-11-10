@@ -91,6 +91,28 @@
   flex: 1;
 }
 
+// .input-container {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   border-bottom: 1.5px solid $blue500;
+//   background-color: bisque;
+//   .input {
+//     @include text-style(2, 500, $grey800);
+//     padding-bottom: 1rem;
+//     width: 100%;
+//     text-align: left;
+
+//     @include responsive("M") {
+//       font-size: 1.8rem;
+//     }
+
+//     &::placeholder {
+//       color: $grey400;
+//     }
+//   }
+// }
+
 .badge-container {
   @include flexbox();
   flex-wrap: wrap;

@@ -127,6 +127,7 @@ const LTVCalculator = () => {
               <div ref={(el) => (inputRefs.current[item.name] = el)} key={item.id}>
                 <Section02 title={item.label}>
                   <Component
+                    id={item.name}
                     formFieldName={item.name as keyof sendLtvCalcRequest}
                     control={control}
                     options={item.options}
