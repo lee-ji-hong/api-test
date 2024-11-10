@@ -106,7 +106,7 @@ export const INPUTS = [
         { label: "+24개월", value: 24 },
       ],
     },
-    component: PeriodController,
+    component: InputController,
   },
 
   {
