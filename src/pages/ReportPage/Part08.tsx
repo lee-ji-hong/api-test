@@ -34,6 +34,13 @@ const Part08 = ({ reportData }: Part08Props) => {
             <Text className={cx("txt-sub")} text={IMAGES.small[icon as keyof typeof IMAGES.small].alt} />
           </div>
         ))}
+        {reportData?.availableBanks?.map((icon: string) => (
+          <div key={icon} className={cx("logo-item")}>
+            <Image className={cx("logo")} imageInfo={IMAGES.small[icon as keyof typeof IMAGES.small]} />
+            <Spacing size={6} />
+            <Text className={cx("txt-sub")} text={IMAGES.small[icon as keyof typeof IMAGES.small].alt} />
+          </div>
+        ))}
       </div>
     </div>
   );

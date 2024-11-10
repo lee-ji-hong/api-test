@@ -19,6 +19,9 @@ import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
 import Onboarding_4 from "@/assets/images/onboarding_4.png";
 import Report_1 from "@/assets/images/report_1.png";
+import Report_2 from "@/assets/images/report_2.png";
+import Report_3 from "@/assets/images/report_3.png";
+import Report_4 from "@/assets/images/report_4.png";
 import Right_arrow from "@/assets/images/right_btn.svg";
 import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
@@ -122,6 +125,18 @@ export const IMAGES = {
   Report_1: {
     src: Report_1,
     alt: "리포트 사용 이미지1",
+  },
+  Report_2: {
+    src: Report_2,
+    alt: "리포트 사용 이미지2",
+  },
+  Report_3: {
+    src: Report_3,
+    alt: "리포트 사용 이미지3",
+  },
+  Report_4: {
+    src: Report_4,
+    alt: "리포트 사용 이미지4",
   },
   Right_arrow: {
     src: Right_arrow,

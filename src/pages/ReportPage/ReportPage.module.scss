@@ -158,7 +158,7 @@
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-33%);
     }
   }
 
@@ -274,7 +274,7 @@
   width: 367px;
 }
 .img {
-  width: 100%px;
+  width: 100%;
   height: 223px;
 }
 
@@ -360,4 +360,10 @@
       }
     }
   }
+}
+
+.report-img {
+  margin: 0 auto;
+  width: auto;
+  height: 223px;
 }
