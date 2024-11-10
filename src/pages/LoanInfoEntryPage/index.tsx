@@ -1,7 +1,8 @@
-import { useRecoilState } from "recoil";
-import React, { useState, useMemo } from "react";
-// import { DevTool } from "@hookform/devtools";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import React, { useState, useEffect, useMemo } from "react";
+// import { DevTool } from "@hookform/devtools";
+import { useLocation } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { INPUTS } from "./INPUTS";
 
 import FullScreenMessage from "@/components/sections/FullScreenMessage";
@@ -24,10 +25,12 @@ import styles from "./LoanInfoEntryPage.module.scss";
 const cx = classNames.bind(styles);
 
 export const LoanInfoEntryPage = () => {
+  const location = useLocation();
   const router = useInternalRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+  const isRecent = location.state?.isRecent || false;
   const [loading, setLoading] = useState(false);
   const { loanAdviceReport } = useSendLoanAdviceReport();
   const {
@@ -40,19 +43,36 @@ export const LoanInfoEntryPage = () => {
   } = useForm({
     defaultValues: recoilFormData,
     mode: "onChange",
+    criteriaMode: "all",
   });
 
-  console.log(recoilFormData);
+  useEffect(() => {
+    for (let i = 0; i < INPUTS.length; i++) {
+      const InputName = INPUTS[i].name;
+      const nextValue = getValues(InputName as keyof sendLoanAdviceReportRequest);
+      if (!nextValue) {
+        handleRowClick(INPUTS[i].id);
+        return;
+      }
+    }
+  }, []);
+
   const maritalStatus = watch("maritalStatus");
   const filteredInputs = useMemo(() => {
     return INPUTS.filter((input) => {
-      // maritalStatus가 SINGLE이면 배우자 연소득 필드 제외
       if (input.name === "spouseAnnualIncome") {
         return maritalStatus && maritalStatus !== "SINGLE";
       }
       return true;
     });
   }, [maritalStatus]);
+
+  const allFieldsFilled = useMemo(() => {
+    return filteredInputs.every((input) => {
+      const value = getValues(input.name as keyof sendLoanAdviceReportRequest);
+      return value !== undefined && value !== "";
+    });
+  }, [filteredInputs, recoilFormData]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus, handleRowClick)) return;
@@ -84,16 +104,24 @@ export const LoanInfoEntryPage = () => {
 
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
+
     setRecoilFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log(id);
-    // if (!value) {
-    //   handleRowClick(id); // 현재 아이템 모달 열기
-    // } else if (id + 1 < INPUTS.length) {
-    //   handleRowClick(id + 1); // 다음 아이템 모달 열기
-    // }
+
+    const filteredInputs =
+      maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
+
+    for (let i = id - 1; i < filteredInputs.length; i++) {
+      const nextInputName = filteredInputs[i + 1]?.name;
+      const nextValue = getValues(nextInputName as keyof sendLoanAdviceReportRequest);
+
+      if (nextValue === undefined || nextValue === null) {
+        handleRowClick(filteredInputs[i + 1].id);
+        return;
+      }
+    }
   };
 
   if (loading) return <FullScreenMessage type="loading" />;
@@ -105,7 +133,7 @@ export const LoanInfoEntryPage = () => {
       <div className={cx("container")}>
         <Spacing size={16} />
         <Text className={cx("txt-title")} text="당신에게 맞는 대출은?" />
-        <Spacing size={20} />
+        <Spacing size={4} />
 
         <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
           <List className={cx("list-wrap")}>
@@ -121,8 +149,8 @@ export const LoanInfoEntryPage = () => {
                       topText={item.label}
                       right={
                         <Text
-                          className={cx(["txt-right", value === undefined && "txt-empty-color"])}
-                          text={value === undefined ? "선택하기" : String(value2)}
+                          className={cx(["txt-right", value === undefined || (value === null && "txt-empty-color")])}
+                          text={value === undefined || value === null ? "선택하기" : String(value2)}
                         />
                       }
                       withArrow={true}
@@ -131,9 +159,11 @@ export const LoanInfoEntryPage = () => {
                       <Component
                         formFieldName={item.name as keyof sendLoanAdviceReportRequest}
                         control={control}
-                        onClose={() => {
+                        onClose={(isBackdropClick = false) => {
                           handleModalClose();
-                          handleInputComplete(item.name, item.id);
+                          if (!isBackdropClick) {
+                            handleInputComplete(item.name, item.id);
+                          }
                         }}
                         modalTitle={item.modalTitle}
                         modalSubTitle={item.modalSubTitle}
@@ -149,8 +179,13 @@ export const LoanInfoEntryPage = () => {
               })}
             </>
           </List>
-          <Spacing size={90} />
-          <Button className={cx("button-wrap")} title="리포트 확인하기" type="submit" disabled={isSubmitting} />
+          <Spacing size={109} />
+          <Button
+            className={cx("button-wrap")}
+            title={isRecent ? "리포트 다시 산출하기" : "리포트 확인하기"}
+            type="submit"
+            disabled={isSubmitting || !allFieldsFilled}
+          />
         </form>
       </div>
       {/* <DevTool control={control} /> */}

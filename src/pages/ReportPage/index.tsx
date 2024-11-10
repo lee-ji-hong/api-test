@@ -28,16 +28,15 @@ import styles from "./ReportPage.module.scss";
 const cx = classNames.bind(styles);
 
 const ReportPage = () => {
-  const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+  const [, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
   const [showPage, setShowPage] = useState(true);
   const [toggle, setToggle] = useState(false);
   const router = useInternalRouter();
   const location = useLocation();
   const reportData = location.state?.reportData?.data;
   const isRecent = location.state?.isRecent;
-  const { specificUserInputInfo } = useGetSpecificUserInputInfo(reportData?.userInputInfoId);
+  const { info } = useGetSpecificUserInputInfo(reportData?.userInputInfoId, isRecent);
   // console.log(location.state);
-  console.log(specificUserInputInfo);
 
   const handleGoBack = () => {
     setShowPage(false);
@@ -45,10 +44,16 @@ const ReportPage = () => {
   };
 
   const handleNavigate = () => {
-    setRecoilFormData(specificUserInputInfo as sendLoanAdviceReportRequest);
-    router.push("/loan-info-entry");
+    setRecoilFormData({
+      ...(info as sendLoanAdviceReportRequest),
+      annualIncome: info?.annualIncome ? info?.annualIncome / 10000 : info?.annualIncome,
+      cashOnHand: info?.cashOnHand ? info?.cashOnHand / 10000 : info?.cashOnHand,
+      monthlyRent: info?.monthlyRent ? info?.monthlyRent / 10000 : info?.monthlyRent,
+      rentalDeposit: info?.rentalDeposit ? info?.rentalDeposit / 10000 : info?.rentalDeposit,
+      spouseAnnualIncome: info?.spouseAnnualIncome ? info?.spouseAnnualIncome / 10000 : info?.spouseAnnualIncome,
+    });
+    router.push("/loan-info-entry", { isRecent: true });
   };
-  console.log(recoilFormData);
 
   const handleClose = () => {
     setToggle((prev) => !prev);
@@ -101,9 +106,7 @@ const ReportPage = () => {
             <Button className={cx("button-wrap")} onClick={handleGoBack} title="리포트 다시 산출하기" />
           )}
           <Spacing size={14} />
-          {toggle && specificUserInputInfo !== undefined && (
-            <Part11 Info={specificUserInputInfo} handleClose={handleClose} />
-          )}
+          {toggle && info !== undefined && <Part11 Info={info} handleClose={handleClose} />}
         </div>
       </CSSTransition>
     </>
