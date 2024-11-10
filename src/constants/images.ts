@@ -23,6 +23,7 @@ import Report_1 from "@/assets/images/report_1.png";
 import Report_2 from "@/assets/images/report_2.png";
 import Report_3 from "@/assets/images/report_3.png";
 import Report_4 from "@/assets/images/report_4.png";
+import Red_right_btn from "@/assets/images/red_right_btn.svg";
 import Right_arrow from "@/assets/images/right_btn.svg";
 import Setting_btn from "@/assets/images/setting.svg";
 import TabBarHomeIcon from "@/assets/images/TabBarHomeIcon";
@@ -44,6 +45,7 @@ import KAKAO_small from "@/assets/images/logo_mini/KAKAO_small.svg";
 import KAKAO_icon from "@/assets/images/kakao_icon.svg";
 import TOSS_small from "@/assets/images/logo_mini/TOSS_small.svg";
 import IM_small from "@/assets/images/logo_mini/IM_small.svg";
+import Information from "@/assets/images/information.svg";
 import BNK_small from "@/assets/images/logo_mini/BNK_small.svg";
 
 export const IMAGES = {
@@ -148,6 +150,10 @@ export const IMAGES = {
     src: Report_4,
     alt: "리포트 사용 이미지4",
   },
+  Red_right_btn: {
+    src: Red_right_btn,
+    alt: "화살표",
+  },
   Right_arrow: {
     src: Right_arrow,
     alt: "화살표",
@@ -206,6 +212,10 @@ export const IMAGES = {
   KAKAO_icon: {
     src: KAKAO_icon,
     alt: "로고",
+  },
+  Information: {
+    src: Information,
+    alt: "정보",
   },
 
   small: {

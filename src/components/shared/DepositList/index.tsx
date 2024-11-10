@@ -10,6 +10,7 @@ import { useGetSpecificLoanAdvice } from "@/hooks/queries/useGetSpecificLoanAdvi
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { formatNumberWithUnits } from "@/utils/formatters";
 import { getBankImage } from "@/utils/getBankImage";
+import { IMAGES } from "@/constants/images";
 import { DepositLists } from "@/models";
 
 import classNames from "classnames/bind";
@@ -94,7 +95,9 @@ const LoanInfoItem = ({
         </div>
         {isAlert && Array.isArray(item?.notEligibleReasons) && item?.notEligibleReasons[0] !== "" && (
           <div className={cx("container-loaninfo-bottom")} onClick={handleRowClick}>
-            <Text className={cx("txt-loaninfo", "alert")} text={`${item.notEligibleReasons[0]}`} />
+            <Image className={cx("img-info")} imageInfo={IMAGES.Information} />
+            <Text className={cx("txt-loaninfo-alert", "alert")} text={`${item.notEligibleReasons[0]}`} />
+            <Image className={cx("img-arrow")} imageInfo={IMAGES.Red_right_btn} />
           </div>
         )}
       </div>

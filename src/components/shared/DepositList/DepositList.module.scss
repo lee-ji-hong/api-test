@@ -33,10 +33,26 @@
   }
 
   .container-loaninfo-bottom {
+    @include flexbox();
+    gap: 4.5px;
     background-color: #fff4f4;
     border-radius: 6px;
     cursor: pointer;
     padding: 9px;
+
+    .txt-loaninfo-alert {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 14.32px;
+      letter-spacing: -0.2px;
+      text-align: left;
+    }
+    .img-info {
+      width: 12px;
+    }
+    .img-arrow {
+      width: 6px;
+    }
   }
 
   .white {
