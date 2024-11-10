@@ -97,6 +97,13 @@
   @include column-flexbox(between, start);
 }
 
+.box-scroll {
+  @include column-flexbox(between, start);
+  width: 100%;
+  overflow-x: hidden;
+  pointer-events: none;
+}
+
 .warnning-box {
   @include column-flexbox(start, start);
   background-color: #fafaff;
@@ -127,8 +134,33 @@
 }
 
 .logo-wrap {
-  @include flexbox();
+  @include flexbox(start, center);
   gap: 16px;
+
+  animation: rolling-left-1 10s linear infinite;
+  flex-wrap: nowrap;
+  margin: unset;
+  pointer-events: all;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    width: 67px;
+    .logo {
+      width: 67px;
+    }
+  }
+
+  @keyframes rolling-left-1 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
   .txt-sub {
     p {
@@ -141,6 +173,11 @@
     }
   }
 }
+
+// .logo-wrap-inner {
+//   animation-duration: 100s;
+// }
+
 .img-logo {
   height: 24px;
   margin-bottom: 6px;

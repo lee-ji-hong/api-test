@@ -15,14 +15,22 @@ interface Part08Props {
 
 const Part08 = ({ reportData }: Part08Props) => {
   return (
-    <div className={cx("box")}>
+    <div className={cx("box-scroll")}>
       <Spacing size={70} />
       <Text className={cx("txt-title")} text="아래 은행에서 취급하는 상품이예요!" />
-      <Spacing size={8} />
-      <div className={cx("logo-wrap")}>
+      <Spacing size={18} />
+      <div className={cx("logo-wrap")} style={{ animationDuration: "10s" }}>
         {reportData?.availableBanks?.map((icon: string) => (
-          <div key={icon}>
+          <div key={icon} className={cx("logo-item")}>
             <Image className={cx("logo")} imageInfo={IMAGES.small[icon as keyof typeof IMAGES.small]} />
+            <Spacing size={6} />
+            <Text className={cx("txt-sub")} text={IMAGES.small[icon as keyof typeof IMAGES.small].alt} />
+          </div>
+        ))}
+        {reportData?.availableBanks?.map((icon: string) => (
+          <div key={icon} className={cx("logo-item")}>
+            <Image className={cx("logo")} imageInfo={IMAGES.small[icon as keyof typeof IMAGES.small]} />
+            <Spacing size={6} />
             <Text className={cx("txt-sub")} text={IMAGES.small[icon as keyof typeof IMAGES.small].alt} />
           </div>
         ))}
