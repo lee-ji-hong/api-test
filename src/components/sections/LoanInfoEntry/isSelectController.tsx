@@ -1,6 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
-import Spacing from "@/components/shared/Spacing";
 
 import classNames from "classnames/bind";
 import styles from "@/components/modal/SelectBottomSheet/SelectBottomSheet.module.scss";
@@ -15,11 +14,12 @@ interface Props<ControlType extends FieldValues> {
   onClose: () => void;
 }
 
-export const isSMEEmployeeController = <ControlType extends FieldValues>({
+export const isSelectController = <ControlType extends FieldValues>({
   onClose,
   formFieldName,
   control,
   modalTitle,
+  modalSubTitle,
   options,
 }: Props<ControlType>) => {
   return (
@@ -34,18 +34,7 @@ export const isSMEEmployeeController = <ControlType extends FieldValues>({
           };
 
           return (
-            <SelectBottomSheet modalTitle={modalTitle} onClose={onClose}>
-              <span className={cx("employ-txt")}>
-                중소기업 기준은 직원 수 300명 이하, 연매출 1천억원 이하로 자세한 기준은{" "}
-                <a
-                  href="https://www.ftc.go.kr/callPop.do?url=/jargonSearchView.do?key=451&dicseq=356&titl=%EC%A4%91%EC%86%8C%EA%B8%B0%EC%97%85"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  링크
-                </a>
-                를 통해 확인해주세요.
-              </span>
-              <Spacing size={20} />
+            <SelectBottomSheet modalTitle={modalTitle} modalSubTitle={modalSubTitle} onClose={onClose}>
               {options?.map(({ label, value }) => (
                 <li
                   key={value.toString()}
@@ -64,4 +53,4 @@ export const isSMEEmployeeController = <ControlType extends FieldValues>({
     </>
   );
 };
-export default isSMEEmployeeController;
+export default isSelectController;

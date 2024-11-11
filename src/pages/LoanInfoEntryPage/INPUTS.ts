@@ -1,5 +1,6 @@
 import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
 import InputController from "@/components/sections/LoanInfoEntry/InputController";
+import isSelectController from "@/components/sections/LoanInfoEntry/isSelectController";
 import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEmployeeController";
 import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
 import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
@@ -65,7 +66,7 @@ export const INPUTS = [
       { label: "기혼", value: "MARRIED" },
       { label: "결혼 예정", value: "ENGAGED" },
     ],
-    component: isSMEEmployeeController,
+    component: isSelectController,
   },
   {
     id: 6,
@@ -126,7 +127,7 @@ export const INPUTS = [
       { label: "순 자산 3.45억원 미만", value: false },
       { label: "순 자산 3.45억원 초과", value: true },
     ],
-    component: isSMEEmployeeController,
+    component: isSelectController,
   },
   {
     id: 11,
@@ -139,7 +140,7 @@ export const INPUTS = [
       { label: "1주택", value: "SINGLE_HOUSE" },
       { label: "다주택", value: "MULTI_HOUSE" },
     ],
-    component: isSMEEmployeeController,
+    component: isSelectController,
   },
   {
     id: 12,
@@ -153,7 +154,7 @@ export const INPUTS = [
       { label: "연립다세대", value: "HOUSEHOLD_HOUSE" },
       { label: "단독/다가구", value: "FAMILY_HOUSE" },
     ],
-    component: isSMEEmployeeController,
+    component: isSelectController,
   },
   {
     id: 13,
