@@ -1,5 +1,6 @@
 import { useState } from "react";
-import CenterModal from "@/components/modal/CenterModal";
+import AlertModal from "@/components/modal/AlertModal";
+
 import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";
 import List from "@/components/shared/List";
@@ -62,10 +63,9 @@ export default function SettingPage() {
         ))}
       </List>
       {isCenterModalOpen && (
-        <CenterModal
+        <AlertModal
           message={modalType === "로그아웃" ? "로그아웃 하시겠어요?" : "정말 탈퇴 하시겠어요?"}
           subMessage={modalType === "회원탈퇴" ? "받은 리포트가 영구 삭제됩니다." : ""}
-          // className={cx("modal-title")}
           confirmLabel="예"
           cancelLabel="아니요"
           onCancel={handleCancel}
