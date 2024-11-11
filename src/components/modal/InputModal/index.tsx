@@ -46,10 +46,10 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
       const calculateKeyboardHeight = () => {
         const height = (window.innerHeight * 0.4 - 207) / 7;
         setKeyboardHeight(height);
-        if (window.innerHeight >= 768) {
+        if (window.innerHeight >= 767) {
           setModalHeight(window.innerHeight * 0.5);
         } else {
-          setModalHeight(window.innerHeight * 0.4 + 60);
+          setModalHeight(window.innerHeight * 0.4 + 42);
         }
       };
       calculateKeyboardHeight();
@@ -79,9 +79,10 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             style={{ bottom: `${modalHeight}px` }}
             aria-label="alert-modal"
             onClick={(e) => e.stopPropagation()}>
-            <Spacing size={30} />
+            <div className={cx("bar")}></div>
+            <Spacing size={35} />
             <Text className={cx("txt-title")} text={modalTitle} />
-            <Spacing size={30} />
+            <Spacing size={44} />
             <Input
               error={error}
               value={value}
