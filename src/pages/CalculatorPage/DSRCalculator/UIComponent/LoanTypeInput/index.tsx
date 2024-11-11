@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { arrDSRDatasState } from "@/recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { LoanItem } from "./LoanItem";
+import ResultInfo from "@/components/sections/Calculator/ResultInfo";
+import Text from "@/components/shared/Text";
+import { DSRResultInfo } from "./DSRResultInfo";
 
 export const LoanTypeInput = () => {
   const cx = classNames.bind(style);
@@ -24,7 +27,6 @@ export const LoanTypeInput = () => {
             return <LoanItem key={index} data={item} />;
           })}
         </div>
-
         <Spacing size={16} />
         <button
           className={cx("button")}
@@ -33,6 +35,8 @@ export const LoanTypeInput = () => {
           }}>
           + 대출을 추가해주세요
         </button>
+        <Spacing size={100} />
+        <DSRResultInfo />
 
         <Spacing size={160} />
       </div>
