@@ -49,12 +49,17 @@ const Part02 = ({ reportData }: Part02Props) => {
         <Spacing size={70} />
         <Text
           className={cx("txt-title")}
-          text={`내가 ${formatNumberWithUnits(sliderValue / 10000)} 대출시/n약 ${formatNumber(
-            Math.floor((reportData?.monthlyInterestCost / reportData?.loanAmount) * sliderValue),
-          )}원의 이자를 내요!`}
+          text={`내가 ${formatNumberWithUnits(sliderValue / 10000)} 대출시/n`}
           highlight={formatNumberWithUnits(sliderValue / 10000)}
         />
-        <Spacing size={40} />
+        <Text
+          className={cx("txt-title")}
+          text={`약 ${formatNumber(
+            Math.floor((reportData?.monthlyInterestCost / reportData?.loanAmount) * sliderValue),
+          )}원의 이자를 내요!`}
+          highlight={`${formatNumber(Math.floor((reportData?.monthlyInterestCost / reportData?.loanAmount) * sliderValue))}원`}
+        />
+        <Spacing size={50} />
         {reportData?.loanAmount && (
           <div>
             <Box sx={{ width: isMobileSize ? width - 70 : isTabletSize ? width - 60 : width - 200, maxWidth: 900 }}>

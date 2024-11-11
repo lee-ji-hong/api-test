@@ -32,12 +32,13 @@ const Part01 = ({ reportData }: Part01Props) => {
         </div>
         <Spacing size={10} />
         {["#20대인기상품", "#초저금리", "#최대한도"].map((item, index) => (
-          <Badge2 key={index} title={item} />
+          <Badge2 className={cx("badge-top")} key={index} title={item} />
         ))}
         <Spacing size={35} />
         <div className={cx("section-bottom")}>
           <div>
             <Text className={cx("bottom-txt-title")} text="최대한도" />
+            <Spacing size={4} />
             <Text
               className={cx("bottom-txt-sub")}
               text={`${formatNumberWithUnits(reportData?.possibleLoanLimit / 10000) || "4억원"}`}
@@ -45,6 +46,7 @@ const Part01 = ({ reportData }: Part01Props) => {
           </div>
           <div>
             <Text className={cx("bottom-txt-title")} text="금리" />
+            <Spacing size={4} />
             <Text className={cx("bottom-txt-sub")} text={`${reportData?.expectedLoanRate || "2.4"}%`} />
           </div>
         </div>

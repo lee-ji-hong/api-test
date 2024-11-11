@@ -31,7 +31,8 @@
 .section {
   margin: 0 -20px;
   justify-content: flex-start !important;
-  background: linear-gradient(180deg, #e8e8fc 0%, #fafaff 50%, #ffffff 100%);
+  // background: linear-gradient(180deg, #e8e8fc 0%, #fafaff 50%, #ffffff 100%);
+  background: linear-gradient(180deg, #f4f4ff 0%, #ffffff 100%);
 }
 
 .section-wrap {
@@ -41,6 +42,10 @@
     @include column-flexbox(center, start);
     text-align: left;
   }
+}
+
+.badge-top {
+  margin-right: 4px !important;
 }
 
 .section-bottom {
@@ -190,11 +195,13 @@
 .txt-title {
   p {
     color: $grey800;
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 600;
-    line-height: 28.5px;
-    letter-spacing: -1px;
+    line-height: 30px;
+    letter-spacing: -0.800000011920929px;
     text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
   }
 }
 

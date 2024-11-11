@@ -31,14 +31,14 @@ const ReportList = ({ list, className, show }: ListProps) => {
       {list.slice(0, 3).map((item, index) => (
         <div className={cx("list-item")} key={index}>
           <Text className={cx("list-txt-left")} text={item.label} />
-          <Text className={cx("list-txt-right")} text={`${formatNumber(item.amount)} 원` ?? "없음"} />
+          <Text className={cx("list-txt-right")} text={`${formatNumber(item.amount)}원` ?? "없음"} />
         </div>
       ))}
       <CollapseList in={show}>
         {list.slice(3).map((item, index) => (
           <div className={cx("list-item")} key={index}>
             <Text className={cx("list-txt-left")} text={item.label} />
-            <Text className={cx("list-txt-right")} text={`${formatNumber(item.amount)} 원` ?? "없음"} />
+            <Text className={cx("list-txt-right")} text={`${formatNumber(item.amount)}원` ?? "없음"} />
           </div>
         ))}
       </CollapseList>

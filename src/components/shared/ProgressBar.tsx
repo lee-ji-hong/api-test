@@ -8,9 +8,10 @@ const ProgressBar = styled(Slider)(({ theme }) => ({
   height: 5,
   padding: "15px 0",
   "& .MuiSlider-thumb": {
-    height: 30,
-    width: 30,
+    height: 38,
+    width: 38,
     backgroundColor: "#fff",
+    border: "1px solid #ECF0FC",
     boxShadow: "0 0 2px 0px rgba(0, 0, 0, 0.1)",
     "&:focus, &:hover, &.Mui-active": {
       boxShadow: "0px 0px 3px 1px rgba(0, 0, 0, 0.1)",
@@ -49,7 +50,7 @@ const ProgressBar = styled(Slider)(({ theme }) => ({
   },
   "& .MuiSlider-track": {
     border: "none",
-    height: 5,
+    height: 6,
   },
   "& .MuiSlider-rail": {
     opacity: 0.5,
