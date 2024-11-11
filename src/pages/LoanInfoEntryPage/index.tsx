@@ -132,7 +132,7 @@ export const LoanInfoEntryPage = () => {
       <Spacing size={53} />
       <div className={cx("container")}>
         <Spacing size={16} />
-        <Text className={cx("txt-title")} text="당신에게 맞는 대출은?" />
+        <Text className={cx("txt-title")} text={isRecent ? "산출 조건을 적용해주세요" : "당신에게 맞는 대출은?"} />
         <Spacing size={4} />
 
         <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>

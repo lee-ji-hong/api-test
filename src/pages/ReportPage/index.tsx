@@ -38,11 +38,6 @@ const ReportPage = () => {
   const { info } = useGetSpecificUserInputInfo(reportData?.userInputInfoId, isRecent);
   // console.log(location.state);
 
-  const handleGoBack = () => {
-    setShowPage(false);
-    router.goBack();
-  };
-
   const handleNavigate = () => {
     setRecoilFormData({
       ...(info as sendLoanAdviceReportRequest),
@@ -103,7 +98,7 @@ const ReportPage = () => {
               <Button className={cx("button")} title="다시 산출하기" onClick={handleNavigate} />
             </div>
           ) : (
-            <Button className={cx("button-wrap")} onClick={handleGoBack} title="리포트 다시 산출하기" />
+            <Button className={cx("button-wrap")} onClick={handleNavigate} title="리포트 다시 산출하기" />
           )}
           <Spacing size={14} />
           {toggle && info !== undefined && <Part11 Info={info} handleClose={handleClose} />}
