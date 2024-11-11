@@ -34,7 +34,9 @@ const KeyboardModal = ({
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, label: string) => {
     e.preventDefault();
-    handleBadgeClick(label);
+    if (handleBadgeClick) {
+      handleBadgeClick(label);
+    }
   };
 
   return (
