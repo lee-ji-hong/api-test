@@ -2,7 +2,7 @@ import Spacing from "@/components/shared/Spacing";
 import classNames from "classnames/bind";
 import style from "./LoanTypeInput.module.scss";
 import { useNavigate } from "react-router-dom";
-import { arrDSRDatasState } from "@/recoil/atoms";
+import { annualIncomeState, arrDSRDatasState } from "@/recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { LoanItem } from "./LoanItem";
 import { DSRResultInfo } from "./DSRResultInfo";
@@ -13,7 +13,9 @@ export const LoanTypeInput = () => {
   const navigate = useNavigate();
 
   const arrDSRDatas = useRecoilValue(arrDSRDatasState); // Recoil 상태 가져오기
+  const annualIncome = useRecoilValue(annualIncomeState);
   console.log("arrDSRDa1231222223tas", arrDSRDatas);
+  console.log("annualIncom22e", annualIncome);
   return (
     <div className={cx("container")}>
       <div className={cx("title")}>대출유형</div>

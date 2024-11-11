@@ -95,3 +95,8 @@ export const arrDSRDatasState = atom<DSRData[]>({
   key: "arrDSRDatasState", // 고유 키
   default: [], // 초기값
 });
+
+export const annualIncomeState = atom<number>({
+  key: "annualIncome", // 고유 키
+  default: 0, // 초기값
+});

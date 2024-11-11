@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect, useRef } from "react";
-import { OptionItem, OptionsType, sendRepaymentCalcRequest } from "@/models";
-import { useRecoilState } from "recoil";
+import { OptionItem, OptionsType, sendDSRCalcRequest } from "@/models";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
 import Spacing from "@/components/shared/Spacing";
 
-import { periodState, repaymentCalcState } from "@/recoil/atoms";
+import { annualIncomeState, periodState } from "@/recoil/atoms";
 import { INPUTS } from "./INPUTS";
 
 import styles from "../../../CalculatorPage.module.scss";
@@ -15,7 +15,6 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const YearIncomeInput = () => {
-  const [ReapymentCalc] = useRecoilState<sendRepaymentCalcRequest>(repaymentCalcState);
   const [focusedInput, setFocusedInput] = useState("");
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [, setSelectedBadge] = useRecoilState(periodState);
@@ -24,20 +23,18 @@ const YearIncomeInput = () => {
   const [toggle, setToggle] = useState(false);
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-
+  const setValue = useSetRecoilState(annualIncomeState);
   const {
     control,
     watch, // watch 추가
   } = useForm({
-    defaultValues: ReapymentCalc,
-    values: ReapymentCalc,
     mode: "onChange",
   });
 
   // watch로 모든 값 모니터링
   const formValues = watch();
   useEffect(() => {
-    console.log("Current Form Values:", formValues);
+    setValue(formValues.annualIncome);
   }, [formValues]); // 값이 변경될 때마다 실행
 
   useEffect(() => {
@@ -107,7 +104,7 @@ const YearIncomeInput = () => {
               <Section02 title={item.label} isPeriodBadge={item?.isPeriod} onClick={handleBadgeSelect}>
                 <Component
                   id={item.name}
-                  formFieldName={item.name as keyof sendRepaymentCalcRequest}
+                  formFieldName={item.name as keyof sendDSRCalcRequest}
                   control={control}
                   options={isOptionsType(item.options) ? item.options : (item.options as OptionItem[])}
                   min={item.limit?.min}

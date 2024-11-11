@@ -343,6 +343,10 @@ export interface sendRepaymentCalcRequest {
   maturityPaymentAmount: number;
 }
 
+export interface sendDSRCalcRequest {
+  annualIncome: number;
+}
+
 export interface DtiCalcResponse {
   code: number;
   status: string;
