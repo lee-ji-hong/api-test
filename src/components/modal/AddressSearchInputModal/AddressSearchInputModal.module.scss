@@ -12,6 +12,7 @@
 
   .container {
     position: fixed;
+    overflow: hidden;
     bottom: -100%;
     width: 95%;
     height: 90%;
@@ -30,9 +31,26 @@
     bottom: 0;
   }
 
+  .hr-top {
+    // background-color: $grey200;
+    background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0) 100%);
+    height: 40px;
+    margin: 0 -20px;
+  }
+
+  .hr-bottom {
+    // box-shadow: 0px -7px 28px 20px rgb(255 255 255);
+    height: 40px;
+    margin: 0 -20px;
+  }
+
   .list-container {
-    height: 83%;
+    height: 74%;
     overflow-y: scroll;
+    scrollbar-width: none; /* 파이어폭스 */
+    ::-webkit-scrollbar {
+      display: none; /* 크롬, 사파리, 엣지 */
+    }
   }
 
   .bar {
@@ -56,11 +74,17 @@
       text-align: left;
     }
   }
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid $blue500;
+  }
 
   .input {
     @include text-style(2, 500, $grey800);
     padding-bottom: 1rem;
-    border-bottom: 2px solid $blue500;
+    // border-bottom: 2px solid $blue500;
     width: 100%;
     text-align: left;
 
@@ -83,6 +107,13 @@
   }
   .reset {
     margin-left: 4px;
+    width: 24px;
+    cursor: pointer;
+  }
+
+  .reset-input {
+    margin-left: 4px;
+    margin-bottom: 6px;
     width: 24px;
     cursor: pointer;
   }
@@ -125,7 +156,8 @@
       border-radius: 12px;
 
       &:hover {
-        background-color: $grey400;
+        background-color: $grey300;
+        // opacity: 30%;
         cursor: pointer;
       }
       .box-txt-top {

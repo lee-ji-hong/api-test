@@ -137,21 +137,35 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
             <Spacing size={30} />
             {recoilFormData.jibun === "" || recoilFormData.jibun === undefined || jibunAddress === "" ? (
               <>
-                <input
-                  className={cx("input")}
-                  ref={ref}
-                  maxLength={30}
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                    }
-                  }}
-                  placeholder="주소를 입력해주세요"
-                  {...props}
-                />
-                <Spacing size={15} />
+                <div className={cx("input-container")}>
+                  <input
+                    className={cx("input")}
+                    ref={ref}
+                    maxLength={30}
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                      }
+                    }}
+                    placeholder="주소를 입력해주세요"
+                    {...props}
+                  />
+                  {inputValue !== "" ? (
+                    <Image
+                      className={cx("reset-input")}
+                      imageInfo={IMAGES?.Cancel_grey}
+                      onClick={() => {
+                        setInputValue("");
+                        onChange("");
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div className={cx("hr-top")}></div>
                 <div className={cx("list-container")}>
                   {!isAddressLoading && addressList?.length > 0 ? (
                     addressList.map((item, index) => (
@@ -170,6 +184,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
                   )}
                   <div ref={observerElem} style={{ height: "5px" }} />
                 </div>
+                <div className={cx("hr-bottom")}></div>
               </>
             ) : (
               <>
