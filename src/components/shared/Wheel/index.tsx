@@ -94,8 +94,8 @@ const Wheel: React.FC<Props> = memo(
           transform: `rotateX(${rotate}deg) translateZ(${radius}px)`,
           WebkitTransform: `rotateX(${rotate}deg) translateZ(${radius}px)`,
           color: rotate === 0 ? "black" : "#000000",
-          height: "60px", // 슬라이드 항목의 높이를 명시적으로 설정
-          lineHeight: "60px", // 텍스트의 세로 정렬을 위해 설정
+          height: "35px", // 슬라이드 항목의 높이를 명시적으로 설정
+          lineHeight: "35px", // 텍스트의 세로 정렬을 위해 설정
         };
         return { value: option, style };
       });

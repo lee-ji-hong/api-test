@@ -35,7 +35,8 @@ export const BottomSheet = forwardRef<HTMLInputElement, BottomSheetProps>(
             aria-label="alert-modal"
             onClick={(e) => e.stopPropagation()}>
             <div className={cx("bar")}></div>
-            <Text className={cx("txt-title")} text={modalTitle} />
+            {modalTitle && <Text className={cx("txt-title")} text={modalTitle} />}
+
             {children}
             <Button className={cx("close-button")} title={buttonText} onClick={() => handleClose(false)} />
           </div>

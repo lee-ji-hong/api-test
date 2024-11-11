@@ -1,5 +1,7 @@
 .sliderContainer {
-  width: calc(100% + 12px);
+  width: 201px;
+  height: 179px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   overflow: visible;
@@ -7,7 +9,6 @@
   user-select: none;
   touch-action: pan-y;
   color: $grey900;
-  height: 100%;
   transform: translate3d(0, 0, 0);
 
   &[data-keen-slider-moves] * {
@@ -39,9 +40,11 @@
   justify-content: center;
   perspective: 1000px;
   transform-style: preserve-3d;
-  height: 16%;
+  border-radius: 8px;
+  height: 37px;
   width: 100%;
   padding: 0 6px;
+  background-color: $grey200;
 }
 
 .sliderItem {

@@ -1,4 +1,3 @@
-// import BadgeList from "@/components/shared/BadgeList";
 import Badge from "@/components/shared/Badge";
 import { useState, useEffect } from "react";
 
@@ -41,7 +40,6 @@ const KeyboardModal = ({
 
   return (
     <div className={cx(["keyboard-modal", className, { show: isVisible }])} onMouseDown={(e) => e.preventDefault()}>
-      {/* {isBadge && <BadgeList className={cx("badge-list")} list={MONEY} onClick={handleBadgeClick} />} */}
       <div className={cx("badge-container")}>
         {isBadge &&
           MONEY?.map(({ label, value }) => (
