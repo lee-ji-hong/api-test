@@ -33,9 +33,13 @@ export const DepositResultPage = () => {
     if (!rentalDeposit || rentalDeposit === 0 || !rentalProductData) {
       navigate("/deposit-entry");
     }
-  }, [rentalDeposit, navigate]);
+  }, [rentalDeposit, rentalProductData, navigate]);
 
   const handleSort = (type: string) => {
+    if (!Array.isArray(rentalProductData)) {
+      setSortedData([]);
+      return;
+    }
     const sorted = [...rentalProductData].sort((a, b) => {
       if (type === "lowRate") {
         return a.expectedLoanRate - b.expectedLoanRate || b.possibleLoanLimit - a.possibleLoanLimit;
