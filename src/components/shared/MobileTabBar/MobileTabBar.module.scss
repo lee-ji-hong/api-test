@@ -1,6 +1,16 @@
 .menu {
   @include flexbox(around, center);
   width: 100%;
+  max-width: 90rem;
+
+  @include responsive("T") {
+    max-width: calc(100% - 16.8rem);
+
+    // padding-bottom: 8rem;
+  }
+  @include responsive("M") {
+    max-width: 100%;
+  }
 
   &-item {
     color: $grey800;
