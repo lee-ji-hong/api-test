@@ -5,10 +5,10 @@ import Text from "@/components/shared/Text";
 
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
-import { YearIncomeInput } from "./UIComponent/YearIncomeInput";
 import Spacing from "@/components/shared/Spacing";
 import { Divider } from "@mui/material";
 import { LoanTypeInput } from "./UIComponent/LoanTypeInput";
+import YearIncomeInput from "./UIComponent/YearIncomeInput";
 const cx = classNames.bind(styles);
 
 const DSRCalculator = () => {
@@ -27,10 +27,8 @@ const DSRCalculator = () => {
         </div>
       </div>
 
-      <Spacing size={40} />
       {/* 연소득 입력 컴포넌트 */}
       <YearIncomeInput />
-      <Spacing size={50} />
       <Divider
         sx={{
           height: 1, // 두께 설정
