@@ -24,6 +24,8 @@ export const DepositResultPage = () => {
   const router = useInternalRouter();
   const { rentalProductData } = location.state || {};
 
+  console.log(rentalProductData);
+
   useEffect(() => {
     if (!rentalDeposit || rentalDeposit === 0) {
       navigate("/deposit-entry");
@@ -41,11 +43,11 @@ export const DepositResultPage = () => {
           text={`보증금 ${formatNumberWithUnits(rentalDeposit ?? 0)}을/n마련할 수 있는 상품이에요`}
           highlight={`${formatNumberWithUnits(rentalDeposit ?? 0)}`}
         />
-        <Spacing size={10} />
+        <Spacing size={8} />
         <Text className={cx("txt-sub")} text="추가 정보를 입력하고/n맞춤형 전월세대출을 알아보세요" />
-        <Spacing size={25} />
+        <Spacing size={20} />
         <DepositList list={rentalProductData} color="white" />
-        <Spacing size={80} />
+        <Spacing size={100} />
         <Button
           className={cx("button-wrap")}
           onClick={() => router.push("/loan-info-entry")}
