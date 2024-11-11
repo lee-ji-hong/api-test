@@ -1,0 +1,73 @@
+.container {
+  .title {
+    font-family: Pretendard;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30.8px;
+    letter-spacing: -0.800000011920929px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    .highlight {
+      color: #4169e1; /* 특정 색상 적용 */
+    }
+  }
+  .subtitle {
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: -0.800000011920929px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #86869a;
+  }
+
+  .subContainer {
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    background-color: #fbfbfb;
+    padding: 30px 20px;
+  }
+
+  .subContainerTitle {
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18.2px;
+    letter-spacing: -0.800000011920929px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #333347;
+  }
+  .subTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  .subContainerTitle2 {
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    letter-spacing: -0.800000011920929px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #86869a;
+  }
+  .subContainerPrice {
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    letter-spacing: -0.800000011920929px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #333347;
+  }
+}

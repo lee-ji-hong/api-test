@@ -1,13 +1,9 @@
 import Spacing from "@/components/shared/Spacing";
-import { DSRData } from "@/recoil/atoms";
+import { LoanStatus } from "@/models";
 import classNames from "classnames/bind";
 import style from "./LoanItem.module.scss";
 
-interface LoanItemProps {
-  data: DSRData; // data를 DSRData 타입으로 받음
-}
-
-export const LoanItem = ({ data }: LoanItemProps) => {
+export const LoanItem = (data: LoanStatus) => {
   const cx = classNames.bind(style);
 
   console.log("data", data.gracePeriod);

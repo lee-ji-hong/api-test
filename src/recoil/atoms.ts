@@ -4,6 +4,7 @@ import {
   sendLtvCalcRequest,
   sendDtiCalcRequest,
   sendRepaymentCalcRequest,
+  LoanStatus,
 } from "@/models";
 
 export const formData = atom<sendLoanAdviceReportRequest>({
@@ -91,7 +92,12 @@ export interface DSRData {
   term: number;
 }
 
-export const arrDSRDatasState = atom<DSRData[]>({
+export const arrDSRDatasState = atom<LoanStatus[]>({
   key: "arrDSRDatasState", // 고유 키
   default: [], // 초기값
+});
+
+export const annualIncomeState = atom<number>({
+  key: "annualIncome", // 고유 키
+  default: 0, // 초기값
 });
