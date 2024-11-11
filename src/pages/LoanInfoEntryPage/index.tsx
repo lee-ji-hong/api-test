@@ -115,12 +115,18 @@ export const LoanInfoEntryPage = () => {
       maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
 
     for (let i = id - 1; i < filteredInputs.length; i++) {
-      const nextInputName = filteredInputs[i + 1]?.name;
-      const nextValue = getValues(nextInputName as keyof sendLoanAdviceReportRequest);
+      const nextInput = filteredInputs.find((input) => input.id === i + 2);
 
-      if (nextValue === undefined || nextValue === null) {
-        handleRowClick(filteredInputs[i + 1].id);
+      if ((maritalStatus === undefined && id === 6) || (maritalStatus === "SINGLE" && id === 6)) {
+        handleRowClick(8);
         return;
+      }
+      if (nextInput) {
+        const nextValue = getValues(nextInput.name as keyof sendLoanAdviceReportRequest);
+        if (nextValue === undefined || nextValue === null) {
+          handleRowClick(nextInput.id);
+          return;
+        }
       }
     }
   };
@@ -150,7 +156,7 @@ export const LoanInfoEntryPage = () => {
                       topText={item.label}
                       right={
                         <Text
-                          className={cx(["txt-right", value === undefined || (value === null && "txt-empty-color")])}
+                          className={cx(["txt-right", { "txt-empty-color": value === undefined || value === null }])}
                           text={value === undefined || value === null ? "선택하기" : String(value2)}
                         />
                       }
