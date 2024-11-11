@@ -22,7 +22,7 @@ interface Part02Props {
 const Part02 = ({ reportData }: Part02Props) => {
   const [sliderValue, setSliderValue] = useState(reportData?.loanAmount);
   const { width } = useWindowSize();
-  const isTabletSize = width < 748;
+  const isTabletSize = width < 744;
   const isMobileSize = width < 500;
 
   function valuetext(value: number) {
@@ -57,7 +57,7 @@ const Part02 = ({ reportData }: Part02Props) => {
         <Spacing size={40} />
         {reportData?.loanAmount && (
           <div>
-            <Box sx={{ width: isMobileSize ? width - 70 : isTabletSize ? width - 50 : width - 200, maxWidth: 900 }}>
+            <Box sx={{ width: isMobileSize ? width - 70 : isTabletSize ? width - 60 : width - 200, maxWidth: 900 }}>
               <ProgressBar
                 aria-label="Temperature"
                 defaultValue={reportData?.loanAmount ?? 0}
@@ -69,6 +69,12 @@ const Part02 = ({ reportData }: Part02Props) => {
                 min={0}
                 max={reportData?.loanAmount}
                 onChange={handleSliderChange}
+                sx={{
+                  "& .MuiSlider-valueLabel": {
+                    right: sliderValue > reportData?.loanAmount * 0.9 ? 0 : "unset",
+                    left: sliderValue < reportData?.loanAmount * 0.1 ? 0 : "unset",
+                  },
+                }}
               />
             </Box>
           </div>

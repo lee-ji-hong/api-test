@@ -27,7 +27,6 @@ const ProgressBar = styled(Slider)(({ theme }) => ({
     fontSize: 14,
     fontWeight: "normal",
     top: 60,
-    right: 0,
     backgroundColor: "unset",
     color: "#66667A",
     display: "block",
@@ -38,6 +37,11 @@ const ProgressBar = styled(Slider)(({ theme }) => ({
     "& *": {
       background: "transparent",
       color: "#66667A",
+      fontFamily: "Pretendard",
+      fontSize: 14,
+      fontWeight: 500,
+      lineHeight: "21px",
+      letterSpacing: "-1px",
       ...theme.applyStyles("dark", {
         color: "#fff",
       }),
