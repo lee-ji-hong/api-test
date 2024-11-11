@@ -47,14 +47,15 @@ export const LoanInfoEntryPage = () => {
   });
 
   useEffect(() => {
-    for (let i = 0; i < INPUTS.length; i++) {
-      const InputName = INPUTS[i].name;
-      const nextValue = getValues(InputName as keyof sendLoanAdviceReportRequest);
-      if (!nextValue) {
-        handleRowClick(INPUTS[i].id);
-        return;
-      }
-    }
+    handleRowClick(1);
+    // for (let i = 0; i < INPUTS.length; i++) {
+    //   const InputName = INPUTS[i].name;
+    //   const nextValue = getValues(InputName as keyof sendLoanAdviceReportRequest);
+    //   if (!nextValue) {
+    //     handleRowClick(INPUTS[i].id);
+    //     return;
+    //   }
+    // }
   }, []);
 
   const maritalStatus = watch("maritalStatus");

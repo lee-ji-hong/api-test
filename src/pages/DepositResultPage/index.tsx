@@ -30,7 +30,7 @@ export const DepositResultPage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (!rentalDeposit || rentalDeposit === 0) {
+    if (!rentalDeposit || rentalDeposit === 0 || !rentalProductData) {
       navigate("/deposit-entry");
     }
   }, [rentalDeposit, navigate]);
