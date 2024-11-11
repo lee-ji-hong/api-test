@@ -99,10 +99,10 @@ const getImageSource = (alternativeComparison: string) => {
 
 const Part04 = ({ reportData }: Part04Props) => {
   const { opportunityCost, alternativeComparison, count } = calculateOpportunityCost(reportData.ownFunds);
-
+  // console.log(reportData);
   return (
     <div className={cx("box")}>
-      <Spacing size={70} />
+      <Spacing size={54} />
       <Text
         className={cx("txt-title")}
         text={`전세 대출을 하게 되면/n한달에 ${alternativeComparison}을 ${count}번을 더 줄여야해요!`}
