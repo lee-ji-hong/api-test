@@ -148,6 +148,7 @@ const DepositEntryPage = () => {
               <div>
                 <Text className={cx("txt-report")} text="최근 보고서" />
                 <DepositList list={loanAdviceInfo} isAlert={false} color="white" isFetch={true} />
+                <Spacing size={80} />
               </div>
             )}
           </>

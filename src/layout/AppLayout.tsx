@@ -27,6 +27,7 @@ const AppLayout = () => {
   useLayoutEffect(() => {
     Axios.setLoadingFunction(setLoading);
     Axios.setLoginFunction(setIsLoginNeed);
+    window.scrollTo(0, 0);
   }, [isLoading, isLoginNeed, auth]);
 
   return (
