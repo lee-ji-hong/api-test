@@ -1,9 +1,9 @@
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
-import DepositEntryPageLoading from "@/pages/DepositEntryPage/DepositEntryPageLoading";
-import DepositResultPageLoading from "@/pages/DepositResultPage/DepositResultPageLoading";
-import LoanInfoEntryPageLoading from "@/pages/LoanInfoEntryPage/LoanInfoEntryPageLoading";
-import ReportPageLoading from "@/pages/ReportPage/ReportPageLoading";
+// import DepositEntryPageLoading from "@/pages/DepositEntryPage/DepositEntryPageLoading";
+// import DepositResultPageLoading from "@/pages/DepositResultPage/DepositResultPageLoading";
+// import LoanInfoEntryPageLoading from "@/pages/LoanInfoEntryPage/LoanInfoEntryPageLoading";
+// import ReportPageLoading from "@/pages/ReportPage/ReportPageLoading";
 import Image from "@/components/shared/Image";
 
 import { IMAGES } from "@/constants/images";
@@ -40,10 +40,13 @@ function Error() {
 }
 
 function Loading() {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
   return (
     <>
-      {pathname === "/deposit-entry" ? (
+      <div className={cx("container")}>
+        <Image className={cx("ico-heart")} imageInfo={IMAGES?.LoadingHeart} />
+      </div>
+      {/* {pathname === "/deposit-entry" ? (
         <DepositEntryPageLoading />
       ) : pathname === "/deposit-result" || pathname === "/no-report" ? (
         <DepositResultPageLoading />
@@ -55,7 +58,7 @@ function Loading() {
         <div className={cx("container")}>
           <Image className={cx("ico-heart")} imageInfo={IMAGES?.LoadingHeart} />
         </div>
-      )}
+      )} */}
     </>
   );
 }
