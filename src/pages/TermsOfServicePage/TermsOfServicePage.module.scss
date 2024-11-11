@@ -1,9 +1,9 @@
 .header {
   @include flexbox(between, center);
-  position: fixed;
-  left: 0;
+  // position: fixed;
+  // left: 0;
+  // padding: 12px 20px;
   width: 100%;
-  padding: 12px 20px;
   text-align: center;
   background-color: white;
 }
