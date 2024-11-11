@@ -1,10 +1,12 @@
 import Spacing from "@/components/shared/Spacing";
+import { DSRCalculationResult } from "@/models";
 import { Divider } from "@mui/material";
 import classNames from "classnames/bind";
 import style from "./DSRResultInfo.module.scss";
 
-export const DSRResultInfo = () => {
+export const DSRResultInfo = (result: DSRCalculationResult) => {
   const cx = classNames.bind(style);
+  console.log("result", result);
   return (
     <div className={cx("container")}>
       <div className={cx("title")}>

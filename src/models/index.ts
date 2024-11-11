@@ -344,7 +344,20 @@ export interface sendRepaymentCalcRequest {
 }
 
 export interface sendDSRCalcRequest {
+  loanStatuses: LoanStatus[];
   annualIncome: number;
+}
+
+export interface LoanStatus {
+  repaymentType: string;
+  loanType: string;
+  principal: number;
+  maturityPaymentAmount: number;
+  term: number;
+  gracePeriod: number;
+  interestRatePercentage: number;
+  isMetroArea: number;
+  interestRateType: number;
 }
 
 export interface DtiCalcResponse {
@@ -352,6 +365,13 @@ export interface DtiCalcResponse {
   status: string;
   message: string;
   data: DtiCalculationResult;
+}
+
+export interface DSRCalcResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: DSRCalculationResult;
 }
 
 export interface RepaymentCalcResponse {
@@ -368,6 +388,23 @@ export interface DtiCalculationResult {
   annualRepaymentPrincipal: number;
   annualRepaymentInterest: number;
   yearlyLoanInterestRepayment: number;
+}
+
+export interface DSRCalculationResult {
+  annualIncome: number;
+  totalAnnualRepayment: number;
+  totalLoanCount: number;
+  finalDsrRatio: number;
+  dsrCalcResults: DSRCalculationResultDetail[];
+}
+
+export interface DSRCalculationResultDetail {
+  serial: number;
+  principal: number;
+  balance: number;
+  term: number;
+  annualPrincipalRepayment: number;
+  annualInterestRepayment: number;
 }
 
 export interface RepaymentCalculationResult {
