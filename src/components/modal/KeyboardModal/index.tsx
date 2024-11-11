@@ -1,5 +1,5 @@
-import BadgeList from "@/components/shared/BadgeList";
-// import Badge from "@/components/shared/Badge";
+// import BadgeList from "@/components/shared/BadgeList";
+import Badge from "@/components/shared/Badge";
 import { useState, useEffect } from "react";
 
 import Image from "@/components/shared/Image";
@@ -32,25 +32,26 @@ const KeyboardModal = ({
     setIsVisible(true);
   }, []);
 
-  // const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, label: string) => {
-  //   e.preventDefault();
-  //   handleBadgeClick(label);
-  // };
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, label: string) => {
+    e.preventDefault();
+    handleBadgeClick(label);
+  };
 
   return (
     <div className={cx(["keyboard-modal", className, { show: isVisible }])} onMouseDown={(e) => e.preventDefault()}>
-      {isBadge && <BadgeList className={cx("badge-list")} list={MONEY} onClick={handleBadgeClick} />}
-      {/* <div className={cx("badge-container")}>
+      {/* {isBadge && <BadgeList className={cx("badge-list")} list={MONEY} onClick={handleBadgeClick} />} */}
+      <div className={cx("badge-container")}>
         {isBadge &&
           MONEY?.map(({ label, value }) => (
             <Badge
               className={cx("button")}
               key={value.toString()}
               title={label}
+              theme="light"
               onClick={(e) => handleClick(e, label)}
             />
           ))}
-      </div> */}
+      </div>
       <div className={cx("keyboard-content")}>
         {keys.map((key) => (
           <button

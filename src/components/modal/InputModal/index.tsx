@@ -80,7 +80,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             aria-label="alert-modal"
             onClick={(e) => e.stopPropagation()}>
             <div className={cx("bar")}></div>
-            <Spacing size={35} />
+            <Spacing size={38} />
             <Text className={cx("txt-title")} text={modalTitle} />
             <Spacing size={44} />
             <Input
@@ -91,7 +91,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
               ref={ref}
               {...props}
             />
-            <Spacing size={30} />
+            <Spacing size={40} />
             <Button
               className={cx("close-button")}
               title={buttonText}

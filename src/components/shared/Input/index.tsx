@@ -1,5 +1,6 @@
 import { forwardRef, InputHTMLAttributes } from "react";
 import classNames from "classnames/bind";
+import Spacing from "@/components/shared/Spacing";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 import { IMAGES } from "@/constants/images";
@@ -36,6 +37,7 @@ const Input = forwardRef<HTMLInputElement, InputFieldProps>(
           )}
           <Text className={cx("unit")} text={unit} />
         </div>
+        <Spacing size={8} />
         <Text
           className={cx("txt-sub", { "text-alert": error })}
           text={

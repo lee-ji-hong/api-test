@@ -7,7 +7,7 @@ interface BadgeProps {
   className?: string;
   title: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  theme?: "primary" | "dark" | "grey" | "white" | "blue";
+  theme?: "primary" | "light" | "dark" | "grey" | "white" | "blue";
 }
 
 const Badge = ({ className, title, onClick, theme = "primary" }: BadgeProps) => {
