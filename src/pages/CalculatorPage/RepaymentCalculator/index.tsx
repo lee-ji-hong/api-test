@@ -18,6 +18,7 @@ import { INPUTS } from "./INPUTS";
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
 import { useSendRepaymentCalc } from "@/hooks/queries/useSendRepaymentCalc";
+import RepaymentCalcDetail from "./RepaymentDetail";
 const cx = classNames.bind(styles);
 
 const RepaymentCalculator = () => {
@@ -29,7 +30,7 @@ const RepaymentCalculator = () => {
   // const [setContents] = useState(resultState);
   const [bottomOffset, setBottomOffset] = useState(0);
   const [toggle, setToggle] = useState(false);
-  const { RepaymentCalcInfo } = useSendRepaymentCalc();
+  const { RepaymentCalcInfo, infoItem } = useSendRepaymentCalc();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const {
@@ -181,22 +182,13 @@ const RepaymentCalculator = () => {
           </div>
         </>
       </form>
-      {/* 
+
       {infoItem && (
         <>
           <div className={cx("hr")}></div>
-          <ResultInfo contents={contents}>
-            <div className={cx("box-txt-container")}>
-              <Text className={cx("box-txt-left")} text="LTV" />
-              <Text className={cx("box-txt-right")} text={infoItem?.dtiRatio} />
-            </div>
-            <div className={cx("box-txt-container")}>
-              <Text className={cx("box-txt-left")} text="예상대출가능금액" />
-              <Text className={cx("box-txt-right")} text={infoItem?.annualRepaymentAmount} />
-            </div>
-          </ResultInfo>
+          <RepaymentCalcDetail {...infoItem} />
         </>
-      )} */}
+      )}
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="대출 원리금 계산기란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
