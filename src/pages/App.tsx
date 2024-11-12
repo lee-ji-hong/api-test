@@ -12,7 +12,6 @@ import CommunityDetail from "./CommunityDetail";
 import CommunityModifyPage from "./CommunityModify";
 import CommunityRecentReportPage from "./CommunityRecentReport";
 import CommunityModifyCommentPage from "./CommunityModifyComment";
-import RepaymentCalcDetail from "./CalculatorPage/RepaymentCalculator/RepaymentDetail";
 import LoanAddPage from "./CalculatorPage/DSRCalculator/LoanAddPage";
 
 const HomePage = lazy(() => import("./HomePage"));
