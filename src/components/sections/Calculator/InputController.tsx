@@ -18,6 +18,7 @@ interface Limit {
 
 interface Props<ControlType extends FieldValues> {
   id: string;
+  userValue?: number;
   formFieldName: Path<ControlType>;
   control: Control<ControlType>;
   keyboardHeight: number;
@@ -31,6 +32,7 @@ interface Props<ControlType extends FieldValues> {
 
 const InputController = <ControlType extends FieldValues>({
   id,
+  userValue,
   formFieldName,
   keyboardHeight,
   control,
@@ -49,6 +51,7 @@ const InputController = <ControlType extends FieldValues>({
       name={formFieldName}
       control={control}
       render={({ field }) => {
+        console.log("field", field.value);
         const isInvalidValue = field.value <= (min?.value ?? -1) || field.value > (max?.value ?? Infinity);
         const warningMessage = field.value <= (min?.value ?? -1) ? (min?.ment ?? "") : (max?.ment ?? "");
 
@@ -90,7 +93,7 @@ const InputController = <ControlType extends FieldValues>({
             <Input
               id={id}
               error={isInvalidValue ? true : false}
-              value={field.value}
+              value={userValue ?? field.value}
               onChange={field.onChange}
               warningMessage={warningMessage}
               onFocus={onFocus}

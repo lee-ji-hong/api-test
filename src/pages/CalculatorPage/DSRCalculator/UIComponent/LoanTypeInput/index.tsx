@@ -19,15 +19,14 @@ export const LoanTypeInput = () => {
 
   const annualIncome = useRecoilValue(annualIncomeState);
 
-  const { DSRCalcInfo, infoItem } = useSendDSRCalc();
-  console.log("arrDSRDa1231222223tas", arrDSRDatas);
-  console.log("annualIncom22e", annualIncome);
+  const { DSRCalcInfo, infoItem, resetInfoItem } = useSendDSRCalc();
   return (
     <div className={cx("container")}>
       <div className={cx("title")}>대출유형</div>
       <Spacing size={16} />
-      <div className={cx("inputContainer")}>
-        <div>
+
+      <div>
+        <div className={cx("inputContainer")}>
           {arrDSRDatas.map((item, index) => {
             console.log("item", item);
             console.log("index", index);
@@ -42,37 +41,47 @@ export const LoanTypeInput = () => {
           }}>
           + 대출을 추가해주세요
         </button>
-        <Spacing size={50} />
-        <div className={cx("buttonWrap")}>
-          <Button
-            className={cx("buttonItem")}
-            title="초기화"
-            type="button"
-            theme="light"
-            onClick={() => {
-              resetArrDSRDatas();
-            }}
-          />
-          <Button
-            className={cx("buttonItem")}
-            title="계산하기"
-            type="button"
-            theme="primary"
-            onClick={() => {
-              const updatedFormData = {
-                loanStatuses: [...arrDSRDatas],
-                annualIncome: annualIncome,
-              };
 
-              DSRCalcInfo(updatedFormData as sendDSRCalcRequest);
-            }}
-          />
-        </div>
-        <Spacing size={100} />
+        {arrDSRDatas.length > 0 && (
+          <>
+            <Spacing size={50} />
+            <div className={cx("buttonWrap")}>
+              <Button
+                className={cx("buttonItem")}
+                title="초기화"
+                type="button"
+                theme="light"
+                onClick={() => {
+                  resetArrDSRDatas();
+                  resetInfoItem();
+                }}
+              />
+              <Button
+                className={cx("buttonItem")}
+                title="계산하기"
+                type="button"
+                theme="primary"
+                onClick={() => {
+                  const updatedFormData = {
+                    loanStatuses: [...arrDSRDatas],
+                    annualIncome: annualIncome,
+                  };
 
-        {infoItem && <DSRResultInfo {...infoItem} />}
+                  DSRCalcInfo(updatedFormData as sendDSRCalcRequest);
+                }}
+              />
+            </div>
+          </>
+        )}
+        {!infoItem && <Spacing size={70} />}
 
-        <Spacing size={160} />
+        {infoItem && (
+          <>
+            <div className={cx("hr")}></div>
+            <DSRResultInfo {...infoItem} />
+            <Spacing size={70} />
+          </>
+        )}
       </div>
     </div>
   );

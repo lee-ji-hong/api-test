@@ -1,4 +1,5 @@
 import InputController from "@/components/sections/Calculator/InputController";
+
 export const INPUTS = [
   {
     id: 1,
