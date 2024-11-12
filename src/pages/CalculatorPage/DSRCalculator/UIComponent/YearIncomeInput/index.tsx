@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect, useRef } from "react";
 import { OptionItem, OptionsType, sendDSRCalcRequest } from "@/models";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
@@ -22,7 +22,8 @@ const YearIncomeInput = () => {
   const [toggle, setToggle] = useState(false);
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-  const setValue = useSetRecoilState(annualIncomeState);
+
+  const [annualIncome, setAnnualIncome] = useRecoilState(annualIncomeState);
   const {
     control,
     watch, // watch 추가
@@ -33,7 +34,9 @@ const YearIncomeInput = () => {
   // watch로 모든 값 모니터링
   const formValues = watch();
   useEffect(() => {
-    setValue(formValues.annualIncome);
+    if (formValues.annualIncome !== undefined) {
+      setAnnualIncome(formValues.annualIncome);
+    }
   }, [formValues]); // 값이 변경될 때마다 실행
 
   useEffect(() => {
@@ -94,6 +97,8 @@ const YearIncomeInput = () => {
     <div>
       <>
         {INPUTS.map((item, ...rest) => {
+          item.value = annualIncome + "";
+          console.log(annualIncome + "asdad");
           const Component = item.component;
           const isOptionsType = (options: OptionItem[] | OptionsType | undefined): options is OptionsType => {
             return options !== undefined && "year" in options && "month" in options;
@@ -103,6 +108,7 @@ const YearIncomeInput = () => {
               <Section02 title={item.label} isPeriodBadge={item?.isPeriod} onClick={handleBadgeSelect}>
                 <Component
                   id={item.name}
+                  userValue={annualIncome}
                   formFieldName={item.name as keyof sendDSRCalcRequest}
                   control={control}
                   options={isOptionsType(item.options) ? item.options : (item.options as OptionItem[])}

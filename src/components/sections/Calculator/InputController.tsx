@@ -88,7 +88,6 @@ const InputController = <ControlType extends FieldValues>({
           handleBadgeClick(label);
         };
 
-        console.log("userValue", userValue);
         return (
           <div className={cx("input-container")}>
             <Input
