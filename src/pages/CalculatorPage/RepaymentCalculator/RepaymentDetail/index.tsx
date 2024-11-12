@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import styles from "./RepaymentDetail.module.scss";
 import classNames from "classnames/bind";
 import Spacing from "@/components/shared/Spacing";
@@ -6,10 +5,8 @@ import { RepaymentCalculationResult } from "@/models";
 import { Divider } from "@mui/material";
 import { formatNumberWithUnits2 } from "@/utils/formatters";
 
-const RepaymentCalcDetail = () => {
+const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
   const cx = classNames.bind(styles);
-  const location = useLocation();
-  const response: RepaymentCalculationResult = location.state?.response; // 전달된 데이터 접근
   console.log(response);
 
   function formatCurrency(value: number): string {
@@ -18,7 +15,6 @@ const RepaymentCalcDetail = () => {
 
   return (
     <div className={cx("container")}>
-      <Spacing size={50} />
       <div className={cx("title")}>
         총 원금 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}원</span>
       </div>
