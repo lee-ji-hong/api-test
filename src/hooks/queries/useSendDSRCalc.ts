@@ -24,5 +24,10 @@ export const useSendDSRCalc = () => {
     },
   });
 
-  return { DSRCalcInfo, infoItem };
+  // infoItem 초기화 함수 추가
+  const resetInfoItem = () => {
+    setInfoItem(undefined); // infoItem을 초기값으로 초기화
+  };
+
+  return { DSRCalcInfo, infoItem, resetInfoItem };
 };

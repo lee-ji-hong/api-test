@@ -5,8 +5,6 @@ import Text from "@/components/shared/Text";
 
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
-import Spacing from "@/components/shared/Spacing";
-import { Divider } from "@mui/material";
 import { LoanTypeInput } from "./UIComponent/LoanTypeInput";
 import YearIncomeInput from "./UIComponent/YearIncomeInput";
 const cx = classNames.bind(styles);
@@ -29,16 +27,9 @@ const DSRCalculator = () => {
 
       {/* 연소득 입력 컴포넌트 */}
       <YearIncomeInput />
-      <Divider
-        sx={{
-          height: 1, // 두께 설정
-        }}
-      />
-
+      <div className={cx("hr")}></div>
       {/* 대출유형 컴포넌트 */}
-      <Spacing size={40} />
       <LoanTypeInput />
-      <Spacing size={150} />
 
       {toggle && (
         <SelectBottomSheet modalTitle="DSR이란?" titleAlign="flex-start" onClose={() => setToggle(false)}>

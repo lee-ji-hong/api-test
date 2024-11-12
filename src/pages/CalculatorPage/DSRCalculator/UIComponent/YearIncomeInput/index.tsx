@@ -5,7 +5,6 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
-import Spacing from "@/components/shared/Spacing";
 
 import { annualIncomeState, periodState } from "@/recoil/atoms";
 import { INPUTS } from "./INPUTS";
@@ -122,7 +121,6 @@ const YearIncomeInput = () => {
           );
         })}
       </>
-      {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="대출 원리금 계산기란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
           <span className={cx("txt-sub")}> {content} </span>
