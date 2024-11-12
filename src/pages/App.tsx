@@ -71,7 +71,6 @@ function App() {
                 <Route path="no-report" element={<NoReportPage />} />
                 <Route path="login-success" element={<LoginSuccessPage />} />
                 <Route path="calculator" element={<CalculatorPage />} />
-                <Route path="calculator/repaymentDetails" element={<RepaymentCalcDetail />} />
                 <Route path="calculator/dsrLoanAddPage" element={<LoanAddPage />} />
 
                 {/* 로딩 화면 테스트용 */}
