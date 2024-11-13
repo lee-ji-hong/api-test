@@ -3,13 +3,14 @@ import { useMutation } from "@tanstack/react-query";
 import { sendLtvCalc } from "@/api/remotes";
 import { sendLtvCalcRequest, LtvCalculationResult } from "@/models";
 
-export const useSendLtvCalc = () => {
+export const useSendLtvCalc = (scrollToResult: () => void) => {
   const [infoItem, setInfoItem] = useState<LtvCalculationResult>();
 
   const { mutate: LtvCalcInfo } = useMutation<LtvCalculationResult, Error, sendLtvCalcRequest>({
     mutationFn: sendLtvCalc,
     onSuccess: (response) => {
       setInfoItem(response);
+      scrollToResult();
     },
     onError: (error) => {
       setInfoItem({

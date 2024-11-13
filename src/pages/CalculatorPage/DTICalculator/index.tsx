@@ -20,6 +20,7 @@ import { INPUTS } from "./INPUTS";
 
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
+import { useLayoutEffect } from "react";
 const cx = classNames.bind(styles);
 
 const DTICalculator = () => {
@@ -31,9 +32,15 @@ const DTICalculator = () => {
   const [contents, setContents] = useState(resultState);
   const [bottomOffset, setBottomOffset] = useState(0);
   const [toggle, setToggle] = useState(false);
-  const { DtiCalcInfo, infoItem } = useSendDtiCalc();
+  const scrollToResult = () => {
+    if (resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  };
 
+  const { DtiCalcInfo, infoItem } = useSendDtiCalc(scrollToResult);
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const resultRef = useRef<HTMLDivElement>(null);
   const {
     control,
     handleSubmit,
@@ -45,6 +52,10 @@ const DTICalculator = () => {
     values: DtiCalc,
     mode: "onChange",
   });
+
+  useLayoutEffect(() => {
+    if (infoItem) scrollToResult();
+  }, [infoItem]);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -204,6 +215,7 @@ const DTICalculator = () => {
           <span className={cx("txt-sub")}> {content} </span>
         </SelectBottomSheet>
       )}
+      <div ref={resultRef}></div>
     </div>
   );
 };

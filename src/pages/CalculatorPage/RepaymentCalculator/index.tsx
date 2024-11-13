@@ -19,6 +19,7 @@ import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
 import { useSendRepaymentCalc } from "@/hooks/queries/useSendRepaymentCalc";
 import RepaymentCalcDetail from "./RepaymentDetail";
+import { useLayoutEffect } from "react";
 const cx = classNames.bind(styles);
 
 const RepaymentCalculator = () => {
@@ -27,12 +28,19 @@ const RepaymentCalculator = () => {
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  // const [setContents] = useState(resultState);
+
   const [bottomOffset, setBottomOffset] = useState(0);
   const [toggle, setToggle] = useState(false);
-  const { RepaymentCalcInfo, infoItem } = useSendRepaymentCalc();
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const resultRef = useRef<HTMLDivElement>(null);
+  const scrollToResult = () => {
+    if (resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const { RepaymentCalcInfo, infoItem } = useSendRepaymentCalc(scrollToResult);
   const {
     control,
     handleSubmit,
@@ -44,6 +52,10 @@ const RepaymentCalculator = () => {
     values: ReapymentCalc,
     mode: "onChange",
   });
+
+  useLayoutEffect(() => {
+    if (infoItem) scrollToResult();
+  }, [infoItem]);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -185,6 +197,7 @@ const RepaymentCalculator = () => {
 
       {infoItem && (
         <>
+          <div ref={resultRef}></div>
           <div className={cx("hr")}></div>
           <RepaymentCalcDetail {...infoItem} />
         </>

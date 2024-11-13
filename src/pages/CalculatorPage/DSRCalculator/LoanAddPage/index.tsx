@@ -16,6 +16,7 @@ import styles2 from "./LoanAddPage.module.scss";
 import classNames from "classnames/bind";
 import Image from "@/components/shared/Image";
 import { useNavigate } from "react-router-dom";
+import { useLayoutEffect } from "react";
 const cx = classNames.bind(styles);
 const cx2 = classNames.bind(styles2);
 
@@ -39,6 +40,10 @@ const LoanAddPage = () => {
     values: ReapymentCalc,
     mode: "onChange",
   });
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {

@@ -9,6 +9,8 @@ import { DSRResultInfo } from "./DSRResultInfo";
 import Button from "@/components/shared/Button";
 import { useSendDSRCalc } from "@/hooks/queries/useSendDSRCalc";
 import { sendDSRCalcRequest } from "@/models";
+import { useRef } from "react";
+import { useLayoutEffect } from "react";
 
 export const LoanTypeInput = () => {
   const cx = classNames.bind(style);
@@ -19,7 +21,20 @@ export const LoanTypeInput = () => {
 
   const annualIncome = useRecoilValue(annualIncomeState);
 
-  const { DSRCalcInfo, infoItem, resetInfoItem } = useSendDSRCalc();
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  const scrollToResult = () => {
+    if (resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  };
+
+  const { DSRCalcInfo, infoItem, resetInfoItem } = useSendDSRCalc(scrollToResult);
+
+  useLayoutEffect(() => {
+    if (infoItem) scrollToResult();
+  }, [infoItem]);
+
   return (
     <div className={cx("container")}>
       <div className={cx("title")}>대출유형</div>
@@ -83,6 +98,7 @@ export const LoanTypeInput = () => {
           </>
         )}
       </div>
+      <div ref={resultRef}></div>
     </div>
   );
 };
