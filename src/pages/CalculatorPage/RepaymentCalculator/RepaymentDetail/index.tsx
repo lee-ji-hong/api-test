@@ -7,7 +7,6 @@ import { formatNumberWithUnits2 } from "@/utils/formatters";
 
 const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
   const cx = classNames.bind(styles);
-  console.log(response);
 
   function formatCurrency(value: number): string {
     return value.toLocaleString("en-US");
@@ -16,18 +15,23 @@ const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
   return (
     <div className={cx("container")}>
       <div className={cx("title")}>
-        총 원금 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}원</span>
+        총 원금 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}</span>
       </div>
       <div className={cx("title")}>
-        총 이자 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}원</span>
+        총 이자 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}</span>
       </div>
       <div className={cx("title")}>
         총 상환 회차 <span className={cx("highlight")}>{response.totalInstallments}회</span>
       </div>
       <Spacing size={12} />
       <div className={cx("titleDescription")}>
-        총 5억원을 60개월동안 3% 원리금균등 상환으로 대출받았을 때 첫달에는 125만원 마지막달에는 250만 6,250원을
-        갚아야합니다. 자세한 내역은 아래 표를 참조해주세요.
+        {`총 ${formatNumberWithUnits2(response.totalPrincipal)}을 
+  ${response.totalInstallments}개월동안 
+  ${response.totalInterest}% 
+  원리금균등 상환으로 대출받았을 때 첫달에는 ${formatNumberWithUnits2(response.repaymentSchedules[0].remainingPrincipal)} 
+  마지막달에는 ${formatNumberWithUnits2(response.repaymentSchedules[response.totalInstallments - 1].remainingPrincipal)}을 갚아야합니다.`}
+        <br />
+        {`자세한 내역은 아래 표를 참조해주세요.`}
       </div>
 
       <Spacing size={20} />

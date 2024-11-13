@@ -20,6 +20,7 @@ import { INPUTS } from "./INPUTS";
 
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
+import { useLayoutEffect } from "react";
 const cx = classNames.bind(styles);
 
 const LTVCalculator = () => {
@@ -29,9 +30,15 @@ const LTVCalculator = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
   const [contents, setContents] = useState(resultState);
-  const { LtvCalcInfo, infoItem } = useSendLtvCalc();
+  const scrollToResult = () => {
+    if (resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  };
+  const { LtvCalcInfo, infoItem } = useSendLtvCalc(scrollToResult);
 
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const resultRef = useRef<HTMLDivElement>(null);
   const {
     control,
     handleSubmit,
@@ -43,6 +50,10 @@ const LTVCalculator = () => {
     values: ltvCalc,
     mode: "onChange",
   });
+
+  useLayoutEffect(() => {
+    scrollToResult();
+  }, [infoItem]);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -179,6 +190,7 @@ const LTVCalculator = () => {
         </SelectBottomSheet>
       )}
 
+      <div ref={resultRef}></div>
       {/* <DevTool control={control} /> */}
     </div>
   );

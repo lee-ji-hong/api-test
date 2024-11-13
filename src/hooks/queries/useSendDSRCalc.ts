@@ -3,13 +3,15 @@ import { useMutation } from "@tanstack/react-query";
 import { sendDSRCalc } from "@/api/remotes";
 import { DSRCalculationResult, sendDSRCalcRequest } from "@/models";
 
-export const useSendDSRCalc = () => {
+export const useSendDSRCalc = (scrollCallback: () => void) => {
   const [infoItem, setInfoItem] = useState<DSRCalculationResult>();
 
   const { mutate: DSRCalcInfo } = useMutation<DSRCalculationResult, Error, sendDSRCalcRequest>({
     mutationFn: sendDSRCalc,
     onSuccess: (response) => {
+      console.log("생성 성공:", response);
       setInfoItem(response);
+      scrollCallback();
     },
     onError: (error) => {
       // setInfoItem({
@@ -27,6 +29,7 @@ export const useSendDSRCalc = () => {
   // infoItem 초기화 함수 추가
   const resetInfoItem = () => {
     setInfoItem(undefined); // infoItem을 초기값으로 초기화
+    console.log("infoItem 초기화");
   };
 
   return { DSRCalcInfo, infoItem, resetInfoItem };

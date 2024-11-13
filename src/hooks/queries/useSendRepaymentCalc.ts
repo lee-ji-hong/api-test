@@ -4,7 +4,7 @@ import { sendRepaymentCalc } from "@/api/remotes";
 import { RepaymentCalculationResult, sendRepaymentCalcRequest } from "@/models";
 // import { useNavigate } from "react-router-dom";
 
-export const useSendRepaymentCalc = () => {
+export const useSendRepaymentCalc = (scrollCallback: () => void) => {
   // const navigate = useNavigate();
   const [infoItem, setInfoItem] = useState<RepaymentCalculationResult>();
 
@@ -12,7 +12,7 @@ export const useSendRepaymentCalc = () => {
     mutationFn: sendRepaymentCalc,
     onSuccess: (response) => {
       setInfoItem(response);
-
+      scrollCallback();
       // router를 활용하여 특정페이지로 이동하기
       // navigate("/calculator/repaymentDetails", { state: { response } });
     },

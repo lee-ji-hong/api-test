@@ -3,13 +3,14 @@ import { useMutation } from "@tanstack/react-query";
 import { sendDtiCalc } from "@/api/remotes";
 import { sendDtiCalcRequest, DtiCalculationResult } from "@/models";
 
-export const useSendDtiCalc = () => {
+export const useSendDtiCalc = (scrollCallback: () => void) => {
   const [infoItem, setInfoItem] = useState<DtiCalculationResult>();
 
   const { mutate: DtiCalcInfo } = useMutation<DtiCalculationResult, Error, sendDtiCalcRequest>({
     mutationFn: sendDtiCalc,
     onSuccess: (response) => {
       setInfoItem(response);
+      scrollCallback();
     },
     onError: (error) => {
       setInfoItem({
