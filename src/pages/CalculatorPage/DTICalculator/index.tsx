@@ -54,7 +54,7 @@ const DTICalculator = () => {
   });
 
   useLayoutEffect(() => {
-    scrollToResult();
+    if (infoItem) scrollToResult();
   }, [infoItem]);
 
   useEffect(() => {

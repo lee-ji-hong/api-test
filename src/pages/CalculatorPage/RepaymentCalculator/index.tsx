@@ -54,7 +54,7 @@ const RepaymentCalculator = () => {
   });
 
   useLayoutEffect(() => {
-    scrollToResult();
+    if (infoItem) scrollToResult();
   }, [infoItem]);
 
   useEffect(() => {

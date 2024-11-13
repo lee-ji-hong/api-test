@@ -52,7 +52,7 @@ const LTVCalculator = () => {
   });
 
   useLayoutEffect(() => {
-    scrollToResult();
+    if (infoItem) scrollToResult();
   }, [infoItem]);
 
   useEffect(() => {

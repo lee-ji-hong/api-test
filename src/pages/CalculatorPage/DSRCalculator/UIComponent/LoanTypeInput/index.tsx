@@ -32,7 +32,7 @@ export const LoanTypeInput = () => {
   const { DSRCalcInfo, infoItem, resetInfoItem } = useSendDSRCalc(scrollToResult);
 
   useLayoutEffect(() => {
-    scrollToResult();
+    if (infoItem) scrollToResult();
   }, [infoItem]);
 
   return (
