@@ -41,7 +41,15 @@ const Input = forwardRef<HTMLInputElement, InputFieldProps>(
         <Text
           className={cx("txt-sub", { "text-alert": error })}
           text={
-            value === undefined ? "0만원" : error ? warningMessage : formattedAmount ? formatNumberWithUnits(value) : ""
+            value === undefined
+              ? `0${unit}`
+              : error
+                ? warningMessage
+                : formattedAmount
+                  ? unit === "만원"
+                    ? formatNumberWithUnits(value)
+                    : `${value}${unit}`
+                  : ""
           }
         />
       </>
