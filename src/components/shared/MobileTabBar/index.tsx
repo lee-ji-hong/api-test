@@ -22,7 +22,7 @@ const MobileTabBar = () => {
               }>
               {({ isActive }) => (
                 <>
-                  <SVGComponent title={alt} color={isActive ? "#4169E1" : "#333347"} />
+                  <SVGComponent title={alt} isActive={isActive} />
                   <div>{tabTitle}</div>
                 </>
               )}
