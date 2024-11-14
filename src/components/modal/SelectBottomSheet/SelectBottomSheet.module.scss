@@ -14,7 +14,7 @@
     position: fixed;
     bottom: -100%;
     width: 95%;
-    max-width: 900px;
+    // max-width: 900px;
     margin: 10px;
     background-color: white;
     padding: 20px;
@@ -22,6 +22,15 @@
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: bottom 0.4s ease-in-out; /* 부드러운 애니메이션 */
+
+    max-width: 90rem;
+    @include responsive("T") {
+      max-width: calc(100% - 16.8rem);
+    }
+    @include responsive("M") {
+      max-width: 100%;
+      padding: 0 20px;
+    }
   }
 
   .container.show {
