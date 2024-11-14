@@ -400,6 +400,7 @@ export interface DSRCalculationResult {
 
 export interface DSRCalculationResultDetail {
   serial: number;
+  loanDescription: string;
   principal: number;
   balance: number;
   term: number;
