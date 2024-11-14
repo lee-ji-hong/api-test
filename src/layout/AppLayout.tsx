@@ -16,6 +16,7 @@ import { reqLogin } from "@/api/remotes";
 
 import styles from "./AppLayout.module.scss";
 import classNames from "classnames/bind";
+import { LinearProgress } from "@mui/material";
 const cx = classNames.bind(styles);
 
 const AppLayout = () => {
@@ -45,7 +46,7 @@ const AppLayout = () => {
         <meta property="og:article:author" content="내집플랜" />
         <meta property="og:url" content="https://myzipplan.com/" />
       </Helmet>
-      {isLoading && <div className={cx("loading")}>로딩 중...</div>} {/* 로딩 컴포넌트 */}
+      {isLoading && <LinearProgress />} {/* 로딩 컴포넌트 */}
       {isLoginNeed && (
         <SelectBottomSheet
           modalTitle={`내집플랜에 로그인하고/n더 다양한 서비스를 확인해보세요!`}
