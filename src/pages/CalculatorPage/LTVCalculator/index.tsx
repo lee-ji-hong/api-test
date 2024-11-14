@@ -117,14 +117,39 @@ const LTVCalculator = () => {
   const handleReset = () => {
     reset();
   };
-  const content =
-    "LTV는 'Loan to Value'의 약자로, 대출금액과 부동산 가치의 비율을 나타냅니다. LTV는 대출 심사 시 중요한 지표로, 대출자가 얼마나 많은 자금을 담보로 제공하는지대출금액과 부동산 가치의 비율을 나타냅니다.";
+  const content = `
+  자산의 담보가치에 대한 대출 비율을 의미하며, 우리나라에서는 주택가격에 대한 대출 비율로 많이 알려져 있다.<br>
+  예를 들어 아파트 감정가격이 5억원이고 담보인정비율이 70%이면 금융기관으로부터 3억 5천만원의 주택담보대출을 받을 수 있다.<br>
+  [은행업 감독업무시행세칙]에서는 주택담보대출의 담보인정비율 산정방식을 다음과 같이 제시하고 있다.<br>
+  담보인정비율 = (주택담보대출 + 선순위채권 + 임차보증금 및 최우선변제 소액임차보증금) / 담보가치 × 100.<br>
+  여기서 담보가치는 다음 중 금융기관 자율로 선택하여 적용한다.<br>
+  ① 국세청 기준시가<br>
+  ② 한국감정원 등 전문감정기관의 감정평가액<br>
+  ③ 한국감정원의 층별·호별 격차율 지수로 산정한 가격<br>
+  ④ KB부동산시세의 일반거래가격<br>
+  당초 LTV(Loan to Value ratio) 규제는 은행권을 중심으로 내규에 반영하여 자율적으로 시행해 오다가,<br>
+  금융기관의 경영 안정성 유지, 주택가격 안정화 등을 위한 주택담보대출 규모의 관리 필요성이 제기되면서 감독규제 수단으로 도입되었다.<br>
+  최근에는 가계부채 증가 억제 및 부동산경기 조절 등 거시건전성정책 수단으로 활용되고 있으며,<br>
+  금융기관별, 지역별로 세분화하여 차등 적용되고 있다.<br>
+  한편, 금융기관은 담보인정비율(LTV)과 차주의 부채상환능력을 나타내는 총부채상환비율(DTI)을 함께 고려하여 대출규모를 결정한다.<br><br>
+  - 출처: 한국은행
+  `;
+
+  // HTML 태그 제거 함수
+  const stripHtml = (html: string) => {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || tempDiv.innerText || "";
+  };
+
+  const plainText = stripHtml(content); // HTML 태그 제거 후 텍스트 추출
+
   return (
     <div>
       <div className={cx("reason-box")}>
-        <Text className={cx("txt-title")} text="LTV란?" />
+        <Text className={cx("txt-title")} text="DSR이란?" />
         <div>
-          <span className={cx("txt-sub")}>{content.substring(0, 100)}...</span>
+          <span className={cx("txt-sub")}>{plainText.substring(0, 100)}...</span>
           <button onClick={() => setToggle(!toggle)}>
             <Text className={cx("txt-sub")} text={"\u00A0\u00A0\u00A0\u00A0더보기"} highlight="더보기" />
           </button>
@@ -186,7 +211,7 @@ const LTVCalculator = () => {
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="LTV란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
-          <span className={cx("txt-sub")}> {content} </span>
+          <span className={cx("txt-sub")} dangerouslySetInnerHTML={{ __html: content }} />
         </SelectBottomSheet>
       )}
 

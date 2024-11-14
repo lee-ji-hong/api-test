@@ -7,7 +7,6 @@ import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import Section02 from "@/components/shared/Section02";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
-import Text from "@/components/shared/Text";
 
 import { validateFormData } from "./validateFormData";
 import { periodState, repaymentCalcState } from "@/recoil/atoms";
@@ -31,7 +30,7 @@ const RepaymentCalculator = () => {
 
   const [bottomOffset, setBottomOffset] = useState(0);
   const [toggle, setToggle] = useState(false);
-
+  const [interestRate, setInterestRate] = useState(0);
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const resultRef = useRef<HTMLDivElement>(null);
   const scrollToResult = () => {
@@ -43,6 +42,7 @@ const RepaymentCalculator = () => {
   const { RepaymentCalcInfo, infoItem } = useSendRepaymentCalc(scrollToResult);
   const {
     control,
+    watch,
     handleSubmit,
     formState: { isSubmitting },
     setFocus,
@@ -56,6 +56,11 @@ const RepaymentCalculator = () => {
   useLayoutEffect(() => {
     if (infoItem) scrollToResult();
   }, [infoItem]);
+
+  const formValues = watch();
+  useEffect(() => {
+    setInterestRate(formValues.interestRatePercentage);
+  }, [formValues]); // 값이 변경될 때마다 실행
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -140,7 +145,7 @@ const RepaymentCalculator = () => {
   const content = "매월 얼마씩 갚아야하는지, 대출기간동안 총 상환 금액관 대출이자는 얼마인지 확인해 보세요.";
   return (
     <div>
-      <div className={cx("reason-box")}>
+      {/* <div className={cx("reason-box")}>
         <Text className={cx("txt-title")} text="대출 원리금 계산기란?" />
         <div>
           <span className={cx("txt-sub")}>{content.substring(0, 100)}...</span>
@@ -148,7 +153,7 @@ const RepaymentCalculator = () => {
             <Text className={cx("txt-sub")} text={"\u00A0\u00A0\u00A0\u00A0더보기"} highlight="더보기" />
           </button>
         </div>
-      </div>
+      </div> */}
       <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
         <>
           {INPUTS.map((item, ...rest) => {
@@ -199,7 +204,7 @@ const RepaymentCalculator = () => {
         <>
           <div ref={resultRef}></div>
           <div className={cx("hr")}></div>
-          <RepaymentCalcDetail {...infoItem} />
+          <RepaymentCalcDetail response={infoItem} interestRate={interestRate} />
         </>
       )}
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}

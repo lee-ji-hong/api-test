@@ -73,7 +73,7 @@ const LoanAddPage = () => {
     if (!validateFormData(data, setFocus)) return;
 
     const updatedFormData = {
-      ...data,
+      loanType: data.loanType,
       principal: (data.principal ?? 0) * 10000,
       interestRatePercentage: data.interestRatePercentage ?? 0,
       term: data.term ?? 0,

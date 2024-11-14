@@ -135,14 +135,30 @@ const DTICalculator = () => {
     setSelectedBadge(item);
   };
 
-  const content =
-    "DTI는 주택담보대출의 연간 원리금의 상환액과 기타 부채에 대해 연간 상환한 이자의 합을 연소득으로 나눈 비율을 말합니다. 담보대출을 받을 경우, 채무자의 소득 중 얼마나 대출 상환에 할애되는지를 나타냅니다. DTI가 높을수록 소득 대비 부채 부담이 큰 상태로, 금융기관은 DTI를 기준으로 대출 한도를 결정하여 채무자의 상환 능력을 평가합니다. ";
+  const content = `
+주택담보대출 차주의 원리금상환능력을 감안하여 주택담보대출 한도를 설정하기 위해 도입된 규제 비율이다.<br>
+[은행업 감독규정]에서는 동 비율을 “DTI = (해당 주택담보대출의 연간 원리금 상환액 + 기타부채의 연간 이자상환액) / 연소득 × 100” 방식으로 산정하도록 하고 있다.<br>
+DTI(Debt to Income ratio) 규제는 LTV 규제 강화의 후속조치로 2005년 8월 도입되었으며, 이는 차주의 소득수준과 관계없이 주택가격에 비례하여 주택담보대출 한도가 결정되는 LTV 규제의 문제점을 보완하고자 도입한 것이다.<br>
+특히 과도한 가계부채의 증가 억제 및 주택자금 수요 축소 등을 위해 DTI 비율을 특정수준 이내로 제한하기도 한다.<br>
+한편, DTI는 LTV와 함께 대표적인 거시건전성정책의 수단으로서 통화신용정책과 상호 보완적인 관계를 가지고 있다.<br>
+예를 들어 저금리 하에서 주택가격 상승세가 확대될 경우 DTI 및 LTV 규제를 강화하면 주택담보대출 한도가 축소되어 주택시장 과열을 억제하는 효과를 기대할 수 있다.<br><br>
+- 출처: 한국은행
+`;
+  // HTML 태그 제거 함수
+  const stripHtml = (html: string) => {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || tempDiv.innerText || "";
+  };
+
+  const plainText = stripHtml(content); // HTML 태그 제거 후 텍스트 추출
+
   return (
     <div>
       <div className={cx("reason-box")}>
-        <Text className={cx("txt-title")} text="DTI란?" />
+        <Text className={cx("txt-title")} text="DSR이란?" />
         <div>
-          <span className={cx("txt-sub")}>{content.substring(0, 100)}...</span>
+          <span className={cx("txt-sub")}>{plainText.substring(0, 100)}...</span>
           <button onClick={() => setToggle(!toggle)}>
             <Text className={cx("txt-sub")} text={"\u00A0\u00A0\u00A0\u00A0더보기"} highlight="더보기" />
           </button>
@@ -212,7 +228,7 @@ const DTICalculator = () => {
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="DTI란?" titleAlign="flex-start" onClose={() => setToggle(false)}>
-          <span className={cx("txt-sub")}> {content} </span>
+          <span className={cx("txt-sub")} dangerouslySetInnerHTML={{ __html: content }} />
         </SelectBottomSheet>
       )}
       <div ref={resultRef}></div>

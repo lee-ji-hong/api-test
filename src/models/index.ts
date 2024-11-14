@@ -357,7 +357,7 @@ export interface LoanStatus {
   gracePeriod: number;
   interestRatePercentage: number;
   isMetroArea: number;
-  interestRateType: number;
+  interestRateType: string;
 }
 
 export interface DtiCalcResponse {
@@ -400,6 +400,7 @@ export interface DSRCalculationResult {
 
 export interface DSRCalculationResultDetail {
   serial: number;
+  loanDescription: string;
   principal: number;
   balance: number;
   term: number;

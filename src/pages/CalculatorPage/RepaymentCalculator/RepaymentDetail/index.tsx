@@ -5,7 +5,13 @@ import { RepaymentCalculationResult } from "@/models";
 import { Divider } from "@mui/material";
 import { formatNumberWithUnits2 } from "@/utils/formatters";
 
-const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
+const RepaymentCalcDetail = ({
+  response,
+  interestRate,
+}: {
+  response: RepaymentCalculationResult;
+  interestRate: number;
+}) => {
   const cx = classNames.bind(styles);
 
   function formatCurrency(value: number): string {
@@ -18,7 +24,7 @@ const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
         총 원금 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}</span>
       </div>
       <div className={cx("title")}>
-        총 이자 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalPrincipal)}</span>
+        총 이자 <span className={cx("highlight")}>{formatNumberWithUnits2(response.totalInterest)}</span>
       </div>
       <div className={cx("title")}>
         총 상환 회차 <span className={cx("highlight")}>{response.totalInstallments}회</span>
@@ -27,7 +33,7 @@ const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
       <div className={cx("titleDescription")}>
         {`총 ${formatNumberWithUnits2(response.totalPrincipal)}을 
   ${response.totalInstallments}개월동안 
-  ${response.totalInterest}% 
+  ${interestRate}% 
   원리금균등 상환으로 대출받았을 때 첫달에는 ${formatNumberWithUnits2(response.repaymentSchedules[0].remainingPrincipal)} 
   마지막달에는 ${formatNumberWithUnits2(response.repaymentSchedules[response.totalInstallments - 1].remainingPrincipal)}을 갚아야합니다.`}
         <br />
@@ -62,15 +68,19 @@ const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
               </div>
             </div>
             <div className={cx("tableMonthColumn")}>
-              <div className={cx("textTotal")}>{formatCurrency(data.totalPayment + data.interestPayment)}원</div>
-              <div className={cx("text")}>원금 {formatCurrency(data.totalPayment)}원</div>
+              <div className={cx("textTotal")}>{formatCurrency(data.totalPayment)}원</div>
+              <div className={cx("text")}>원금 {formatCurrency(data.principalPayment)}원</div>
               <div className={cx("text")}>이자 {formatCurrency(data.interestPayment)}원</div>
             </div>
 
             <div className={cx("tableRestPriceColumn")}>
-              <div className={cx("textTotal")}>{formatCurrency(data.remainingPrincipal + data.principalPayment)}원</div>
-              <div className={cx("text")}>원금 {formatCurrency(data.remainingPrincipal)}원</div>
-              <div className={cx("text")}>이자 {formatCurrency(data.principalPayment)}원</div>
+              <div className={cx("textTotal")}>{formatCurrency(data.remainingPrincipal)}원</div>
+              <div className={cx("text")} style={{ visibility: "hidden" }}>
+                -
+              </div>
+              <div className={cx("text")} style={{ visibility: "hidden" }}>
+                -
+              </div>
             </div>
           </div>
         ))}
