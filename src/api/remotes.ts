@@ -66,14 +66,14 @@ export function getSpecificLoanAdvice(param: number) {
 
 //전세대출상품 추천 보고서 산출 - 최초 유입 유저
 export function sendLoanAdviceReportWithTempUser(requestBody: sendLoanAdviceReportRequest) {
-  return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, false, {
+  return Axios.post<SpecificLoanAdviceResponse>("/api/v1/loanAdvice", requestBody, false, {
     tempUserId: `temp_${getOrCreateUuid()}`,
   });
 }
 
 //전세대출상품 추천 보고서 산출 - 로그인 유저
 export function sendLoanAdviceReport(requestBody: sendLoanAdviceReportRequest) {
-  return Axios.post<LoanAdviceReportResponse>("/api/v1/loanAdvice", requestBody, true);
+  return Axios.post<SpecificLoanAdviceResponse>("/api/v1/loanAdvice", requestBody, true);
 }
 
 // 특정 전세대출상품 추천 보고서 산출

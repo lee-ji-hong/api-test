@@ -37,12 +37,11 @@ const Part02 = ({ reportData }: Part02Props) => {
 
   return (
     <>
-      {" "}
       <div className={cx("banner-container")}>
         <Image className={cx("left-img")} imageInfo={IMAGES?.Letter} />
         <Text
           className={cx("right-txt")}
-          text={`전세 대출금${formatNumberWithUnits(reportData?.loanAmount / 10000)}, 자기자금 ${formatNumberWithUnits(reportData?.ownFunds / 10000)}으로/n총 ${formatNumberWithUnits(reportData?.loanAmount + reportData?.ownFunds / 10000)}의 보증금을 충당할 수 있습니다.`}
+          text={`전세 대출금${formatNumberWithUnits(reportData?.loanAmount / 10000)}, 자기자금 ${formatNumberWithUnits(reportData?.ownFunds / 10000)}으로/n총 ${formatNumberWithUnits(Number(reportData?.loanAmount + reportData?.ownFunds) / 10000)}의 보증금을 충당할 수 있습니다.`}
         />
       </div>
       <div className={cx("box")}>

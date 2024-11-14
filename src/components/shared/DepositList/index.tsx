@@ -8,6 +8,7 @@ import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 
 import { useGetSpecificLoanAdvice } from "@/hooks/queries/useGetSpecificLoanAdvice";
+import { useSendSpecificLoanAdvice } from "@/hooks/queries/useSendSpecificLoanAdvice";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { formatNumberWithUnits } from "@/utils/formatters";
 import { getBankImage } from "@/utils/getBankImage";
@@ -22,6 +23,7 @@ const cx = classNames.bind(styles);
 type ColorType = "white" | "grey";
 interface ListProps {
   className?: string;
+  userInputInfoId?: number;
   list?: DepositLists[];
   color?: ColorType;
   isShow?: boolean;
@@ -42,31 +44,43 @@ const LoanInfoItem = ({
   color,
   isAlert,
   isFetch,
+  userInputInfoId,
 }: {
   item: DepositLists;
   color?: ColorType;
   isAlert?: boolean;
   isFetch?: boolean;
+  userInputInfoId?: number;
   onClick?: () => void;
   onClose?: () => void;
 }) => {
   const [resultId, setResultId] = useState<number>();
   const [modalOpen, setModalOpen] = useState(false);
   const { specificLoanAdvice, error } = useGetSpecificLoanAdvice(resultId ?? 0);
+  const { sendSpecificLoanData } = useSendSpecificLoanAdvice();
   const router = useInternalRouter();
   const location = useLocation();
 
   useEffect(() => {
     if (specificLoanAdvice) {
-      router.push(`/report`, { reportData: specificLoanAdvice, isRecent: true });
+      router.push(`/report/${resultId}`, { reportData: specificLoanAdvice, isRecent: true });
     }
     if (error) {
       console.error("조회 실패:", error);
     }
   }, [specificLoanAdvice, error]);
 
-  const handleAdviceReport = (param: number) => {
-    setResultId(param);
+  const handleAdviceReport = (id: number, code: string) => {
+    if (userInputInfoId) {
+      // console.log("리포트 출력", userInputInfoId);
+      sendSpecificLoanData({
+        userInputInfoId: userInputInfoId,
+        productCode: code,
+      });
+    } else {
+      // console.log("보증금 입력", id);
+      setResultId(id);
+    }
   };
 
   const handleRowClick = () => {
@@ -81,7 +95,7 @@ const LoanInfoItem = ({
     <>
       <div
         className={cx(["container-loaninfo", color, { "hover-enabled": isFetch }])}
-        onClick={() => isFetch && handleAdviceReport(item.loanAdviceResultId ?? 0)}>
+        onClick={() => isFetch && handleAdviceReport(item.loanAdviceResultId ?? 0, item.loanProductCode)}>
         <div className={cx(["container-loaninfo-top"])}>
           <div className={cx("container-txt-loaninfo")}>
             <div>
@@ -91,7 +105,7 @@ const LoanInfoItem = ({
             <Text className={cx("txt-loaninfo")} text={item.loanProductName} />
           </div>
           <div className={cx("container-loaninfo-money")}>
-            {location.pathname === "/report" ? (
+            {location.pathname.includes("/report") ? (
               <>
                 <div>
                   <span className={cx("txt-percent-limit")}>최소</span>
@@ -142,6 +156,7 @@ const LoanInfoItem = ({
 };
 
 export const DepositList = ({
+  userInputInfoId,
   list,
   className,
   color,
@@ -153,7 +168,16 @@ export const DepositList = ({
   const renderLoanInfoItems = (items: DepositLists[], start: number, end?: number) => {
     return items
       .slice(start, end || items.length)
-      .map((item, index) => <LoanInfoItem key={index} item={item} color={color} isAlert={isAlert} isFetch={isFetch} />);
+      .map((item, index) => (
+        <LoanInfoItem
+          key={index}
+          item={item}
+          userInputInfoId={userInputInfoId}
+          color={color}
+          isAlert={isAlert}
+          isFetch={isFetch}
+        />
+      ));
   };
 
   return (

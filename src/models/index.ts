@@ -79,7 +79,7 @@ export interface SpecificLoanAdviceResponse {
   code: number;
   status: string;
   message: string;
-  data: SpecificLoanAdvice[];
+  data: SpecificLoanAdvice;
 }
 
 export interface SpecificLoanAdvice {

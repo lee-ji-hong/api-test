@@ -66,8 +66,8 @@ function App() {
                 <Route path="terms-of-service" element={<TermsOfServicePage />} />
                 <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="community/recent-report" element={<CommunityRecentReportPage />} />
-                <Route path="report" element={<ReportPage />} />
-                <Route path="no-report" element={<NoReportPage />} />
+                <Route path="report/:id" element={<ReportPage />} />
+                <Route path="no-report/:id" element={<NoReportPage />} />
                 <Route path="login-success" element={<LoginSuccessPage />} />
                 <Route path="calculator" element={<CalculatorPage />} />
                 <Route path="calculator/dsrLoanAddPage" element={<LoanAddPage />} />

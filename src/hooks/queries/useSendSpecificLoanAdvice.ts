@@ -6,12 +6,16 @@ import { useInternalRouter } from "@/hooks/useInternalRouter";
 export const useSendSpecificLoanAdvice = () => {
   const router = useInternalRouter();
 
-  const { mutate: specificLoanAdvice } = useMutation<SpecificLoanAdviceResponse, Error, sendSpecificLoanAdviceRequest>({
+  const { mutate: sendSpecificLoanData } = useMutation<
+    SpecificLoanAdviceResponse,
+    Error,
+    sendSpecificLoanAdviceRequest
+  >({
     mutationFn: async (requestBody) => {
       return await sendSpecificLoanAdvice(requestBody);
     },
     onSuccess: (data) => {
-      router.push(`/report`, { reportData: data, isRecent: true });
+      router.push(`/report/${data.data.userInputInfoId}`, { reportData: data, isRecent: true });
     },
     retry: 0,
     onError: (error) => {
@@ -19,5 +23,5 @@ export const useSendSpecificLoanAdvice = () => {
     },
   });
 
-  return { specificLoanAdvice };
+  return { sendSpecificLoanData };
 };

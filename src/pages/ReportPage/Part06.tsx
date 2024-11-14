@@ -37,6 +37,7 @@ const Part06 = ({ reportData }: Part06Props) => {
         list={eligibleProduct?.slice().sort((a, b) => a.expectedLoanRate - b.expectedLoanRate) || MOCK}
         isShow={eligibleProduct.length > 3}
         toggle={showMoreDepositList}
+        userInputInfoId={reportData?.userInputInfoId}
         isFetch={true}
         color="white"
       />

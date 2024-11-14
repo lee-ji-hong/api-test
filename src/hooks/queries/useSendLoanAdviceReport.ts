@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import { sendLoanAdviceReportWithTempUser, sendLoanAdviceReport } from "@/api/remotes";
-import { LoanAdviceReportResponse, sendLoanAdviceReportRequest } from "@/models";
+import { SpecificLoanAdviceResponse, sendLoanAdviceReportRequest } from "@/models";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { LOGIN_REDIRECT } from "@/constants/loginLanding";
 import { setLoginRedirectPath } from "@/utils/localStorage";
@@ -14,7 +14,7 @@ export const useSendLoanAdviceReport = () => {
   const router = useInternalRouter();
   const { auth } = useAuth();
 
-  const { mutate: loanAdviceReport } = useMutation<LoanAdviceReportResponse, Error, sendLoanAdviceReportRequest>({
+  const { mutate: loanAdviceReport } = useMutation<SpecificLoanAdviceResponse, Error, sendLoanAdviceReportRequest>({
     mutationFn: (requestBody) => {
       if (!uuid) {
         return sendLoanAdviceReportWithTempUser(requestBody);
@@ -29,9 +29,9 @@ export const useSendLoanAdviceReport = () => {
     },
     onSuccess: (data) => {
       if (data.status === "NO_CONTENT") {
-        router.push(`/no-report`, { reportData: data });
+        router.push(`/no-report/${data.data.userInputInfoId}`, { reportData: data });
       } else {
-        router.push(`/report`, { reportData: data, isRecent: false });
+        router.push(`/report/${data.data.userInputInfoId}`, { reportData: data, isRecent: false });
       }
     },
     retry: 0,
