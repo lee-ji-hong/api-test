@@ -52,7 +52,7 @@ const HomePage = () => {
             <Spacing size={18} />
             <Text className={cx("txt-box")} text="최신 정보를 바탕으로/n맞춤형 대출 솔루션을 제공받으세요" />
             <Spacing size={52} />
-            <Image className={cx("top-img")} imageInfo={IMAGES?.Onboarding_1} />
+            <Image className={cx("top-img-1")} imageInfo={IMAGES?.Onboarding_1} />
           </Section01>
           <Box>
             <div>
