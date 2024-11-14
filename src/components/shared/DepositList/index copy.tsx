@@ -91,17 +91,13 @@ const LoanInfoItem = ({
             <Text className={cx("txt-loaninfo")} text={item.loanProductName} />
           </div>
           <div className={cx("container-loaninfo-money")}>
-            {location.pathname === "/report" ? (
+            {location.pathname !== `/report` ? (
               <>
                 <div>
                   <span className={cx("txt-percent-limit")}>최소</span>
                   <span className={cx("txt-percent")}>{item.expectedLoanRate}%</span>
                 </div>
-                <div>
-                  <span className={cx("txt-loaninfo")}>최대&nbsp;&nbsp;</span>
-                  <span
-                    className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit / 10000)}`}</span>
-                </div>
+                <span className={cx("txt-loaninfo")}>{`${formatNumberWithUnits(item.possibleLoanLimit / 10000)}`}</span>
               </>
             ) : (
               <>
@@ -111,7 +107,6 @@ const LoanInfoItem = ({
             )}
           </div>
         </div>
-        <Spacing size={10} />
         {isAlert && Array.isArray(item?.notEligibleReasons) && item?.notEligibleReasons[0] !== "" && (
           <div className={cx("container-loaninfo-bottom")} onClick={handleRowClick}>
             <Image className={cx("img-info")} imageInfo={IMAGES.Information} />
