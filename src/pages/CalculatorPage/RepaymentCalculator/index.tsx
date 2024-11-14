@@ -31,7 +31,7 @@ const RepaymentCalculator = () => {
 
   const [bottomOffset, setBottomOffset] = useState(0);
   const [toggle, setToggle] = useState(false);
-
+  const [interestRate, setInterestRate] = useState(0);
   const inputRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const resultRef = useRef<HTMLDivElement>(null);
   const scrollToResult = () => {
@@ -43,6 +43,7 @@ const RepaymentCalculator = () => {
   const { RepaymentCalcInfo, infoItem } = useSendRepaymentCalc(scrollToResult);
   const {
     control,
+    watch,
     handleSubmit,
     formState: { isSubmitting },
     setFocus,
@@ -56,6 +57,11 @@ const RepaymentCalculator = () => {
   useLayoutEffect(() => {
     if (infoItem) scrollToResult();
   }, [infoItem]);
+
+  const formValues = watch();
+  useEffect(() => {
+    setInterestRate(formValues.interestRatePercentage);
+  }, [formValues]); // 값이 변경될 때마다 실행
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -199,7 +205,7 @@ const RepaymentCalculator = () => {
         <>
           <div ref={resultRef}></div>
           <div className={cx("hr")}></div>
-          <RepaymentCalcDetail {...infoItem} />
+          <RepaymentCalcDetail response={infoItem} interestRate={interestRate} />
         </>
       )}
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}

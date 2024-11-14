@@ -5,7 +5,13 @@ import { RepaymentCalculationResult } from "@/models";
 import { Divider } from "@mui/material";
 import { formatNumberWithUnits2 } from "@/utils/formatters";
 
-const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
+const RepaymentCalcDetail = ({
+  response,
+  interestRate,
+}: {
+  response: RepaymentCalculationResult;
+  interestRate: number;
+}) => {
   const cx = classNames.bind(styles);
 
   function formatCurrency(value: number): string {
@@ -27,7 +33,7 @@ const RepaymentCalcDetail = (response: RepaymentCalculationResult) => {
       <div className={cx("titleDescription")}>
         {`총 ${formatNumberWithUnits2(response.totalPrincipal)}을 
   ${response.totalInstallments}개월동안 
-  ${response.totalInterest}% 
+  ${interestRate}% 
   원리금균등 상환으로 대출받았을 때 첫달에는 ${formatNumberWithUnits2(response.repaymentSchedules[0].remainingPrincipal)} 
   마지막달에는 ${formatNumberWithUnits2(response.repaymentSchedules[response.totalInstallments - 1].remainingPrincipal)}을 갚아야합니다.`}
         <br />
