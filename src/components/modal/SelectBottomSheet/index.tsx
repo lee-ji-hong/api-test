@@ -22,6 +22,11 @@ export const SelectBottomSheet = forwardRef<HTMLUListElement, SelectBottomSheetP
 
     useEffect(() => {
       setIsVisible(true);
+      document.body.style.overflow = "hidden"; // 부모 스크롤 막기
+
+      return () => {
+        document.body.style.overflow = "auto"; // 컴포넌트 언마운트 시 스크롤 다시 활성화
+      };
     }, []);
 
     const handleClose = (isBackdropClick?: boolean) => {
