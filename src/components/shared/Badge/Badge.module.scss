@@ -37,8 +37,9 @@
     background-color: $grey800;
     color: $white;
     &:hover {
-      background-color: $grey700;
+      // background-color: $grey700;
       transition: background-color 0.3s ease;
+      opacity: 30%;
     }
   }
 

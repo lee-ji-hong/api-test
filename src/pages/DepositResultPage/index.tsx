@@ -6,9 +6,7 @@ import DepositList from "@/components/shared/DepositList";
 import Spacing from "@/components/shared/Spacing";
 import Header from "@/components/sections/Header";
 import Button from "@/components/shared/Button";
-import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
-import { IMAGES } from "@/constants/images";
 
 import { formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
@@ -16,6 +14,7 @@ import { formData } from "@/recoil/atoms";
 // import { rentalProductData } from "./mock";
 import classNames from "classnames/bind";
 import styles from "./DepositResultPage.module.scss";
+import Badge from "@/components/shared/Badge";
 const cx = classNames.bind(styles);
 
 export const DepositResultPage = () => {
@@ -26,8 +25,7 @@ export const DepositResultPage = () => {
   const router = useInternalRouter();
   const { rentalProductData } = location.state || {};
   const [sortedData, setSortedData] = useState(rentalProductData);
-  const [sortType, setSortType] = useState("lowRate");
-  const [isOpen, setIsOpen] = useState(false);
+  const [sortType, setSortType] = useState("한도순");
 
   useEffect(() => {
     if (!rentalDeposit || rentalDeposit === 0 || !rentalProductData) {
@@ -41,9 +39,9 @@ export const DepositResultPage = () => {
       return;
     }
     const sorted = [...rentalProductData].sort((a, b) => {
-      if (type === "lowRate") {
+      if (type === "금리순") {
         return a.expectedLoanRate - b.expectedLoanRate || b.possibleLoanLimit - a.possibleLoanLimit;
-      } else if (type === "highLimit") {
+      } else if (type === "한도순") {
         return b.possibleLoanLimit - a.possibleLoanLimit || a.expectedLoanRate - b.expectedLoanRate;
       }
       return 0;
@@ -53,7 +51,6 @@ export const DepositResultPage = () => {
 
   const handleSelectOption = (value: string) => {
     setSortType(value);
-    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -74,19 +71,16 @@ export const DepositResultPage = () => {
         <Spacing size={8} />
         <Text className={cx("txt-sub")} text="추가 정보를 입력하고/n맞춤형 전월세대출을 알아보세요" />
         <Spacing size={20} />
-        <div className={cx("filter-wrap")}>
-          <div className={cx("filter-container")} onClick={() => setIsOpen(!isOpen)}>
-            <div className={cx("filter-select")}>
-              <Text className={cx("txt-sub")} text={sortType === "lowRate" ? "금리 낮은 순" : "한도 높은 순"} />
-              <Image className={cx("arrow")} imageInfo={isOpen ? IMAGES.Down : IMAGES.Up} />
-            </div>
-            {isOpen && (
-              <ul className={cx("options")}>
-                <li onClick={() => handleSelectOption("lowRate")}>금리 낮은 순</li>
-                <li onClick={() => handleSelectOption("highLimit")}>한도 높은 순</li>
-              </ul>
-            )}
-          </div>
+        <div className={cx("container")}>
+          {["한도순", "금리순"].map((item, index) => (
+            <Badge
+              className={cx("badge")}
+              key={index}
+              title={item}
+              onClick={() => handleSelectOption(item)}
+              theme={item === sortType ? "dark" : "white"}
+            />
+          ))}
         </div>
         <DepositList list={sortedData} color="white" />
         <Spacing size={100} />

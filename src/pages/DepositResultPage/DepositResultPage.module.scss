@@ -53,6 +53,13 @@
     transform: translateX(-50%);
     transition: bottom 0.3s ease;
   }
+
+  .badge {
+    width: auto !important;
+    height: auto !important;
+    padding: 6px 14px;
+    margin-right: 4px;
+  }
 }
 
 .filter-wrap {
