@@ -131,10 +131,10 @@ export const INPUTS = [
   },
   {
     id: 11,
-    label: "주택 소유 형태",
+    label: "주택 소유 상태",
     name: "houseOwnershipType",
     value: "",
-    modalTitle: "주택 소유 형태를 선택해주세요",
+    modalTitle: "주택 소유 상태를 선택해주세요",
     options: [
       { label: "무주택", value: "NO_HOUSE" },
       { label: "1주택", value: "SINGLE_HOUSE" },
@@ -144,10 +144,10 @@ export const INPUTS = [
   },
   {
     id: 12,
-    label: "주택유형",
+    label: "임차주택 유형",
     name: "rentHousingType",
     value: "",
-    modalTitle: "주택유형을 선택하세요",
+    modalTitle: "임차주택 유형을 선택하세요",
     options: [
       { label: "아파트", value: "APARTMENT" },
       { label: "오피스텔", value: "OFFICETEL" },
@@ -158,10 +158,10 @@ export const INPUTS = [
   },
   {
     id: 13,
-    label: "주택정보",
+    label: "임차주택 주소",
     name: "jibun",
     value: "",
-    modalTitle: "주택정보를 찾아주세요",
+    modalTitle: "임차주택 주소를 찾아주세요",
     component: AddressSearchInputControllter,
   },
 ];
