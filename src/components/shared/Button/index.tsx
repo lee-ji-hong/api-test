@@ -15,7 +15,7 @@ interface ButtonProps {
   disabled?: boolean;
   title?: string;
   bottom?: number;
-  theme?: "primary" | "light";
+  theme?: "primary" | "light" | "yellow";
 }
 
 const Button = ({

@@ -58,6 +58,17 @@
       cursor: pointer;
     }
   }
+
+  &.yellow {
+    background-color: $yellow500;
+    color: $grey900;
+
+    &:hover {
+      transition: opacity 0.3s ease;
+      opacity: 30%;
+      cursor: pointer;
+    }
+  }
 }
 
 .dual-button-container {

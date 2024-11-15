@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
+import { LinearProgress } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useLayoutEffect } from "react";
 import { useRecoilState } from "recoil";
@@ -6,8 +7,8 @@ import Axios from "@/api/axios";
 
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
 import MobileTabBar from "@/components/shared/MobileTabBar";
-import Button from "@/components/shared/Button";
 import Image from "@/components/shared/Image";
+import Text from "@/components/shared/Text";
 
 import { loadingState, loginState } from "@/recoil/atoms";
 import { IMAGES } from "@/constants/images";
@@ -16,7 +17,6 @@ import { reqLogin } from "@/api/remotes";
 
 import styles from "./AppLayout.module.scss";
 import classNames from "classnames/bind";
-import { LinearProgress } from "@mui/material";
 const cx = classNames.bind(styles);
 
 const AppLayout = () => {
@@ -54,16 +54,21 @@ const AppLayout = () => {
           onClose={() => setIsLoginNeed(false)}>
           <>
             <div className={cx("img-wrap")}>
-              <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_1} />
+              <Image className={cx("img")} imageInfo={IMAGES?.Letter} />
             </div>
-            <Button
-              subClassName={cx("button-container")}
-              onClick={() => {
-                setIsLoginNeed(false);
-                reqLogin();
-              }}
-              title="카카오로 3초만에 로그인"
-            />
+            <div>
+              <button
+                className={cx(["button-container", "yellow"])}
+                onClick={() => {
+                  setIsLoginNeed(false);
+                  reqLogin();
+                }}>
+                <div className={cx("button-text-wrap")}>
+                  <Image className={cx("img")} imageInfo={IMAGES?.KAKAO_icon} />
+                  <Text text="카카오로 3초만에 로그인" />
+                </div>
+              </button>
+            </div>
           </>
         </SelectBottomSheet>
       )}
