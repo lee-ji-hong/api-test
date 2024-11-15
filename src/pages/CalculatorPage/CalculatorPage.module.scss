@@ -1,5 +1,15 @@
 .header {
   justify-content: flex-start !important;
+  p {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    font-family: Pretendard;
+    color: $grey800;
+  }
 }
 
 .badge {
