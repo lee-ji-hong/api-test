@@ -93,9 +93,9 @@ export const INPUTS = [
       max: { value: 10000000, ment: "1,000억원 이하로 입력이 가능합니다." },
     },
     options: [
+      { label: "+10만", value: 10 },
+      { label: "+100만", value: 100 },
       { label: "+1000만", value: 1000 },
-      { label: "+1억", value: 10000 },
-      { label: "+10억", value: 100000 },
     ],
     component: InputController,
   },
