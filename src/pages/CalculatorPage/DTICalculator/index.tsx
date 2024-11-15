@@ -21,6 +21,7 @@ import { INPUTS } from "./INPUTS";
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
 import { useLayoutEffect } from "react";
+import { formatNumber } from "@/utils/formatters";
 const cx = classNames.bind(styles);
 
 const DTICalculator = () => {
@@ -102,12 +103,17 @@ const DTICalculator = () => {
   }, [isKeyboardModalOpen, bottomOffset]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
     if (!validateFormData(data, setFocus)) return;
     setContents((prev) => ({
       ...prev,
       details: {
         ...prev.details,
-        // collateralValue: data.collateralValue,
+        annualIncome: data.annualIncome * 10000,
+        loanAmount: data.loanAmount * 10000,
+        interestRate: data.interestRate,
+        loanTerm: data.loanTerm,
+        yearlyLoanInterestRepayment: data.yearlyLoanInterestRepayment * 10000,
         repaymentType: getLabelFromOptions(data.repaymentType, repaymentOptions) as string,
       },
     }));
@@ -115,8 +121,8 @@ const DTICalculator = () => {
       ...data,
       annualIncome: (data.annualIncome ?? 0) * 10000,
       loanAmount: (data.loanAmount ?? 0) * 10000,
-      interestRate: (data.interestRate ?? 0) * 10000,
-      loanTerm: (data.loanTerm ?? 0) * 10000,
+      interestRate: data.interestRate ?? 0,
+      loanTerm: data.loanTerm ?? 0,
       yearlyLoanInterestRepayment: (data.yearlyLoanInterestRepayment ?? 0) * 10000,
     };
     DtiCalcInfo(updatedFormData as sendDtiCalcRequest);
@@ -210,21 +216,26 @@ DTI(Debt to Income ratio) 규제는 LTV 규제 강화의 후속조치로 2005년
         </>
       </form>
 
-      {infoItem && (
-        <>
-          <div className={cx("hr")}></div>
-          <ResultInfo contents={contents}>
-            <div className={cx("box-txt-container")}>
-              <Text className={cx("box-txt-left")} text="LTV" />
-              <Text className={cx("box-txt-right")} text={infoItem?.dtiRatio} />
-            </div>
-            <div className={cx("box-txt-container")}>
-              <Text className={cx("box-txt-left")} text="예상대출가능금액" />
-              <Text className={cx("box-txt-right")} text={infoItem?.annualRepaymentAmount} />
-            </div>
-          </ResultInfo>
-        </>
-      )}
+      {infoItem &&
+        (console.log(`21asd${infoItem.annualIncome}`),
+        (
+          <>
+            <div className={cx("hr")}></div>
+            <ResultInfo
+              availableLoanAmount={infoItem.annualRepaymentInterest}
+              ltvRatio={infoItem.dtiRatio}
+              contents={contents}>
+              <div className={cx("box-txt-container")}>
+                <Text className={cx("box-txt-left")} text="DTI" />
+                <Text className={cx("box-txt-right")} text={infoItem?.dtiRatio + "%"} />
+              </div>
+              <div className={cx("box-txt-container")}>
+                <Text className={cx("box-txt-left")} text="연 원리금 상환액" />
+                <Text className={cx("box-txt-right")} text={formatNumber(infoItem?.annualRepaymentAmount) + "원"} />
+              </div>
+            </ResultInfo>
+          </>
+        ))}
       {isKeyboardModalOpen ? <Spacing size={bottomOffset} /> : <Spacing size={70} />}
       {toggle && (
         <SelectBottomSheet modalTitle="DTI란?" titleAlign="flex-start" onClose={() => setToggle(false)}>

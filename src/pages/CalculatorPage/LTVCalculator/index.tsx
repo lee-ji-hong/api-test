@@ -21,6 +21,7 @@ import { INPUTS } from "./INPUTS";
 import styles from "../CalculatorPage.module.scss";
 import classNames from "classnames/bind";
 import { useLayoutEffect } from "react";
+import { formatNumber } from "@/utils/formatters";
 const cx = classNames.bind(styles);
 
 const LTVCalculator = () => {
@@ -196,14 +197,17 @@ const LTVCalculator = () => {
       {infoItem && (
         <>
           <div className={cx("hr")}></div>
-          <ResultInfo contents={contents}>
+          <ResultInfo
+            contents={contents}
+            ltvRatio={infoItem?.ltvRatio}
+            availableLoanAmount={infoItem?.possibleLoanAmount}>
             <div className={cx("box-txt-container")}>
               <Text className={cx("box-txt-left")} text="LTV" />
-              <Text className={cx("box-txt-right")} text={infoItem?.ltvRatio} />
+              <Text className={cx("box-txt-right")} text={infoItem?.ltvRatio + "%"} />
             </div>
             <div className={cx("box-txt-container")}>
               <Text className={cx("box-txt-left")} text="예상대출가능금액" />
-              <Text className={cx("box-txt-right")} text={infoItem?.possibleLoanAmount} />
+              <Text className={cx("box-txt-right")} text={formatNumber(infoItem?.possibleLoanAmount) + "원"} />
             </div>
           </ResultInfo>
         </>

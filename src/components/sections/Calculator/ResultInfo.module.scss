@@ -3,12 +3,29 @@
     p {
       color: $grey800;
 
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 20.8px;
-      letter-spacing: -0.8px;
+      font-family: Pretendard;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 30.8px;
+      letter-spacing: -0.800000011920929px;
       text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
     }
+  }
+  .textContainer {
+    display: flex;
+  }
+  .textValue {
+    color: #4169e1;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30.8px;
+    letter-spacing: -0.800000011920929px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
   }
 
   .text-sub {

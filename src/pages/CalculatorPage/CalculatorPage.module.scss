@@ -141,10 +141,17 @@
   letter-spacing: -0.8px;
   margin-bottom: 16px;
   .box-txt-left {
-    color: $grey500;
+    color: #86869a;
   }
 
   .box-txt-right {
-    color: $grey800;
+    color: #333347;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18.2px;
+    letter-spacing: -0.800000011920929px;
+    text-align: right;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
   }
 }
