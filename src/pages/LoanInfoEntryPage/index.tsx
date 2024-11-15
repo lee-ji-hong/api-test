@@ -88,11 +88,13 @@ export const LoanInfoEntryPage = () => {
   const handleRowClick = (item: number) => {
     setSelectedItem(item);
     setModalOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const handleModalClose = () => {
     setModalOpen(false);
     setSelectedItem(null);
+    document.body.style.overflow = "auto";
   };
 
   const handleInputComplete = (name: string, id: number) => {

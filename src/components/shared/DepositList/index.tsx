@@ -85,10 +85,12 @@ const LoanInfoItem = ({
 
   const handleRowClick = () => {
     setModalOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const handleModalClose = () => {
     setModalOpen(false);
+    document.body.style.overflow = "auto";
   };
 
   return (
