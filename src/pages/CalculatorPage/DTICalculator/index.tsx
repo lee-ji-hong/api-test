@@ -156,7 +156,7 @@ DTI(Debt to Income ratio) 규제는 LTV 규제 강화의 후속조치로 2005년
   return (
     <div>
       <div className={cx("reason-box")}>
-        <Text className={cx("txt-title")} text="DSR이란?" />
+        <Text className={cx("txt-title")} text="DTI란?" />
         <div>
           <span className={cx("txt-sub")}>{plainText.substring(0, 100)}...</span>
           <button onClick={() => setToggle(!toggle)}>

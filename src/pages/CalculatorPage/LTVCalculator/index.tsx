@@ -147,7 +147,7 @@ const LTVCalculator = () => {
   return (
     <div>
       <div className={cx("reason-box")}>
-        <Text className={cx("txt-title")} text="DSR이란?" />
+        <Text className={cx("txt-title")} text="LTV란?" />
         <div>
           <span className={cx("txt-sub")}>{plainText.substring(0, 100)}...</span>
           <button onClick={() => setToggle(!toggle)}>
