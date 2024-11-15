@@ -1,7 +1,9 @@
 import Spacing from "@/components/shared/Spacing";
 import { LoanStatus } from "@/models";
+import { periodState } from "@/recoil/atoms";
 import { formatNumberWithUnits2 } from "@/utils/formatters";
 import classNames from "classnames/bind";
+import { useRecoilValue } from "recoil";
 import style from "./LoanItem.module.scss";
 
 export const LoanItem = (data: LoanStatus) => {
@@ -22,7 +24,8 @@ export const LoanItem = (data: LoanStatus) => {
     OTHER_LOAN: "기타대출",
   } as const;
 
-  console.log("data", data.gracePeriod);
+  const period = useRecoilValue(periodState);
+  const periodUnit = period === "년" ? "년" : "개월";
   return (
     <div className={cx("container")}>
       <div className={cx("title")}> {loanTypeMapping[data.loanType as keyof typeof loanTypeMapping] || ""}</div>
@@ -52,12 +55,12 @@ export const LoanItem = (data: LoanStatus) => {
       <Spacing size={14} />
       <div className={cx("itemContainer")}>
         <div className={cx("text1")}>대출기간</div>
-        <div className={cx("text2")}>{data.term}</div>
+        <div className={cx("text2")}>{data.term + periodUnit}</div>
       </div>
       <Spacing size={14} />
       <div className={cx("itemContainer")}>
         <div className={cx("text1")}>대출거치기간</div>
-        <div className={cx("text2")}>{data.gracePeriod}</div>
+        <div className={cx("text2")}>{data.gracePeriod + periodUnit}</div>
       </div>
       <Spacing size={14} />
       <div className={cx("itemContainer")}>

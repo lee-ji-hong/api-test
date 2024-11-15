@@ -25,7 +25,7 @@ const RepaymentCalculator = () => {
   const [ReapymentCalc] = useRecoilState<sendRepaymentCalcRequest>(repaymentCalcState);
   const [focusedInput, setFocusedInput] = useState("");
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
-  const [, setSelectedBadge] = useRecoilState(periodState);
+  const [selectedBadge, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   const [bottomOffset, setBottomOffset] = useState(0);
@@ -108,21 +108,13 @@ const RepaymentCalculator = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!validateFormData(data, setFocus)) return;
-    // setContents((prev) => ({
-    //   ...prev,
-    //   details: {
-    //     ...prev.details,
-    //     // collateralValue: data.collateralValue,
-    //     repaymentType: getLabelFromOptions(data.repaymentType, repaymentOptions) as string,
-    //   },
-    // }));
 
     const updatedFormData = {
       ...data,
       principal: (data.principal ?? 0) * 10000,
       interestRatePercentage: data.interestRatePercentage ?? 0,
-      term: data.term ?? 0,
-      gracePeriod: data.gracePeriod ?? 0,
+      term: selectedBadge == "년" ? data.term * 12 : data.term,
+      gracePeriod: selectedBadge == "년" ? data.gracePeriod * 12 : data.gracePeriod,
       repaymentType: data.repaymentType ?? "",
       maturityPaymentAmount: (data.principal ?? 0) * 10000,
     };

@@ -1,10 +1,12 @@
 import Spacing from "@/components/shared/Spacing";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import Text from "@/components/shared/Text";
+import { periodState } from "@/recoil/atoms";
 import { formatNumber, formatNumberWithUnits2 } from "@/utils/formatters";
 import { Divider } from "@mui/material";
 
 import classNames from "classnames/bind";
+import { useRecoilValue } from "recoil";
 import styles from "./ResultInfo.module.scss";
 const cx = classNames.bind(styles);
 
@@ -28,6 +30,7 @@ const ResultInfo = ({
   availableLoanAmount: number;
   contents: Contents;
 }) => {
+  const periodUnit = useRecoilValue(periodState);
   const getLabelForKey = (key: string) => {
     switch (key) {
       case "loanPurpose":
@@ -63,6 +66,9 @@ const ResultInfo = ({
       (key === "annualIncome" || key === "loanAmount" || key === "yearlyLoanInterestRepayment")
     ) {
       return formatNumber(value) + "원";
+    } else if (getLabelForKey(key) === "대출 기간") {
+      const unit = periodUnit === "년" ? "년" : "개월";
+      return value + unit;
     } else if (typeof value === "number") {
       return formatNumber(value); // 숫자를 천 단위로 포맷팅
     }

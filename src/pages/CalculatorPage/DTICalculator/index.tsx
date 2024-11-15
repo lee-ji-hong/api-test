@@ -28,7 +28,7 @@ const DTICalculator = () => {
   const [DtiCalc] = useRecoilState<sendDtiCalcRequest>(dtiCalcState);
   const [focusedInput, setFocusedInput] = useState("");
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
-  const [, setSelectedBadge] = useRecoilState(periodState);
+  const [selectedBadge, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [contents, setContents] = useState(resultState);
   const [bottomOffset, setBottomOffset] = useState(0);
@@ -112,7 +112,7 @@ const DTICalculator = () => {
         annualIncome: data.annualIncome * 10000,
         loanAmount: data.loanAmount * 10000,
         interestRate: data.interestRate,
-        loanTerm: data.loanTerm,
+        loanTerm: selectedBadge === "년" ? data.loanTerm * 12 : data.loanTerm,
         yearlyLoanInterestRepayment: data.yearlyLoanInterestRepayment * 10000,
         repaymentType: getLabelFromOptions(data.repaymentType, repaymentOptions) as string,
       },
@@ -122,7 +122,7 @@ const DTICalculator = () => {
       annualIncome: (data.annualIncome ?? 0) * 10000,
       loanAmount: (data.loanAmount ?? 0) * 10000,
       interestRate: data.interestRate ?? 0,
-      loanTerm: data.loanTerm ?? 0,
+      loanTerm: selectedBadge === "년" ? data.loanTerm * 12 : data.loanTerm,
       yearlyLoanInterestRepayment: (data.yearlyLoanInterestRepayment ?? 0) * 10000,
     };
     DtiCalcInfo(updatedFormData as sendDtiCalcRequest);
