@@ -30,6 +30,7 @@ const DepositEntryPage = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [inputValue, setInputValue] = useState<number>(0);
   const [bottomOffset, setBottomOffset] = useState(0);
+  const [gap, setGap] = useState(0);
   const { loanAdviceInfo } = useGetLoanAdvice();
   const { height } = useWindowSize();
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
@@ -44,8 +45,10 @@ const DepositEntryPage = () => {
 
       if (!isInputFocused) {
         setBottomOffset(70);
+        setGap(0);
       } else {
-        const newBottomOffset = height < 668 ? height * 0.4 + 15 : height * 0.4 + 45;
+        const newBottomOffset = height < 668 ? height * 0.4 + 15 : height < 900 ? height * 0.4 + 25 : height * 0.4 + 45;
+        setGap(height - newBottomOffset - 56 - 180);
         setBottomOffset(newBottomOffset);
       }
     };
@@ -110,9 +113,9 @@ const DepositEntryPage = () => {
       <Header className={cx("cancel")} onRightClick={() => router.push("/settings")} right="Setting_btn" left="Logo" />
       <Spacing size={53} />
       <div className={cx("container")}>
-        <Spacing size={90} />
+        <Spacing size={gap === 0 ? 90 : Math.floor(gap / 3)} />
         <Text className={cx("txt-title")} text="전월세보증금은?" />
-
+        <Spacing size={4} />
         <div className={cx("input-container")}>
           <input
             className={cx("input", { shake: isInvalidValue })}
@@ -125,13 +128,19 @@ const DepositEntryPage = () => {
             readOnly={true}
           />
         </div>
-
         <Text
-          className={cx("txt-sub", { "text-alert": isInvalidValue })}
-          text={inputValue === 0 ? "" : isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
+          className={cx(
+            "txt-sub",
+            { "text-alert": isInvalidValue },
+            {
+              "text-zero": inputValue === 0,
+            },
+          )}
+          text={inputValue === 0 ? "-" : isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
         />
-        <Spacing size={45} />
+        <Spacing size={24} />
         <BadgeList list={MONEY} onClick={handleChangeValue} />
+        <Spacing size={gap === 0 ? 60 : Math.floor(gap / 2)} />
 
         {!isInputFocused ? (
           <>
