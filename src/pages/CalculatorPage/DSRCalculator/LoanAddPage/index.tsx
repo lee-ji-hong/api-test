@@ -24,7 +24,7 @@ const LoanAddPage = () => {
   const [ReapymentCalc] = useRecoilState<sendRepaymentCalcRequest>(repaymentCalcState);
   const [focusedInput, setFocusedInput] = useState("");
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
-  const [, setSelectedBadge] = useRecoilState(periodState);
+  const [selectedBadge, setSelectedBadge] = useRecoilState(periodState);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const navigate = useNavigate();
 
@@ -76,10 +76,11 @@ const LoanAddPage = () => {
       loanType: data.loanType,
       principal: (data.principal ?? 0) * 10000,
       interestRatePercentage: data.interestRatePercentage ?? 0,
-      term: data.term ?? 0,
-      gracePeriod: data.gracePeriod ?? 0,
+      term: selectedBadge == "년" ? data.term * 12 : data.term,
+      gracePeriod: selectedBadge == "년" ? data.gracePeriod * 12 : data.gracePeriod,
       repaymentType: data.repaymentType ?? "",
       maturityPaymentAmount: (data.principal ?? 0) * 10000,
+      interestRateType: data.interestRateType ?? "",
     };
 
     navigate("/calculator", {

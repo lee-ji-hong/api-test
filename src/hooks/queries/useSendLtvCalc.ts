@@ -14,9 +14,9 @@ export const useSendLtvCalc = (scrollToResult: () => void) => {
     },
     onError: (error) => {
       setInfoItem({
-        ltvRatio: 0.6,
-        collateralValue: 500000000,
-        possibleLoanAmount: 300000000,
+        ltvRatio: 0.0,
+        collateralValue: 0,
+        possibleLoanAmount: 0,
       });
       console.error(" 생성 실패:", error);
     },
