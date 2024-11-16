@@ -10,8 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { Post } from "@/api/model/CommunityResponse";
 import { useState } from "react";
 import CommunityService from "@/api/service/CommunityService";
-import Axios from "@/api/axios";
-import { LikeResponse } from "@/models";
 import { setCommunityIdAfterLogin, setLoginRedirectPath } from "@/utils/localStorage";
 import { LOGIN_REDIRECT } from "@/constants/loginLanding";
 
