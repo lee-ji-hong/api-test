@@ -4,4 +4,5 @@ export const LOGIN_REDIRECT = new Map<string, string>([
   ["COMMUNITY", "/community"],
   ["COMMUNITY_DETAIL", "/community/detail"],
   ["COMMUNITY_WRITE", "/community/write"],
+  ["LOAN_ADVICE", "/report"],
 ]);

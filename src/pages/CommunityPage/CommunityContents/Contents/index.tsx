@@ -25,8 +25,8 @@ const Contents: React.FC<Post> = (props) => {
     <div
       onClick={async () => {
         try {
-          const response = await Axios.get<LikeResponse>(`/login/oauth2/kakao/health-check`, true);
-          console.log("코드?", response.code);
+          // const response = await Axios.get<LikeResponse>(`/login/oauth2/kakao/health-check`, true);
+          // console.log("코드?", response.code);
           navigator("/community/detail", { state: { postId: props.id } });
         } catch (error) {
           setLoginRedirectPath(LOGIN_REDIRECT.get("COMMUNITY_DETAIL"));

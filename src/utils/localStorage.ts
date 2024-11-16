@@ -21,6 +21,14 @@ export function getCommunityIdAfterLogin(): number | undefined {
   return id ? parseInt(id) : undefined;
 }
 
+export function setAdviceReportData(data: string) {
+  localStorage.setItem("adviceReport", data);
+}
+
+export function getAdviceReportData(): string {
+  return localStorage.getItem("adviceReport") || "";
+}
+
 export function setLoginRedirectPath(path: string | undefined) {
   localStorage.setItem("loginRedirectPath", path || "/");
 }

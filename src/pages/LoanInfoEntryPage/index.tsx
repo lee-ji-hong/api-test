@@ -22,6 +22,7 @@ import { formData } from "@/recoil/atoms";
 
 import classNames from "classnames/bind";
 import styles from "./LoanInfoEntryPage.module.scss";
+import { setAdviceReportData } from "@/utils/localStorage";
 const cx = classNames.bind(styles);
 
 export const LoanInfoEntryPage = () => {
@@ -80,7 +81,11 @@ export const LoanInfoEntryPage = () => {
       spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
     };
     localStorage.setItem("formData", JSON.stringify(recoilFormData));
+
+    setAdviceReportData(JSON.stringify(updatedFormData)); // 비로그인 상태의 리포트 데이터를 저장하기 위함
+
     loanAdviceReport(updatedFormData as sendLoanAdviceReportRequest);
+
     await new Promise((r) => setTimeout(r, 5000));
     setLoading(false);
   };

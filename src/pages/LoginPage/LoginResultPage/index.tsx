@@ -3,8 +3,10 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 import { createCommunityDetail } from "@/constants/communityDetailDummy";
-import { getCommunityIdAfterLogin, getLoginRedirectPath } from "@/utils/localStorage";
+import { getAdviceReportData, getCommunityIdAfterLogin, getLoginRedirectPath } from "@/utils/localStorage";
 import { formData } from "@/recoil/atoms";
+import { sendLoanAdviceReportRequest } from "@/models";
+import { useSendLoanAdviceReport } from "@/hooks/queries/useSendLoanAdviceReport";
 
 const LoginSuccessPage = () => {
   const [, setRecoilFormData] = useRecoilState(formData);
@@ -30,10 +32,13 @@ const LoginSuccessPage = () => {
           navigate(getLoginRedirectPath(), { state: { postId: getCommunityIdAfterLogin() } });
           break;
         case "/community/write":
-          navigate("/community/write", { state: { communityDetail: createCommunityDetail() } });
+          navigate(getLoginRedirectPath(), { state: { communityDetail: createCommunityDetail() } });
           break;
-        case "/loan-info-entry":
-          navigate("/loan-info-entry");
+        case "/report":
+          const jsonString = getAdviceReportData();
+          const parsedData = JSON.parse(jsonString) as sendLoanAdviceReportRequest;
+          const { loanAdviceReport } = useSendLoanAdviceReport();
+          loanAdviceReport(parsedData);
           break;
         default:
           navigate(getLoginRedirectPath());
