@@ -37,7 +37,7 @@ const DepositEntryPage = () => {
 
   const router = useInternalRouter();
   const { auth } = useAuth();
-
+  console.log("test");
   useEffect(() => {
     const calculateKeyboardHeight = () => {
       const calculatedHeight = (height * 0.4 - 207) / 7;
