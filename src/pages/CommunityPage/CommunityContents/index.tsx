@@ -14,7 +14,6 @@ const CommunityContents: React.FC<Post> = (props) => {
       <Profile author={props.author} timeAgo={props.timeAgo} avatarUrl={props.avatarUrl ?? ""} />
       <Spacing size={12} />
       <Contents {...props} />
-      <Spacing size={16} />
       <Spacing size={50} />
     </div>
   );
