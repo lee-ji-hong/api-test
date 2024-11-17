@@ -13,9 +13,13 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ onClick }) => {
         position: "fixed",
         bottom: 100,
         right: 20,
-        width: 46,
-        height: 46,
-        backgroundColor: "#4169E1",
+        width: 48, // 크기를 48px로 변경
+        height: 48,
+        backgroundColor: "#4169E1", // 배경색 설정
+        boxShadow: "none", // 그림자 제거
+        "&:hover": {
+          backgroundColor: "#27408B", // 호버 시 배경색 변경
+        },
       }}
       color="primary"
       aria-label="add"
