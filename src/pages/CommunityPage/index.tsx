@@ -71,8 +71,8 @@ const CommunityPage = () => {
         dataLength={contentItems ? contentItems.data.length : 0} // 현재 표시 중인 데이터 수
         next={fetchMoreData} // 더 가져오는 데이터가 없으므로 빈 함수
         hasMore={hasMore} // 더 불러올 데이터가 없으므로 false
-        loader={<h4>Loading...</h4>} // 로딩 상태, 필요 없으면 제거 가능
-        endMessage={<p>모두 불러왔습니다.</p>} // 끝났을 때 메시지
+        loader={<h4></h4>} // 로딩 상태, 필요 없으면 제거 가능
+        endMessage={<p></p>} // 끝났을 때 메시지
       >
         {contentItems?.data.map((data, index) => <CommunityContents key={index} {...data} />)}
       </InfiniteScroll>
@@ -107,6 +107,7 @@ const CommunityPage = () => {
 
       {InfiniteScrollComponent()}
 
+      <Spacing size={86} />
       <FloatingButton
         onClick={async () => {
           try {

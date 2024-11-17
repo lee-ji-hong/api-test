@@ -11,7 +11,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ onClick }) => {
     <Fab
       sx={{
         position: "fixed",
-        bottom: 100,
+        bottom: 80,
         right: 20,
         width: 48, // 크기를 48px로 변경
         height: 48,
