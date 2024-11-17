@@ -16,7 +16,7 @@ import BackButton from "@/assets/images/community/ico_back.png";
 import MoreButton from "@/assets/images/community/ico_more.png";
 import Logo from "@/assets/images/logo.svg";
 // import Onboarding_1 from "@/assets/images/onboarding_1.png";
-import Onboarding_1 from "@/assets/images/onboarding_5.webp";
+import Onboarding_1 from "@/assets/images/onboarding_5.gif";
 import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
 import Onboarding_4 from "@/assets/images/onboarding_4.png";
