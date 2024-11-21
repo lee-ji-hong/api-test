@@ -1,5 +1,4 @@
 import SelectController from "@/components/sections/Calculator/SelectController";
-import SelectController from "@/components/sections/Calculator/SelectController";
 import InputController from "@/components/sections/Calculator/InputController";
 import HouseTypeController from "@/components/sections/Calculator/HouseTypeController";
 

@@ -24,7 +24,9 @@ const HouseTypeController = <ControlType extends FieldValues>({
   };
   const ltvOptions = useRecoilValue<sendLtvCalcRequest>(ltvCalcState);
 
-  const filteredOptions = ltvOptions.loanPurpose === "LIVING_STABILITY" ? options.slice(5, 7) : options.slice(0, 5);
+  const filteredOptions =
+    isOptionItemArray(options) &&
+    (ltvOptions.loanPurpose === "LIVING_STABILITY" ? options.slice(5, 7) : options.slice(0, 5));
   return (
     <Controller
       name={formFieldName}
