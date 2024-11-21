@@ -1,7 +1,7 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { OptionItem, OptionsType, sendLtvCalcRequest } from "@/models";
 import { ltvCalcState } from "@/recoil/atoms";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Badge from "@/components/shared/Badge";
 import styles from "@/pages/CalculatorPage/CalculatorPage.module.scss";
@@ -14,12 +14,17 @@ interface Props<ControlType extends FieldValues> {
   options?: OptionItem[] | OptionsType;
 }
 
-const SelectController = <ControlType extends FieldValues>({ formFieldName, control, options }: Props<ControlType>) => {
+const HouseTypeController = <ControlType extends FieldValues>({
+  formFieldName,
+  control,
+  options,
+}: Props<ControlType>) => {
   const isOptionItemArray = (options: OptionItem[] | OptionsType | undefined): options is OptionItem[] => {
     return Array.isArray(options);
   };
-  const [, setLtvCalc] = useRecoilState<sendLtvCalcRequest>(ltvCalcState);
+  const ltvOptions = useRecoilValue<sendLtvCalcRequest>(ltvCalcState);
 
+  const filteredOptions = ltvOptions.loanPurpose === "LIVING_STABILITY" ? options.slice(5, 7) : options.slice(0, 5);
   return (
     <Controller
       name={formFieldName}
@@ -27,16 +32,12 @@ const SelectController = <ControlType extends FieldValues>({ formFieldName, cont
       render={({ field }) => {
         const handleSelect = (value: boolean | string | number) => {
           field.onChange(value);
-          setLtvCalc((prev) => ({
-            ...prev,
-            [field.name]: value,
-          }));
         };
 
         return (
           <div className={cx("button-container")}>
             {isOptionItemArray(options) &&
-              options?.map(({ label, value }) => (
+              filteredOptions?.map(({ label, value }) => (
                 <Badge
                   className={cx("button")}
                   key={value.toString()}
@@ -52,4 +53,4 @@ const SelectController = <ControlType extends FieldValues>({ formFieldName, cont
   );
 };
 
-export default SelectController;
+export default HouseTypeController;

@@ -1,5 +1,8 @@
 import SelectController from "@/components/sections/Calculator/SelectController";
+import SelectController from "@/components/sections/Calculator/SelectController";
 import InputController from "@/components/sections/Calculator/InputController";
+import HouseTypeController from "@/components/sections/Calculator/HouseTypeController";
+
 import { loanPurposeOptions, houseOwnershipTypeOptions, regionTypeOptions } from "./ltvOptions";
 
 export const INPUTS = [
@@ -17,7 +20,7 @@ export const INPUTS = [
     name: "houseOwnershipType",
     value: "",
     options: houseOwnershipTypeOptions,
-    component: SelectController,
+    component: HouseTypeController,
   },
   {
     id: 3,
