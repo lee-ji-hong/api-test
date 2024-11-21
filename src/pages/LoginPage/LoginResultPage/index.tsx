@@ -16,9 +16,6 @@ const LoginSuccessPage = () => {
   useEffect(() => {
     const objToken = getTokens();
     if (objToken.accessToken && objToken.refreshToken) {
-      alert("로그인 성공!");
-      // alert(`해당 경로로 이동합니다.: ${getLoginRedirectPath()}`);
-
       setCookie("accessToken", objToken.accessToken);
       setCookie("refreshToken", objToken.refreshToken);
 

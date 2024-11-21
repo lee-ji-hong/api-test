@@ -71,6 +71,13 @@ export const setupInterceptors = (
     async (error: AxiosError) => {
       setLoading(false);
       const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+
+      // refresh 요청 자체에서 발생한 401은 바로 로그인 페이지로
+      if (originalRequest.url?.includes("/auth/refresh")) {
+        setLogin(true);
+        return Promise.reject(error);
+      }
+
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         const refreshToken = getCookie("refreshToken");
@@ -78,21 +85,26 @@ export const setupInterceptors = (
         if (refreshToken) {
           try {
             setLoading(true);
-            originalRequest.headers = { ...originalRequest.headers, RefreshToken: refreshToken };
-            const { data } = await axiosInstance.post("/auth/refresh", originalRequest);
-            originalRequest.headers = { ...originalRequest.headers, AccessToken: data.accessToken };
+            const { data } = await axiosInstance.post("/auth/refresh", null, {
+              headers: { RefreshToken: refreshToken },
+            });
+
+            originalRequest.headers = {
+              ...originalRequest.headers,
+              AccessToken: data.accessToken,
+            };
             return axiosInstance(originalRequest);
           } catch (refreshError) {
             console.error("Refresh token renewal failed:", refreshError);
-            console.error("Refresh token is not available.");
             setLogin(true);
-
             return Promise.reject(refreshError);
           } finally {
+            setLoading(false);
           }
         } else {
           console.error("Refresh token is not available.");
           setLogin(true);
+          return Promise.reject(new Error("Refresh token not available"));
         }
       }
       return Promise.reject(error);
