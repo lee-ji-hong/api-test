@@ -54,9 +54,17 @@ const DetailFooter: React.FC<WriteFooterProps> = ({ postId, onCommentAdded, logi
 
   return (
     <div className={cx("containerFooter")}>
-      <Divider sx={{ borderBottomWidth: "1px" }} />
-      <Spacing size={16} />
+      <Divider
+        sx={{
+          borderBottomWidth: "1px",
+          backgroundColor: "##F7F7F7",
+          height: "1px",
+          marginLeft: "-20px",
+          marginRight: "-20px",
+        }}
+      />
 
+      <Spacing size={10} />
       <div className={cx("containerSubFooter")}>
         <div className={cx("containerInputbox")}>
           <textarea
