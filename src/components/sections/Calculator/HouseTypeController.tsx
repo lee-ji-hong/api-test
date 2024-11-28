@@ -19,14 +19,17 @@ const HouseTypeController = <ControlType extends FieldValues>({
   control,
   options,
 }: Props<ControlType>) => {
-  const isOptionItemArray = (options: OptionItem[] | OptionsType | undefined): options is OptionItem[] => {
-    return Array.isArray(options);
-  };
+  // const isOptionItemArray = (options: OptionItem[] | OptionsType | undefined): options is OptionItem[] => {
+  //   return Array.isArray(options);
+  // };
   const ltvOptions = useRecoilValue<sendLtvCalcRequest>(ltvCalcState);
 
-  const filteredOptions =
-    isOptionItemArray(options) &&
-    (ltvOptions.loanPurpose === "LIVING_STABILITY" ? options.slice(5, 7) : options.slice(0, 5));
+  const filteredOptions = Array.isArray(options)
+    ? ltvOptions.loanPurpose === "LIVING_STABILITY"
+      ? options.slice(5, 7)
+      : options.slice(0, 5)
+    : undefined;
+
   return (
     <Controller
       name={formFieldName}
@@ -38,7 +41,7 @@ const HouseTypeController = <ControlType extends FieldValues>({
 
         return (
           <div className={cx("button-container")}>
-            {isOptionItemArray(options) &&
+            {filteredOptions &&
               filteredOptions?.map(({ label, value }) => (
                 <Badge
                   className={cx("button")}
