@@ -11,7 +11,7 @@ const TabBarCalculatorIcon = ({ title, isActive }: TabBarIconProps) => {
         d="M2.125 3.375C2.125 2.68464 2.68464 2.125 3.375 2.125H18.625C19.3154 2.125 19.875 2.68464 19.875 3.375V18.625C19.875 19.3154 19.3154 19.875 18.625 19.875H3.375C2.68464 19.875 2.125 19.3154 2.125 18.625V3.375Z"
         fill="#4169E1"
         stroke="#4169E1"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <rect
         x="7.1875"
@@ -21,7 +21,7 @@ const TabBarCalculatorIcon = ({ title, isActive }: TabBarIconProps) => {
         rx="0.375"
         fill="white"
         stroke="white"
-        stroke-width="0.75"
+        strokeWidth="0.75"
       />
       <rect
         x="9.50586"
@@ -32,18 +32,18 @@ const TabBarCalculatorIcon = ({ title, isActive }: TabBarIconProps) => {
         transform="rotate(90 9.50586 7.1875)"
         fill="white"
         stroke="white"
-        stroke-width="0.75"
+        strokeWidth="0.75"
       />
       <mask id="path-4-inside-1_2045_7602" fill="white">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M9.20059 12.7963C8.90769 12.5034 8.43282 12.5034 8.13993 12.7963L7.56186 13.3744L6.98248 12.795C6.68959 12.5021 6.21471 12.5021 5.92182 12.795C5.62893 13.0879 5.62893 13.5627 5.92182 13.8556L6.5012 14.435L5.92193 15.0143C5.62904 15.3072 5.62904 15.7821 5.92193 16.0749C6.21482 16.3678 6.6897 16.3678 6.98259 16.0749L7.56186 15.4957L8.13981 16.0736C8.43271 16.3665 8.90758 16.3665 9.20047 16.0736C9.49337 15.7807 9.49337 15.3059 9.20047 15.013L8.62252 14.435L9.20059 13.857C9.49348 13.5641 9.49348 13.0892 9.20059 12.7963Z"
         />
       </mask>
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M9.20059 12.7963C8.90769 12.5034 8.43282 12.5034 8.13993 12.7963L7.56186 13.3744L6.98248 12.795C6.68959 12.5021 6.21471 12.5021 5.92182 12.795C5.62893 13.0879 5.62893 13.5627 5.92182 13.8556L6.5012 14.435L5.92193 15.0143C5.62904 15.3072 5.62904 15.7821 5.92193 16.0749C6.21482 16.3678 6.6897 16.3678 6.98259 16.0749L7.56186 15.4957L8.13981 16.0736C8.43271 16.3665 8.90758 16.3665 9.20047 16.0736C9.49337 15.7807 9.49337 15.3059 9.20047 15.013L8.62252 14.435L9.20059 13.857C9.49348 13.5641 9.49348 13.0892 9.20059 12.7963Z"
         fill="white"
       />
@@ -61,7 +61,7 @@ const TabBarCalculatorIcon = ({ title, isActive }: TabBarIconProps) => {
         transform="rotate(90 16.3809 7.1875)"
         fill="white"
         stroke="white"
-        stroke-width="0.75"
+        strokeWidth="0.75"
       />
       <rect
         x="16.3809"
@@ -72,7 +72,7 @@ const TabBarCalculatorIcon = ({ title, isActive }: TabBarIconProps) => {
         transform="rotate(90 16.3809 13.0078)"
         fill="white"
         stroke="white"
-        stroke-width="0.75"
+        strokeWidth="0.75"
       />
       <rect
         x="16.3809"
@@ -83,15 +83,15 @@ const TabBarCalculatorIcon = ({ title, isActive }: TabBarIconProps) => {
         transform="rotate(90 16.3809 15.1133)"
         fill="white"
         stroke="white"
-        stroke-width="0.75"
+        strokeWidth="0.75"
       />
     </svg>
   ) : (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <title>{title}</title>
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M18.625 2.875H3.375C3.09886 2.875 2.875 3.09886 2.875 3.375V18.625C2.875 18.9011 3.09886 19.125 3.375 19.125H18.625C18.9011 19.125 19.125 18.9011 19.125 18.625V3.375C19.125 3.09886 18.9011 2.875 18.625 2.875ZM3.375 1.375C2.27043 1.375 1.375 2.27043 1.375 3.375V18.625C1.375 19.7296 2.27043 20.625 3.375 20.625H18.625C19.7296 20.625 20.625 19.7296 20.625 18.625V3.375C20.625 2.27043 19.7296 1.375 18.625 1.375H3.375Z"
         fill="black"
       />
@@ -106,8 +106,8 @@ const TabBarCalculatorIcon = ({ title, isActive }: TabBarIconProps) => {
         fill="black"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M9.20156 12.7982C8.90867 12.5053 8.4338 12.5053 8.1409 12.7982L7.56284 13.3763L6.98346 12.7969C6.69056 12.504 6.21569 12.504 5.9228 12.7969C5.6299 13.0898 5.6299 13.5647 5.9228 13.8576L6.50217 14.437L5.92291 15.0162C5.63001 15.3091 5.63001 15.784 5.92291 16.0769C6.2158 16.3698 6.69068 16.3698 6.98357 16.0769L7.56284 15.4976L8.14079 16.0756C8.43368 16.3685 8.90856 16.3685 9.20145 16.0756C9.49434 15.7827 9.49434 15.3078 9.20145 15.0149L8.6235 14.437L9.20156 13.8589C9.49446 13.566 9.49446 13.0911 9.20156 12.7982Z"
         fill="black"
       />

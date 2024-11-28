@@ -9,14 +9,14 @@ const TabBarBoardIcon = ({ title, isActive }: TabBarIconProps) => {
       <title>{title}</title>
       <mask id="path-1-inside-1_2045_7748" fill="white">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M10.0732 18.9933C10.0698 18.9902 10.0719 18.9845 10.0765 18.9842C15.0663 18.6983 19.0244 14.5614 19.0244 9.5C19.0244 4.25329 14.7711 0 9.52441 0C4.27771 0 0.0244141 4.25329 0.0244141 9.5C0.0244141 11.4295 0.599673 13.2247 1.58804 14.7234C1.8596 15.1352 1.84494 15.6845 1.51078 16.0473L0.334106 17.3248C-0.256135 17.9657 0.198414 19.0023 1.06965 19.0023H10.0697C10.0745 19.0023 10.0768 18.9965 10.0732 18.9933Z"
         />
       </mask>
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M10.0732 18.9933C10.0698 18.9902 10.0719 18.9845 10.0765 18.9842C15.0663 18.6983 19.0244 14.5614 19.0244 9.5C19.0244 4.25329 14.7711 0 9.52441 0C4.27771 0 0.0244141 4.25329 0.0244141 9.5C0.0244141 11.4295 0.599673 13.2247 1.58804 14.7234C1.8596 15.1352 1.84494 15.6845 1.51078 16.0473L0.334106 17.3248C-0.256135 17.9657 0.198414 19.0023 1.06965 19.0023H10.0697C10.0745 19.0023 10.0768 18.9965 10.0732 18.9933Z"
         fill="#4169E1"
       />
@@ -25,17 +25,17 @@ const TabBarBoardIcon = ({ title, isActive }: TabBarIconProps) => {
         fill="#4169E1"
         mask="url(#path-1-inside-1_2045_7748)"
       />
-      <circle cx="9.52378" cy="9.77964" r="0.838235" fill="white" stroke="white" stroke-width="0.5" />
-      <circle cx="6.17124" cy="9.77964" r="0.838235" fill="white" stroke="white" stroke-width="0.5" />
-      <circle cx="12.8773" cy="9.77964" r="0.838235" fill="white" stroke="white" stroke-width="0.5" />
+      <circle cx="9.52378" cy="9.77964" r="0.838235" fill="white" stroke="white" strokeWidth="0.5" />
+      <circle cx="6.17124" cy="9.77964" r="0.838235" fill="white" stroke="white" strokeWidth="0.5" />
+      <circle cx="12.8773" cy="9.77964" r="0.838235" fill="white" stroke="white" strokeWidth="0.5" />
     </svg>
   ) : (
     <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
       <title>{title}</title>
       <mask id="path-1-inside-1_2045_7591" fill="white">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M10.0733 18.9933C10.0699 18.9902 10.0719 18.9845 10.0765 18.9843C15.0667 18.6988 19.0254 14.5617 19.0254 9.5C19.0254 4.25329 14.7721 0 9.52539 0C4.27869 0 0.0253906 4.25329 0.0253906 9.5C0.0253906 11.4293 0.600509 13.2243 1.58866 14.7229C1.86017 15.1346 1.84549 15.6839 1.51135 16.0467L0.334106 17.3248C-0.256135 17.9657 0.198414 19.0023 1.06965 19.0023H10.0698C10.0745 19.0023 10.0768 18.9965 10.0733 18.9933Z"
         />
       </mask>
@@ -44,9 +44,9 @@ const TabBarBoardIcon = ({ title, isActive }: TabBarIconProps) => {
         fill="#333347"
         mask="url(#path-1-inside-1_2045_7591)"
       />
-      <circle cx="9.52573" cy="9.77964" r="0.838235" fill="#333347" stroke="#333347" stroke-width="0.5" />
-      <circle cx="6.17222" cy="9.77964" r="0.838235" fill="#333347" stroke="#333347" stroke-width="0.5" />
-      <circle cx="12.8773" cy="9.77964" r="0.838235" fill="#333347" stroke="#333347" stroke-width="0.5" />
+      <circle cx="9.52573" cy="9.77964" r="0.838235" fill="#333347" stroke="#333347" strokeWidth="0.5" />
+      <circle cx="6.17222" cy="9.77964" r="0.838235" fill="#333347" stroke="#333347" strokeWidth="0.5" />
+      <circle cx="12.8773" cy="9.77964" r="0.838235" fill="#333347" stroke="#333347" strokeWidth="0.5" />
     </svg>
   );
 };
