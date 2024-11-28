@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { authState } from "@/recoil/atoms";
 
 const getCookie = (name: string): string | null => {
   const cookieArr = document.cookie.split("; ");
@@ -12,16 +14,16 @@ const getCookie = (name: string): string | null => {
 };
 
 export const useAuth = () => {
-  const [auth, setAuth] = useState(false);
-  const accessToken = getCookie("accessToken");
+  const [auth, setAuth] = useRecoilState(authState);
 
+  const accessToken = getCookie("accessToken");
   useEffect(() => {
     if (accessToken) {
       setAuth(true);
     } else {
       setAuth(false);
     }
-  }, []);
+  }, [auth]);
 
   return { auth };
 };

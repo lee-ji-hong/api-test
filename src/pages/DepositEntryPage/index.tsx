@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useWindowSize } from "usehooks-ts";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { GlobalPortal } from "@/components/shared/GlobalPortal";
 import KeyboardModal from "@/components/modal/KeyboardModal";
@@ -16,8 +16,7 @@ import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useGetLoanAdvice } from "@/hooks/queries/useGetLoanAdvice";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { sendLoanAdviceReportRequest } from "@/models";
-import { useAuth } from "@/hooks/useAuth";
-import { formData } from "@/recoil/atoms";
+import { formData, authState } from "@/recoil/atoms";
 import { MONEY } from "@/constants/money";
 
 import styles from "./DepositEntryPage.module.scss";
@@ -34,10 +33,9 @@ const DepositEntryPage = () => {
   const { loanAdviceInfo } = useGetLoanAdvice();
   const { height } = useWindowSize();
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
-
+  const auth = useRecoilValue(authState);
   const router = useInternalRouter();
-  const { auth } = useAuth();
-  console.log("test");
+
   useEffect(() => {
     const calculateKeyboardHeight = () => {
       const calculatedHeight = (height * 0.4 - 207) / 7;

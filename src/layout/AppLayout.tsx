@@ -2,7 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { LinearProgress } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useLayoutEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Axios from "@/api/axios";
 
 import SelectBottomSheet from "@/components/modal/SelectBottomSheet";
@@ -10,9 +10,8 @@ import MobileTabBar from "@/components/shared/MobileTabBar";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
 
-import { loadingState, loginState } from "@/recoil/atoms";
+import { loadingState, loginState, authState } from "@/recoil/atoms";
 import { IMAGES } from "@/constants/images";
-import { useAuth } from "@/hooks/useAuth";
 import { reqLogin } from "@/api/remotes";
 
 import styles from "./AppLayout.module.scss";
@@ -23,7 +22,7 @@ const AppLayout = () => {
   const { pathname } = useLocation();
   const [isLoading, setLoading] = useRecoilState(loadingState);
   const [isLoginNeed, setIsLoginNeed] = useRecoilState(loginState);
-  const { auth } = useAuth();
+  const auth = useRecoilValue(authState);
 
   useLayoutEffect(() => {
     Axios.setLoadingFunction(setLoading);

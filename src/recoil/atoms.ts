@@ -41,6 +41,11 @@ export const loginState = atom<boolean>({
   default: false,
 });
 
+export const authState = atom<boolean>({
+  key: "authState",
+  default: false,
+});
+
 export const ltvCalcState = atom<sendLtvCalcRequest>({
   key: "ltvCalcState",
   default: {
