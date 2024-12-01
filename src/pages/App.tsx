@@ -14,6 +14,27 @@ import CommunityRecentReportPage from "./CommunityRecentReport";
 import CommunityModifyCommentPage from "./CommunityModifyComment";
 import LoanAddPage from "./CalculatorPage/DSRCalculator/LoanAddPage";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBgT-51qFDZesgRgc8De0w0DCP3QdFU8OM",
+  authDomain: "myzipplan-af832.firebaseapp.com",
+  projectId: "myzipplan-af832",
+  storageBucket: "myzipplan-af832.firebasestorage.app",
+  messagingSenderId: "165937643454",
+  appId: "1:165937643454:web:191a4ec58b4cf8296ac3ef",
+  measurementId: "G-88Y0YMDJE1",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
 const HomePage = lazy(() => import("./HomePage"));
 const DepositEntryPage = lazy(() => import("./DepositEntryPage"));
 const DepositResultPage = lazy(() => import("./DepositResultPage"));
@@ -43,6 +64,12 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const analytics = getAnalytics(app);
+  logEvent(analytics, "홈페이지 진입", {
+    page_title: "App.tsx",
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+  });
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
