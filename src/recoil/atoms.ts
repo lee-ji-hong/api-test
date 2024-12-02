@@ -6,6 +6,8 @@ import {
   sendRepaymentCalcRequest,
   LoanStatus,
 } from "@/models";
+import { analytics } from "../utils/firebase";
+import { Analytics } from "firebase/analytics";
 
 export const formData = atom<sendLoanAdviceReportRequest>({
   key: "formState",
@@ -105,4 +107,10 @@ export const arrDSRDatasState = atom<LoanStatus[]>({
 export const annualIncomeState = atom<number>({
   key: "annualIncome", // 고유 키
   default: 0, // 초기값
+});
+
+// Firebase Analytics 전역 상태
+export const analyticsState = atom<Analytics | null>({
+  key: "analyticsState", // 고유한 키
+  default: analytics, // 초기화된 Analytics 인스턴스
 });

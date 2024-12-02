@@ -4,10 +4,22 @@ import { useInternalRouter } from "@/hooks/useInternalRouter";
 
 import styles from "./TermsOfServicePage.module.scss";
 import classNames from "classnames/bind";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
+import { useEffect } from "react";
 const cx = classNames.bind(styles);
 
 export default function TermsOfServicePage() {
   const router = useInternalRouter();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("TermOfServicePage", {
+      page_title: "./TermOfServicePage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   return (
     <>

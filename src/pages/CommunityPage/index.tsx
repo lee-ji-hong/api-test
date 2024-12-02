@@ -14,6 +14,7 @@ import { LikeResponse } from "@/models";
 import RoundButton from "@/components/shared/RoundButton";
 import SpacingWidth from "@/components/shared/SpacingWidth";
 import { createCommunityDetail } from "@/constants/communityDetailDummy";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 const CommunityPage = () => {
@@ -24,6 +25,16 @@ const CommunityPage = () => {
   const tokenVaildation = false;
 
   const navigator = useNavigate();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("CommunityPage", {
+      page_title: "./CommunityPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   const InfiniteScrollComponent = () => {
     useEffect(() => {

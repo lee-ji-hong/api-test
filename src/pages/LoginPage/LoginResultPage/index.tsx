@@ -7,11 +7,22 @@ import { getAdviceReportData, getCommunityIdAfterLogin, getLoginRedirectPath } f
 import { formData } from "@/recoil/atoms";
 import { sendLoanAdviceReportRequest } from "@/models";
 import { useSendLoanAdviceReport } from "@/hooks/queries/useSendLoanAdviceReport";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 
 const LoginSuccessPage = () => {
   const [, setRecoilFormData] = useRecoilState(formData);
   const navigate = useNavigate();
   // const token = getTokens();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("LoginResultPage", {
+      page_title: "./LoginPage/LoginResultPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   useEffect(() => {
     const objToken = getTokens();

@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { arrDSRDatasState } from "@/recoil/atoms";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 export default function CalculatorPage() {
@@ -23,6 +24,16 @@ export default function CalculatorPage() {
   const setArrDSRDatas = useSetRecoilState(arrDSRDatasState);
 
   const location = useLocation();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("CalculatorPage", {
+      page_title: "./CalculatorPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   useEffect(() => {
     // navigate로 전달된 state에서 초기값 설정
@@ -51,7 +62,14 @@ export default function CalculatorPage() {
             className={cx("badge")}
             key={index}
             title={item}
-            onClick={() => setSelectedCalculator(item)}
+            onClick={() => {
+              setSelectedCalculator(item);
+              logEvent(`${item} Click`, {
+                page_title: `./CalculatorPage-${item}`,
+                page_location: window.location.href,
+                page_path: window.location.pathname,
+              });
+            }}
             theme={selectedCalculator === item ? "dark" : "white"}
           />
         ))}

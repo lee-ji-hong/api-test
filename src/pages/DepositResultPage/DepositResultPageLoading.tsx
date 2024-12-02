@@ -6,10 +6,22 @@ import Header from "@/components/sections/Header";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import classNames from "classnames/bind";
 import styles from "./DepositResultPage.module.scss";
+import { useEffect } from "react";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 export const DepositResultPageLoading = () => {
   const router = useInternalRouter();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("DepositResultPageLoading", {
+      page_title: "./DepositResultPageLoading",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   return (
     <>

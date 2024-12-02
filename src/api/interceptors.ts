@@ -1,10 +1,12 @@
 import { LOGIN_REDIRECT } from "@/constants/loginLanding";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 import { setAdviceReportData, setCommunityIdAfterLogin, setLoginRedirectPath } from "@/utils/localStorage";
 import { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { getCookie } from "./authUtils";
 
 function setRedirectPathAfterLogin(config: AxiosRequestConfig) {
   console.log("config.url", config.url);
+
   switch (true) {
     // 커뮤니티 디테일
     case config.url?.includes("/api/v1/post/") && !config.url?.includes("sorted"):
@@ -50,6 +52,7 @@ export const setupInterceptors = (
         headers: config.headers,
         data: config.data,
       });
+
       return config;
     },
     (error) => {
