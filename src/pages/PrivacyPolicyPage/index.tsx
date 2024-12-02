@@ -4,10 +4,22 @@ import { useInternalRouter } from "@/hooks/useInternalRouter";
 
 import styles from "./PrivacyPolicyPage.module.scss";
 import classNames from "classnames/bind";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
+import { useEffect } from "react";
 const cx = classNames.bind(styles);
 
 export default function PrivacyPolicyPage() {
   const router = useInternalRouter();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("PrivacyPolicyPage", {
+      page_title: "./PrivacyPolicyPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   return (
     <>

@@ -15,6 +15,7 @@ import { formData } from "@/recoil/atoms";
 import classNames from "classnames/bind";
 import styles from "./DepositResultPage.module.scss";
 import Badge from "@/components/shared/Badge";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 export const DepositResultPage = () => {
@@ -26,6 +27,16 @@ export const DepositResultPage = () => {
   const { rentalProductData } = location.state || {};
   const [sortedData, setSortedData] = useState(rentalProductData);
   const [sortType, setSortType] = useState("한도순");
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("DepositResultPage", {
+      page_title: "./DepositResultPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   useEffect(() => {
     if (!rentalDeposit || rentalDeposit === 0 || !rentalProductData) {

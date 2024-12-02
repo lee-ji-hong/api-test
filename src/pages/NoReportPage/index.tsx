@@ -1,7 +1,7 @@
 // controller 만들어서 컴포넌트 나눌 예정
 import { CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DepositList from "@/components/shared/DepositList";
 import Spacing from "@/components/shared/Spacing";
@@ -14,6 +14,7 @@ import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { MOCK } from "@/pages/DepositResultPage/mock";
 import classNames from "classnames/bind";
 import styles from "./NoReportPage.module.scss";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 interface ReportProduct {
@@ -38,6 +39,16 @@ const NoReportPage = () => {
   const notEligibleProductSample = MOCK.filter(
     (item) => item?.notEligibleReasons && item?.notEligibleReasons[0] !== "",
   );
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("NoReportPage", {
+      page_title: "./NoReportPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   return (
     <>

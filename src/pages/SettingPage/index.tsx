@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AlertModal from "@/components/modal/AlertModal";
 
 import Header from "@/components/sections/Header";
@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 import styles from "./settings.module.scss";
 import classNames from "classnames/bind";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 export default function SettingPage() {
@@ -45,6 +46,16 @@ export default function SettingPage() {
     setCenterModalOpen(false);
     alert("준비중입니다.😢");
   };
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("SettingPage", {
+      page_title: "./SettingPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   return (
     <>

@@ -2,7 +2,7 @@
 import { CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useGetSpecificUserInputInfo } from "@/hooks/queries/useGetSpecificUserInputInfo";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
@@ -25,6 +25,7 @@ import Part11 from "./Part11";
 
 import classNames from "classnames/bind";
 import styles from "./ReportPage.module.scss";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 const ReportPage = () => {
@@ -58,6 +59,16 @@ const ReportPage = () => {
   const handleClose = () => {
     setToggle((prev) => !prev);
   };
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("ReportPage", {
+      page_title: "./ReportPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   return (
     <>

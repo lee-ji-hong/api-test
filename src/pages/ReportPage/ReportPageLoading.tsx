@@ -3,7 +3,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 
 import { CSSTransition } from "react-transition-group";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Spacing from "@/components/shared/Spacing";
 import Section01 from "@/components/shared/Section01";
@@ -12,6 +12,7 @@ import Header from "@/components/sections/Header";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import classNames from "classnames/bind";
 import styles from "./ReportPage.module.scss";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 const ReportPageLoading = () => {
@@ -22,6 +23,16 @@ const ReportPageLoading = () => {
     setShowPage(false);
     router.goBack();
   };
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("ReportPageLoading", {
+      page_title: "./ReportPageLoading",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   return (
     <>

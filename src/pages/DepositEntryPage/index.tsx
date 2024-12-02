@@ -21,6 +21,7 @@ import { MONEY } from "@/constants/money";
 
 import styles from "./DepositEntryPage.module.scss";
 import classNames from "classnames/bind";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 const DepositEntryPage = () => {
@@ -35,6 +36,16 @@ const DepositEntryPage = () => {
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
   const auth = useRecoilValue(authState);
   const router = useInternalRouter();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("DepositEntryPage", {
+      page_title: "./DepositEntryPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {

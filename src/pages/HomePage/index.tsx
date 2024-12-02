@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { IMAGES } from "@/constants/images";
 import classNames from "classnames/bind";
 import styles from "./HomePage.module.scss";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 const HomePage = () => {
@@ -19,6 +20,16 @@ const HomePage = () => {
   const router = useInternalRouter();
   const nodeRef = useRef(null);
   const { auth } = useAuth();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("홈페이지 진입", {
+      page_title: "./HomePage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   useEffect(() => {
     if (auth) {

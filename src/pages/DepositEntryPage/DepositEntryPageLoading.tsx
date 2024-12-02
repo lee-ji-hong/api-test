@@ -6,9 +6,21 @@ import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";
 
 import classNames from "classnames/bind";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
+import { useEffect } from "react";
 const cx = classNames.bind(styles);
 
 const DepositEntryPageLoading = () => {
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("DepositEntryPageLoading", {
+      page_title: "./DepositEntryPageLoading",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
+
   return (
     <>
       <Header className={cx("cancel")} right="Setting_btn" left="Logo" />

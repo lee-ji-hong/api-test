@@ -23,6 +23,7 @@ import { formData } from "@/recoil/atoms";
 import classNames from "classnames/bind";
 import styles from "./LoanInfoEntryPage.module.scss";
 import { setAdviceReportData } from "@/utils/localStorage";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 const cx = classNames.bind(styles);
 
 export const LoanInfoEntryPage = () => {
@@ -46,6 +47,16 @@ export const LoanInfoEntryPage = () => {
     mode: "onChange",
     criteriaMode: "all",
   });
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("LoanInfoEntryPage", {
+      page_title: "./LoanInfoEntryPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   useEffect(() => {
     handleRowClick(1);
