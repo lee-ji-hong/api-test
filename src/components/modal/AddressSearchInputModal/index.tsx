@@ -132,6 +132,7 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
             aria-label="alert-modal"
             onClick={(e) => e.stopPropagation()}>
             <div className={cx("bar")}></div>
+            <Image className={cx("Icon")} onClick={() => onClose(true)} imageInfo={IMAGES.Cancel_btn} />
             <Spacing size={35} />
             <Text className={cx("txt-title")} text={modalTitle} />
             <Spacing size={30} />

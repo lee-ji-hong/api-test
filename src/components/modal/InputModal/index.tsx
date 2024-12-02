@@ -4,6 +4,8 @@ import KeyboardModal from "@/components/modal/KeyboardModal";
 import Spacing from "@/components/shared/Spacing";
 import Button from "@/components/shared/Button";
 import Input from "@/components/shared/Input";
+import Image from "@/components/shared/Image";
+import { IMAGES } from "@/constants/images";
 import Text from "@/components/shared/Text";
 
 import classNames from "classnames/bind";
@@ -80,6 +82,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
             aria-label="alert-modal"
             onClick={(e) => e.stopPropagation()}>
             <div className={cx("bar")}></div>
+            <Image className={cx("Icon")} onClick={() => handleClose(true)} imageInfo={IMAGES.Cancel_btn} />
             <Spacing size={38} />
             <Text className={cx("txt-title")} text={modalTitle} />
             <Spacing size={44} />
