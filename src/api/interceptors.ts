@@ -1,4 +1,5 @@
 import { LOGIN_REDIRECT } from "@/constants/loginLanding";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 import { setAdviceReportData, setCommunityIdAfterLogin, setLoginRedirectPath } from "@/utils/localStorage";
 import { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { getCookie } from "./authUtils";
