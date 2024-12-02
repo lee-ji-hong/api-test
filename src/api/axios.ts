@@ -1,4 +1,3 @@
-import { useLogEvent } from "@/utils/firebaseLogEvent";
 import axios, { AxiosInstance, AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
 import { getCookie } from "./authUtils";
 import { setupInterceptors } from "./interceptors";
