@@ -18,6 +18,7 @@ interface InputModalProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "o
   buttonText?: string;
   error?: boolean;
   value: number;
+  isValue?: boolean;
   onClose: (isBackdropClick?: boolean) => void;
   onChange: (value: number) => void;
   handleKeyPress: (key: string) => void;
@@ -32,6 +33,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
       buttonText,
       error,
       value,
+      isValue,
       onClose,
       onChange,
       handleKeyPress,
@@ -99,7 +101,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
               className={cx("close-button")}
               title={buttonText}
               onClick={() => handleClose(false)}
-              disabled={error}
+              disabled={error || (isValue && value === undefined)}
             />
           </div>
           <div onClick={(e) => e.stopPropagation()}>

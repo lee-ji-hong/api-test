@@ -13,6 +13,7 @@ export const INPUTS = [
     value: "",
     modalTitle: "보증금을 입력해주세요",
     modalButton: "다음",
+    isValue: true,
     limit: {
       min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
       max: { value: 200000, ment: "20억원 이하로 입력이 가능합니다." },
@@ -24,6 +25,7 @@ export const INPUTS = [
     label: "월세",
     name: "monthlyRent",
     value: "",
+    isValue: false,
     modalTitle: "월세가 있다면 월세를 입력해주세요",
     modalButton: "다음",
     limit: {
@@ -37,6 +39,7 @@ export const INPUTS = [
     label: "보유현금",
     name: "cashOnHand",
     value: "",
+    isValue: false,
     modalTitle: "보유현금을 입력해주세요",
     modalButton: "다음",
     // limit: {
@@ -73,6 +76,7 @@ export const INPUTS = [
     label: "연소득",
     name: "annualIncome",
     value: "",
+    isValue: true,
     modalTitle: "연소득을 입력해주세요",
     modalButton: "다음",
     // limit: {
@@ -87,6 +91,7 @@ export const INPUTS = [
     label: "배우자 연소득",
     name: "spouseAnnualIncome",
     value: "",
+    isValue: true,
     modalTitle: "배우자 연소득을 입력해주세요",
     modalButton: "다음",
     // limit: {
