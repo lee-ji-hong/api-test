@@ -105,7 +105,11 @@ const HomePage = () => {
             <Image className={cx("img")} imageInfo={IMAGES?.Onboarding_4} />
           </Box>
           <Spacing size={60} />
-          <Button onClick={() => router.push("/deposit-entry")} title="전월세 대출 상품 확인하러 가기" />
+          <Button
+            className={cx("button-wrap")}
+            onClick={() => router.push("/deposit-entry")}
+            title="전월세 대출 상품 확인하러 가기"
+          />
           <Spacing size={14} />
         </div>
       </CSSTransition>
