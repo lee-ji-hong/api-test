@@ -15,7 +15,7 @@ interface WriteFooterProps {
   loginUserName: string;
 }
 
-const DetailFooter: React.FC<WriteFooterProps> = ({ postId, onCommentAdded, loginUserName }) => {
+const DetailFooter: React.FC<WriteFooterProps> = ({ postId, onCommentAdded }) => {
   const [commentContent, setCommentContent] = useState(""); // 댓글 내용을 저장할 상태
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
