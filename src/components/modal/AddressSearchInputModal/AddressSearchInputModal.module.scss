@@ -28,7 +28,7 @@
   }
 
   .container.show {
-    bottom: 0;
+    bottom: 12px;
   }
 
   .hr-top {
@@ -62,6 +62,16 @@
     left: 50%;
     transform: translateX(-50%);
     border-radius: 100px;
+  }
+
+  .Icon {
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transform: none;
+    cursor: pointer;
   }
 
   .txt-title {

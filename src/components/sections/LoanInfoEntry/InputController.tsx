@@ -11,6 +11,7 @@ interface Props<ControlType extends FieldValues> {
   control: Control<ControlType>;
   modalTitle?: string;
   buttonText: string;
+  isValue?: boolean;
   min?: Limit;
   max?: Limit;
   onClose: () => void;
@@ -22,6 +23,7 @@ export const InputController = <ControlType extends FieldValues>({
   control,
   modalTitle,
   buttonText,
+  isValue,
   min,
   max,
 }: Props<ControlType>) => {
@@ -64,6 +66,7 @@ export const InputController = <ControlType extends FieldValues>({
             <InputModal
               modalTitle={modalTitle}
               buttonText={buttonText}
+              isValue={isValue}
               error={isInvalidValue ? true : false}
               {...field}
               value={field.value}

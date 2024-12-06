@@ -11,6 +11,7 @@ import { useLogEvent } from "@/utils/firebaseLogEvent";
 
 const LoginSuccessPage = () => {
   const [, setRecoilFormData] = useRecoilState(formData);
+  const { loanAdviceReport } = useSendLoanAdviceReport();
   const navigate = useNavigate();
   // const token = getTokens();
 
@@ -36,24 +37,27 @@ const LoginSuccessPage = () => {
       }
 
       switch (getLoginRedirectPath()) {
-        case "/community/detail":
+        case "/community/detail": {
           navigate(getLoginRedirectPath(), { state: { postId: getCommunityIdAfterLogin() } });
           break;
-        case "/community/write":
+        }
+        case "/community/write": {
           navigate(getLoginRedirectPath(), { state: { communityDetail: createCommunityDetail() } });
           break;
-        case "/report":
+        }
+        case "/report": {
           const jsonString = getAdviceReportData();
           const parsedData = JSON.parse(jsonString) as sendLoanAdviceReportRequest;
-          const { loanAdviceReport } = useSendLoanAdviceReport();
           loanAdviceReport(parsedData);
           break;
-        default:
+        }
+        default: {
           navigate(getLoginRedirectPath());
           break;
+        }
       }
     }
-  });
+  }, [loanAdviceReport, navigate, setRecoilFormData]);
 
   return <div></div>;
 };

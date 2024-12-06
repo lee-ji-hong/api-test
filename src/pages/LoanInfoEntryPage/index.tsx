@@ -186,6 +186,7 @@ export const LoanInfoEntryPage = () => {
                         modalSubTitle={item.modalSubTitle}
                         options={item.options}
                         buttonText={item.modalButton!}
+                        isValue={item?.isValue}
                         min={item.limit?.min}
                         max={item.limit?.max}
                         {...rest}
