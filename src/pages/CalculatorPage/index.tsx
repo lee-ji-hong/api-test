@@ -68,6 +68,7 @@ export default function CalculatorPage() {
                 page_title: `./CalculatorPage-${item}`,
                 page_location: window.location.href,
                 page_path: window.location.pathname,
+                screen_name: item,
               });
             }}
             theme={selectedCalculator === item ? "dark" : "white"}

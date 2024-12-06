@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 import CenterModal from "@/components/modal/CenterModal";
 import { useRef } from "react";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +29,16 @@ const CommunityModifyPage = () => {
   const navigator = useNavigate();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isFirstClick, setIsFirstClick] = useState(true);
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("CommunityModify", {
+      page_title: "./CommunityModify",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   // 수정 상태 감지
   useEffect(() => {

@@ -8,6 +8,8 @@ import WriteBody from "./WriteBody";
 import WriteFooter from "./WriteFooter";
 import { CommunityDetail, LoanAdviceSummaryReport } from "@/models";
 import { useRef } from "react";
+import { useEffect } from "react";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 
 const cx = classNames.bind(styles);
 
@@ -44,6 +46,14 @@ const CommunityWirtePage = () => {
   const [loanAdviceReport, setLoanAdviceReport] = useState<LoanAdviceSummaryReport | null>(
     communityDetail.loanAdviceSummaryReport,
   );
+  const logEvent = useLogEvent();
+  useEffect(() => {
+    logEvent("CommunityWirtePage", {
+      page_title: "./CommunityWirtePage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   // Function to clear image preview
   const changeImage = (imgUrl: string, imgFile: File | null) => {
