@@ -12,6 +12,7 @@ import DetailHeader from "./DetailHeader";
 import DetailBody from "./DetailBody";
 import BottomModal from "@/components/modal/BottomModal";
 import CenterModal from "@/components/modal/CenterModal";
+import { useLogEvent } from "@/utils/firebaseLogEvent";
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,16 @@ const CommunityDetailPage = () => {
   const [commentUpdated, setCommentUpdated] = useState(false); // 댓글 업데이트 여부 상태 추가
   const { communityDetail, isCommunityDetailLoading } = useGetCommunityDetail(postId);
   const navigate = useNavigate();
+
+  const logEvent = useLogEvent();
+
+  useEffect(() => {
+    logEvent("CommunityDetail", {
+      page_title: "./CommunityDetail",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }, [logEvent]);
 
   // 댓글 작성 후 업데이트 트리거 함수
   const handleCommentUpdate = () => {
