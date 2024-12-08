@@ -115,6 +115,11 @@ export const LoanInfoEntryPage = () => {
 
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
+    logEvent(name, {
+      page_title: "./LoanInfoEntryPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
 
     setRecoilFormData((prevState) => ({
       ...prevState,
