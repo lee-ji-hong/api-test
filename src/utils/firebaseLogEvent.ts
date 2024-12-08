@@ -11,6 +11,7 @@ export const useLogEvent = () => {
 
   // 이벤트 로깅 함수
   const logCustomEvent = (eventName: string, eventParams?: EventParams): void => {
+    console.log(eventName);
     if (!analytics) {
       console.error("Analytics instance is not available.");
       return;

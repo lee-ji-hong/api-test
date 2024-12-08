@@ -50,13 +50,14 @@ export const LoanInfoEntryPage = () => {
 
   const logEvent = useLogEvent();
 
-  useEffect(() => {
-    logEvent("LoanInfoEntryPage", {
-      page_title: "./LoanInfoEntryPage",
-      page_location: window.location.href,
-      page_path: window.location.pathname,
-    });
-  }, [logEvent]);
+  // useEffect(() => {
+  //   console.log('test')
+  //   logEvent("LoanInfoEntryPage", {
+  //     page_title: "./LoanInfoEntryPage",
+  //     page_location: window.location.href,
+  //     page_path: window.location.pathname,
+  //   });
+  // }, [logEvent]);
 
   useEffect(() => {
     handleRowClick(1);
@@ -92,6 +93,12 @@ export const LoanInfoEntryPage = () => {
       spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
     };
     localStorage.setItem("formData", JSON.stringify(recoilFormData));
+    console.log("LoanInfoEntryPage");
+    logEvent("LoanInfoEntryPage", {
+      page_title: "./LoanInfoEntryPage",
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
 
     setAdviceReportData(JSON.stringify(updatedFormData)); // 비로그인 상태의 리포트 데이터를 저장하기 위함
 
@@ -115,6 +122,7 @@ export const LoanInfoEntryPage = () => {
 
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
+    console.log(name);
     logEvent(name, {
       page_title: "./LoanInfoEntryPage",
       page_location: window.location.href,
