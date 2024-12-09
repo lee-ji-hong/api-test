@@ -24,8 +24,13 @@ function setRedirectPathAfterLogin(config: AxiosRequestConfig) {
       setLoginRedirectPath(LOGIN_REDIRECT.get("COMMUNITY_WRITE"));
       break;
 
+    // 메인페이지
+    case window.location.pathname === "/deposit-entry":
+      setLoginRedirectPath(LOGIN_REDIRECT.get("DEPOSIT_ENTRY"));
+      break;
+
     // 리포트 결과
-    case config.url?.includes("/api/v1/loanAdvice"):
+    case window.location.pathname === "/loan-info-entry":
       const jsonString = JSON.stringify(config.data);
       setAdviceReportData(jsonString);
       setLoginRedirectPath(LOGIN_REDIRECT.get("LOAN_ADVICE"));
