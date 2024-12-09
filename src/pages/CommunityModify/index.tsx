@@ -38,7 +38,7 @@ const CommunityModifyPage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
 
   // 수정 상태 감지
   useEffect(() => {

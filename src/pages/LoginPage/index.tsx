@@ -11,7 +11,7 @@ const LoginPage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
   return (
     <div>
       <h1>Login Page</h1>

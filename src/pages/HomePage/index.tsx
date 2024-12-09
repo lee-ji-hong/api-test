@@ -29,7 +29,7 @@ const HomePage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
 
   useEffect(() => {
     if (auth) {

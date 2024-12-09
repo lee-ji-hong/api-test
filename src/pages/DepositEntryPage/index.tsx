@@ -45,7 +45,7 @@ const DepositEntryPage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {

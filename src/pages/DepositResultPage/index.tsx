@@ -36,7 +36,7 @@ export const DepositResultPage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
 
   useEffect(() => {
     if (!rentalDeposit || rentalDeposit === 0 || !rentalProductData) {

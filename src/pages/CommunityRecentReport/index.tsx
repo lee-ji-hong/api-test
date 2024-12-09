@@ -21,7 +21,7 @@ const CommunityRecentReportPage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
 
   return (
     <div className={cx("container")}>

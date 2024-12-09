@@ -53,7 +53,7 @@ const CommunityWirtePage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
 
   // Function to clear image preview
   const changeImage = (imgUrl: string, imgFile: File | null) => {

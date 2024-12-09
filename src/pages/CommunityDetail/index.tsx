@@ -35,7 +35,7 @@ const CommunityDetailPage = () => {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  }, [logEvent]);
+  }, []);
 
   // 댓글 작성 후 업데이트 트리거 함수
   const handleCommentUpdate = () => {
