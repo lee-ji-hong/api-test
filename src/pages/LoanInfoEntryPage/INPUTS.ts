@@ -2,7 +2,7 @@ import UserInfo from "@/components/sections/LoanInfoEntry/UserInfo";
 import InputController from "@/components/sections/LoanInfoEntry/InputController";
 import isSelectController from "@/components/sections/LoanInfoEntry/isSelectController";
 import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEmployeeController";
-import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
+// import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
 import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
 
 export const INPUTS = [
@@ -122,51 +122,51 @@ export const INPUTS = [
     ],
     component: isSMEEmployeeController,
   },
-  {
-    id: 10,
-    label: "순자산 3.45억 초과여부",
-    name: "isNetAssetOver345M",
-    value: "",
-    modalTitle: "순자산 3.45억원 초과여부를 알려주세요",
-    options: [
-      { label: "순 자산 3.45억원 미만", value: false },
-      { label: "순 자산 3.45억원 초과", value: true },
-    ],
-    component: isSelectController,
-  },
-  {
-    id: 11,
-    label: "주택 소유 상태",
-    name: "houseOwnershipType",
-    value: "",
-    modalTitle: "주택 소유 상태를 선택해주세요",
-    options: [
-      { label: "무주택", value: "NO_HOUSE" },
-      { label: "1주택", value: "SINGLE_HOUSE" },
-      { label: "다주택", value: "MULTI_HOUSE" },
-    ],
-    component: isSelectController,
-  },
-  {
-    id: 12,
-    label: "임차주택 유형",
-    name: "rentHousingType",
-    value: "",
-    modalTitle: "임차주택 유형을 선택하세요",
-    options: [
-      { label: "아파트", value: "APARTMENT" },
-      { label: "오피스텔", value: "OFFICETEL" },
-      { label: "연립다세대", value: "HOUSEHOLD_HOUSE" },
-      { label: "단독/다가구", value: "FAMILY_HOUSE" },
-    ],
-    component: isSelectController,
-  },
-  {
-    id: 13,
-    label: "임차주택 주소",
-    name: "jibun",
-    value: "",
-    modalTitle: "임차주택 주소를 찾아주세요",
-    component: AddressSearchInputControllter,
-  },
+  // {
+  //   id: 10,
+  //   label: "순자산 3.45억 초과여부",
+  //   name: "isNetAssetOver345M",
+  //   value: "",
+  //   modalTitle: "순자산 3.45억원 초과여부를 알려주세요",
+  //   options: [
+  //     { label: "순 자산 3.45억원 미만", value: false },
+  //     { label: "순 자산 3.45억원 초과", value: true },
+  //   ],
+  //   component: isSelectController,
+  // },
+  // {
+  //   id: 11,
+  //   label: "주택 소유 상태",
+  //   name: "houseOwnershipType",
+  //   value: "",
+  //   modalTitle: "주택 소유 상태를 선택해주세요",
+  //   options: [
+  //     { label: "무주택", value: "NO_HOUSE" },
+  //     { label: "1주택", value: "SINGLE_HOUSE" },
+  //     { label: "다주택", value: "MULTI_HOUSE" },
+  //   ],
+  //   component: isSelectController,
+  // },
+  // {
+  //   id: 12,
+  //   label: "임차주택 유형",
+  //   name: "rentHousingType",
+  //   value: "",
+  //   modalTitle: "임차주택 유형을 선택하세요",
+  //   options: [
+  //     { label: "아파트", value: "APARTMENT" },
+  //     { label: "오피스텔", value: "OFFICETEL" },
+  //     { label: "연립다세대", value: "HOUSEHOLD_HOUSE" },
+  //     { label: "단독/다가구", value: "FAMILY_HOUSE" },
+  //   ],
+  //   component: isSelectController,
+  // },
+  // {
+  //   id: 13,
+  //   label: "임차주택 주소",
+  //   name: "jibun",
+  //   value: "",
+  //   modalTitle: "임차주택 주소를 찾아주세요",
+  //   component: AddressSearchInputControllter,
+  // },
 ];

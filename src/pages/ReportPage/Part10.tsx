@@ -1,3 +1,4 @@
+import React from "react";
 import Spacing from "@/components/shared/Spacing";
 import Image from "@/components/shared/Image";
 import Text from "@/components/shared/Text";
@@ -29,8 +30,8 @@ const Part10 = () => {
                       : null;
 
             return (
-              <>
-                <div className={cx("order-wrap")} key={step.id}>
+              <React.Fragment key={step.id}>
+                <div className={cx("order-wrap")}>
                   {orderImage && <Image className={cx("img")} imageInfo={orderImage} />}
                   <div>
                     <Text className={cx("txt-title")} text={`STEP ${step.id}`} />
@@ -38,7 +39,7 @@ const Part10 = () => {
                   </div>
                 </div>
                 <Spacing size={30} />
-              </>
+              </React.Fragment>
             );
           })}
         </div>
