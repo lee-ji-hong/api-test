@@ -54,7 +54,8 @@ export const InputController = <ControlType extends FieldValues>({
 
           // 금액 뱃지 이벤트
           const handleBadgeClick = (label: string) => {
-            const item = MONEY.find((item) => item.label === label)!;
+            const filteredMoney = field.name in MONEY ? MONEY[field.name as keyof typeof MONEY] : MONEY.default;
+            const item = filteredMoney.find((item) => item.label === label)!;
             if (item) {
               const currentValue = field.value || 0;
               const newValue = currentValue + item.value;

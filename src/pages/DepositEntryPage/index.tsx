@@ -81,7 +81,7 @@ const DepositEntryPage = () => {
   };
 
   const handleChangeValue = (label: string) => {
-    const item = MONEY.find((item) => item.label === label)!;
+    const item = MONEY.default.find((item) => item.label === label)!;
     setInputValue((prevValue) => Math.min(prevValue + item.value, 210000));
   };
 
@@ -148,7 +148,7 @@ const DepositEntryPage = () => {
           text={inputValue === 0 ? "-" : isInvalidValue ? warningMessage : formatNumberWithUnits(inputValue)}
         />
         <Spacing size={24} />
-        <BadgeList list={MONEY} onClick={handleChangeValue} />
+        <BadgeList list={MONEY.default} onClick={handleChangeValue} />
         <Spacing size={gap === 0 ? 60 : Math.floor(gap / 2)} />
 
         {!isInputFocused ? (

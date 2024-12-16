@@ -122,7 +122,6 @@ export const LoanInfoEntryPage = () => {
 
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
-    console.log(name);
     logEvent(name, {
       page_title: "./LoanInfoEntryPage",
       page_location: window.location.href,

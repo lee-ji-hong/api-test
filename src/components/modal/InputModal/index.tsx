@@ -110,6 +110,7 @@ export const InputModal = forwardRef<HTMLInputElement, InputModalProps>(
               isBadge={true}
               handleBadgeClick={handleBadgeClick}
               keyboardHeight={keyboardHeight}
+              name={props.name}
             />
           </div>
         </div>

@@ -15,6 +15,7 @@ interface KeyboardModalProps {
   keyboardHeight: number;
   className?: string;
   isBadge?: boolean;
+  name?: string;
 }
 
 const KeyboardModal = ({
@@ -23,6 +24,7 @@ const KeyboardModal = ({
   className,
   isBadge = false,
   keyboardHeight,
+  name,
 }: KeyboardModalProps) => {
   const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0", "⌫"];
   const [isVisible, setIsVisible] = useState(false);
@@ -30,6 +32,10 @@ const KeyboardModal = ({
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const getFilteredMoney = (name: string) => {
+    return name in MONEY ? MONEY[name as keyof typeof MONEY] : MONEY.default;
+  };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, label: string) => {
     e.preventDefault();
@@ -42,7 +48,7 @@ const KeyboardModal = ({
     <div className={cx(["keyboard-modal", className, { show: isVisible }])} onMouseDown={(e) => e.preventDefault()}>
       <div className={cx("badge-container")}>
         {isBadge &&
-          MONEY?.map(({ label, value }) => (
+          getFilteredMoney(name as string)?.map(({ label, value }) => (
             <Badge
               className={cx("button")}
               key={value.toString()}
