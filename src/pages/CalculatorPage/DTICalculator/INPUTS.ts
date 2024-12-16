@@ -94,8 +94,8 @@ export const INPUTS = [
     },
     options: [
       { label: "+10만", value: 10 },
+      { label: "+50만", value: 50 },
       { label: "+100만", value: 100 },
-      { label: "+1000만", value: 1000 },
     ],
     component: InputController,
   },
