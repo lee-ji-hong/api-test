@@ -1,4 +1,9 @@
-export const MONEY = {
+interface BadgeItem {
+  label: string;
+  value: number;
+}
+
+export const MONEY: Record<string, BadgeItem[]> = {
   default: [
     { label: "+10만", value: 10 },
     { label: "+100만", value: 100 },
