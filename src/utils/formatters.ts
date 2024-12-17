@@ -2,11 +2,14 @@ export const formatNumber = (number: number): string => {
   return `${new Intl.NumberFormat().format(number)}`;
 };
 
-export const modalformatNumber = (number: number): string => {
-  if (number === undefined || isNaN(number)) {
-    return "";
+export const modalformatNumber = (value: number | string): string => {
+  if (typeof value === "string" && value.includes(".")) {
+    return value; // 온점 포함 문자열 그대로 반환
   }
-  return `${new Intl.NumberFormat().format(number)}`;
+  if (!isNaN(Number(value))) {
+    return `${new Intl.NumberFormat().format(Number(value))}`; // 숫자 포맷
+  }
+  return "";
 };
 
 export const formatNumberWithUnits = (number: number): string => {

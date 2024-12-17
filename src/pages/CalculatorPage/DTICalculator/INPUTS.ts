@@ -1,5 +1,6 @@
 import SelectController from "@/components/sections/Calculator/SelectController";
 import InputController from "@/components/sections/Calculator/InputController";
+import DotInputController from "@/components/sections/Calculator/DotInputController";
 import PeriodController from "@/components/sections/Calculator/PeriodController";
 
 import { repaymentOptions } from "./options";
@@ -48,7 +49,7 @@ export const INPUTS = [
       min: { value: -1, ment: "이자율을 입력해주세요" },
       max: { value: 100, ment: "100 이하로 입력이 가능합니다." },
     },
-    component: InputController,
+    component: DotInputController,
   },
   {
     id: 4,
