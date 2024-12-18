@@ -62,6 +62,7 @@ const HomePage = () => {
           <Section01 className={cx("section")} title="당신을 위한/n최적의 전세 대출을/n찾아드릴게요">
             <Spacing size={18} />
             <Text className={cx("txt-box")} text="최신 정보를 바탕으로/n맞춤형 대출 솔루션을 제공받으세요" />
+            <Text className={cx("txt-grey")} text="*신용 점수에 전혀 영향이 없어요" />
             <Spacing size={52} />
             <Image className={cx("top-img-1")} imageInfo={IMAGES?.Onboarding_1} />
           </Section01>
