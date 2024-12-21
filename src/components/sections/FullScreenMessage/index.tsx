@@ -1,11 +1,5 @@
-// import { useLocation } from "react-router-dom";
-
-// import DepositEntryPageLoading from "@/pages/DepositEntryPage/DepositEntryPageLoading";
-// import DepositResultPageLoading from "@/pages/DepositResultPage/DepositResultPageLoading";
-// import LoanInfoEntryPageLoading from "@/pages/LoanInfoEntryPage/LoanInfoEntryPageLoading";
-// import ReportPageLoading from "@/pages/ReportPage/ReportPageLoading";
 import Image from "@/components/shared/Image";
-
+import { LinearProgress } from "@mui/material";
 import { IMAGES } from "@/constants/images";
 
 import classNames from "classnames/bind";
@@ -40,27 +34,7 @@ function Error() {
 }
 
 function Loading() {
-  // const { pathname } = useLocation();
-  return (
-    <>
-      <div className={cx("container")}>
-        <Image className={cx("ico-heart")} imageInfo={IMAGES?.LoadingHeart} />
-      </div>
-      {/* {pathname === "/deposit-entry" ? (
-        <DepositEntryPageLoading />
-      ) : pathname === "/deposit-result" || pathname === "/no-report" ? (
-        <DepositResultPageLoading />
-      ) : pathname === "/loan-info-entry" ? (
-        <LoanInfoEntryPageLoading />
-      ) : pathname === "/report" ? (
-        <ReportPageLoading />
-      ) : (
-        <div className={cx("container")}>
-          <Image className={cx("ico-heart")} imageInfo={IMAGES?.LoadingHeart} />
-        </div>
-      )} */}
-    </>
-  );
+  return <LinearProgress />;
 }
 
 export default FullScreenMessage;
