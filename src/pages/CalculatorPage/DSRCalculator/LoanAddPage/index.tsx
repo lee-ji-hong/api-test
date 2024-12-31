@@ -75,7 +75,7 @@ const LoanAddPage = () => {
     const updatedFormData = {
       loanType: data.loanType,
       principal: (data.principal ?? 0) * 10000,
-      interestRatePercentage: data.interestRatePercentage ?? 0,
+      interestRatePercentage: parseFloat(data.interestRatePercentage) ?? 0,
       term: selectedBadge == "년" ? data.term * 12 : data.term,
       gracePeriod: selectedBadge == "년" ? data.gracePeriod * 12 : data.gracePeriod,
       repaymentType: data.repaymentType ?? "",
