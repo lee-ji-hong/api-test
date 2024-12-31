@@ -81,6 +81,7 @@ const LoanAddPage = () => {
       repaymentType: data.repaymentType ?? "",
       maturityPaymentAmount: (data.principal ?? 0) * 10000,
       interestRateType: data.interestRateType ?? "",
+      isMetroArea: data.isMetroArea ?? "",
     };
 
     navigate("/calculator", {

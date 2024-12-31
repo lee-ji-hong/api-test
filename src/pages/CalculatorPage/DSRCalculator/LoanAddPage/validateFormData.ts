@@ -8,31 +8,46 @@ import { FieldValues, UseFormSetFocus } from "react-hook-form";
  */
 
 export const validateFormData = (data: FieldValues, setFocus: UseFormSetFocus<FieldValues>): boolean => {
-  const { principal, interestRatePercentage, term, gracePeriod, repaymentType } = data;
+  const { principal, interestRatePercentage, term, gracePeriod, repaymentType, isMetroArea } = data;
+
+  if (!repaymentType) {
+    alert("대출 상환방법를 입력해주세요.");
+    setFocus("repaymentType");
+    return false;
+  }
 
   if (!principal) {
     alert("대출금액을 입력해주세요.");
     setFocus("principal");
     return false;
   }
-  if (!interestRatePercentage) {
-    alert("주택 담보 대출 금리을 입력해주세요.");
-    setFocus("interestRatePercentage");
-    return false;
-  }
+
   if (!term) {
     alert("총 대출 기간을 입력해주세요.");
     setFocus("term");
     return false;
   }
+
   if (!gracePeriod) {
-    alert("대출 거치 기간를 입력해주세요.");
+    alert("대출 거치 기간을 입력해주세요.");
     setFocus("gracePeriod");
     return false;
   }
-  if (!repaymentType) {
-    alert("대출 상환방법를 입력해주세요.");
-    setFocus("repaymentType");
+
+  if (!interestRatePercentage) {
+    alert("대출 이자율을 입력해주세요.");
+    setFocus("interestRatePercentage");
+    return false;
+  }
+
+  if (!interestRatePercentage) {
+    alert("대출 이자율을 입력해주세요.");
+    setFocus("interestRatePercentage");
+    return false;
+  }
+  if (!isMetroArea) {
+    alert("대상주택 수도권여부를 입력해주세요.");
+    setFocus("isMetroArea");
     return false;
   }
 
