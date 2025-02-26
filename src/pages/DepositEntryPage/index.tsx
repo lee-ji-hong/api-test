@@ -14,6 +14,8 @@ import Text from "@/components/shared/Text";
 import { useSendSimpleRentalProduct } from "@/hooks/queries/useSendSimpleRentalProduct";
 import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useGetLoanAdvice } from "@/hooks/queries/useGetLoanAdvice";
+import { useGetGuestToken } from "@/hooks/queries/useGetGuestToken";
+import { setGuestToken } from "@/utils/localStorage";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { sendLoanAdviceReportRequest } from "@/models";
 import { formData, authState } from "@/recoil/atoms";
@@ -34,6 +36,7 @@ const DepositEntryPage = () => {
   const { loanAdviceInfo } = useGetLoanAdvice();
   const { height } = useWindowSize();
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
+  const { guestToken } = useGetGuestToken();
   const auth = useRecoilValue(authState);
   const router = useInternalRouter();
 
@@ -46,6 +49,12 @@ const DepositEntryPage = () => {
       page_path: window.location.pathname,
     });
   }, []);
+
+  useEffect(() => {
+    if (!auth) {
+      setGuestToken("guestToken", guestToken?.data.accessToken);
+    }
+  }, [auth]);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {

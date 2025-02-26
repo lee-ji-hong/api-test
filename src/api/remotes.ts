@@ -23,6 +23,7 @@ import {
   RepaymentCalcResponse,
   sendDSRCalcRequest,
   DSRCalcResponse,
+  GuestTokenResponse,
 } from "@/models";
 import { getOrCreateUuid } from "@/utils/localStorage";
 
@@ -42,6 +43,11 @@ export function sendTransferUser(requestBody: string) {
     //   tempUserId: `temp_${getOrCreateUuid()}`,
     // }
   );
+}
+
+// 게스트유저 토큰 발급
+export function getGuestToken() {
+  return Axios.get<GuestTokenResponse>(`/api/v1/guest/login`, false);
 }
 
 /*************

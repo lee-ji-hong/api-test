@@ -106,6 +106,19 @@ export interface SpecificLoanAdvice {
   rentalLoanGuide: string; // 전세 대출 안내
 }
 
+// 게스트유저 토큰 발급 응답
+export interface GuestTokenResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: GuestToken;
+}
+
+export interface GuestToken {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export interface LoanAdviceReport {
   loanAdviceResultId: number; // 대출 상담 결과 ID
   userInputInfoId: number; // 사용자 입력 정보 ID
