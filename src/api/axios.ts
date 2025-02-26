@@ -57,7 +57,7 @@ class Axios {
     };
     if (withToken) {
       const token = getCookie("accessToken") || getGuestToken();
-    if (token) headers.AccessToken = token;
+      if (token) headers.AccessToken = token;
     }
 
     // 추가적인 헤더들을 덮어씌우기
