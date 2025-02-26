@@ -48,7 +48,7 @@ const CommunityPage = () => {
       try {
         const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
         console.log("tokenVaildation", tokenVaildation);
-        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=0&size=5`, true);
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=0&size=5`, false);
         setContentItems(res); // 초기 데이터를 설정
         setHasMore(res.data.length > 0); // 데이터가 더 있는지 확인
       } catch (error) {
@@ -61,7 +61,7 @@ const CommunityPage = () => {
       try {
         const endPoint = isLatest ? "/api/v1/post/sorted?sortType=LATEST&" : "/api/v1/post/sorted?sortType=POPULAR&";
         console.log("tokenVaildation", tokenVaildation);
-        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=${page + 1}&size=5`, true);
+        const res = await Axios.get<CommunityListResponse>(`${endPoint}page=${page + 1}&size=5`, false);
         if (res.data.length > 0) {
           setContentItems((prevItems) => ({
             ...prevItems,
