@@ -1,19 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { sendLoanAdviceReportWithTempUser, sendLoanAdviceReport } from "@/api/remotes";
+import { sendLoanAdviceReport } from "@/api/remotes";
 import { SpecificLoanAdviceResponse, sendLoanAdviceReportRequest } from "@/models";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 
 export const useSendLoanAdviceReport = () => {
-  const uuid = localStorage.getItem("tempUserId");
   const router = useInternalRouter();
 
   const { mutate: loanAdviceReport } = useMutation<SpecificLoanAdviceResponse, Error, sendLoanAdviceReportRequest>({
     mutationFn: (requestBody) => {
-      if (!uuid) {
-        return sendLoanAdviceReportWithTempUser(requestBody);
-      } else {
-        return sendLoanAdviceReport(requestBody);
-      }
+      return sendLoanAdviceReport(requestBody);
     },
     onSuccess: (data) => {
       if (data.status === "NO_CONTENT") {

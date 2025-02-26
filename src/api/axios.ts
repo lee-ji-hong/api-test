@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
 import { getCookie } from "./authUtils";
+import { getGuestToken } from "@/utils/localStorage";
 import { setupInterceptors } from "./interceptors";
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
@@ -55,8 +56,8 @@ class Axios {
       "Content-Type": this.CONTENT_TYPE_JSON,
     };
     if (withToken) {
-      const token = getCookie("accessToken");
-      if (token) headers.AccessToken = token;
+      const token = getCookie("accessToken") || getGuestToken();
+    if (token) headers.AccessToken = token;
     }
 
     // 추가적인 헤더들을 덮어씌우기
