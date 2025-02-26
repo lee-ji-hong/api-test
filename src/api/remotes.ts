@@ -47,7 +47,7 @@ export function sendTransferUser(requestBody: string) {
 
 // 게스트유저 토큰 발급
 export function getGuestToken() {
-  return Axios.get<GuestTokenResponse>(`/api/v1/guest/login`, false);
+  return Axios.get<GuestTokenResponse>(`/api/v1/guest/login`, false).then((response) => response.data);
 }
 
 /*************

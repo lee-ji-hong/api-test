@@ -36,7 +36,7 @@ const DepositEntryPage = () => {
   const { loanAdviceInfo } = useGetLoanAdvice();
   const { height } = useWindowSize();
   const { simpleRentalProduct } = useSendSimpleRentalProduct();
-  const { guestToken } = useGetGuestToken();
+  const { guestToken, isGetGuestTokenLoading } = useGetGuestToken();
   const auth = useRecoilValue(authState);
   const router = useInternalRouter();
 
@@ -51,10 +51,10 @@ const DepositEntryPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!auth) {
-      setGuestToken("guestToken", guestToken?.data.accessToken);
+    if (!auth && !isGetGuestTokenLoading) {
+      setGuestToken(guestToken?.accessToken || "");
     }
-  }, [auth]);
+  }, [guestToken]);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
