@@ -369,7 +369,7 @@ export interface LoanStatus {
   term: number;
   gracePeriod: number;
   interestRatePercentage: number;
-  isMetroArea: number;
+  isMetroArea: boolean;
   interestRateType: string;
 }
 
