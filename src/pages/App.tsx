@@ -33,7 +33,7 @@ const NoReportPage = lazy(() => import("./NoReportPage"));
 const TermsOfServicePage = lazy(() => import("./TermsOfServicePage"));
 const PrivacyPolicyPage = lazy(() => import("./PrivacyPolicyPage"));
 const CalculatorPage = lazy(() => import("./CalculatorPage"));
-
+const LoanInfoEntryTypeBPage = lazy(() => import("./LoanInfoEntryTypeBPage"));
 // 로딩 테스트용 페이지
 const ReportPageLoading = lazy(() => import("./ReportPage/ReportPageLoading"));
 const DepositEntryPageLoading = lazy(() => import("./DepositEntryPage/DepositEntryPageLoading"));
@@ -69,6 +69,7 @@ function App() {
                 <Route path="community/detail/modify-comment" element={<CommunityModifyCommentPage />} />
                 <Route path="community/modify" element={<CommunityModifyPage />} />
                 <Route path="loan-info-entry" element={<LoanInfoEntryPage />} />
+                <Route path="loan-info-entry-b" element={<LoanInfoEntryTypeBPage />} />
                 <Route path="terms-of-service" element={<TermsOfServicePage />} />
                 <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="community/recent-report" element={<CommunityRecentReportPage />} />
