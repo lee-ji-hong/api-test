@@ -1,6 +1,8 @@
-@mixin text-style($size, $weight: 400, $color: false) {
+@mixin text-style($size, $weight: 400, $color: false, $line: 0, $letter: 0) {
   font-size: $size * 1rem;
   font-weight: $weight;
+  line-height: #{$line}px;
+  letter-spacing: #{$letter}px;
 
   @if (type-of($color) == color) {
     color: $color;

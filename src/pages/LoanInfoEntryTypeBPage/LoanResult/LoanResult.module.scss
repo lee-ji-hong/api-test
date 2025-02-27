@@ -1,0 +1,28 @@
+.container {
+  @include flexbox(between, center);
+  width: 100%;
+  min-height: 79px;
+  background-color: $blue100;
+  border-radius: 10px;
+  padding: 17px;
+  position: relative;
+
+  .box {
+    flex: 1;
+    .title {
+      p {
+        @include text-style(1.4, 400, $grey500, $line: 21, $letter: -1);
+      }
+    }
+    .value {
+      @include text-style(1.7, 600, $grey800, $line: 25.5, $letter: -1);
+    }
+  }
+  .vertical-line {
+    width: 1px;
+    height: 40px;
+    max-height: 40px;
+    background-color: $grey400;
+    align-self: center;
+  }
+}
