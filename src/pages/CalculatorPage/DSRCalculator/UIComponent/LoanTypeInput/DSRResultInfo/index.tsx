@@ -19,8 +19,8 @@ export const DSRResultInfo = (result: DSRCalculationResult) => {
       <div className={cx("title")}></div>
       <Spacing size={12} />
       <div className={cx("subtitle")}>
-        연원리금 상환액은 1,996만 5,514원이고 보유하고 계신 대출의 연원리금 상환액은 2,400만원입니다. 연소득은 1억
-        5천만원이므로 DSR은 약 30%로 예상됩니다.
+        연원리금 상환액은 {formatNumberWithUnits2(result.totalAnnualRepayment)}이고, 연소득은
+        {formatNumberWithUnits2(result.annualIncome)}이므로 DSR은 약{Math.floor(result.finalDsrRatio)}%로 예상됩니다.
       </div>
       <Spacing size={20} />
       <div className={cx("subContainer")}>

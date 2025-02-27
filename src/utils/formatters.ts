@@ -61,7 +61,7 @@ export const formatNumberWithUnits2 = (number: number): string => {
     const million = number % 100000000; // 만 단위 이하 계산
     const thousand = Math.floor(million / 10000000); // 천만 단위 계산
     const tenThousand = Math.floor((million % 10000000) / 10000); // 만 단위 계산
-    const remainder = million % 10000; // 만원 이하 계산
+    const remainder = Math.floor(million % 10000); // 만원 이하 계산
 
     if (thousand > 0 && tenThousand === 0 && remainder === 0) {
       return `${billion}억 ${thousand}천만원`;
@@ -75,11 +75,11 @@ export const formatNumberWithUnits2 = (number: number): string => {
     return `${billion}억${remainder !== 0 ? ` ${remainder.toLocaleString()}원` : "원"}`;
   } else if (number >= 10000) {
     const tenThousand = Math.floor(number / 10000);
-    const remainder = number % 10000;
+    const remainder = Math.floor(number % 10000);
     if (remainder === 0) {
       return `${tenThousand}만원`;
     }
-    return `${number.toLocaleString()}원`;
+    return `${Math.floor(number).toLocaleString()}원`;
   }
-  return `${number.toLocaleString()}원`;
+  return `${Math.floor(number).toLocaleString()}원`;
 };
