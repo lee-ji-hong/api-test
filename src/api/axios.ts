@@ -60,6 +60,7 @@ class Axios {
       if (token) headers.AccessToken = token;
     }
 
+    // 테스트
     // 추가적인 헤더들을 덮어씌우기
     if (additionalHeaders) {
       Object.assign(headers, additionalHeaders);
