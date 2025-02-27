@@ -1,9 +1,9 @@
 import Spacing from "@/components/shared/Spacing";
 import { LoanStatus } from "@/models";
-import { periodState } from "@/recoil/atoms";
+// import { periodState } from "@/recoil/atoms";
 import { formatNumberWithUnits2 } from "@/utils/formatters";
 import classNames from "classnames/bind";
-import { useRecoilValue } from "recoil";
+// import { useRecoilValue } from "recoil";
 import style from "./LoanItem.module.scss";
 
 export const LoanItem = (data: LoanStatus) => {
@@ -24,8 +24,9 @@ export const LoanItem = (data: LoanStatus) => {
     OTHER_LOAN: "기타대출",
   } as const;
 
-  const period = useRecoilValue(periodState);
-  const periodUnit = period === "년" ? "년" : "개월";
+  // const period = useRecoilValue(periodState);
+  // const periodUnit = period === "년" ? "년" : "개월";
+  const periodUnit = "개월";
   return (
     <div className={cx("container")}>
       <div className={cx("title")}> {loanTypeMapping[data.loanType as keyof typeof loanTypeMapping] || ""}</div>

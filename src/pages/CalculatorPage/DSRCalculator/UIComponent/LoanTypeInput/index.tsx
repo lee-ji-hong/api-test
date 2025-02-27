@@ -35,6 +35,7 @@ export const LoanTypeInput = () => {
     if (infoItem) scrollToResult();
   }, [infoItem]);
 
+  console.log("arrDSRDatas", arrDSRDatas);
   return (
     <div className={cx("container")}>
       <div className={cx("title")}>대출유형</div>
@@ -79,7 +80,7 @@ export const LoanTypeInput = () => {
                 onClick={() => {
                   const updatedFormData = {
                     loanStatuses: [...arrDSRDatas],
-                    annualIncome: annualIncome,
+                    annualIncome: annualIncome * 10000,
                   };
 
                   DSRCalcInfo(updatedFormData as sendDSRCalcRequest);
