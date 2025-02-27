@@ -11,7 +11,7 @@ export const DSRResultInfo = (result: DSRCalculationResult) => {
   return (
     <div className={cx("container")}>
       <div className={cx("title")}>
-        DSR <span className={cx("highlight")}>{Math.floor(result.finalDsrRatio)}%</span>
+        DSR <span className={cx("highlight")}>{result.finalDsrRatio.toFixed(2)}%</span>
       </div>
       <div className={cx("title")}>
         연원리금 <span className={cx("highlight")}>{formatNumberWithUnits2(result.totalAnnualRepayment)}</span>
@@ -20,7 +20,7 @@ export const DSRResultInfo = (result: DSRCalculationResult) => {
       <Spacing size={12} />
       <div className={cx("subtitle")}>
         연원리금 상환액은 {formatNumberWithUnits2(result.totalAnnualRepayment)}이고, 연소득은
-        {formatNumberWithUnits2(result.annualIncome)}이므로 DSR은 약{Math.floor(result.finalDsrRatio)}%로 예상됩니다.
+        {formatNumberWithUnits2(result.annualIncome)}이므로 DSR은 약{result.finalDsrRatio.toFixed(2)}%로 예상됩니다.
       </div>
       <Spacing size={20} />
       <div className={cx("subContainer")}>
