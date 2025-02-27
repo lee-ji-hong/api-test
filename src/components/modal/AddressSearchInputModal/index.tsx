@@ -226,5 +226,3 @@ export const AddressSearchInputModal = forwardRef<HTMLInputElement, AddressProps
     );
   },
 );
-
-export default AddressSearchInputModal;

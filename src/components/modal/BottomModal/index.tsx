@@ -7,7 +7,7 @@ interface BottomModalProps {
   onDelete: () => void;
 }
 
-const BottomModal: React.FC<BottomModalProps> = ({ onClose, onEdit, onDelete }) => {
+export const BottomModal: React.FC<BottomModalProps> = ({ onClose, onEdit, onDelete }) => {
   const [dragging, setDragging] = useState(false);
   const [offsetY, setOffsetY] = useState(0); // Y축으로 이동한 거리
   const [isClosing, setIsClosing] = useState(false); // 닫기 애니메이션 여부
@@ -106,5 +106,3 @@ const BottomModal: React.FC<BottomModalProps> = ({ onClose, onEdit, onDelete }) 
     </div>
   );
 };
-
-export default BottomModal;

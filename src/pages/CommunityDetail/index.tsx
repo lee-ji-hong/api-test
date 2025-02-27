@@ -10,7 +10,7 @@ import FullScreenMessage from "@/components/sections/FullScreenMessage";
 import DetailFooter from "./DetailFooter";
 import DetailHeader from "./DetailHeader";
 import DetailBody from "./DetailBody";
-import BottomModal from "@/components/modal/BottomModal";
+import { BottomModal } from "@/components/modal/BottomModal";
 import CenterModal from "@/components/modal/CenterModal";
 import { useLogEvent } from "@/utils/firebaseLogEvent";
 

@@ -3,7 +3,7 @@ import styles from "./Profile.module.scss";
 import classNames from "classnames/bind";
 import Image from "@/components/shared/Image";
 import { IMAGES } from "@/constants/images";
-import BottomModal from "@/components/modal/BottomModal";
+import { BottomModal } from "@/components/modal/BottomModal";
 import { useState } from "react";
 import CenterModal from "@/components/modal/CenterModal";
 import Axios from "@/api/axios";

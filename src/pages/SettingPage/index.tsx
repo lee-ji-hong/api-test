@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AlertModal from "@/components/modal/AlertModal";
+import { AlertModal } from "@/components/modal";
 
 import Header from "@/components/sections/Header";
 import Spacing from "@/components/shared/Spacing";

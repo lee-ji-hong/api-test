@@ -13,7 +13,7 @@ interface CenterModalProps {
   onConfirm: () => void;
 }
 
-const AlertModal: React.FC<CenterModalProps> = (props) => {
+export const AlertModal: React.FC<CenterModalProps> = (props) => {
   return (
     <div className={styles["modal-overlay"]}>
       <div className={styles["modal-content"]}>
@@ -42,5 +42,3 @@ const AlertModal: React.FC<CenterModalProps> = (props) => {
     </div>
   );
 };
-
-export default AlertModal;
