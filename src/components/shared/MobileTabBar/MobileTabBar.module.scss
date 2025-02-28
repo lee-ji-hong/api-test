@@ -2,7 +2,8 @@
   @include flexbox(around, center);
   width: 100%;
   max-width: 90rem;
-
+  padding-bottom: 10px;
+  height: 100%;
   @include responsive("T") {
     max-width: calc(100% - 16.8rem);
 

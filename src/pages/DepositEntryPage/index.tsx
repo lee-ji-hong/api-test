@@ -62,7 +62,7 @@ const DepositEntryPage = () => {
       setKeyboardHeight(calculatedHeight);
 
       if (!isInputFocused) {
-        setBottomOffset(70);
+        setBottomOffset(82);
         setGap(0);
       } else {
         const newBottomOffset = height < 668 ? height * 0.4 + 15 : height < 900 ? height * 0.4 + 25 : height * 0.4 + 45;
