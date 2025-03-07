@@ -15,7 +15,7 @@ import { useSendSimpleRentalProduct } from "@/hooks/queries/useSendSimpleRentalP
 import { formatNumber, formatNumberWithUnits } from "@/utils/formatters";
 import { useGetLoanAdvice } from "@/hooks/queries/useGetLoanAdvice";
 import { useGetGuestToken } from "@/hooks/queries/useGetGuestToken";
-import { setGuestToken } from "@/utils/localStorage";
+import { setCookie } from "@/api/authUtils";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { sendLoanAdviceReportRequest } from "@/models";
 import { formData, authState } from "@/recoil/atoms";
@@ -50,11 +50,9 @@ const DepositEntryPage = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (!auth && !isGetGuestTokenLoading) {
-      setGuestToken(guestToken?.accessToken || "");
-    }
-  }, [guestToken]);
+  if (!isGetGuestTokenLoading && guestToken?.accessToken) {
+    setCookie("guestToken", guestToken.accessToken);
+  }
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {

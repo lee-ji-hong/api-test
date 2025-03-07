@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
 import { getCookie } from "./authUtils";
-import { getGuestToken } from "@/utils/localStorage";
 import { setupInterceptors } from "./interceptors";
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
@@ -56,7 +55,7 @@ class Axios {
       "Content-Type": this.CONTENT_TYPE_JSON,
     };
     if (withToken) {
-      const token = getCookie("accessToken") || getGuestToken();
+      const token = getCookie("accessToken") || getCookie("guestToken");
       if (token) headers.AccessToken = token;
     }
 

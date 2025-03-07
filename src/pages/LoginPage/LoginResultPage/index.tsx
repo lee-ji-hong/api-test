@@ -84,10 +84,11 @@ const getTokens = () => {
   const queryParams = new URLSearchParams(location.search);
   const accessToken = queryParams.get("accessToken");
   const refreshToken = queryParams.get("refreshToken");
-
+  const guestToken = queryParams.get("guestToken");
   return {
     accessToken: accessToken,
     refreshToken: refreshToken,
+    guestToken: guestToken,
   };
 };
 export default LoginSuccessPage;

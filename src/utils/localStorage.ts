@@ -11,15 +11,6 @@ export function getOrCreateUuid(): string {
 
   return uuid;
 }
-export function getGuestToken(): string | null {
-  return localStorage.getItem("guestToken");
-}
-
-export function setGuestToken(token: string) {
-  if (!getGuestToken()) {
-    localStorage.setItem("guestToken", token);
-  }
-}
 
 export function setCommunityIdAfterLogin(id: number) {
   localStorage.setItem("communityDetailId", id.toString());
