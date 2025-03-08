@@ -8,6 +8,7 @@ import { formData } from "@/recoil/atoms";
 import { sendLoanAdviceReportRequest } from "@/models";
 import { useSendLoanAdviceReport } from "@/hooks/queries/useSendLoanAdviceReport";
 import { useLogEvent } from "@/utils/firebaseLogEvent";
+import { removeCookie } from "@/api/authUtils";
 
 const LoginSuccessPage = () => {
   const [, setRecoilFormData] = useRecoilState(formData);
@@ -30,6 +31,7 @@ const LoginSuccessPage = () => {
     if (objToken.accessToken && objToken.refreshToken) {
       setCookie("accessToken", objToken.accessToken);
       setCookie("refreshToken", objToken.refreshToken);
+      removeCookie("roleType");
 
       const savedFormData = localStorage.getItem("formData");
       if (savedFormData) {
@@ -85,10 +87,12 @@ const getTokens = () => {
   const accessToken = queryParams.get("accessToken");
   const refreshToken = queryParams.get("refreshToken");
   const guestToken = queryParams.get("guestToken");
+  const roleType = queryParams.get("roleType");
   return {
     accessToken: accessToken,
     refreshToken: refreshToken,
     guestToken: guestToken,
+    roleType: roleType,
   };
 };
 export default LoginSuccessPage;

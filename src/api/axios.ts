@@ -53,6 +53,7 @@ class Axios {
   private static getHeaders(withToken: boolean, additionalHeaders?: RawAxiosRequestHeaders): RawAxiosRequestHeaders {
     const headers: RawAxiosRequestHeaders = {
       "Content-Type": this.CONTENT_TYPE_JSON,
+      Profile: import.meta.env.MODE === "production" ? "prod" : "dev",
     };
     if (withToken) {
       const token = getCookie("accessToken") || getCookie("guestToken");

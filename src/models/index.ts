@@ -117,6 +117,7 @@ export interface GuestTokenResponse {
 export interface GuestToken {
   accessToken: string;
   refreshToken: string;
+  roleType: string;
 }
 
 export interface LoanAdviceReport {

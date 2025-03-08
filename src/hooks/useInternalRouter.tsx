@@ -12,8 +12,8 @@ export function useInternalRouter() {
       push(path: RoutePath | string, state?: Record<string, unknown>) {
         navigate(path, { state });
       },
-      replace(path: RoutePath) {
-        navigate(path, { replace: true });
+      replace(path: RoutePath, state?: Record<string, unknown>) {
+        navigate(path, { replace: true, state });
       },
     };
   }, [navigate]);
