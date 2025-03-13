@@ -30,6 +30,21 @@ export interface sendLoanAdviceReportRequest {
   jibun: string | undefined; //지번
 }
 
+export interface sendLoanAdvicePreRequest {
+  rentalDeposit: number;
+  monthlyRent: number;
+  cashOnHand: number;
+  age: number;
+  maritalStatus: MaritalStatus;
+  annualIncome: number;
+  spouseAnnualIncome: number;
+  childStatus: ChildStatus;
+  hasNewborn: boolean;
+  houseOwnershipType: HouseOwnershipType;
+  isSMEEmployee: boolean;
+  isNetAssetOver345M: boolean;
+}
+
 export interface SendSimpleRentalProductRequest {
   rentalDeposit: number;
 }
@@ -73,6 +88,18 @@ export interface SimpleRentalProduct extends BaseLoanProduct {
 
 export interface RecommendedProduct extends BaseLoanProduct {
   notEligibleReasons: string[]; // 적격하지 않은 이유
+}
+
+export interface LoanAdvicePreTermsResponse {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    loanProductName: string;
+    loanProductCode: string;
+    possibleLoanLimit: number;
+    expectedLoanRate: number;
+  };
 }
 
 export interface SpecificLoanAdviceResponse {

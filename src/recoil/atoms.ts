@@ -9,6 +9,11 @@ import {
 import { analytics } from "../utils/firebase";
 import { Analytics } from "firebase/analytics";
 
+export const loanInfoStepState = atom<number>({
+  key: "loanInfoStepState",
+  default: 1,
+});
+
 export const formData = atom<sendLoanAdviceReportRequest>({
   key: "formState",
   default: {

@@ -32,7 +32,7 @@ export const LoanInfoEntryPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
-  const isRecent = location.state?.isRecent || false;
+  const isRecent = location.state?.isRecent || "loan-info";
   const [loading, setLoading] = useState(false);
   const { loanAdviceReport } = useSendLoanAdviceReport();
   const {
@@ -161,7 +161,16 @@ export const LoanInfoEntryPage = () => {
       <Spacing size={53} />
       <div className={cx("container")}>
         <Spacing size={16} />
-        <Text className={cx("txt-title")} text={isRecent ? "산출 조건을 적용해주세요" : "당신에게 맞는 대출은?"} />
+        <Text
+          className={cx("txt-title")}
+          text={
+            isRecent === "loan-info"
+              ? "산출 조건을 적용해주세요"
+              : isRecent === "report"
+                ? "당신에게 맞는 대출은?"
+                : "입력하신 정보를 최종 확인해주세요"
+          }
+        />
         <Spacing size={4} />
 
         <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
@@ -212,7 +221,13 @@ export const LoanInfoEntryPage = () => {
           <Spacing size={109} />
           <Button
             className={cx("button-wrap")}
-            title={isRecent ? "리포트 다시 산출하기" : "리포트 확인하기"}
+            title={
+              isRecent === "report"
+                ? "리포트 다시 산출하기"
+                : isRecent === "loan-info"
+                  ? "리포트 확인하기"
+                  : "리포트 산출하기"
+            }
             type="submit"
             disabled={isSubmitting || !allFieldsFilled}
           />

@@ -24,6 +24,8 @@ import {
   sendDSRCalcRequest,
   DSRCalcResponse,
   GuestTokenResponse,
+  sendLoanAdvicePreRequest,
+  LoanAdvicePreTermsResponse,
 } from "@/models";
 import { getOrCreateUuid } from "@/utils/localStorage";
 
@@ -68,6 +70,10 @@ export function getLoanAdvice() {
 // 특정 대출추천 보고서 조회
 export function getSpecificLoanAdvice(param: number) {
   return Axios.get<LoanAdviceReportResponse>(`/api/v1/loanAdvice/${param}`, true);
+}
+// 대출조건 사전 조회
+export function sendLoanAdvicePreTerms(requestBody: sendLoanAdvicePreRequest) {
+  return Axios.post<LoanAdvicePreTermsResponse>(`/api/v1/loanAdvice/pre-terms`, requestBody, true);
 }
 
 //전세대출상품 추천 보고서 산출 - 최초 유입 유저

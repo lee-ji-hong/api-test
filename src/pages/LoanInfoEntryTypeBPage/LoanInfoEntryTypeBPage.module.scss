@@ -1,0 +1,91 @@
+.step-txt {
+  @include flexbox(start, center);
+  p {
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 130%;
+    letter-spacing: -0.8px;
+  }
+}
+
+.button-wrap-focus {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  // max-width: 1013px;
+  width: 100%;
+  padding: 0 20px;
+  transition: bottom 0.4s ease;
+  background-color: white;
+  box-shadow: 0px -7px 30px 2px rgb(255, 255, 255);
+  z-index: 2;
+
+  max-width: 90rem;
+  @include responsive("T") {
+    max-width: calc(100% - 16.8rem);
+  }
+  @include responsive("M") {
+    max-width: 100%;
+  }
+}
+
+.button-container {
+  margin: 0;
+}
+
+.options {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-button {
+  @include flexbox();
+  padding: 15px 24px;
+  background-color: #f7f7f7;
+  border-radius: 12px;
+
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20.8px;
+  letter-spacing: -0.8px;
+  text-align: center;
+  color: $grey800;
+}
+
+.checkbox-container {
+  @include flexbox();
+  gap: 8px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20.8px;
+  letter-spacing: -0.8px;
+  text-align: left;
+  color: $grey800;
+  cursor: pointer;
+}
+
+.img {
+  padding: 6.65px 4.62px;
+  border-radius: 8px;
+  width: 24px;
+  transition: background-color 0.2s ease;
+}
+
+.check-true {
+  background-color: $blue500;
+  &:hover {
+    background-color: $blue300;
+  }
+}
+
+.check-false {
+  background-color: $grey400;
+  &:hover {
+    background-color: $grey300;
+  }
+}
