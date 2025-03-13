@@ -41,7 +41,7 @@ const ReportPage = () => {
 
   const handleGoBack = () => {
     setShowPage(false);
-    router.push("/loan-info-entry", { isRecent: true });
+    router.push("/loan-info-entry", { isRecent: "report" });
   };
 
   const handleNavigate = () => {
@@ -53,7 +53,7 @@ const ReportPage = () => {
       rentalDeposit: info?.rentalDeposit ? info?.rentalDeposit / 10000 : info?.rentalDeposit,
       spouseAnnualIncome: info?.spouseAnnualIncome ? info?.spouseAnnualIncome / 10000 : info?.spouseAnnualIncome,
     });
-    router.push("/loan-info-entry", { isRecent: true });
+    router.push("/loan-info-entry", { isRecent: "report" });
   };
 
   const handleClose = () => {

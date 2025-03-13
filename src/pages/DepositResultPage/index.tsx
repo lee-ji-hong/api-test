@@ -97,7 +97,11 @@ export const DepositResultPage = () => {
         <Spacing size={100} />
         <Button
           className={cx("button-wrap")}
-          onClick={() => router.push("/loan-info-entry")}
+          onClick={() => {
+            // 랜덤 값에 따라 A/B 경로 중 하나로 이동
+            const randomPath = Math.random() > 0.4 ? "/loan-info-entry" : "/loan-info-entry-b";
+            router.push(randomPath);
+          }}
           title="맞춤형 전월세대출 더 알아보기"
         />
       </div>
