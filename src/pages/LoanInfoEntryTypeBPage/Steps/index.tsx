@@ -51,9 +51,11 @@ export const StepContent: React.FC<StepContentProps> = ({
         setKeyboardHeight(0);
       } else {
         if (window.innerWidth < 380) {
-          setBottomOffset(window.innerHeight * 0.4 - 5);
+          setBottomOffset(window.innerHeight * 0.5);
         }
-        setBottomOffset(window.innerHeight * 0.4 + 15);
+        setBottomOffset(window.innerHeight * 0.4 + 55);
+        // const newBottomOffset = height < 668 ? height * 0.4 + 15 : height < 900 ? height * 0.4 + 25 : height * 0.4 + 45;
+        // setBottomOffset(newBottomOffset);
       }
     };
 
@@ -85,6 +87,7 @@ export const StepContent: React.FC<StepContentProps> = ({
           id={stepConfig.id}
           formFieldName={stepConfig.name}
           options={stepConfig.options}
+          unit={stepConfig.unit}
           //   min={stepConfig.limit?.min}
           max={stepConfig.limit?.max}
           onFocus={() => setIsKeyboardModalOpen(true)}
