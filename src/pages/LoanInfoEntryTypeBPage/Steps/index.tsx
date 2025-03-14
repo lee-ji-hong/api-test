@@ -76,19 +76,9 @@ export const StepContent: React.FC<StepContentProps> = ({
   const renderComponent = () => {
     if (stepConfig && stepConfig.component) {
       const FieldComponent = stepConfig.component;
+      console.log(stepConfig);
 
       return (
-        // <FieldComponent
-        //   control={control}
-        //   label={stepConfig.label}
-        //   modalTitle={stepConfig.modalTitle}
-        //   modalButton={stepConfig.modalButton}
-        //   options={stepConfig.options}
-        //   limit={stepConfig.limit}
-        //   isValue={stepConfig.isValue}
-        //   //   {...rest}
-        // />
-
         <FieldComponent
           control={control}
           id={stepConfig.id}
@@ -99,7 +89,6 @@ export const StepContent: React.FC<StepContentProps> = ({
           onFocus={() => setIsKeyboardModalOpen(true)}
           onBlur={stepConfig.id === 4 ? () => handleInputComplete(stepConfig?.name, stepConfig?.id) : onClose}
           keyboardHeight={keyboardHeight}
-          //   {...rest}
         />
       );
     }
@@ -120,7 +109,7 @@ export const StepContent: React.FC<StepContentProps> = ({
           onClick={() =>
             allFieldsFilled
               ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
-              : handleInputComplete(stepConfig?.name, stepConfig?.id)
+              : handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)
           }
           bottom={bottomOffset}
           title="다음"
