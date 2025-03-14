@@ -12,8 +12,8 @@ import { ProgressPercentage } from "@/components";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { LoanResult } from "./LoanResult";
 import { StepContent } from "./Steps";
-import { INPUTS } from "./Steps/INPUTS";
-import { useEffect, useMemo } from "react";
+import { INPUTS, OptionInputs } from "./Steps/INPUTS";
+import { useEffect, useMemo, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form";
 import { setAdviceReportData } from "@/utils/localStorage";
@@ -25,6 +25,8 @@ export const LoanInfoEntryTypeBPage = () => {
   const router = useInternalRouter();
   const [currentStep, setCurrentStep] = useRecoilState(loanInfoStepState);
   const [recoilFormData, setRecoilFormData] = useRecoilState<sendLoanAdviceReportRequest>(formData);
+  const [inputs, setInputs] = useState(INPUTS);
+
   const { loanAdvicPreReport, infoItem } = useSendLoanAdvicePreTerms();
   const { loanAdviceReport } = useSendLoanAdviceReport();
   const { maritalStatus } = recoilFormData;
@@ -71,10 +73,15 @@ export const LoanInfoEntryTypeBPage = () => {
       const value = getValues(input.name as keyof sendLoanAdviceReportRequest);
       return value !== undefined && value !== "";
     });
-  }, [filteredInputs, recoilFormData]);
+  }, [filteredInputs, recoilFormData, getValues]);
 
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
+    if (id === 7) {
+      setCurrentStep(1);
+      setInputs(OptionInputs);
+      return;
+    }
     // logEvent(name, {
     //   page_title: "./LoanInfoEntryPage",
     //   page_location: window.location.href,
@@ -153,13 +160,23 @@ export const LoanInfoEntryTypeBPage = () => {
 
   return (
     <>
-      <ProgressPercentage currentStep={currentStep} />
-      <Header className={cx("cancel")} onLeftClick={handlePrevStep} left="Back_btn" />
+      <ProgressPercentage currentStep={currentStep} length={inputs.length} />
+      <Header
+        className={cx("cancel")}
+        onLeftClick={handlePrevStep}
+        left="Back_btn"
+        right={inputs.length === 2 && "JumpBtn"}
+        onRightClick={() => router.push("/loan-info-entry", { isRecent: "loan-info-B" })}
+      />
       <Spacing size={53} />
       <div className={cx("container")}>
         <LoanResult />
         <Spacing size={35} />
-        <Badge className={cx("button")} title={`${currentStep}/7`} theme="light" />
+        <Badge
+          className={cx("button")}
+          title={`${inputs.length === 2 ? "추가정보 입력" : ""}${currentStep}/${inputs.length}`}
+          theme="light"
+        />
         <Spacing size={10} />
         <FormProvider {...methods}>
           <form className={cx("form-container")} onSubmit={handleSubmit(onSubmit)}>
@@ -167,6 +184,7 @@ export const LoanInfoEntryTypeBPage = () => {
               step={currentStep}
               maritalStatus={maritalStatus}
               isSubmitting={isSubmitting}
+              inputs={inputs}
               handleInputComplete={handleInputComplete}
               allFieldsFilled={allFieldsFilled}
             />

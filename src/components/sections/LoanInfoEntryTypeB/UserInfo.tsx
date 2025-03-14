@@ -51,8 +51,12 @@ export const UserInfo = <ControlType extends FieldValues>({ formFieldName, contr
               {(["NO_CHILD", "ONE_CHILD", "TWO_CHILD", "THREE_OR_MORE_CHILDREN"] as ChildStatus[]).map((status) => (
                 <li
                   key={status}
-                  className={cx("option-button", { selected: field.value === status })}
+                  className={cx("option-button", {
+                    selected: field.value === status || (field.value === undefined && status === "NO_CHILD"),
+                  })}
                   onClick={() => {
+                    console.log(field.value);
+                    console.log(status);
                     field.onChange(status);
                     setChildStatus(status);
                     if (status === "NO_CHILD") {

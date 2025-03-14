@@ -16,6 +16,7 @@ import BackButton from "@/assets/images/community/ico_back.png";
 import MoreButton from "@/assets/images/community/ico_more.png";
 import Logo from "@/assets/images/logo.svg";
 // import Onboarding_1 from "@/assets/images/onboarding_1.png";
+import JumpBtn from "@/assets/images/jump_btn.svg";
 import Onboarding_1 from "@/assets/images/onboarding_5.gif";
 import Onboarding_2 from "@/assets/images/onboarding_2.png";
 import Onboarding_3 from "@/assets/images/onboarding_3.png";
@@ -97,6 +98,10 @@ export const IMAGES = {
   Checkbox_btn: {
     src: Checkbox_btn,
     alt: "체크박스",
+  },
+  JumpBtn: {
+    src: JumpBtn,
+    alt: "건너뛰기",
   },
   TabBarCalculatorIcon: {
     SVGComponent: TabBarCalculatorIcon,
