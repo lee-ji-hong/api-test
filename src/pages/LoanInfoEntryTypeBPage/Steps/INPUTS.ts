@@ -112,19 +112,6 @@ export const INPUTS = [
     // },
     component: InputController,
   },
-
-  // {
-  //   id: 9,
-  //   label: "순자산 3.45억 초과여부",
-  //   name: "isNetAssetOver345M",
-  //   value: "",
-  //   modalTitle: "순자산 3.45억원/n초과여부를 알려주세요",
-  //   options: [
-  //     { label: "순 자산 3.45억원 미만", value: false },
-  //     { label: "순 자산 3.45억원 초과", value: true },
-  //   ],
-  //   component: isSelectController,
-  // },
   // {
   //   id: 11,
   //   label: "주택 소유 상태",
@@ -160,4 +147,32 @@ export const INPUTS = [
   //   modalTitle: "임차주택 주소를 찾아주세요",
   //   component: AddressSearchInputControllter,
   // },
+];
+
+export const OptionInputs = [
+  {
+    id: 1,
+    label: "순자산 3.45억 초과여부",
+    name: "isNetAssetOver345M",
+    value: "",
+    modalTitle: "순자산 3.45억원/n초과여부를 알려주세요",
+    options: [
+      { label: "순 자산 3.45억원 미만", value: false },
+      { label: "순 자산 3.45억원 초과", value: true },
+    ],
+    component: isSelectController,
+  },
+  {
+    id: 2,
+    label: "주택의 지역을 선택해주세요",
+    name: "houseOwnershipType",
+    value: "",
+    modalTitle: "주택의 지역을 선택해주세요",
+    options: [
+      { label: "서울", value: "SEOUL" },
+      { label: "경기", value: "GYEONGGI" },
+      { label: "그 외", value: "OTHER" },
+    ],
+    component: isSelectController,
+  },
 ];

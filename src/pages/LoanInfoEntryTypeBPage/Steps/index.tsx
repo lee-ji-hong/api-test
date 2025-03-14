@@ -15,12 +15,15 @@ interface StepContentProps {
   step: number;
   maritalStatus: sendLoanAdviceReportRequest["maritalStatus"];
   // isSubmitting: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  inputs: any[];
   allFieldsFilled: boolean;
   handleInputComplete: (name: string, id: number) => void;
 }
 
 export const StepContent: React.FC<StepContentProps> = ({
   step,
+  inputs,
   maritalStatus,
   // isSubmitting,
   allFieldsFilled,
@@ -29,13 +32,14 @@ export const StepContent: React.FC<StepContentProps> = ({
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
+
   const { control } = useFormContext();
   const router = useInternalRouter();
 
   console.log(maritalStatus);
 
   // 스텝 정보 가져오기
-  const stepConfig = INPUTS.find((input) => input.id === step);
+  const stepConfig = inputs.find((input) => input.id === step);
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
@@ -68,7 +72,7 @@ export const StepContent: React.FC<StepContentProps> = ({
 
   // // 현재 스텝에 맞는 필드 가져오기control
   const filteredFields =
-    maritalStatus !== "SINGLE" ? INPUTS.filter((input) => input.id === 5 || input.id === 8) : [stepConfig];
+    maritalStatus !== "SINGLE" ? INPUTS.filter((input) => input.id === 5 || input.id === 10) : [stepConfig];
   console.log(filteredFields);
 
   const renderComponent = () => {
@@ -84,7 +88,15 @@ export const StepContent: React.FC<StepContentProps> = ({
           //   min={stepConfig.limit?.min}
           max={stepConfig.limit?.max}
           onFocus={() => setIsKeyboardModalOpen(true)}
-          onBlur={stepConfig.id === 4 ? () => handleInputComplete(stepConfig?.name, stepConfig?.id) : onClose}
+          onBlur={
+            stepConfig.name === "houseOwnershipType" || stepConfig.name === "isNetAssetOver345M" || stepConfig.id === 4
+              ? () => handleInputComplete(stepConfig?.name, stepConfig?.id)
+              : stepConfig.id === 7
+                ? () => {
+                    handleInputComplete(stepConfig?.name, stepConfig?.id);
+                  }
+                : onClose
+          }
           keyboardHeight={keyboardHeight}
         />
       );
@@ -128,20 +140,22 @@ export const StepContent: React.FC<StepContentProps> = ({
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
       <Spacing size={35} />
       {renderComponent()}
-      {stepConfig?.id !== 4 && (
-        <Button
-          className={cx("button-wrap-focus")}
-          subClassName={cx("button-container")}
-          disabled={stepConfig?.isValue && stepConfig?.value === undefined}
-          onClick={() =>
-            allFieldsFilled
-              ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
-              : handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)
-          }
-          bottom={bottomOffset}
-          title="다음"
-        />
-      )}
+      {stepConfig?.name === "houseOwnershipType" ||
+        stepConfig?.name === "isNetAssetOver345M" ||
+        (stepConfig?.id !== 4 && stepConfig?.id !== 7 && (
+          <Button
+            className={cx("button-wrap-focus")}
+            subClassName={cx("button-container")}
+            disabled={stepConfig?.isValue && stepConfig?.value === undefined}
+            onClick={() =>
+              allFieldsFilled
+                ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
+                : handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)
+            }
+            bottom={bottomOffset}
+            title="다음"
+          />
+        ))}
     </div>
   );
 };

@@ -11,8 +11,8 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
   );
 }
 
-export const ProgressPercentage = ({ currentStep }: { currentStep: number }) => {
-  const percentValue = (currentStep / 7) * 100;
+export const ProgressPercentage = ({ currentStep, length }: { currentStep: number; length: number }) => {
+  const percentValue = (currentStep / length) * 100;
   return (
     <Box sx={{ width: "100%" }}>
       <LinearProgressWithLabel value={percentValue} />

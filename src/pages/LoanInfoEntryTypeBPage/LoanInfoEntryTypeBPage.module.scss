@@ -55,6 +55,11 @@
   color: $grey800;
 }
 
+.selected {
+  background-color: $blue100;
+  color: $blue500;
+}
+
 .checkbox-container {
   @include flexbox();
   gap: 8px;
