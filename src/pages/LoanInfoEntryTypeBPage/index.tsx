@@ -108,8 +108,8 @@ export const LoanInfoEntryTypeBPage = () => {
     for (let i = id - 1; i < filteredInputs.length; i++) {
       const nextInput = filteredInputs.find((input) => input.id === i + 2);
 
-      if ((maritalStatus === undefined && id === 5) || (maritalStatus === "SINGLE" && id === 5)) {
-        setCurrentStep(7);
+      if ((maritalStatus === undefined && id === 5) || id === 5) {
+        setCurrentStep(6);
         return;
       }
       if (nextInput) {

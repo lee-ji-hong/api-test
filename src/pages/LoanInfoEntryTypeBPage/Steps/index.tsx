@@ -33,13 +33,6 @@ export const StepContent: React.FC<StepContentProps> = ({
   const router = useInternalRouter();
 
   console.log(maritalStatus);
-  // 현재 스텝에 맞는 필드 가져오기control
-  //   const fields = INPUTS.filter((input) => {
-  //     if (input.name === "spouseAnnualIncome") {
-  //       return maritalStatus && maritalStatus !== "SINGLE";
-  //     }
-  //     return true;
-  //   });
 
   // 스텝 정보 가져오기
   const stepConfig = INPUTS.find((input) => input.id === step);
@@ -73,6 +66,11 @@ export const StepContent: React.FC<StepContentProps> = ({
     }, 100);
   };
 
+  // // 현재 스텝에 맞는 필드 가져오기control
+  const filteredFields =
+    maritalStatus !== "SINGLE" ? INPUTS.filter((input) => input.id === 5 || input.id === 8) : [stepConfig];
+  console.log(filteredFields);
+
   const renderComponent = () => {
     if (stepConfig && stepConfig.component) {
       const FieldComponent = stepConfig.component;
@@ -93,6 +91,37 @@ export const StepContent: React.FC<StepContentProps> = ({
     }
     return null;
   };
+
+  if (stepConfig?.id === 5 || stepConfig?.id === 8) {
+    return (
+      <>
+        {filteredFields.map((field) => (
+          <React.Fragment key={field?.id}>
+            <div>
+              <Text className={cx("step-txt")} text={field?.modalTitle} />
+              <Spacing size={35} />
+              {renderComponent()}
+              {stepConfig?.id !== 4 && (
+                <Button
+                  className={cx("button-wrap-focus")}
+                  subClassName={cx("button-container")}
+                  disabled={field?.isValue && field?.value === undefined}
+                  onClick={() =>
+                    allFieldsFilled
+                      ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
+                      : handleInputComplete(field?.name ?? "monthlyRent", field?.id ?? 1)
+                  }
+                  bottom={bottomOffset}
+                  title="다음"
+                />
+              )}
+            </div>
+            <Spacing size={50} />
+          </React.Fragment>
+        ))}
+      </>
+    );
+  }
 
   return (
     <div>

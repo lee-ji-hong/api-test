@@ -76,9 +76,30 @@ export const INPUTS = [
     // },
     component: InputController,
   },
-
   {
     id: 6,
+    label: "자녀유무",
+    name: "childStatus",
+    value: "",
+    modalTitle: "자녀유무를 선택해주세요",
+    modalButton: "다음",
+    component: UserInfo,
+  },
+  {
+    id: 7,
+    label: "중소기업재직여부",
+    name: "isSMEEmployee",
+    value: "",
+    modalTitle: "중소기업 재직여부를 선택해주세요",
+    modalSubTitle: "중소기업 기준은 직원 수 300명 이하, 연매출 1천억원 이하로 자세한 기준은 링크를 통해 확인해주세요.",
+    options: [
+      { label: "예", value: true },
+      { label: "아니요", value: false },
+    ],
+    component: isSelectController,
+  },
+  {
+    id: 8,
     label: "배우자 연소득",
     name: "spouseAnnualIncome",
     value: "",
@@ -91,28 +112,7 @@ export const INPUTS = [
     // },
     component: InputController,
   },
-  {
-    id: 7,
-    label: "자녀유무",
-    name: "childStatus",
-    value: "",
-    modalTitle: "자녀유무를 선택해주세요",
-    modalButton: "다음",
-    component: UserInfo,
-  },
-  // {
-  //   id: 8,
-  //   label: "중소기업재직여부",
-  //   name: "isSMEEmployee",
-  //   value: "",
-  //   modalTitle: "중소기업 재직여부를 선택해주세요",
-  //   modalSubTitle: "중소기업 기준은 직원 수 300명 이하, 연매출 1천억원 이하로 자세한 기준은 링크를 통해 확인해주세요.",
-  //   options: [
-  //     { label: "예", value: true },
-  //     { label: "아니요", value: false },
-  //   ],
-  //   component: isSelectController,
-  // },
+
   // {
   //   id: 9,
   //   label: "순자산 3.45억 초과여부",
