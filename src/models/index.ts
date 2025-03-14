@@ -94,12 +94,7 @@ export interface LoanAdvicePreTermsResponse {
   code: number;
   status: string;
   message: string;
-  data: {
-    loanProductName: string;
-    loanProductCode: string;
-    possibleLoanLimit: number;
-    expectedLoanRate: number;
-  };
+  data: BaseLoanProduct;
 }
 
 export interface SpecificLoanAdviceResponse {

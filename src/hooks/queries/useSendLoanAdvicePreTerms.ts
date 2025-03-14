@@ -1,14 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { sendLoanAdviceReport } from "@/api/remotes";
-import { LoanAdvicePreTermsResponse, sendLoanAdviceReportRequest } from "@/models";
+import { sendLoanAdvicePreTerms } from "@/api/remotes";
+import { BaseLoanProduct, sendLoanAdvicePreRequest } from "@/models";
 import { useState } from "react";
 
 export const useSendLoanAdvicePreTerms = () => {
-  const [infoItem, setInfoItem] = useState<LoanAdvicePreTermsResponse>();
+  const [infoItem, setInfoItem] = useState<BaseLoanProduct>();
 
-  const { mutate: loanAdvicPreReport } = useMutation<LoanAdvicePreTermsResponse, Error, sendLoanAdviceReportRequest>({
+  const { mutate: loanAdvicPreReport } = useMutation<BaseLoanProduct, Error, sendLoanAdvicePreRequest>({
     mutationFn: (requestBody) => {
-      return sendLoanAdviceReport(requestBody);
+      return sendLoanAdvicePreTerms(requestBody);
     },
     onSuccess: (response) => {
       setInfoItem(response);

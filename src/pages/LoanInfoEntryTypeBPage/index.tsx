@@ -35,7 +35,6 @@ export const LoanInfoEntryTypeBPage = () => {
     mode: "onChange",
     criteriaMode: "all",
   });
-  console.log(infoItem);
   console.log(recoilFormData);
 
   // 필요한 함수들 분해 할당으로 추출
@@ -93,12 +92,12 @@ export const LoanInfoEntryTypeBPage = () => {
       [name]: value,
     }));
     const updatedFormData = {
-      rentalDeposit: (recoilFormData.rentalDeposit ?? 0) * 10000,
+      rentalDeposit: (recoilFormData.rentalDeposit ?? 100) * 10000,
       monthlyRent: (recoilFormData.monthlyRent ?? 0) * 10000,
       cashOnHand: (recoilFormData.cashOnHand ?? 0) * 10000,
       annualIncome: (recoilFormData.annualIncome ?? 0) * 10000,
       spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
-      age: recoilFormData.age ?? 0,
+      age: recoilFormData.age ?? 28,
       maritalStatus: maritalStatus ?? "SINGLE",
       childStatus: recoilFormData.childStatus ?? "NO_CHILD",
       hasNewborn: recoilFormData.hasNewborn ?? false,
@@ -170,7 +169,7 @@ export const LoanInfoEntryTypeBPage = () => {
       />
       <Spacing size={53} />
       <div className={cx("container")}>
-        <LoanResult />
+        <LoanResult LoanLimit={infoItem?.possibleLoanLimit ?? 0} LoanRate={infoItem?.expectedLoanRate ?? 0} />
         <Spacing size={35} />
         <Badge
           className={cx("button")}

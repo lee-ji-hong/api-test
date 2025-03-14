@@ -73,7 +73,9 @@ export function getSpecificLoanAdvice(param: number) {
 }
 // 대출조건 사전 조회
 export function sendLoanAdvicePreTerms(requestBody: sendLoanAdvicePreRequest) {
-  return Axios.post<LoanAdvicePreTermsResponse>(`/api/v1/loanAdvice/pre-terms`, requestBody, true);
+  return Axios.post<LoanAdvicePreTermsResponse>(`/api/v1/loanAdvice/pre-terms`, requestBody, true).then(
+    (response) => response.data,
+  );
 }
 
 //전세대출상품 추천 보고서 산출 - 최초 유입 유저
