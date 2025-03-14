@@ -40,7 +40,6 @@ export const LoanInfoEntryTypeBPage = () => {
   // 필요한 함수들 분해 할당으로 추출
   const {
     handleSubmit,
-    formState: { isSubmitting },
     // setFocus,
     getValues,
     // watch,
@@ -111,16 +110,16 @@ export const LoanInfoEntryTypeBPage = () => {
       [name]: value,
     }));
 
-    const filteredInputs =
-      maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
+    // const filteredInputs =
+    //   maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
 
-    for (let i = id - 1; i < filteredInputs.length; i++) {
-      const nextInput = filteredInputs.find((input) => input.id === i + 2);
+    for (let i = id - 1; i < INPUTS.length; i++) {
+      const nextInput = INPUTS.find((input) => input.id === i + 2);
 
-      if ((maritalStatus === undefined && id === 5) || id === 5) {
-        setCurrentStep(6);
-        return;
-      }
+      // if ((maritalStatus === undefined && id === 5) || id === 5) {
+      //   setCurrentStep(6);
+      //   return;
+      // }
       if (nextInput) {
         const nextValue = getValues(nextInput.name as keyof sendLoanAdviceReportRequest);
         if (nextValue === undefined || nextValue === null) {
@@ -185,7 +184,6 @@ export const LoanInfoEntryTypeBPage = () => {
             <StepContent
               step={currentStep}
               maritalStatus={maritalStatus}
-              isSubmitting={isSubmitting}
               inputs={inputs}
               handleInputComplete={handleInputComplete}
               allFieldsFilled={allFieldsFilled}

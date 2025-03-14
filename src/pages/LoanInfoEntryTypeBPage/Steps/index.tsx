@@ -8,13 +8,12 @@ import { sendLoanAdviceReportRequest } from "@/models";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
-import { INPUTS } from "./INPUTS";
+import { INPUTS, SpouseAnnualIncome } from "./INPUTS";
 import Spacing from "@/components/shared/Spacing";
 
 interface StepContentProps {
   step: number;
   maritalStatus: sendLoanAdviceReportRequest["maritalStatus"];
-  // isSubmitting: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   inputs: any[];
   allFieldsFilled: boolean;
@@ -25,7 +24,6 @@ export const StepContent: React.FC<StepContentProps> = ({
   step,
   inputs,
   maritalStatus,
-  // isSubmitting,
   allFieldsFilled,
   handleInputComplete,
 }) => {
@@ -35,8 +33,6 @@ export const StepContent: React.FC<StepContentProps> = ({
 
   const { control } = useFormContext();
   const router = useInternalRouter();
-
-  console.log(maritalStatus);
 
   // 스텝 정보 가져오기
   const stepConfig = inputs.find((input) => input.id === step);
@@ -74,8 +70,7 @@ export const StepContent: React.FC<StepContentProps> = ({
 
   // // 현재 스텝에 맞는 필드 가져오기control
   const filteredFields =
-    maritalStatus !== "SINGLE" ? INPUTS.filter((input) => input.id === 5 || input.id === 10) : [stepConfig];
-  console.log(filteredFields);
+    maritalStatus !== "SINGLE" ? [...INPUTS.filter((input) => input.id === 5), SpouseAnnualIncome] : [stepConfig];
 
   const renderComponent = () => {
     if (stepConfig && stepConfig.component) {
@@ -107,7 +102,8 @@ export const StepContent: React.FC<StepContentProps> = ({
     return null;
   };
 
-  if (stepConfig?.id === 5 || stepConfig?.id === 8) {
+  if (stepConfig?.id === 5) {
+    console.log(filteredFields);
     return (
       <>
         {filteredFields.map((field) => (

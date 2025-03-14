@@ -1,9 +1,6 @@
 import UserInfo from "@/components/sections/LoanInfoEntryTypeB/UserInfo";
 import InputController from "@/components/sections/LoanInfoEntryTypeB/InputController";
 import isSelectController from "@/components/sections/LoanInfoEntryTypeB/isSelectController";
-// import isSMEEmployeeController from "@/components/sections/LoanInfoEntry/isSMEEmployeeController";
-// import AddressSearchInputControllter from "@/components/sections/LoanInfoEntry/AddressSearchInputControllter";
-// import WheelContrller from "@/components/sections/LoanInfoEntry/WheelContrller";
 
 export const INPUTS = [
   {
@@ -102,21 +99,7 @@ export const INPUTS = [
     ],
     component: isSelectController,
   },
-  {
-    id: 8,
-    label: "배우자 연소득",
-    name: "spouseAnnualIncome",
-    value: "",
-    isValue: true,
-    modalTitle: "배우자 연소득을 입력해주세요",
-    modalButton: "다음",
-    unit: "만원",
-    // limit: {
-    //   min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
-    //   max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
-    // },
-    component: InputController,
-  },
+
   // {
   //   id: 11,
   //   label: "주택 소유 상태",
@@ -153,6 +136,22 @@ export const INPUTS = [
   //   component: AddressSearchInputControllter,
   // },
 ];
+
+export const SpouseAnnualIncome = {
+  id: 1,
+  label: "배우자 연소득",
+  name: "spouseAnnualIncome",
+  value: "",
+  isValue: true,
+  modalTitle: "배우자 연소득을 입력해주세요",
+  modalButton: "다음",
+  unit: "테스트",
+  // limit: {
+  //   min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
+  //   max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+  // },
+  component: InputController,
+};
 
 export const OptionInputs = [
   {
