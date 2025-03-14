@@ -48,6 +48,7 @@ export const LoanInfoEntryTypeBPage = () => {
 
   useEffect(() => {
     methods.reset(recoilFormData);
+    sendLoanAdvicePreTerms();
   }, [recoilFormData, methods]);
 
   const handlePrevStep = () => {
@@ -74,6 +75,24 @@ export const LoanInfoEntryTypeBPage = () => {
     });
   }, [filteredInputs, recoilFormData, getValues]);
 
+  const sendLoanAdvicePreTerms = () => {
+    const updatedFormData = {
+      rentalDeposit: (recoilFormData.rentalDeposit ?? 100) * 10000,
+      monthlyRent: (recoilFormData.monthlyRent ?? 0) * 10000,
+      cashOnHand: (recoilFormData.cashOnHand ?? 0) * 10000,
+      annualIncome: (recoilFormData.annualIncome ?? 0) * 10000,
+      spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
+      age: recoilFormData.age ?? 28,
+      maritalStatus: maritalStatus ?? "SINGLE",
+      childStatus: recoilFormData.childStatus ?? "NO_CHILD",
+      hasNewborn: recoilFormData.hasNewborn ?? false,
+      houseOwnershipType: recoilFormData.houseOwnershipType ?? "NO_HOUSE",
+      isSMEEmployee: recoilFormData.isSMEEmployee ?? false,
+      isNetAssetOver345M: recoilFormData.isNetAssetOver345M ?? false,
+    };
+    loanAdvicPreReport(updatedFormData as sendLoanAdvicePreRequest);
+  };
+
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
     if (id === 7) {
@@ -91,22 +110,6 @@ export const LoanInfoEntryTypeBPage = () => {
       ...prevState,
       [name]: value,
     }));
-    const updatedFormData = {
-      rentalDeposit: (recoilFormData.rentalDeposit ?? 100) * 10000,
-      monthlyRent: (recoilFormData.monthlyRent ?? 0) * 10000,
-      cashOnHand: (recoilFormData.cashOnHand ?? 0) * 10000,
-      annualIncome: (recoilFormData.annualIncome ?? 0) * 10000,
-      spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
-      age: recoilFormData.age ?? 28,
-      maritalStatus: maritalStatus ?? "SINGLE",
-      childStatus: recoilFormData.childStatus ?? "NO_CHILD",
-      hasNewborn: recoilFormData.hasNewborn ?? false,
-      houseOwnershipType: recoilFormData.houseOwnershipType ?? "NO_HOUSE",
-      isSMEEmployee: recoilFormData.isSMEEmployee ?? false,
-      isNetAssetOver345M: recoilFormData.isNetAssetOver345M ?? false,
-    };
-    console.log(updatedFormData);
-    loanAdvicPreReport(updatedFormData as sendLoanAdvicePreRequest);
 
     const filteredInputs =
       maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
