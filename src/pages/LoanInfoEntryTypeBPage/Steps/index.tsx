@@ -87,13 +87,12 @@ export const StepContent: React.FC<StepContentProps> = ({
           max={stepConfig.limit?.max}
           onFocus={() => setIsKeyboardModalOpen(true)}
           onBlur={
-            stepConfig.name === "houseOwnershipType" || stepConfig.name === "isNetAssetOver345M" || stepConfig.id === 4
+            stepConfig.name === "houseOwnershipType" ||
+            stepConfig.name === "isNetAssetOver345M" ||
+            stepConfig.id === 7 ||
+            stepConfig.id === 4
               ? () => handleInputComplete(stepConfig?.name, stepConfig?.id)
-              : stepConfig.id === 7
-                ? () => {
-                    handleInputComplete(stepConfig?.name, stepConfig?.id);
-                  }
-                : onClose
+              : onClose
           }
           keyboardHeight={keyboardHeight}
         />
