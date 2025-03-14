@@ -14,7 +14,7 @@ import Spacing from "@/components/shared/Spacing";
 interface StepContentProps {
   step: number;
   maritalStatus: sendLoanAdviceReportRequest["maritalStatus"];
-  isSubmitting: boolean;
+  // isSubmitting: boolean;
   allFieldsFilled: boolean;
   handleInputComplete: (name: string, id: number) => void;
 }
@@ -22,7 +22,7 @@ interface StepContentProps {
 export const StepContent: React.FC<StepContentProps> = ({
   step,
   maritalStatus,
-  isSubmitting,
+  // isSubmitting,
   allFieldsFilled,
   handleInputComplete,
 }) => {
@@ -33,7 +33,7 @@ export const StepContent: React.FC<StepContentProps> = ({
   const router = useInternalRouter();
 
   console.log(maritalStatus);
-  // 현재 스텝에 맞는 필드 가져오기
+  // 현재 스텝에 맞는 필드 가져오기control
   //   const fields = INPUTS.filter((input) => {
   //     if (input.name === "spouseAnnualIncome") {
   //       return maritalStatus && maritalStatus !== "SINGLE";
@@ -76,7 +76,6 @@ export const StepContent: React.FC<StepContentProps> = ({
   const renderComponent = () => {
     if (stepConfig && stepConfig.component) {
       const FieldComponent = stepConfig.component;
-      console.log(stepConfig);
 
       return (
         <FieldComponent
@@ -95,7 +94,6 @@ export const StepContent: React.FC<StepContentProps> = ({
     return null;
   };
 
-  console.log(stepConfig);
   return (
     <div>
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
@@ -105,7 +103,7 @@ export const StepContent: React.FC<StepContentProps> = ({
         <Button
           className={cx("button-wrap-focus")}
           subClassName={cx("button-container")}
-          disabled={isSubmitting}
+          disabled={stepConfig?.isValue && stepConfig?.value === undefined}
           onClick={() =>
             allFieldsFilled
               ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })

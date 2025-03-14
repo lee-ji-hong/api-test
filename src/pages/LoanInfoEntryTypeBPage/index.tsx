@@ -13,7 +13,7 @@ import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { LoanResult } from "./LoanResult";
 import { StepContent } from "./Steps";
 import { INPUTS } from "./Steps/INPUTS";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { FieldValues } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form";
 import { setAdviceReportData } from "@/utils/localStorage";
@@ -34,6 +34,7 @@ export const LoanInfoEntryTypeBPage = () => {
     criteriaMode: "all",
   });
   console.log(infoItem);
+  console.log(recoilFormData);
 
   // 필요한 함수들 분해 할당으로 추출
   const {
@@ -43,6 +44,10 @@ export const LoanInfoEntryTypeBPage = () => {
     getValues,
     // watch,
   } = methods;
+
+  useEffect(() => {
+    methods.reset(recoilFormData);
+  }, [recoilFormData, methods]);
 
   const handlePrevStep = () => {
     if (currentStep > 1) {
@@ -103,8 +108,8 @@ export const LoanInfoEntryTypeBPage = () => {
     for (let i = id - 1; i < filteredInputs.length; i++) {
       const nextInput = filteredInputs.find((input) => input.id === i + 2);
 
-      if ((maritalStatus === undefined && id === 6) || (maritalStatus === "SINGLE" && id === 6)) {
-        setCurrentStep(8);
+      if ((maritalStatus === undefined && id === 5) || (maritalStatus === "SINGLE" && id === 5)) {
+        setCurrentStep(7);
         return;
       }
       if (nextInput) {

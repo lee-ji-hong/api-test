@@ -33,6 +33,7 @@ export const InputController = <ControlType extends FieldValues>({
         name={formFieldName}
         control={control}
         render={({ field }) => {
+          console.log(field);
           const isInvalidValue = field.value <= (min?.value ?? -1) || field.value > (max?.value ?? Infinity);
           const warningMessage = field.value <= (min?.value ?? -1) ? (min?.ment ?? "") : (max?.ment ?? "");
 
