@@ -110,16 +110,18 @@ export const LoanInfoEntryTypeBPage = () => {
       [name]: value,
     }));
 
-    // const filteredInputs =
-    //   maritalStatus === "SINGLE" ? INPUTS.filter((input) => input.name !== "spouseAnnualIncome") : INPUTS;
+    if (inputs === OptionInputs) {
+      if (id === 1) {
+        setCurrentStep(2);
+        return;
+      } else {
+        router.push("/loan-info-entry", { isRecent: "loan-info-B" });
+      }
+    }
 
     for (let i = id - 1; i < INPUTS.length; i++) {
       const nextInput = INPUTS.find((input) => input.id === i + 2);
 
-      // if ((maritalStatus === undefined && id === 5) || id === 5) {
-      //   setCurrentStep(6);
-      //   return;
-      // }
       if (nextInput) {
         const nextValue = getValues(nextInput.name as keyof sendLoanAdviceReportRequest);
         if (nextValue === undefined || nextValue === null) {
