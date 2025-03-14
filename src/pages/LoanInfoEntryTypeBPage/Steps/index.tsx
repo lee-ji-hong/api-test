@@ -83,7 +83,7 @@ export const StepContent: React.FC<StepContentProps> = ({
           formFieldName={stepConfig.name}
           options={stepConfig.options}
           unit={stepConfig.unit}
-          //   min={stepConfig.limit?.min}
+          min={stepConfig.limit?.min}
           max={stepConfig.limit?.max}
           onFocus={() => setIsKeyboardModalOpen(true)}
           onBlur={
