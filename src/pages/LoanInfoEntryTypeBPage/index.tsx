@@ -96,7 +96,7 @@ export const LoanInfoEntryTypeBPage = () => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
     if (id === 7) {
       setCurrentStep(1);
-      setInputs(OptionInputs);
+      setInputs(OptionInputs as unknown as typeof inputs);
       return;
     }
     // logEvent(name, {
