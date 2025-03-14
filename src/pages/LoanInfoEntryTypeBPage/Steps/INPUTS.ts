@@ -41,6 +41,11 @@ export const INPUTS = [
     value: "",
     modalTitle: "생년월일을 입력해주세요",
     modalButton: "다음",
+    isValue: true,
+    // limit: {
+    //   min: { value: 251231, ment: "19세이상이여야합니다" },
+    //   max: { value: 61231, ment: "100세이하로 입력이 가능합니다." },
+    // },
     component: InputController,
   },
   {
