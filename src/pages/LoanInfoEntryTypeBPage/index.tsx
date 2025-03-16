@@ -12,7 +12,7 @@ import { ProgressPercentage } from "@/components";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { LoanResult } from "./LoanResult";
 import { StepContent } from "./Steps";
-import { INPUTS, OptionInputs } from "./Steps/INPUTS";
+import { INPUTS, OptionInputs, RENT_HOUSING_DATA } from "./Steps/INPUTS";
 import { useEffect, useMemo, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form";
@@ -94,11 +94,7 @@ export const LoanInfoEntryTypeBPage = () => {
 
   const handleInputComplete = (name: string, id: number) => {
     const value = getValues(name as keyof sendLoanAdviceReportRequest);
-    if (id === 7) {
-      setCurrentStep(1);
-      setInputs(OptionInputs as unknown as typeof inputs);
-      return;
-    }
+
     // logEvent(name, {
     //   page_title: "./LoanInfoEntryPage",
     //   page_location: window.location.href,
@@ -110,12 +106,24 @@ export const LoanInfoEntryTypeBPage = () => {
       [name]: value,
     }));
 
+    if (id === 7) {
+      setCurrentStep(1);
+      setInputs(OptionInputs as unknown as typeof inputs);
+      return;
+    }
+
     if (inputs === OptionInputs) {
       if (id === 1) {
         setCurrentStep(2);
         return;
       } else {
+        const housingData = RENT_HOUSING_DATA[value as keyof typeof RENT_HOUSING_DATA];
+        setRecoilFormData((prevState) => ({
+          ...prevState,
+          ...housingData,
+        }));
         router.push("/loan-info-entry", { isRecent: "loan-info-B" });
+        return;
       }
     }
 

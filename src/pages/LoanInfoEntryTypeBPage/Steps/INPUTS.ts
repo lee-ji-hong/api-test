@@ -2,6 +2,7 @@ import UserInfo from "@/components/sections/LoanInfoEntryTypeB/UserInfo";
 import InputController from "@/components/sections/LoanInfoEntryTypeB/InputController";
 import isSelectController from "@/components/sections/LoanInfoEntryTypeB/isSelectController";
 import WheelContrller from "@/components/sections/LoanInfoEntryTypeB/WheelContrller";
+
 export const INPUTS = [
   {
     id: 1,
@@ -169,14 +170,38 @@ export const OptionInputs = [
   {
     id: 2,
     label: "주택의 지역을 선택해주세요",
-    name: "houseOwnershipType",
+    name: "rentHousingType",
     value: "",
     modalTitle: "주택의 지역을 선택해주세요",
     options: [
-      { label: "서울", value: "SEOUL" },
-      { label: "경기", value: "GYEONGGI" },
-      { label: "그 외", value: "OTHER" },
+      { label: "서울", value: "OFFICETEL" },
+      { label: "경기", value: "APARTMENT" },
+      { label: "그 외", value: "HOUSEHOLD_HOUSE" },
     ],
     component: isSelectController,
   },
 ];
+
+export const RENT_HOUSING_DATA = {
+  OFFICETEL: {
+    exclusiveArea: 84.5,
+    buildingName: "행복아파트",
+    districtCode: "1111011700",
+    dongName: "역삼동",
+    jibun: "649-5",
+  },
+  APARTMENT: {
+    exclusiveArea: 59.0,
+    buildingName: "송도 더샵 퍼스트월드",
+    districtCode: "2818510600",
+    dongName: "송도동",
+    jibun: "4-1",
+  },
+  HOUSEHOLD_HOUSE: {
+    exclusiveArea: 59.0,
+    buildingName: "용산면사무소",
+    districtCode: "4374031021",
+    dongName: "용산면",
+    jibun: "381-1",
+  },
+};

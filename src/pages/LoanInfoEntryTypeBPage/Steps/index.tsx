@@ -87,7 +87,7 @@ export const StepContent: React.FC<StepContentProps> = ({
           max={stepConfig.limit?.max}
           onFocus={() => setIsKeyboardModalOpen(true)}
           onBlur={
-            stepConfig.name === "houseOwnershipType" ||
+            stepConfig.name === "rentHousingType" ||
             stepConfig.name === "isNetAssetOver345M" ||
             stepConfig.id === 7 ||
             stepConfig.id === 4
@@ -138,7 +138,7 @@ export const StepContent: React.FC<StepContentProps> = ({
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
       <Spacing size={35} />
       {renderComponent()}
-      {stepConfig?.name === "houseOwnershipType" ||
+      {stepConfig?.name === "rentHousingType" ||
         stepConfig?.name === "isNetAssetOver345M" ||
         (stepConfig?.id !== 4 && stepConfig?.id !== 7 && (
           <Button
