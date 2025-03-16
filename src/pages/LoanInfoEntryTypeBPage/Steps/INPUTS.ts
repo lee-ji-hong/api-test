@@ -1,7 +1,7 @@
 import UserInfo from "@/components/sections/LoanInfoEntryTypeB/UserInfo";
 import InputController from "@/components/sections/LoanInfoEntryTypeB/InputController";
 import isSelectController from "@/components/sections/LoanInfoEntryTypeB/isSelectController";
-
+import WheelContrller from "@/components/sections/LoanInfoEntryTypeB/WheelContrller";
 export const INPUTS = [
   {
     id: 1,
@@ -46,7 +46,7 @@ export const INPUTS = [
       min: { value: 19, ment: "만 19세이상이여야합니다" },
       max: { value: 100, ment: "만 100세이하로 입력이 가능합니다." },
     },
-    component: InputController,
+    component: WheelContrller,
   },
   {
     id: 4,
