@@ -87,10 +87,7 @@ export const StepContent: React.FC<StepContentProps> = ({
           max={stepConfig.limit?.max}
           onFocus={() => setIsKeyboardModalOpen(true)}
           onBlur={
-            stepConfig.name === "rentHousingType" ||
-            stepConfig.name === "isNetAssetOver345M" ||
-            stepConfig.id === 7 ||
-            stepConfig.id === 4
+            stepConfig.id === 7 || stepConfig.id === 4
               ? () => handleInputComplete(stepConfig?.name, stepConfig?.id)
               : onClose
           }
@@ -138,9 +135,23 @@ export const StepContent: React.FC<StepContentProps> = ({
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
       <Spacing size={35} />
       {renderComponent()}
-      {stepConfig?.name === "rentHousingType" ||
-        stepConfig?.name === "isNetAssetOver345M" ||
-        (stepConfig?.id !== 4 && stepConfig?.id !== 7 && (
+      {stepConfig?.name === "rentHousingType" || stepConfig?.name === "isNetAssetOver345M" ? (
+        <div className={cx("button-wrap-divide")}>
+          <Button
+            className={cx("button")}
+            title="건너뛰기"
+            theme="light"
+            onClick={() => router.push("/loan-info-entry", { isRecent: "loan-info-B" })}
+          />
+          <Button
+            className={cx("button")}
+            title="다음"
+            onClick={() => handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)}
+          />
+        </div>
+      ) : (
+        stepConfig?.id !== 4 &&
+        stepConfig?.id !== 7 && (
           <Button
             className={cx("button-wrap-focus")}
             subClassName={cx("button-container")}
@@ -153,7 +164,8 @@ export const StepContent: React.FC<StepContentProps> = ({
             bottom={bottomOffset}
             title="다음"
           />
-        ))}
+        )
+      )}
     </div>
   );
 };

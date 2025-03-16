@@ -35,10 +35,12 @@ export const isSelectController = <ControlType extends FieldValues>({
               {options?.map(({ label, value }) => (
                 <li
                   key={value.toString()}
-                  className={cx("option-button")}
+                  className={cx("option-button", {
+                    selected: field.value === value,
+                  })}
                   onClick={(e) => {
-                    e.stopPropagation(); // 이벤트 전파 중단
-                    handleSelect(value); // 선택 동작 실행
+                    e.stopPropagation();
+                    handleSelect(value);
                   }}>
                   {label}
                 </li>

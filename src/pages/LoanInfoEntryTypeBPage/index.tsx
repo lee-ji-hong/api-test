@@ -172,13 +172,7 @@ export const LoanInfoEntryTypeBPage = () => {
   return (
     <>
       <ProgressPercentage currentStep={currentStep} length={inputs.length} />
-      <Header
-        className={cx("cancel")}
-        onLeftClick={handlePrevStep}
-        left="Back_btn"
-        right={inputs.length === 2 && "JumpBtn"}
-        onRightClick={() => router.push("/loan-info-entry", { isRecent: "loan-info-B" })}
-      />
+      <Header className={cx("cancel")} onLeftClick={handlePrevStep} left="Back_btn" />
       <Spacing size={53} />
       <div className={cx("container")}>
         <LoanResult LoanLimit={infoItem?.possibleLoanLimit ?? 0} LoanRate={infoItem?.expectedLoanRate ?? 0} />
