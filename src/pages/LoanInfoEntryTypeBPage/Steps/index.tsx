@@ -30,7 +30,7 @@ export const StepContent: React.FC<StepContentProps> = ({
   const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
-
+  const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const { control } = useFormContext();
   const router = useInternalRouter();
 
@@ -40,7 +40,7 @@ export const StepContent: React.FC<StepContentProps> = ({
   useEffect(() => {
     const calculateKeyboardHeight = () => {
       const height = (window.innerHeight * 0.4 - 207) / 7;
-      setKeyboardHeight(height);
+      setKeyboardHeight(selectedItem !== null ? height : 0);
 
       if (!isKeyboardModalOpen) {
         setBottomOffset(34);
@@ -60,11 +60,12 @@ export const StepContent: React.FC<StepContentProps> = ({
     return () => {
       window.removeEventListener("resize", calculateKeyboardHeight);
     };
-  }, [isKeyboardModalOpen]);
+  }, [isKeyboardModalOpen, selectedItem]);
 
   const onClose = () => {
     setTimeout(() => {
       setIsKeyboardModalOpen(false);
+      setSelectedItem(null);
     }, 100);
   };
 
@@ -72,10 +73,10 @@ export const StepContent: React.FC<StepContentProps> = ({
   const filteredFields =
     maritalStatus !== "SINGLE" ? [...INPUTS.filter((input) => input.id === 5), SpouseAnnualIncome] : [stepConfig];
 
-  const renderComponent = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const renderComponent = (stepConfig: any) => {
     if (stepConfig && stepConfig.component) {
       const FieldComponent = stepConfig.component;
-
       return (
         <FieldComponent
           control={control}
@@ -85,13 +86,16 @@ export const StepContent: React.FC<StepContentProps> = ({
           unit={stepConfig.unit}
           min={stepConfig.limit?.min}
           max={stepConfig.limit?.max}
-          onFocus={() => setIsKeyboardModalOpen(true)}
+          onFocus={() => {
+            setSelectedItem(stepConfig.id);
+            setIsKeyboardModalOpen(true);
+          }}
           onBlur={
             stepConfig.id === 7 || stepConfig.id === 4
               ? () => handleInputComplete(stepConfig?.name, stepConfig?.id)
               : onClose
           }
-          keyboardHeight={keyboardHeight}
+          keyboardHeight={selectedItem === stepConfig.id && keyboardHeight}
         />
       );
     }
@@ -99,7 +103,6 @@ export const StepContent: React.FC<StepContentProps> = ({
   };
 
   if (stepConfig?.id === 5) {
-    console.log(filteredFields);
     return (
       <>
         {filteredFields.map((field) => (
@@ -107,25 +110,23 @@ export const StepContent: React.FC<StepContentProps> = ({
             <div>
               <Text className={cx("step-txt")} text={field?.modalTitle} />
               <Spacing size={35} />
-              {renderComponent()}
-              {stepConfig?.id !== 4 && (
-                <Button
-                  className={cx("button-wrap-focus")}
-                  subClassName={cx("button-container")}
-                  disabled={field?.isValue && field?.value === undefined}
-                  onClick={() =>
-                    allFieldsFilled
-                      ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
-                      : handleInputComplete(field?.name ?? "monthlyRent", field?.id ?? 1)
-                  }
-                  bottom={bottomOffset}
-                  title="다음"
-                />
-              )}
+              {renderComponent(field)}
             </div>
             <Spacing size={50} />
           </React.Fragment>
         ))}
+        <Button
+          className={cx("button-wrap-focus")}
+          subClassName={cx("button-container")}
+          disabled={stepConfig?.isValue && stepConfig?.value === undefined}
+          onClick={() =>
+            allFieldsFilled
+              ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
+              : handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)
+          }
+          bottom={bottomOffset}
+          title="다음"
+        />
       </>
     );
   }
@@ -134,7 +135,7 @@ export const StepContent: React.FC<StepContentProps> = ({
     <div>
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
       <Spacing size={35} />
-      {renderComponent()}
+      {renderComponent(stepConfig)}
       {stepConfig?.name === "rentHousingType" || stepConfig?.name === "isNetAssetOver345M" ? (
         <div className={cx("button-wrap-divide")}>
           <Button

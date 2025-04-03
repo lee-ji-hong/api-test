@@ -85,6 +85,14 @@ export const INPUTS = [
     value: "",
     modalTitle: "자녀유무를 선택해주세요",
     modalButton: "다음",
+    options: [
+      // { label: "자녀 없음", value: "NOssss_CHILD" },
+      { label: "무자녀", value: "NO_CHILD" },
+      { label: "1명", value: "ONE_CHILD" },
+      { label: "2명", value: "TWO_CHILD" },
+      { label: "3명 이상", value: "THREE_OR_MORE_CHILDREN" },
+    ],
+
     component: UserInfo,
   },
   {
@@ -146,7 +154,7 @@ export const SpouseAnnualIncome = {
   isValue: true,
   modalTitle: "배우자 연소득을 입력해주세요",
   modalButton: "다음",
-  unit: "테스트",
+  unit: "만원",
   // limit: {
   //   min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
   //   max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
