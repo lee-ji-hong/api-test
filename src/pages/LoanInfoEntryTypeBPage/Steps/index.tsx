@@ -1,8 +1,9 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+
 import styles from "../LoanInfoEntryTypeBPage.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
-import React, { useEffect, useState } from "react";
 
 import { sendLoanAdviceReportRequest } from "@/models";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
@@ -31,7 +32,8 @@ export const StepContent: React.FC<StepContentProps> = ({
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
-  const { control } = useFormContext();
+  const { control, setFocus } = useFormContext();
+  const spouseAnnualIncomeValue = useWatch({ control, name: "spouseAnnualIncome" }); // useWatch로 값 감시
   const router = useInternalRouter();
 
   // 스텝 정보 가져오기
@@ -67,6 +69,17 @@ export const StepContent: React.FC<StepContentProps> = ({
       setIsKeyboardModalOpen(false);
       setSelectedItem(null);
     }, 100);
+  };
+
+  // 포커스 이동 및 스크롤 이동
+  const focusAndScrollTo = (name: string) => {
+    alert("배우자 연소득을 입력해주세요");
+    setFocus(name);
+    setTimeout(() => {
+      const target = document.querySelector(`input[name="${name}"]`);
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+    setIsKeyboardModalOpen(true);
   };
 
   // // 현재 스텝에 맞는 필드 가져오기control
@@ -113,20 +126,26 @@ export const StepContent: React.FC<StepContentProps> = ({
               {renderComponent(field)}
             </div>
             <Spacing size={50} />
+            {isKeyboardModalOpen && <Spacing size={500} />}
           </React.Fragment>
         ))}
         <Button
           className={cx("button-wrap-focus")}
           subClassName={cx("button-container")}
           disabled={stepConfig?.isValue && stepConfig?.value === undefined}
-          onClick={() =>
-            allFieldsFilled
-              ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
-              : handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)
-          }
+          onClick={() => {
+            if (allFieldsFilled) {
+              router.push("/loan-info-entry", { isRecent: "loan-info-B" });
+            } else if (stepConfig.name === "annualIncome" && spouseAnnualIncomeValue === undefined) {
+              focusAndScrollTo("spouseAnnualIncome");
+            } else {
+              handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1);
+            }
+          }}
           bottom={bottomOffset}
           title="다음"
         />
+        <Spacing size={800} />
       </>
     );
   }

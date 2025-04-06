@@ -15,6 +15,10 @@
       font-size: 1.8rem;
     }
 
+    &:focus {
+      scroll-margin-top: -150px !important; /* 스크롤 시 위에 여백 남기기 */
+    }
+
     &::placeholder {
       color: $grey400;
     }
