@@ -62,6 +62,9 @@
 
 .checkbox-container {
   @include flexbox();
+  position: fixed;
+  bottom: 80px;
+
   gap: 8px;
   margin-top: 20px;
   margin-bottom: 30px;
