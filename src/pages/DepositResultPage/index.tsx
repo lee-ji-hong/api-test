@@ -11,6 +11,7 @@ import Text from "@/components/shared/Text";
 import { formatNumberWithUnits } from "@/utils/formatters";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import { formData } from "@/recoil/atoms";
+import { getCookie } from "@/api/authUtils";
 // import { rentalProductData } from "./mock";
 import classNames from "classnames/bind";
 import styles from "./DepositResultPage.module.scss";
@@ -29,6 +30,8 @@ export const DepositResultPage = () => {
   const [sortType, setSortType] = useState("한도순");
 
   const logEvent = useLogEvent();
+
+  const abTestType = getCookie("abTestType");
 
   useEffect(() => {
     logEvent("DepositResultPage", {
@@ -98,9 +101,9 @@ export const DepositResultPage = () => {
         <Button
           className={cx("button-wrap")}
           onClick={() => {
-            // 랜덤 값에 따라 A/B 경로 중 하나로 이동
-            const randomPath = Math.random() > 0.4 ? "/loan-info-entry" : "/loan-info-entry-b";
-            router.push(randomPath);
+            // A/B 경로에 따라 이동
+            const path = abTestType === "A" ? "/loan-info-entry" : "/loan-info-entry-b";
+            router.push(path);
           }}
           title="맞춤형 전월세대출 더 알아보기"
         />

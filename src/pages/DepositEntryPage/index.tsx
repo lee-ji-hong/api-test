@@ -53,6 +53,7 @@ const DepositEntryPage = () => {
   if (!isGetGuestTokenLoading && guestToken?.accessToken) {
     setCookie("guestToken", guestToken.accessToken);
     setCookie("roleType", guestToken.roleType);
+    setCookie("abTestType", guestToken.abTestType);
   }
 
   useEffect(() => {

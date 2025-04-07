@@ -140,6 +140,7 @@ export interface GuestToken {
   accessToken: string;
   refreshToken: string;
   roleType: string;
+  abTestType: string;
 }
 
 export interface LoanAdviceReport {
