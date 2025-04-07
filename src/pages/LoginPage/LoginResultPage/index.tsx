@@ -9,10 +9,11 @@ import { sendLoanAdviceReportRequest } from "@/models";
 import { useSendLoanAdviceReport } from "@/hooks/queries/useSendLoanAdviceReport";
 import { useLogEvent } from "@/utils/firebaseLogEvent";
 import { removeCookie } from "@/api/authUtils";
-
+import { useSendTransferUser } from "@/hooks/queries/useSendTransferUser";
 const LoginSuccessPage = () => {
   const [, setRecoilFormData] = useRecoilState(formData);
   const { loanAdviceReport } = useSendLoanAdviceReport();
+  const { transferUser } = useSendTransferUser();
   const navigate = useNavigate();
   // const token = getTokens();
 
@@ -28,9 +29,14 @@ const LoginSuccessPage = () => {
 
   useEffect(() => {
     const objToken = getTokens();
+    console.log(objToken);
     if (objToken.accessToken && objToken.refreshToken) {
       setCookie("accessToken", objToken.accessToken);
       setCookie("refreshToken", objToken.refreshToken);
+      if (objToken.guestToken) {
+        transferUser(objToken.guestToken);
+        alert("토큰 전송 완료");
+      }
       removeCookie("roleType");
 
       const savedFormData = localStorage.getItem("formData");

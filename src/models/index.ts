@@ -73,7 +73,7 @@ export interface TransferUserResponse {
   code: number;
   status: string;
   message: string;
-  data: null;
+  data: GuestToken;
 }
 
 export interface RentalProductResponse {

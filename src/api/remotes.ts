@@ -44,7 +44,7 @@ export function sendTransferUser(requestBody: string) {
     //   {
     //   tempUserId: `temp_${getOrCreateUuid()}`,
     // }
-  );
+  ).then((response) => response.data);
 }
 
 // 게스트유저 토큰 발급
