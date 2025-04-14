@@ -15,7 +15,7 @@ export const useSendTransferUser = () => {
     },
     retry: 0,
     onError: (error) => {
-      console.error(" 생성 실패:", error);
+      console.error(" 생성 실패:는", error);
       console.log(error);
     },
   });
