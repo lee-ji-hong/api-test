@@ -17,6 +17,7 @@
 
     &:focus {
       scroll-margin-top: -150px !important; /* 스크롤 시 위에 여백 남기기 */
+      background-color: $grey200;
     }
 
     &::placeholder {
