@@ -73,7 +73,7 @@ export const StepContent: React.FC<StepContentProps> = ({
 
   // 포커스 이동 및 스크롤 이동
   const focusAndScrollTo = (name: string) => {
-    alert("배우자 연소득을 입력해주세요");
+    // alert("배우자 연소득을 입력해주세요");
     setFocus(name);
     setTimeout(() => {
       const target = document.querySelector(`input[name="${name}"]`);
@@ -126,7 +126,7 @@ export const StepContent: React.FC<StepContentProps> = ({
               {renderComponent(field)}
             </div>
             <Spacing size={50} />
-            {isKeyboardModalOpen && <Spacing size={500} />}
+            {/* {isKeyboardModalOpen && <Spacing size={500} />} */}
           </React.Fragment>
         ))}
         <Button
