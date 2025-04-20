@@ -33,6 +33,7 @@ export const StepContent: React.FC<StepContentProps> = ({
   const [bottomOffset, setBottomOffset] = useState(0);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const { control, setFocus } = useFormContext();
+  const watchedValues = useWatch({ control });
   const spouseAnnualIncomeValue = useWatch({ control, name: "spouseAnnualIncome" }); // useWatch로 값 감시
   const router = useInternalRouter();
 
@@ -88,6 +89,8 @@ export const StepContent: React.FC<StepContentProps> = ({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderComponent = (stepConfig: any) => {
+    const fieldValue = watchedValues[stepConfig.name]; // Get the specific field value
+    console.log(fieldValue);
     if (stepConfig && stepConfig.component) {
       const FieldComponent = stepConfig.component;
       return (
@@ -132,7 +135,7 @@ export const StepContent: React.FC<StepContentProps> = ({
         <Button
           className={cx("button-wrap-focus")}
           subClassName={cx("button-container")}
-          disabled={stepConfig?.isValue && stepConfig?.value === undefined}
+          disabled={watchedValues["annualIncome"] === undefined}
           onClick={() => {
             if (allFieldsFilled) {
               router.push("/loan-info-entry", { isRecent: "loan-info-B" });
@@ -155,6 +158,7 @@ export const StepContent: React.FC<StepContentProps> = ({
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
       <Spacing size={35} />
       {renderComponent(stepConfig)}
+
       {stepConfig?.name === "rentHousingType" || stepConfig?.name === "isNetAssetOver345M" ? (
         <div className={cx("button-wrap-divide")}>
           <Button
@@ -167,6 +171,7 @@ export const StepContent: React.FC<StepContentProps> = ({
             className={cx("button")}
             title="다음"
             onClick={() => handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)}
+            disabled={watchedValues[stepConfig.name] === undefined}
           />
         </div>
       ) : (
@@ -175,7 +180,7 @@ export const StepContent: React.FC<StepContentProps> = ({
           <Button
             className={cx("button-wrap-focus")}
             subClassName={cx("button-container")}
-            disabled={stepConfig?.isValue && stepConfig?.value === undefined}
+            disabled={watchedValues[stepConfig.name] === undefined}
             onClick={() =>
               allFieldsFilled
                 ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
