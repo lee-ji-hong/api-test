@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { useState, useEffect, useRef } from "react";
 // import { DevTool } from "@hookform/devtools";
 import { useRecoilState } from "recoil";
@@ -51,6 +51,9 @@ const LTVCalculator = () => {
     values: ltvCalc,
     mode: "onChange",
   });
+
+  const formValues = useWatch({ control });
+  const isFormComplete = Object.values(formValues).every((value) => value !== undefined && value !== "");
 
   useLayoutEffect(() => {
     if (infoItem) scrollToResult();
@@ -118,6 +121,7 @@ const LTVCalculator = () => {
   const handleReset = () => {
     reset();
   };
+
   const content = `
   자산의 담보가치에 대한 대출 비율을 의미하며, 우리나라에서는 주택가격에 대한 대출 비율로 많이 알려져 있다.<br>
   예를 들어 아파트 감정가격이 5억원이고 담보인정비율이 70%이면 금융기관으로부터 3억 5천만원의 주택담보대출을 받을 수 있다.<br>
@@ -189,7 +193,12 @@ const LTVCalculator = () => {
               theme="light"
               onClick={handleReset}
             />
-            <Button className={cx("button")} title="계산하기" type="submit" disabled={isSubmitting} />
+            <Button
+              className={cx("button")}
+              title="계산하기"
+              type="submit"
+              disabled={isSubmitting || !isFormComplete}
+            />
           </div>
         </>
       </form>
