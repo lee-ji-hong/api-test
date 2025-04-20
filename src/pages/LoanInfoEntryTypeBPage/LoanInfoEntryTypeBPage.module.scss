@@ -126,3 +126,11 @@
     flex: 1;
   }
 }
+
+.button {
+  flex: 1;
+  &:hover {
+    opacity: 1 !important;
+    cursor: auto !important;
+  }
+}
