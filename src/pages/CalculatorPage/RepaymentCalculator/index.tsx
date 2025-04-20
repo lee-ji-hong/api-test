@@ -58,6 +58,7 @@ const RepaymentCalculator = () => {
   }, [infoItem]);
 
   const formValues = watch();
+  const isFormComplete = Object.values(formValues).every((value) => value !== undefined && value !== "");
   useEffect(() => {
     setInterestRate(formValues.interestRatePercentage);
   }, [formValues]); // 값이 변경될 때마다 실행
@@ -187,7 +188,12 @@ const RepaymentCalculator = () => {
               theme="light"
               onClick={handleReset}
             />
-            <Button className={cx("button")} title="계산하기" type="submit" disabled={isSubmitting} />
+            <Button
+              className={cx("button")}
+              title="계산하기"
+              type="submit"
+              disabled={isSubmitting || !isFormComplete}
+            />
           </div>
         </>
       </form>

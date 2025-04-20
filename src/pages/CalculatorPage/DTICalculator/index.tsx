@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { useState, useEffect, useRef } from "react";
 import { OptionItem, OptionsType } from "@/models";
 import { useRecoilState } from "recoil";
@@ -53,6 +53,9 @@ const DTICalculator = () => {
     values: DtiCalc,
     mode: "onChange",
   });
+
+  const formValues = useWatch({ control });
+  const isFormComplete = Object.values(formValues).every((value) => value !== undefined && value !== "");
 
   useLayoutEffect(() => {
     if (infoItem) scrollToResult();
@@ -211,7 +214,12 @@ DTI(Debt to Income ratio) 규제는 LTV 규제 강화의 후속조치로 2005년
               theme="light"
               onClick={handleReset}
             />
-            <Button className={cx("button")} title="계산하기" type="submit" disabled={isSubmitting} />
+            <Button
+              className={cx("button")}
+              title="계산하기"
+              type="submit"
+              disabled={isSubmitting || !isFormComplete}
+            />
           </div>
         </>
       </form>
