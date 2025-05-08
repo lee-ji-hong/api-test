@@ -46,7 +46,7 @@ const InputController = <ControlType extends FieldValues>({
       render={({ field }) => {
         const isInvalidValue = field.value <= (min?.value ?? -1) || field.value > (max?.value ?? Infinity);
         const warningMessage = field.value <= (min?.value ?? -1) ? (min?.ment ?? "") : (max?.ment ?? "");
-        console.log(userValue, field);
+
         // 키보드 입력 이벤트
         const handleKeyPress = (key: string) => {
           if (key === "⌫") {
@@ -87,18 +87,19 @@ const InputController = <ControlType extends FieldValues>({
               ref={field.ref}
             />
 
-            {keyboardHeight > 0 && (
-              <GlobalPortal.Consumer>
-                <KeyboardModal
-                  className={cx("keyboard-container")}
-                  onKeyPress={handleKeyPress}
-                  isBadge={true}
-                  handleBadgeClick={handleBadgeClick}
-                  keyboardHeight={keyboardHeight}
-                  name={field.name}
-                />
-              </GlobalPortal.Consumer>
-            )}
+            {/* {keyboardHeight > 0 && (
+              
+            )} */}
+            <GlobalPortal.Consumer>
+              <KeyboardModal
+                className={cx("keyboard-container")}
+                onKeyPress={handleKeyPress}
+                isBadge={true}
+                handleBadgeClick={handleBadgeClick}
+                keyboardHeight={keyboardHeight}
+                name={field.name}
+              />
+            </GlobalPortal.Consumer>
           </div>
         );
       }}

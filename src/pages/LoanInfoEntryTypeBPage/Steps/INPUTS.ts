@@ -80,6 +80,21 @@ export const INPUTS = [
   },
   {
     id: 6,
+    label: "배우자 연소득",
+    name: "spouseAnnualIncome",
+    value: "",
+    isValue: true,
+    modalTitle: "배우자 연소득을 입력해주세요",
+    modalButton: "다음",
+    unit: "만원",
+    // limit: {
+    //   min: { value: 100, ment: "보증금은 100만원 이상이어야 합니다." },
+    //   max: { value: 200000, ment: "보증금은 100만원 이상이어야 합니다." },
+    // },
+    component: InputController,
+  },
+  {
+    id: 7,
     label: "자녀유무",
     name: "childStatus",
     value: "",
@@ -96,7 +111,7 @@ export const INPUTS = [
     component: UserInfo,
   },
   {
-    id: 7,
+    id: 8,
     label: "중소기업재직여부",
     name: "isSMEEmployee",
     value: "",

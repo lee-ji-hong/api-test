@@ -35,7 +35,6 @@ export const LoanInfoEntryTypeBPage = () => {
     mode: "onChange",
     criteriaMode: "all",
   });
-  console.log(recoilFormData);
 
   // 필요한 함수들 분해 할당으로 추출
   const {
@@ -106,7 +105,7 @@ export const LoanInfoEntryTypeBPage = () => {
       [name]: value,
     }));
 
-    if (id === 7) {
+    if (id === 8) {
       setCurrentStep(1);
       setInputs(OptionInputs as unknown as typeof inputs);
       return;
@@ -154,7 +153,7 @@ export const LoanInfoEntryTypeBPage = () => {
       spouseAnnualIncome: (recoilFormData.spouseAnnualIncome ?? 0) * 10000,
     };
     localStorage.setItem("formData", JSON.stringify(recoilFormData));
-    console.log("LoanInfoEntryPage");
+
     // logEvent("LoanInfoEntryPage", {
     //   page_title: "./LoanInfoEntryPage",
     //   page_location: window.location.href,
@@ -176,7 +175,7 @@ export const LoanInfoEntryTypeBPage = () => {
       <Spacing size={53} />
       <div className={cx("container")}>
         <LoanResult LoanLimit={infoItem?.possibleLoanLimit ?? 0} LoanRate={infoItem?.expectedLoanRate ?? 0} />
-        <Spacing size={35} />
+        <Spacing size={15} />
         <Badge
           className={cx("button")}
           title={`${inputs.length === 2 ? "추가정보 입력" : ""}${currentStep}/${inputs.length}`}
