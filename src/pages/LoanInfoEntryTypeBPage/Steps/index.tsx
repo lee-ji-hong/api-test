@@ -9,7 +9,6 @@ import { sendLoanAdviceReportRequest } from "@/models";
 import { useInternalRouter } from "@/hooks/useInternalRouter";
 import Button from "@/components/shared/Button";
 import Text from "@/components/shared/Text";
-import { INPUTS, SpouseAnnualIncome } from "./INPUTS";
 import Spacing from "@/components/shared/Spacing";
 
 interface StepContentProps {
@@ -28,33 +27,34 @@ export const StepContent: React.FC<StepContentProps> = ({
   allFieldsFilled,
   handleInputComplete,
 }) => {
-  const [isKeyboardModalOpen, setIsKeyboardModalOpen] = useState(false);
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [bottomOffset, setBottomOffset] = useState(0);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
-  const { control, setFocus } = useFormContext();
-  const watchedValues = useWatch({ control });
-  const spouseAnnualIncomeValue = useWatch({ control, name: "spouseAnnualIncome" }); // useWatch로 값 감시
-  const router = useInternalRouter();
 
+  const { control } = useFormContext();
+  const watchedValues = useWatch({ control });
+
+  const router = useInternalRouter();
+  // const keyboardHeight = (window.innerHeight * 0.4 - 207) / 7;
   // 스텝 정보 가져오기
   const stepConfig = inputs.find((input) => input.id === step);
+  const isInput =
+    stepConfig?.id === 1 || stepConfig?.id === 2 || stepConfig?.id === 5 || stepConfig?.name === "spouseAnnualIncome";
 
   useEffect(() => {
     const calculateKeyboardHeight = () => {
-      const height = (window.innerHeight * 0.4 - 207) / 7;
-      setKeyboardHeight(selectedItem !== null ? height : 0);
-
-      if (!isKeyboardModalOpen) {
+      if (isInput) {
+        if (window.innerWidth < 380) {
+          setBottomOffset(window.innerHeight * 0.4 + 20);
+          setKeyboardHeight((window.innerHeight * 0.4 - 207) / 10);
+        } else if (window.innerWidth >= 380) {
+          setBottomOffset(window.innerHeight * 0.4 + 35);
+          setKeyboardHeight((window.innerHeight * 0.4 - 207) / 8);
+          // setKeyboardHeight(7.5);
+        }
+      } else if (!isInput) {
         setBottomOffset(34);
         setKeyboardHeight(0);
-      } else {
-        if (window.innerWidth < 380) {
-          setBottomOffset(window.innerHeight * 0.5);
-        }
-        setBottomOffset(window.innerHeight * 0.4 + 55);
-        // const newBottomOffset = height < 668 ? height * 0.4 + 15 : height < 900 ? height * 0.4 + 25 : height * 0.4 + 45;
-        // setBottomOffset(newBottomOffset);
       }
     };
 
@@ -63,29 +63,19 @@ export const StepContent: React.FC<StepContentProps> = ({
     return () => {
       window.removeEventListener("resize", calculateKeyboardHeight);
     };
-  }, [isKeyboardModalOpen, selectedItem]);
+  }, [isInput, selectedItem]);
+
+  useEffect(() => {
+    if (stepConfig?.id === 6 && maritalStatus === "SINGLE") {
+      handleInputComplete("maritalStatus", 4);
+    }
+  }, [stepConfig]);
 
   const onClose = () => {
     setTimeout(() => {
-      setIsKeyboardModalOpen(false);
       setSelectedItem(null);
     }, 100);
   };
-
-  // 포커스 이동 및 스크롤 이동
-  const focusAndScrollTo = (name: string) => {
-    // alert("배우자 연소득을 입력해주세요");
-    setFocus(name);
-    setTimeout(() => {
-      const target = document.querySelector(`input[name="${name}"]`);
-      target?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 100);
-    setIsKeyboardModalOpen(true);
-  };
-
-  // // 현재 스텝에 맞는 필드 가져오기control
-  const filteredFields =
-    maritalStatus !== "SINGLE" ? [...INPUTS.filter((input) => input.id === 5), SpouseAnnualIncome] : [stepConfig];
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderComponent = (stepConfig: any) => {
@@ -104,59 +94,25 @@ export const StepContent: React.FC<StepContentProps> = ({
           max={stepConfig.limit?.max}
           onFocus={() => {
             setSelectedItem(stepConfig.id);
-            setIsKeyboardModalOpen(true);
           }}
           onBlur={
             stepConfig.id === 7 || stepConfig.id === 4
               ? () => handleInputComplete(stepConfig?.name, stepConfig?.id)
               : onClose
           }
-          keyboardHeight={selectedItem === stepConfig.id && keyboardHeight}
+          keyboardHeight={keyboardHeight}
+          // keyboardHeight={selectedItem === stepConfig.id && keyboardHeight}
         />
       );
     }
     return null;
   };
 
-  if (stepConfig?.id === 5) {
-    return (
-      <>
-        {filteredFields.map((field) => (
-          <React.Fragment key={field?.id}>
-            <div>
-              <Text className={cx("step-txt")} text={field?.modalTitle} />
-              <Spacing size={35} />
-              {renderComponent(field)}
-            </div>
-            <Spacing size={50} />
-            {/* {isKeyboardModalOpen && <Spacing size={500} />} */}
-          </React.Fragment>
-        ))}
-        <Button
-          className={cx("button-wrap-focus")}
-          subClassName={cx("button-container")}
-          disabled={watchedValues["annualIncome"] === undefined}
-          onClick={() => {
-            if (allFieldsFilled) {
-              router.push("/loan-info-entry", { isRecent: "loan-info-B" });
-            } else if (stepConfig.name === "annualIncome" && spouseAnnualIncomeValue === undefined) {
-              focusAndScrollTo("spouseAnnualIncome");
-            } else {
-              handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1);
-            }
-          }}
-          bottom={bottomOffset}
-          title="다음"
-        />
-        <Spacing size={800} />
-      </>
-    );
-  }
 
   return (
     <div>
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
-      <Spacing size={35} />
+      <Spacing size={30} />
       {renderComponent(stepConfig)}
 
       {stepConfig?.name === "rentHousingType" || stepConfig?.name === "isNetAssetOver345M" ? (
@@ -181,11 +137,17 @@ export const StepContent: React.FC<StepContentProps> = ({
             className={cx("button-wrap-focus")}
             subClassName={cx("button-container")}
             disabled={watchedValues[stepConfig.name] === undefined}
-            onClick={() =>
-              allFieldsFilled
-                ? router.push("/loan-info-entry", { isRecent: "loan-info-B" })
-                : handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1)
-            }
+
+            onClick={() => {
+              if (allFieldsFilled) {
+                router.push("/loan-info-entry", { isRecent: "loan-info-B" });
+              } else if (stepConfig.id === 5 && maritalStatus === "SINGLE") {
+                handleInputComplete("spouseAnnualIncome", 6);
+              } else {
+                handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1);
+              }
+            }}
+
             bottom={bottomOffset}
             title="다음"
           />

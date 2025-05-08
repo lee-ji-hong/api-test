@@ -30,27 +30,12 @@
   position: relative;
   left: 0;
   left: 0;
-  // top: 0;
-  // right: 0;
-  // background-color: rgba(0, 0, 0, 0.5);
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // z-index: 1000;
 }
 
 .keyboard-container {
   position: relative;
-  animation: slide-up 0.4s ease forwards; // 0.4초 동안 부드럽게 올라오는 애니메이션
-
-  @keyframes slide-up {
-    from {
-      bottom: -100%; // 화면 아래에서 시작
-    }
-    to {
-      bottom: 0; // 화면 아래쪽에 고정
-    }
-  }
+  bottom: 0 !important;
+  animation: none !important;
 }
 
 .reason-box {
