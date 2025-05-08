@@ -45,8 +45,10 @@ export const StepContent: React.FC<StepContentProps> = ({
     const calculateKeyboardHeight = () => {
       if (isInput) {
         if (window.innerWidth < 380) {
-          setBottomOffset(window.innerHeight * 0.4 + 20);
-          setKeyboardHeight((window.innerHeight * 0.4 - 207) / 10);
+          setBottomOffset(window.innerHeight * 0.4 + 5);
+          setKeyboardHeight((window.innerHeight * 0.4 - 207) / 16);
+          // setBottomOffset(window.innerHeight * 0.4 + 20);
+          // setKeyboardHeight((window.innerHeight * 0.4 - 207) / 10);
         } else if (window.innerWidth >= 380) {
           setBottomOffset(window.innerHeight * 0.4 + 35);
           setKeyboardHeight((window.innerHeight * 0.4 - 207) / 8);
@@ -108,7 +110,6 @@ export const StepContent: React.FC<StepContentProps> = ({
     return null;
   };
 
-
   return (
     <div>
       {stepConfig && <Text className={cx("step-txt")} text={stepConfig.modalTitle} />}
@@ -137,7 +138,6 @@ export const StepContent: React.FC<StepContentProps> = ({
             className={cx("button-wrap-focus")}
             subClassName={cx("button-container")}
             disabled={watchedValues[stepConfig.name] === undefined}
-
             onClick={() => {
               if (allFieldsFilled) {
                 router.push("/loan-info-entry", { isRecent: "loan-info-B" });
@@ -147,7 +147,6 @@ export const StepContent: React.FC<StepContentProps> = ({
                 handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1);
               }
             }}
-
             bottom={bottomOffset}
             title="다음"
           />
