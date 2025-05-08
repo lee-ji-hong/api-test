@@ -30,8 +30,10 @@ export const StepContent: React.FC<StepContentProps> = ({
   const [bottomOffset, setBottomOffset] = useState(0);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
+
   const { control } = useFormContext();
   const watchedValues = useWatch({ control });
+
   const router = useInternalRouter();
   // const keyboardHeight = (window.innerHeight * 0.4 - 207) / 7;
   // 스텝 정보 가져오기
@@ -77,6 +79,8 @@ export const StepContent: React.FC<StepContentProps> = ({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderComponent = (stepConfig: any) => {
+    const fieldValue = watchedValues[stepConfig.name]; // Get the specific field value
+    console.log(fieldValue);
     if (stepConfig && stepConfig.component) {
       const FieldComponent = stepConfig.component;
       return (
@@ -103,6 +107,7 @@ export const StepContent: React.FC<StepContentProps> = ({
     }
     return null;
   };
+
 
   return (
     <div>
@@ -132,6 +137,7 @@ export const StepContent: React.FC<StepContentProps> = ({
             className={cx("button-wrap-focus")}
             subClassName={cx("button-container")}
             disabled={watchedValues[stepConfig.name] === undefined}
+
             onClick={() => {
               if (allFieldsFilled) {
                 router.push("/loan-info-entry", { isRecent: "loan-info-B" });
@@ -141,6 +147,7 @@ export const StepContent: React.FC<StepContentProps> = ({
                 handleInputComplete(stepConfig?.name ?? "monthlyRent", stepConfig?.id ?? 1);
               }
             }}
+
             bottom={bottomOffset}
             title="다음"
           />
