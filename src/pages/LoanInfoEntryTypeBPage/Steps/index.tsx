@@ -39,9 +39,6 @@ export const StepContent: React.FC<StepContentProps> = ({
   const isInput =
     stepConfig?.id === 1 || stepConfig?.id === 2 || stepConfig?.id === 5 || stepConfig?.name === "spouseAnnualIncome";
 
-  console.log(window.innerWidth);
-  console.log(window.innerHeight);
-  console.log(keyboardHeight);
   useEffect(() => {
     const calculateKeyboardHeight = () => {
       if (isInput) {
