@@ -41,9 +41,9 @@ const AppLayout = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content="내집플랜" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://myzipplan.com/metaThum.png" />
+        <meta property="og:image" content="https://myzipplan.xyz/metaThum.png" />
         <meta property="og:article:author" content="내집플랜" />
-        <meta property="og:url" content="https://myzipplan.com/" />
+        <meta property="og:url" content="https://myzipplan.xyz/" />
       </Helmet>
       {isLoading && <LinearProgress />} {/* 로딩 컴포넌트 */}
       {isLoginNeed && (

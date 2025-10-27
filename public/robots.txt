@@ -2,4 +2,4 @@ User-agent: *
 Disallow: 
 Allow: /
 
-Sitemap: https://myzipplan.com/sitemap.xml
+Sitemap: https://myzipplan.xyz/sitemap.xml
